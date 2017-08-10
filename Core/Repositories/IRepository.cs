@@ -8,7 +8,7 @@ using AskanioPhotoSite.Core.Storage;
 
 namespace AskanioPhotoSite.Core.Repositories
 {
-    public interface IRepository<TEntity, TKey> where TEntity : Entity
+    public interface IRepository<TEntity, TKey> 
     {
         IEnumerable<TEntity> GetAll();
         TEntity AddOne(TEntity entity);

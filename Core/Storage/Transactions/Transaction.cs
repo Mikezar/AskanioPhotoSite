@@ -1,34 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using AskanioPhotoSite.Core.Entities;
+using AskanioPhotoSite.Core.Storage.Interpreter;
 using AskanioPhotoSite.Core.Storage.Queries;
 
 namespace AskanioPhotoSite.Core.Storage.Transactions
 {
     public class Transaction<TEntity, TKey> : ITransaction<TEntity, TKey>
     {
+        private readonly IInterpreter<TEntity> _interpreter;
         private bool _disposed;
 
-        public IQueryResult Read(IQuery<TEntity, TKey> query)
+        public Transaction(IInterpreter<TEntity> interpreter)
         {
-            return new QueryResult()
+            _interpreter = interpreter;
+
+        }
+        public IQueryResult<TEntity> Read(IQuery<TEntity, TKey> query)
+        {
+            try
             {
-                IsSuccess = true,
-                Result = new List<Album>()
+                if (query.ActionType != ActionType.Select) throw new InvalidOperationException();
+                
+                    string type = typeof(TEntity).Name;
+                    DirectoryInfo directory =
+                        new DirectoryInfo(
+                            Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\..\..\Core\App_Data")));
+
+                    string path = $"{directory}\\{type}.txt";
+                    if (!Directory.Exists(directory.ToString())) Directory.CreateDirectory(directory.ToString());
+
+                    if (!File.Exists(path))File.Create(path);
+
+                    var source = File.ReadAllText(path);
+                
+                return new QueryResult<TEntity>()
                 {
-                    new Album()
-                    {
-                        Id = 1,
-                        DescriptionEng = "Test",
-                        DescriptionRu =  "Тест",
-                        TitleEng = "Test",
-                        TitleRu = "Тест"
-                    }
-                }
-            };
+                    IsSuccess = true,
+                    Result =_interpreter.InterpreteToEntity(source, Activator.CreateInstance<TEntity>())
+                };
+            }
+            catch (Exception exception)
+            {
+                return new QueryResult<TEntity>()
+                {
+                    IsSuccess = false,
+                    Exception = exception,
+                    ErrorMessage = exception.Message
+                };
+            }
         }
 
-        public IQueryResult Write(IQuery<TEntity, TKey> query)
+        public IQueryResult<TEntity> Write(IQuery<TEntity, TKey> query)
         {
             throw new NotImplementedException();
         }

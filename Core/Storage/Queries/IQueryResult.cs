@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using AskanioPhotoSite.Core.Entities;
 
 namespace AskanioPhotoSite.Core.Storage.Queries
 {
-    public interface IQueryResult
+    public interface IQueryResult<TEntity>
     {
         bool IsSuccess { get; set; }
 
@@ -11,6 +12,6 @@ namespace AskanioPhotoSite.Core.Storage.Queries
 
         Exception Exception { get; set; }
 
-        IEnumerable<object> Result { get; set; }
+        IEnumerable<TEntity> Result { get; set; }
     }
 }

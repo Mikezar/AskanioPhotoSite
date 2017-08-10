@@ -24,7 +24,7 @@ namespace AskanioPhotoSite.Core.Repositories
         {
             if (_cache == null)
             {
-                return (IEnumerable <TEntity>)_storage.Execute(QueryBuilder<TEntity, TKey>.GetAll()).Result;
+                return _storage.Execute(QueryBuilder<TEntity, TKey>.GetAll()).Result;
             }
 
             return  _cache.GetEntities<TEntity>().AsEnumerable();
@@ -32,7 +32,7 @@ namespace AskanioPhotoSite.Core.Repositories
 
         public virtual TEntity AddOne(TEntity entity)
         {
-            return (TEntity)_storage.Execute(QueryBuilder<TEntity, TKey>.AddOne(entity)).Result.SingleOrDefault();          
+            return _storage.Execute(QueryBuilder<TEntity, TKey>.AddOne(entity)).Result.SingleOrDefault();          
         }
 
         public virtual TEntity[] AddMany(TEntity[] entities)
@@ -42,7 +42,7 @@ namespace AskanioPhotoSite.Core.Repositories
 
         public virtual TEntity UpdateOne(TEntity entity)
         {
-            return (TEntity)_storage.Execute(QueryBuilder<TEntity, TKey>.UpdateOne(entity)).Result.SingleOrDefault();
+            return _storage.Execute(QueryBuilder<TEntity, TKey>.UpdateOne(entity)).Result.SingleOrDefault();
         }
 
         public virtual TEntity[] UpdateMany(TEntity[] entities)

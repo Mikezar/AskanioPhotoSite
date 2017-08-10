@@ -13,7 +13,7 @@ namespace AskanioPhotoSite.Core.Storage
    {
        ICache Cache { get; }
        IRepository<TEntity, TKey> GetRepository<TEntity, TKey>() where TEntity : Entity;
-       IQueryResult Execute<TEntity, TKey>(IQuery<TEntity, TKey> query);
+       IQueryResult<TEntity> Execute<TEntity, TKey>(IQuery<TEntity, TKey> query);
        ICache GetCache();
        void UpdateCache(ICache cache);
        void MarkAsModified();

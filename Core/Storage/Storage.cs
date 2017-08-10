@@ -25,7 +25,7 @@ namespace AskanioPhotoSite.Core.Storage
             _repositories = new Dictionary<object, object>();
             _repositories.Add(typeof(Album), new GenericRepository<Album, int>(this));
             _repositories.Add(typeof(Photo), new GenericRepository<Photo, int>(this));
-            Cache = GetCache();
+          //  Cache = GetCache();
         }
 
         public IRepository<TEntity, TKey> GetRepository<TEntity, TKey>() where TEntity : Entity
@@ -40,11 +40,11 @@ namespace AskanioPhotoSite.Core.Storage
             }
         }
 
-        public IQueryResult Execute<TEntity, TKey>(IQuery<TEntity, TKey> query)
+        public IQueryResult<TEntity> Execute<TEntity, TKey>(IQuery<TEntity, TKey> query)
         {
             if (query.QueryType == QueryType.Read)
             {
-                using (var transaction = new Transaction<TEntity, TKey>())
+                using (var transaction = new Transaction<TEntity, TKey>(new Interpreter<TEntity>()))
                 {
                     var result = transaction.Read(query);
 
@@ -56,7 +56,7 @@ namespace AskanioPhotoSite.Core.Storage
             }
             else 
             {
-                using (var transaction = new Transaction<TEntity, TKey>())
+                using (var transaction = new Transaction<TEntity, TKey>(new Interpreter<TEntity>()))
                 {
                     var result = transaction.Write(query);
 
