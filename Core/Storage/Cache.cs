@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,8 @@ namespace AskanioPhotoSite.Core.Storage
 
        public void AddEntity<TEntity>(ICollection<TEntity> entities)
        {
-           Entities.Add(typeof(TEntity), (ICollection<object>)entities);
+          // ICollection<object> converted = entities.Cast<object>().ToArray();
+           Entities.Add(typeof(TEntity), (ICloneable<)entities);
        }
 
     }

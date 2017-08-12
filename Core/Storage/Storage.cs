@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using AskanioPhotoSite.Core.Entities;
 using AskanioPhotoSite.Core.Repositories;
+using AskanioPhotoSite.Core.Storage.Interpreter;
 using AskanioPhotoSite.Core.Storage.Queries;
 using AskanioPhotoSite.Core.Storage.Transactions;
 
@@ -16,17 +17,16 @@ namespace AskanioPhotoSite.Core.Storage
     {
         private readonly IDictionary<object, object> _repositories;
         
-        public ICache Cache { get; set; }
-
-        private const string CacheKey = "AskanioCachedData";
 
         public Storage()
         {
             _repositories = new Dictionary<object, object>();
             _repositories.Add(typeof(Album), new GenericRepository<Album, int>(this));
             _repositories.Add(typeof(Photo), new GenericRepository<Photo, int>(this));
-          //  Cache = GetCache();
         }
+
+
+        public IDictionary<object, object> GetEntities => _repositories;
 
         public IRepository<TEntity, TKey> GetRepository<TEntity, TKey>() where TEntity : Entity
         {
@@ -71,42 +71,5 @@ namespace AskanioPhotoSite.Core.Storage
                 }
             }
         }
-
-        public ICache GetCache()
-        {
-            ICache cache = HttpContext.Current.Cache[CacheKey] as Cache;
-            if (cache == null)
-            {
-                cache = new Cache();
-
-                foreach (var key in _repositories)
-                {
-                    var repository = (IRepository<Entity,int>)key.Value;
-                    cache.AddEntity(repository.GetAll().ToList());
-                }
-                UpdateCache(cache);
-            }
-
-            return cache;
-        }
-
-        public void UpdateCache(ICache cache)
-        {
-            if (cache == null) throw new ArgumentNullException("cache");
-            HttpContext.Current.Cache[CacheKey] = cache;
-            Cache = cache;
-        }
-
-        public void MarkAsModified()
-        {
-            ICache cache = HttpContext.Current.Cache[CacheKey] as Cache;
-
-            if (cache == null) cache = GetCache();
-
-            cache.IsActual = false;
-
-            UpdateCache(cache);
-        }
-
     }
 }

@@ -9,25 +9,18 @@ using AskanioPhotoSite.Core.Storage.Queries;
 
 namespace AskanioPhotoSite.Core.Repositories
 {
-    public class GenericRepository<TEntity,TKey> : IRepository<TEntity, TKey> where TEntity: Entity
+    public class GenericRepository<TEntity,TKey> : IRepository<TEntity, TKey> 
     {
         private readonly IStorage _storage;
-        private readonly ICache _cache;
 
         public GenericRepository(IStorage storage)
         {
             _storage = storage;
-            _cache = storage.Cache;
         }
 
         public virtual IEnumerable<TEntity> GetAll()
         {
-            if (_cache == null)
-            {
-                return _storage.Execute(QueryBuilder<TEntity, TKey>.GetAll()).Result;
-            }
-
-            return  _cache.GetEntities<TEntity>().AsEnumerable();
+            return _storage.Execute(QueryBuilder<TEntity, TKey>.GetAll()).Result;
         }
 
         public virtual TEntity AddOne(TEntity entity)
