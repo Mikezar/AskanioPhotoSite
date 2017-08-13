@@ -8,14 +8,14 @@ using AskanioPhotoSite.Core.Storage;
 
 namespace AskanioPhotoSite.Core.Repositories
 {
-    public interface IRepository<TEntity, TKey> 
+    public interface IRepository<TEntity> 
     {
         IEnumerable<TEntity> GetAll();
         TEntity AddOne(TEntity entity);
         TEntity[] AddMany(TEntity[] entities);
         TEntity UpdateOne(TEntity entity);
         TEntity[] UpdateMany(TEntity[] entities);
-        void DeleteOne(TKey key);
-        void DeleteMany(TKey[] keys);
+        void DeleteOne(int key);
+        void DeleteMany(int [] keys);
     }
 }

@@ -12,6 +12,6 @@ namespace AskanioPhotoSite.Core.Storage
         bool IsActual { get; set; }
 
         ICollection<TEntity> GetEntities<TEntity>();
-        void AddEntity<TEntity>(ICollection<TEntity> entities);
+        void AddEntity<TEntity>(IEnumerable<TEntity> entities);
     }
 }

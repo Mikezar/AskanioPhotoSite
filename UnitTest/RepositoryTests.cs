@@ -13,13 +13,13 @@ namespace AskanioPhotoSite.UnitTest
     public class RepositoryTests
     {
         [TestMethod]
-        public void GetAllTest()
+        public void GetAllFromCacheTest()
         {
             BaseService<Album> service = new AlbumService(new Storage());
 
             service.Cache = new Cache();
 
-            ICollection<Entity> entity = new List<Entity>()
+            IEnumerable<Album> entity = new List<Album>()
             {
                 new Album()
                 {
@@ -29,13 +29,13 @@ namespace AskanioPhotoSite.UnitTest
                     DescriptionRu = "DescriptionRu",
                     DescriptionEng = "DescripntionEng"
                 }
-            };
+            }.ToList();
 
             service.Cache.AddEntity(entity);
 
             var data = service.GetAll();
             Assert.IsNotNull(data);
-            Assert.IsTrue(data.Count() > 1);
+            Assert.IsTrue(data.Count() == 1);
         }
     }
 }

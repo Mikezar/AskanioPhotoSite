@@ -34,7 +34,7 @@ namespace AskanioPhotoSite.Core.Services
 
                 foreach (var key in _storage.GetEntities)
                 {
-                    var repository = (IRepository<Entity, int>)key.Value;
+                    var repository = (IRepository<object>)key.Value;
                     cache.AddEntity(repository.GetAll().ToList());
                 }
                 UpdateCache(cache);

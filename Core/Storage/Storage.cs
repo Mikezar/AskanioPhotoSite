@@ -21,18 +21,18 @@ namespace AskanioPhotoSite.Core.Storage
         public Storage()
         {
             _repositories = new Dictionary<object, object>();
-            _repositories.Add(typeof(Album), new GenericRepository<Album, int>(this));
-            _repositories.Add(typeof(Photo), new GenericRepository<Photo, int>(this));
+            _repositories.Add(typeof(Album), new GenericRepository<Album>(this));
+            _repositories.Add(typeof(Photo), new GenericRepository<Photo>(this));
         }
 
 
         public IDictionary<object, object> GetEntities => _repositories;
 
-        public IRepository<TEntity, TKey> GetRepository<TEntity, TKey>() where TEntity : Entity
+        public IRepository<TEntity> GetRepository<TEntity>() where TEntity : Entity
         {
             try
             {
-                return (IRepository<TEntity, TKey>) _repositories[typeof(TEntity)];
+                return (IRepository<TEntity>) _repositories[typeof(TEntity)];
             }
             catch(KeyNotFoundException)
             {
@@ -40,11 +40,11 @@ namespace AskanioPhotoSite.Core.Storage
             }
         }
 
-        public IQueryResult<TEntity> Execute<TEntity, TKey>(IQuery<TEntity, TKey> query)
+        public IQueryResult<TEntity> Execute<TEntity>(IQuery<TEntity> query)
         {
             if (query.QueryType == QueryType.Read)
             {
-                using (var transaction = new Transaction<TEntity, TKey>(new Interpreter<TEntity>()))
+                using (var transaction = new Transaction<TEntity>(new Interpreter<TEntity>()))
                 {
                     var result = transaction.Read(query);
 
@@ -56,7 +56,7 @@ namespace AskanioPhotoSite.Core.Storage
             }
             else 
             {
-                using (var transaction = new Transaction<TEntity, TKey>(new Interpreter<TEntity>()))
+                using (var transaction = new Transaction<TEntity>(new Interpreter<TEntity>()))
                 {
                     var result = transaction.Write(query);
 

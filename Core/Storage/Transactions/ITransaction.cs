@@ -3,10 +3,10 @@ using AskanioPhotoSite.Core.Storage.Queries;
 
 namespace AskanioPhotoSite.Core.Storage.Transactions
 {
-   public interface ITransaction<TEntity, TKey> : IDisposable
+   public interface ITransaction<TEntity> : IDisposable 
    {
-       IQueryResult<TEntity> Read(IQuery<TEntity, TKey> query);
-       IQueryResult<TEntity> Write(IQuery<TEntity, TKey> query);
+       IQueryResult<TEntity> Read(IQuery<TEntity> query);
+       IQueryResult<TEntity> Write(IQuery<TEntity> query);
        void Commit();
        void RollBack();
    }

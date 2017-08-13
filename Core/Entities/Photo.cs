@@ -22,6 +22,6 @@ namespace AskanioPhotoSite.Core.Entities
 
         public string ThumbnailPath { get; set; }
 
-        public Album Album { get; set; }
+        public int AlbumId { get; set; }
     }
 }

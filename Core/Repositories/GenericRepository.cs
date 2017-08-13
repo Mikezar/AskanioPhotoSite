@@ -9,7 +9,7 @@ using AskanioPhotoSite.Core.Storage.Queries;
 
 namespace AskanioPhotoSite.Core.Repositories
 {
-    public class GenericRepository<TEntity,TKey> : IRepository<TEntity, TKey> 
+    public class GenericRepository<TEntity> : IRepository<TEntity> 
     {
         private readonly IStorage _storage;
 
@@ -20,37 +20,37 @@ namespace AskanioPhotoSite.Core.Repositories
 
         public virtual IEnumerable<TEntity> GetAll()
         {
-            return _storage.Execute(QueryBuilder<TEntity, TKey>.GetAll()).Result;
+            return _storage.Execute(QueryBuilder<TEntity>.GetAll()).Result;
         }
 
         public virtual TEntity AddOne(TEntity entity)
         {
-            return _storage.Execute(QueryBuilder<TEntity, TKey>.AddOne(entity)).Result.SingleOrDefault();          
+            return _storage.Execute(QueryBuilder<TEntity>.AddOne(entity)).Result.SingleOrDefault();          
         }
 
         public virtual TEntity[] AddMany(TEntity[] entities)
         {
-            return (TEntity[])_storage.Execute(QueryBuilder<TEntity, TKey>.AddMany(entities)).Result;
+            return (TEntity[])_storage.Execute(QueryBuilder<TEntity>.AddMany(entities)).Result;
         }
 
         public virtual TEntity UpdateOne(TEntity entity)
         {
-            return _storage.Execute(QueryBuilder<TEntity, TKey>.UpdateOne(entity)).Result.SingleOrDefault();
+            return _storage.Execute(QueryBuilder<TEntity>.UpdateOne(entity)).Result.SingleOrDefault();
         }
 
         public virtual TEntity[] UpdateMany(TEntity[] entities)
         {
-            return (TEntity[])_storage.Execute(QueryBuilder<TEntity, TKey>.UpdateMany(entities)).Result;
+            return (TEntity[])_storage.Execute(QueryBuilder<TEntity>.UpdateMany(entities)).Result;
         }
 
-        public virtual void DeleteOne(TKey key)
+        public virtual void DeleteOne(int key)
         {
-             _storage.Execute(QueryBuilder<TEntity, TKey>.DeleteOne(key));
+             _storage.Execute(QueryBuilder<TEntity>.DeleteOne(key));
         }
 
-        public virtual void DeleteMany(TKey[] keys)
+        public virtual void DeleteMany(int[] keys)
         {
-            _storage.Execute(QueryBuilder<TEntity, TKey>.DeleteMany(keys));
+            _storage.Execute(QueryBuilder<TEntity>.DeleteMany(keys));
         }
     }
 }

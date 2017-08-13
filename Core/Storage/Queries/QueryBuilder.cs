@@ -2,20 +2,20 @@
 
 namespace AskanioPhotoSite.Core.Storage.Queries
 {
-    public static class QueryBuilder<TEntity, TKey>
+    public static class QueryBuilder<TEntity>
     {
-        public static IQuery<TEntity, TKey> GetAll()
+        public static IQuery<TEntity> GetAll()
         {
-            return new Query<TEntity, TKey>()
+            return new Query<TEntity>()
             {
                 QueryType = QueryType.Read,
                 ActionType = ActionType.Select
             };
         }
 
-        public static IQuery<TEntity, TKey> AddOne(TEntity entity)
+        public static IQuery<TEntity> AddOne(TEntity entity)
         {
-            return new Query<TEntity, TKey>()
+            return new Query<TEntity>()
             {
                 QueryType = QueryType.Write,
                 Entities = new List<TEntity>()
@@ -27,9 +27,9 @@ namespace AskanioPhotoSite.Core.Storage.Queries
         }
 
 
-        public static IQuery<TEntity, TKey> AddMany(TEntity[] entities)
+        public static IQuery<TEntity> AddMany(TEntity[] entities)
         {
-            return new Query<TEntity, TKey>()
+            return new Query<TEntity>()
             {
                 QueryType = QueryType.Write,
                 Entities = entities,
@@ -37,9 +37,9 @@ namespace AskanioPhotoSite.Core.Storage.Queries
             };
         }
 
-        public static IQuery<TEntity, TKey> UpdateOne(TEntity entity)
+        public static IQuery<TEntity> UpdateOne(TEntity entity)
         {
-            return new Query<TEntity, TKey>()
+            return new Query<TEntity>()
             {
                 QueryType = QueryType.Write,
                 Entities = new List<TEntity>()
@@ -50,9 +50,9 @@ namespace AskanioPhotoSite.Core.Storage.Queries
             };
         }
 
-        public static IQuery<TEntity, TKey> UpdateMany(TEntity[] entities)
+        public static IQuery<TEntity> UpdateMany(TEntity[] entities)
         {
-            return new Query<TEntity, TKey>()
+            return new Query<TEntity>()
             {
                 QueryType = QueryType.Write,
                 Entities = entities,
@@ -60,22 +60,22 @@ namespace AskanioPhotoSite.Core.Storage.Queries
             };
         }
 
-        public static IQuery<TEntity, TKey> DeleteOne(TKey key)
+        public static IQuery<TEntity> DeleteOne(int key)
         {
-            return new Query<TEntity, TKey>()
+            return new Query<TEntity>()
             {
                 QueryType = QueryType.Write,
                 ActionType = ActionType.Delete,
-                Keys = new List<TKey>()
+                Keys = new List<int>()
                 {
                     key
                 }
             };
         }
 
-        public static IQuery<TEntity, TKey> DeleteMany(TKey[] keys)
+        public static IQuery<TEntity> DeleteMany(int[] keys)
         {
-            return new Query<TEntity, TKey>()
+            return new Query<TEntity>()
             {
                 QueryType = QueryType.Write,
                 ActionType = ActionType.Delete,

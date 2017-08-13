@@ -17,18 +17,17 @@ namespace AskanioPhotoSite.Core.Storage
            get { return _isActual; }
            set { _isActual = value; }
        }
-       
-       private IDictionary<object, ICollection<object>> Entities { get; set; } 
+
+       private IDictionary<object, IEnumerable<object>> Entities = new Dictionary<object, IEnumerable<object>>();
 
        public ICollection<TEntity> GetEntities<TEntity>()
        {
            return (ICollection<TEntity>)Entities[typeof(TEntity)];
        }
 
-       public void AddEntity<TEntity>(ICollection<TEntity> entities)
+       public void AddEntity<TEntity>(IEnumerable<TEntity> entities)
        {
-          // ICollection<object> converted = entities.Cast<object>().ToArray();
-           Entities.Add(typeof(TEntity), (ICloneable<)entities);
+           Entities.Add(typeof(TEntity), (IEnumerable<object>)entities);
        }
 
     }

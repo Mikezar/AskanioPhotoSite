@@ -2,7 +2,7 @@
 
 namespace AskanioPhotoSite.Core.Storage.Queries
 {
-    public interface IQuery<TEntity, TKey> 
+    public interface IQuery<TEntity> 
     {
         QueryType QueryType { get; set; }
 
@@ -10,6 +10,6 @@ namespace AskanioPhotoSite.Core.Storage.Queries
 
         ActionType ActionType { get; set; }
 
-        ICollection<TKey> Keys { get; set; }
+        ICollection<int> Keys { get; set; }
     }
 }

@@ -8,9 +8,10 @@ namespace AskanioPhotoSite.Core.Entities
 {
     public class Album : Entity
     {
+
         public int Id { get; set; }
 
-        public int? ParentId { get; set; }
+        public int ParentId { get; set; }
 
         public string TitleRu { get; set; }
 
@@ -19,7 +20,5 @@ namespace AskanioPhotoSite.Core.Entities
         public string DescriptionRu { get; set; }
 
         public string DescriptionEng { get; set; }
-
-        public ICollection<Photo> Photos { get; set; }
     }
 }

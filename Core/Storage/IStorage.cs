@@ -12,7 +12,7 @@ namespace AskanioPhotoSite.Core.Storage
    public interface IStorage
    {
        IDictionary<object, object> GetEntities { get; }
-       IRepository<TEntity, TKey> GetRepository<TEntity, TKey>() where TEntity : Entity;
-       IQueryResult<TEntity> Execute<TEntity, TKey>(IQuery<TEntity, TKey> query);
+       IRepository<TEntity> GetRepository<TEntity>() where TEntity : Entity;
+       IQueryResult<TEntity> Execute<TEntity>(IQuery<TEntity> query);
    }
 }
