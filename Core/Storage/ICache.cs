@@ -13,5 +13,6 @@ namespace AskanioPhotoSite.Core.Storage
 
         ICollection<TEntity> GetEntities<TEntity>();
         void AddEntity<TEntity>(IEnumerable<TEntity> entities);
+        void Reset();
     }
 }

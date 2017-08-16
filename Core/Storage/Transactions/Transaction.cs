@@ -4,9 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Web;
 using AskanioPhotoSite.Core.Entities;
-using AskanioPhotoSite.Core.Storage.Interpreter;
 using AskanioPhotoSite.Core.Storage.Queries;
+using AskanioPhotoSite.Core.Storage.Queries.Interpreter;
 
 namespace AskanioPhotoSite.Core.Storage.Transactions
 {
@@ -15,26 +16,29 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
         private readonly IInterpreter<TEntity> _interpreter;
         private bool _disposed;
 
+        public const char Line = (char)30;
+        public const char Field = (char)31;
+
         private string FilePath { get; set; }
 
+        private DirectoryInfo OptDirectory { get; set; }
         private string Source { get; set; }
 
         private string[] Modified { get; set; }
 
-        public Transaction(IInterpreter<TEntity> interpreter)
+        public Transaction(IInterpreter<TEntity> interpreter, DirectoryInfo directory = null)
         {
             _interpreter = interpreter;
+            OptDirectory = directory;
 
         }
 
         private void CreateIfNotExists(string type)
         {
-            DirectoryInfo directory =
-                new DirectoryInfo(
-                    Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\..\..\Core\App_Data")));
+            DirectoryInfo directory = OptDirectory ??  new DirectoryInfo(HttpContext.Current.Server.MapPath("..\\App_Data"));
 
             string path = $"{directory}\\{type}.txt";
-            if (!Directory.Exists(directory.ToString())) Directory.CreateDirectory(directory.ToString());
+             if (!Directory.Exists(directory.ToString())) Directory.CreateDirectory(directory.ToString());
 
             if (!File.Exists(path))
             {
@@ -55,6 +59,15 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
             }
         }
 
+
+        private void WriteStream()
+        {
+                var bytes = Encoding.Unicode.GetBytes(String.Concat(Modified));
+               
+                File.WriteAllBytes(FilePath, bytes);
+        }
+
+
         public IQueryResult<TEntity> Read(IQuery<TEntity> query)
         {
             CreateIfNotExists(typeof(TEntity).Name);
@@ -63,12 +76,22 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
             {
                 if (query.ActionType != ActionType.Select) throw new InvalidOperationException();
 
-                ReadStream();   
-                       
+                ReadStream();
+
+                if (string.IsNullOrEmpty(Source))
+                {
+                    return new QueryResult<TEntity>()
+                    {
+                        IsSuccess = true,
+                        Result = new List<TEntity>()
+                    };
+                }
+
+                var lines = Source.Split(Line).Where(x => x != "\r\n" && !string.IsNullOrEmpty(x)).ToArray();
                 return new QueryResult<TEntity>()
                 {
                     IsSuccess = true,
-                    Result =_interpreter.InterpreteToEntity(Source, Activator.CreateInstance<TEntity>())
+                    Result =_interpreter.InterpreteToEntity(lines, Activator.CreateInstance<TEntity>())
                 };
             }
             catch (Exception exception)
@@ -91,14 +114,19 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
             {
                 if (query.ActionType == ActionType.Select) throw new InvalidOperationException();
 
-                var lines = File.ReadAllLines(FilePath).Where(x => !string.IsNullOrEmpty(x));
+                ReadStream();
 
                 BackUp();
 
+                var lines = Source.Split(Line).Where(x => x != "\r\n" && !string.IsNullOrEmpty(x)).ToArray();
+
                 if (query.ActionType == ActionType.Delete)
                 {
+                    if (string.IsNullOrEmpty(Source)) throw new ArgumentNullException("Source");
+
                     if (query.Keys == null) throw new ArgumentNullException("Keys");
-                    Modified = lines.Where(x => query.Keys.Contains(Convert.ToInt32(x.Substring(0, x.IndexOf('\t')))) == false).ToArray();
+
+                    Modified = lines.Where(x => query.Keys.Contains(Convert.ToInt32(x.Substring(0, x.IndexOf(Field)))) == false).ToArray();
 
                     return new QueryResult<TEntity>()
                     {
@@ -109,11 +137,16 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
                 if(query.ActionType == ActionType.Add)
                 {
                     if(query.Entities == null) throw new ArgumentNullException("Entities");
-                    var lstLine = lines.Last();
-                    int maxId = Convert.ToInt32(lstLine.Substring(0, lstLine.IndexOf('\t')));
 
-                   Modified = lines.Concat(_interpreter.InterpreteToString(query.Entities, maxId)).ToArray();            
+                    int maxId = 0;
+                    if (lines.Length > 0)
+                    { 
+                        var lstLine = lines.Last();
+                        maxId = Convert.ToInt32(lstLine.Substring(0, lstLine.IndexOf(Field)));
+                    }
 
+                   Modified = lines.Concat(_interpreter.InterpreteToString(query.Entities, maxId)).ToArray();
+                   Modified = Modified.Select(x => x + $"{Line}").ToArray();
                     return new QueryResult<TEntity>()
                     {
                         IsSuccess = true,
@@ -122,7 +155,9 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
                 }
                 if(query.ActionType == ActionType.Update)
                 {
-                   if (query.Entities == null) throw new ArgumentNullException("Entities");
+                    if (string.IsNullOrEmpty(Source)) throw new ArgumentNullException("Source");
+
+                    if (query.Entities == null) throw new ArgumentNullException("Entities");
 
                     var updates = _interpreter.InterpreteToString(query.Entities);
 
@@ -130,13 +165,14 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
 
                     for (int i = 0; i < Modified.Length; i ++)
                     {
-                        int id = Convert.ToInt32(Modified[i].Substring(0, Modified[i].IndexOf('\t')));
+                        int id = Convert.ToInt32(Modified[i].Substring(0, Modified[i].IndexOf(Field)));
                      
                         if(updates.ContainsKey(id))
                         {
                             Modified[i] = updates[id];
                         }
                     }
+                    Modified = Modified.Select(x => x + $"{Line}").ToArray();
 
                     return new QueryResult<TEntity>()
                     {
@@ -172,7 +208,8 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
             {
                 if (Modified == null) return;
 
-                File.WriteAllLines(FilePath, Modified, Encoding.Unicode);
+                WriteStream();
+               // File.WriteAllLines(FilePath, Modified, Encoding.Unicode);
                 File.Delete(FilePath + ".backup");
             }
             catch(Exception exception)

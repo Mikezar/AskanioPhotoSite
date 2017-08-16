@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using AskanioPhotoSite.Core.Entities;
+using AskanioPhotoSite.Core.Storage.Transactions;
 
-namespace AskanioPhotoSite.Core.Storage.Interpreter
+namespace AskanioPhotoSite.Core.Storage.Queries.Interpreter
 {
     public class Interpreter<TEntity> : IInterpreter<TEntity>
     {
-        public IEnumerable<TEntity> InterpreteToEntity(string source, TEntity entity)
+        public IEnumerable<TEntity> InterpreteToEntity(string[] lines, TEntity entity)
         {
-            if (string.IsNullOrEmpty(source)) return new List<TEntity>();
-
-            var lines = source.Split('\r', '\n').Where(x => x != "").ToArray();
-
             if (entity.GetType() == typeof(Album))
             {
                return GetAlbumEntities(lines).Cast<TEntity>();
@@ -26,9 +24,7 @@ namespace AskanioPhotoSite.Core.Storage.Interpreter
 
         public IEnumerable<string> InterpreteToString(IEnumerable<TEntity> entities, int maxId)
         {
-            int counter = ++maxId;
-            if (entities.First().GetType() == typeof(Album))
-            {
+                int counter = ++maxId;
                 var result = new List<string>();
 
                 foreach(var entity in entities)
@@ -38,40 +34,33 @@ namespace AskanioPhotoSite.Core.Storage.Interpreter
                     counter++;
                     var properties = entity.GetType().GetProperties();
                     var values = properties.Select(x => x.GetValue(entity)).ToArray();
-                    var entityString = String.Join("\t", values.Select(c => c).ToArray());
+                    var entityString = String.Join($"{Transaction<TEntity>.Field}", values.Select(c => c).ToArray());
                     result.Add(entityString);
                 }
 
-                return result;
-            }
-
-            return null;
+            return result;
         }
 
         public Dictionary<int, string> InterpreteToString(IEnumerable<TEntity> entities)
         {
-            if (entities.First().GetType() == typeof(Album))
-            {
                 var result = new Dictionary<int, string>();
 
                 foreach (var entity in entities)
                 {
                     var properties = entity.GetType().GetProperties();
                     var values = properties.Select(x => x.GetValue(entity)).ToArray();
-                    var entityString = String.Join("\t", values.Select(c => c).ToArray());
+                    var entityString = String.Join($"{Transaction<TEntity>.Field}", values.Select(c => c).ToArray());
                     result.Add((int)entity.GetType().GetProperty("Id").GetValue(entity), entityString);
                 }
 
                 return result;
-            }
-            return null;
         }
 
         private IEnumerable<Album> GetAlbumEntities(string[] lines)
         {
             return lines.Select(x =>
             {
-                var albumFields = x.Split('\t');
+                var albumFields = x.Split(Transaction<TEntity>.Field);
                 return new Album()
                 {
                     Id = Convert.ToInt32(albumFields[0]),
@@ -88,7 +77,7 @@ namespace AskanioPhotoSite.Core.Storage.Interpreter
         {
             return lines.Select(x =>
             {
-                var albumFields = x.Split('\t');
+                var albumFields = x.Split(Transaction<TEntity>.Field);
                 return new Photo()
                 {
                     Id = Convert.ToInt32(albumFields[0]),

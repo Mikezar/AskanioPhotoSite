@@ -1,0 +1,74 @@
+﻿@model AskanioPhotoSite.Core.Models.AlbumModel
+@{
+    ViewBag.Title = "Альбомы";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int counter = 0;
+}
+
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    
+    @Html.ActionLink("Добавить новый фотоальбом", "AddAlbum", null, new {@class = "btn btn-primary"})
+    
+    <table class="table table-hover space">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Название</th>
+            <th>Фотографий</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var album in Model.Albums)
+            {
+                <tr>
+                    <td>@(++counter)</td>
+                    <td>@album.TitleRu</td>
+                    <td></td>
+                    <td style="text-align: right">
+                        <a  href='@Url.Action("EditAlbum", "Management", new {id = album.Id})' class="edit"><span class="glyphicon glyphicon-pencil"></span>Редактировать</a>
+                        <a class="remove" data-id="@album.Id"><span class="glyphicon glyphicon-remove-sign"></span>Удалить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $(".remove").on("click", function () {
+
+            var element = $(this);
+            var id = $(this).data("id");
+
+            ConfirmDelete("Вы уверены, что хотите удалить альбом и все связанные с ним фотографии? Это действие будет наобратимо!", function () {
+                ConfirmDelete("Вы точно уверенны? Это последнее китайское предупреждение!",
+                    function () {
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '@Url.Action("DeleteAlbum")',
+                                    data: { id: id },
+                                    success: function(result) {
+                                        if (result.success) {
+                                            $(element).closest('tr').fadeIn(500,
+                                                function() {
+                                                    $(this).remove();
+                                                });
+                                        } else {
+                                            bootbox.alert(result.errorMessage);
+                                        }
+                                    }
+                                });
+                            });
+                });
+        });
+    });
+</script>
+

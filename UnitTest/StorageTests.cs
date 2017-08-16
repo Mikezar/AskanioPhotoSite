@@ -1,24 +1,51 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
+using System.Threading;
+using System.Web;
+using System.Web.Routing;
+using System.Web.UI.WebControls;
 using AskanioPhotoSite.Core.Entities;
-using AskanioPhotoSite.Core.Repositories;
-using AskanioPhotoSite.Core.Services;
 using AskanioPhotoSite.Core.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AskanioPhotoSite.Core.Storage.Queries;
+using AskanioPhotoSite.WebUI;
+using NUnit.Framework;
+using NUnit.Framework.Internal;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 
 namespace AskanioPhotoSite.UnitTest
 {
+ 
     [TestClass]
     public class StorageTests
     {
+        public object obj = new object();
+
+        [TestInitialize]
+        public void Init()
+        {
+
+            HttpContext.Current = new HttpContext(new HttpRequest("", "http://localhost/", ""),
+                new HttpResponse(new StringWriter()));
+
+        }
+
+        DirectoryInfo directory =
+                   new DirectoryInfo(
+                       Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\..\..\Core\App_Data")));
+
         [TestMethod]
         public void ExecuteSelectTest()
         {
-            Storage storage = new Storage();
+            Storage storage = new Storage(directory);
 
+           
             var query = new Query<Album>()
             {
                 QueryType = QueryType.Read,
@@ -31,30 +58,10 @@ namespace AskanioPhotoSite.UnitTest
         }
 
         [TestMethod]
-        public void ExecuteDeleteTest()
-        {
-            Storage storage = new Storage();
-
-            var query = new Query<Album>()
-            {
-                QueryType = QueryType.Write,
-                ActionType = ActionType.Delete,
-                Keys = new List<int>()
-                {
-                    3,
-                }
-            };
-
-            var data = storage.Execute(query);
-
-            Assert.IsTrue(data.IsSuccess);
-        }
-
-
-        [TestMethod]
         public void ExecuteAddTest()
         {
-            Storage storage = new Storage();
+            Storage storage = new Storage(directory);
+
 
             var query = new Query<Album>()
             {
@@ -82,7 +89,8 @@ namespace AskanioPhotoSite.UnitTest
         [TestMethod]
         public void ExecuteUpdateTest()
         {
-            Storage storage = new Storage();
+          
+            Storage storage = new Storage(directory);
 
             var query = new Query<Album>()
             {
@@ -92,7 +100,7 @@ namespace AskanioPhotoSite.UnitTest
                 {
                     new Album()
                     {
-                        Id = 2,
+                        Id = 1,
                         ParentId = 1,
                         TitleEng = "TitleUpdated",
                         TitleRu = "НазваниеUpdated",
@@ -105,6 +113,37 @@ namespace AskanioPhotoSite.UnitTest
             var data = storage.Execute(query);
 
             Assert.IsTrue(data.IsSuccess);
+        }
+
+
+        [TestMethod]
+        public void ExecuteDeleteTest()
+        {
+
+            Storage storage = new Storage(directory);
+
+            var query = new Query<Album>()
+            {
+                QueryType = QueryType.Write,
+                ActionType = ActionType.Delete,
+                Keys = new List<int>()
+                {
+                    1,
+                }
+            };
+
+            var data = storage.Execute(query);
+
+            Assert.IsTrue(data.IsSuccess);
+        }
+
+        [TestMethod]
+        public void CharTest()
+        {
+            char Line = (char)30;
+            char Field = (char)31;
+
+            Assert.IsNotNull(Field);
         }
     }
 }

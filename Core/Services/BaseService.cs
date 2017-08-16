@@ -1,9 +1,11 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Mvc;
 using AskanioPhotoSite.Core.Entities;
 using AskanioPhotoSite.Core.Repositories;
 using AskanioPhotoSite.Core.Storage;
@@ -12,10 +14,6 @@ namespace AskanioPhotoSite.Core.Services
 {
     public abstract class BaseService<TEntity>
     {
-        public ICache Cache { get; set; }
-        
-        private const string CacheKey = "AskanioCachedData";
-
         protected readonly IStorage _storage;
 
         public BaseService(IStorage storage)
@@ -25,40 +23,15 @@ namespace AskanioPhotoSite.Core.Services
 
         public abstract IEnumerable<TEntity> GetAll();
 
-        public ICache GetCache()
-        {
-            ICache cache = HttpContext.Current.Cache[CacheKey] as Cache;
-            if (cache == null)
-            {
-                cache = new Cache();
+        public abstract TEntity GetOne(int id);
 
-                foreach (var key in _storage.GetEntities)
-                {
-                    var repository = (IRepository<object>)key.Value;
-                    cache.AddEntity(repository.GetAll().ToList());
-                }
-                UpdateCache(cache);
-            }
+        public abstract TEntity AddOne(object obj);
 
-            return cache;
-        }
+        public abstract TEntity UpdateOne(object obj);
 
-        public void UpdateCache(ICache cache)
-        {
-            if (cache == null) throw new ArgumentNullException("cache");
-            HttpContext.Current.Cache[CacheKey] = cache;
-            Cache = cache;
-        }
+        public abstract void DeleteOne(int id);
 
-        public void MarkAsModified()
-        {
-            ICache cache = HttpContext.Current.Cache[CacheKey] as Cache;
-
-            if (cache == null) cache = GetCache();
-
-            cache.IsActual = false;
-
-            UpdateCache(cache);
-        }
+        public abstract IEnumerable<SelectListItem> GetSelectListItem();
+       
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Permissions;
 using AskanioPhotoSite.Core.Entities;
 using AskanioPhotoSite.Core.Repositories;
 using AskanioPhotoSite.Core.Services;
@@ -15,9 +16,12 @@ namespace AskanioPhotoSite.UnitTest
         [TestMethod]
         public void GetAllFromCacheTest()
         {
-            BaseService<Album> service = new AlbumService(new Storage());
 
-            service.Cache = new Cache();
+            Storage storage = new Storage();
+            BaseService<Album> service = new AlbumService(storage);
+
+            storage.Cache = new Cache();
+            storage.Cache.IsActual = true;
 
             IEnumerable<Album> entity = new List<Album>()
             {
@@ -31,7 +35,7 @@ namespace AskanioPhotoSite.UnitTest
                 }
             }.ToList();
 
-            service.Cache.AddEntity(entity);
+            storage.Cache.AddEntity(entity);
 
             var data = service.GetAll();
             Assert.IsNotNull(data);

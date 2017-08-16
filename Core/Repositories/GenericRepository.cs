@@ -20,7 +20,7 @@ namespace AskanioPhotoSite.Core.Repositories
 
         public virtual IEnumerable<TEntity> GetAll()
         {
-            return _storage.Execute(QueryBuilder<TEntity>.GetAll()).Result;
+            return _storage.GetDataFromCache<TEntity>();
         }
 
         public virtual TEntity AddOne(TEntity entity)

@@ -1,0 +1,66 @@
+﻿@model AskanioPhotoSite.Core.Models.EditAlbumModel
+
+@{
+    ViewBag.Title = Model.Id == 0 ? "Добавление нового альбома" : $"Редактирование альбома {Model.TitleRu}";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container">
+    <h3>@ViewBag.Title</h3>
+    
+    @using (Html.BeginForm("EditAlbum", "Management", FormMethod.Post))
+    {
+        @Html.HiddenFor(x => x.Id)
+        @Html.HiddenFor(x => x.ParentAlbum.Id)
+
+        if (ViewBag.Success != null)
+        {
+            <div class="alert alert-success">@ViewBag.Sucess</div>
+        }
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(x => x.TitleEng, new {@class = "control-label col-sm-4"})
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(x => x.TitleEng, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(x => x.TitleEng)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.TitleRu, new {@class = "control-label col-sm-4"})
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(x => x.TitleRu, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(x => x.TitleRu)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.DescriptionEng, new {@class = "control-label col-sm-4"})
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(x => x.DescriptionEng, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(x => x.DescriptionEng)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.DescriptionRu, new {@class = "control-label col-sm-4"})
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(x => x.DescriptionRu, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(x => x.DescriptionRu)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.ParentAlbums, new {@class = "control-label col-sm-4"})
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(x => x.ParentAlbum, Model.ParentAlbums, " ", new {@class = "form-control"})
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-8">
+                    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

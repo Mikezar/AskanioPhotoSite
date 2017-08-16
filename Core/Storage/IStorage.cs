@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,12 @@ namespace AskanioPhotoSite.Core.Storage
 {
    public interface IStorage
    {
-       IDictionary<object, object> GetEntities { get; }
+        ICache Cache { get; }
        IRepository<TEntity> GetRepository<TEntity>() where TEntity : Entity;
        IQueryResult<TEntity> Execute<TEntity>(IQuery<TEntity> query);
+       IEnumerable<TEntity> GetDataFromCache<TEntity>();
+       ICache GetCache();
+       void UpdateCache(ICache cache);
+       void MarkAsModified();
    }
 }

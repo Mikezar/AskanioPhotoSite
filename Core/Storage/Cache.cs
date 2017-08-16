@@ -10,7 +10,7 @@ namespace AskanioPhotoSite.Core.Storage
 {
    public class Cache : ICache
    {
-       private bool _isActual = true;
+       private bool _isActual;
 
        public bool IsActual
        {
@@ -29,6 +29,11 @@ namespace AskanioPhotoSite.Core.Storage
        {
            Entities.Add(typeof(TEntity), (IEnumerable<object>)entities);
        }
+
+       public void Reset()
+       {
+           Entities = new Dictionary<object, IEnumerable<object>>();
+        }
 
     }
 }
