@@ -1,8 +1,45 @@
-﻿
+﻿@model AskanioPhotoSite.Core.Models.PhotoListModel
+
 @{
     ViewBag.Title = "Фотографии";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int counter = 0;
 }
 
-<h2>PhotoIndex</h2>
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+    
+    @Html.ActionLink("Загрузить новые фотографии", "Upload", null, new {@class = "btn btn-primary"})
+    
+    <h3>Фотографии без альбомов</h3>
+
+    <table class="table table-hover space">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Иконка</th>
+                <th>Название</th>
+                <th>Путь к файлу</th>
+                <th>Альбом</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var photo in Model.Photos)
+            {
+                <tr>
+                    <td>@(++counter)</td>
+                    <td><a href='@Url.Content(photo.ThumbnailPath)'/></td>
+                    <td>@photo.TitleRu</td>
+                    <td>@photo.PhotoPath</td>
+                    <td>@photo.Album.TitleRu</td>
+                    <td style="text-align: right">
+                        <a href='@Url.Action("EditPhoto", "Management", new {id = photo.Id})' class="edit"><span class="glyphicon glyphicon-pencil"></span>Редактировать</a>
+                        <a class="remove" data-id="@photo.Id"><span class="glyphicon glyphicon-remove-sign"></span>Удалить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 

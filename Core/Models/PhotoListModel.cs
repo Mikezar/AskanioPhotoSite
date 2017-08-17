@@ -7,8 +7,8 @@ using AskanioPhotoSite.Core.Entities;
 
 namespace AskanioPhotoSite.Core.Models
 {
-   public class AlbumModel
+   public class PhotoListModel
     {
-        public List<Album> Albums { get; set; }
+        public List<PhotoModel> Photos{ get; set; }
     }
 }

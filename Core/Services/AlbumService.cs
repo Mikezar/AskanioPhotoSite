@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using AskanioPhotoSite.Core.Entities;
+using AskanioPhotoSite.Core.Helpers;
 using AskanioPhotoSite.Core.Models;
 using AskanioPhotoSite.Core.Storage;
 
@@ -68,8 +69,9 @@ namespace AskanioPhotoSite.Core.Services
             return albums.Select(x => new SelectListItem()
             {
                 Value = x.Id.ToString(),
-                Text = x.TitleRu
-            }).ToList();
+                Text = x.TitleRu,
+            }).InsertEmptyFirst("None", "0").ToList();
         }
+
     }
 }

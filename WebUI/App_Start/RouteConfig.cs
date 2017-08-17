@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Mvc.Routing.Constraints;
 using System.Web.Routing;
 
 namespace AskanioPhotoSite.WebUI
@@ -9,12 +10,14 @@ namespace AskanioPhotoSite.WebUI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.IgnoreRoute("Management/");
+            routes.IgnoreRoute("Management/{action}");
+
+            routes.IgnoreRoute("Management/{action}/{id}");
 
             routes.MapRoute(
             "Manage",
-            "Secured/Management",
-            new { controller = "Management", action = "Index" }
+            "Secured/Management/{action}/{id}",
+            new {controller = "Management", action = "Index", id = UrlParameter.Optional }
         );
 
             routes.MapRoute(

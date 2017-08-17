@@ -37,6 +37,7 @@ namespace AskanioPhotoSite.WebUI.Infrastructure
         private void AddBindings()
         {
             _ninjectKernel.Bind<BaseService<Album>>().To<AlbumService>();
+            _ninjectKernel.Bind<BaseService<Photo>>().To<PhotoService>();
             _ninjectKernel.Bind<IStorage>().To<Storage>();
         }
     }

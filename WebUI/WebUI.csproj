@@ -201,6 +201,7 @@
     <Content Include="Views\Management\AlbumIndex.cshtml" />
     <Content Include="Views\Management\PhotoIndex.cshtml" />
     <Content Include="Views\Management\EditAlbum.cshtml" />
+    <Content Include="Views\Management\Upload.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

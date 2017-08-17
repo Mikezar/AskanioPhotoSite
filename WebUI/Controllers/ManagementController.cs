@@ -19,9 +19,12 @@ namespace AskanioPhotoSite.WebUI.Controllers
     {
         private readonly BaseService<Album> _albumService;
 
-        public ManagementController(BaseService<Album> albumService)
+        private readonly BaseService<Photo> _photoService;
+
+        public ManagementController(BaseService<Album> albumService, BaseService<Photo> photoService)
         {
             _albumService = albumService;
+            _photoService = photoService;
         }
 
         // GET: Management
@@ -32,7 +35,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
         public ActionResult AlbumIndex()
         {
-            var model = new AlbumModel()
+            var model = new AlbumListModel()
             {
                 Albums = _albumService.GetAll().ToList()
             };
@@ -42,7 +45,22 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
         public ActionResult PhotoIndex()
         {
-            return View();
+            var model = new PhotoListModel()
+            {
+                Photos =  _photoService.GetAll().Select(x => new PhotoModel()
+                    {
+                        Id = x.Id,
+                        DescriptionEng = x.DescriptionEng,
+                        DescriptionRu = x.DescriptionRu,
+                        PhotoPath = x.PhotoPath,
+                        ThumbnailPath = x.ThumbnailPath,
+                        TitleRu = x.TitleRu,
+                        TitleEng = x.TitleEng,
+                        Album = x.AlbumId == 0 ? new Album() : _albumService.GetOne(x.AlbumId)
+                    }).ToList()      
+            };
+
+            return View(model);
         }
 
 
@@ -70,7 +88,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 DescriptionEng = album.DescriptionEng,
                 TitleRu = album.TitleRu,
                 TitleEng = album.TitleEng,
-                ParentAlbums = _albumService.GetSelectListItem()
+                ParentAlbums = _albumService.GetSelectListItem().Where(x => x.Value != album.Id.ToString())
             };
 
             return View(model);
@@ -86,10 +104,12 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 {
                     var added = _albumService.AddOne(model);
                     model.Id = added.Id;
+                    if (model.ParentAlbum.Id != 0) model.ParentAlbum = _albumService.GetOne(model.ParentAlbum.Id);
                     ViewBag.Success = $"Альбом {model.TitleRu} был успешно добавлен";
                 }
                 else
                 {
+                    if(model.ParentAlbum.Id != 0) model.ParentAlbum = _albumService.GetOne(model.ParentAlbum.Id);
                     _albumService.UpdateOne(model);
                     ViewBag.Success = $"Альбом {model.TitleRu} был успешно обновлен";
                 }
@@ -113,6 +133,11 @@ namespace AskanioPhotoSite.WebUI.Controllers
             {
                 return Json(MyAjaxHelper.GetErrorResponse(exception.Message));
             }
+        }
+
+        public ActionResult Upload()
+        {
+            return View();
         }
     }
 }
