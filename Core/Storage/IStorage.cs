@@ -12,7 +12,7 @@ namespace AskanioPhotoSite.Core.Storage
 {
    public interface IStorage
    {
-        ICache Cache { get; }
+       ICache Cache { get; }
        IRepository<TEntity> GetRepository<TEntity>() where TEntity : Entity;
        IQueryResult<TEntity> Execute<TEntity>(IQuery<TEntity> query);
        IEnumerable<TEntity> GetDataFromCache<TEntity>();

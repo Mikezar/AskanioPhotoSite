@@ -1,21 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
-using System.Threading;
 using System.Web;
-using System.Web.Routing;
-using System.Web.UI.WebControls;
 using AskanioPhotoSite.Core.Entities;
 using AskanioPhotoSite.Core.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AskanioPhotoSite.Core.Storage.Queries;
-using AskanioPhotoSite.WebUI;
-using NUnit.Framework;
-using NUnit.Framework.Internal;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 
@@ -25,8 +15,6 @@ namespace AskanioPhotoSite.UnitTest
     [TestClass]
     public class StorageTests
     {
-        public object obj = new object();
-
         [TestInitialize]
         public void Init()
         {
@@ -36,16 +24,15 @@ namespace AskanioPhotoSite.UnitTest
 
         }
 
-        DirectoryInfo directory =
+        public static DirectoryInfo directory =
                    new DirectoryInfo(
                        Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, @"..\..\..\Core\App_Data")));
 
+        public static  Storage storage = new Storage(directory);
+
         [TestMethod]
         public void ExecuteSelectTest()
-        {
-            Storage storage = new Storage(directory);
-
-           
+        {    
             var query = new Query<Album>()
             {
                 QueryType = QueryType.Read,
@@ -60,9 +47,6 @@ namespace AskanioPhotoSite.UnitTest
         [TestMethod]
         public void ExecuteAddTest()
         {
-            Storage storage = new Storage(directory);
-
-
             var query = new Query<Album>()
             {
                 QueryType = QueryType.Write,
@@ -89,9 +73,7 @@ namespace AskanioPhotoSite.UnitTest
         [TestMethod]
         public void ExecuteUpdateTest()
         {
-          
-            Storage storage = new Storage(directory);
-
+         
             var query = new Query<Album>()
             {
                 QueryType = QueryType.Write,
@@ -119,9 +101,6 @@ namespace AskanioPhotoSite.UnitTest
         [TestMethod]
         public void ExecuteDeleteTest()
         {
-
-            Storage storage = new Storage(directory);
-
             var query = new Query<Album>()
             {
                 QueryType = QueryType.Write,

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using AskanioPhotoSite.Core.Entities;
 using AskanioPhotoSite.Core.Repositories;
@@ -32,14 +28,10 @@ namespace AskanioPhotoSite.Core.Storage
             _repositories.Add(typeof(Photo), new GenericRepository<Photo>(this));
         }
 
-        public Storage(DirectoryInfo directory)
+        public Storage(DirectoryInfo directory) : this()
         {
             if (directory == null) throw new ArgumentNullException("directory");
-            _directory = directory;
-
-            _repositories = new Dictionary<object, object>();
-            _repositories.Add(typeof(Album), new GenericRepository<Album>(this));
-            _repositories.Add(typeof(Photo), new GenericRepository<Photo>(this));
+            _directory = directory;       
         }
 
         public IRepository<TEntity> GetRepository<TEntity>() where TEntity : Entity

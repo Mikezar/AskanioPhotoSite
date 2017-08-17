@@ -51,7 +51,7 @@ namespace AskanioPhotoSite.Core.Services
             album.DescriptionRu = model.DescriptionRu;
             album.TitleEng = model.TitleEng;
             album.TitleRu = model.TitleRu;
-            album.ParentId = model.ParentAlbum.Id;
+            album.ParentId = model.ParentAlbum?.Id ?? 0;
 
             return _storage.GetRepository<Album>().UpdateOne(album);
         }

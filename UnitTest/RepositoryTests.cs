@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Permissions;
 using AskanioPhotoSite.Core.Entities;
-using AskanioPhotoSite.Core.Repositories;
 using AskanioPhotoSite.Core.Services;
 using AskanioPhotoSite.Core.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

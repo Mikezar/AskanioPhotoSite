@@ -14,8 +14,8 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
     public class Transaction<TEntity> : ITransaction<TEntity> 
     {
         private readonly IInterpreter<TEntity> _interpreter;
+        private object _lock = new object();
         private bool _disposed;
-
         public const char Line = (char)30;
         public const char Field = (char)31;
 
@@ -35,7 +35,7 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
 
         private void CreateIfNotExists(string type)
         {
-            DirectoryInfo directory = OptDirectory ??  new DirectoryInfo(HttpContext.Current.Server.MapPath("..\\App_Data"));
+            DirectoryInfo directory = OptDirectory ??  new DirectoryInfo(HttpContext.Current.Server.MapPath("~\\App_Data"));
 
             string path = $"{directory}\\{type}.txt";
              if (!Directory.Exists(directory.ToString())) Directory.CreateDirectory(directory.ToString());
@@ -51,7 +51,7 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
 
         private void ReadStream()
         {
-            using (var reader = File.OpenRead(FilePath))
+            using (var reader = File.Open(FilePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
             {
                 var buffer = new byte[reader.Length];
                 reader.Read(buffer, 0, buffer.Length);
@@ -62,9 +62,14 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
 
         private void WriteStream()
         {
-                var bytes = Encoding.Unicode.GetBytes(String.Concat(Modified));
-               
-                File.WriteAllBytes(FilePath, bytes);
+            using (var writer = File.Open(FilePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+            {
+                for (int i = 0; i < Modified.Length; i++)
+                {
+                    var bytes = Encoding.Unicode.GetBytes(Modified[i]);
+                    writer.Write(bytes, 0, bytes.Length);
+                }
+            }
         }
 
 
@@ -74,25 +79,25 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
 
             try
             {
+                ReadStream();
                 if (query.ActionType != ActionType.Select) throw new InvalidOperationException();
 
-                ReadStream();
+                    if (string.IsNullOrEmpty(Source))
+                    {
+                        return new QueryResult<TEntity>()
+                        {
+                            IsSuccess = true,
+                            Result = new List<TEntity>()
+                        };
+                    }
 
-                if (string.IsNullOrEmpty(Source))
-                {
+                    var lines = Source.Split(Line).Where(x => x != "\r\n" && !string.IsNullOrEmpty(x)).ToArray();
                     return new QueryResult<TEntity>()
                     {
                         IsSuccess = true,
-                        Result = new List<TEntity>()
+                        Result = _interpreter.InterpreteToEntity(lines, Activator.CreateInstance<TEntity>())
                     };
-                }
-
-                var lines = Source.Split(Line).Where(x => x != "\r\n" && !string.IsNullOrEmpty(x)).ToArray();
-                return new QueryResult<TEntity>()
-                {
-                    IsSuccess = true,
-                    Result =_interpreter.InterpreteToEntity(lines, Activator.CreateInstance<TEntity>())
-                };
+                
             }
             catch (Exception exception)
             {
@@ -108,90 +113,100 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
 
         public IQueryResult<TEntity> Write(IQuery<TEntity> query)
         {
-            CreateIfNotExists(typeof(TEntity).Name);
 
-            try
-            {
-                if (query.ActionType == ActionType.Select) throw new InvalidOperationException();
+                CreateIfNotExists(typeof(TEntity).Name);
 
-                ReadStream();
-
-                BackUp();
-
-                var lines = Source.Split(Line).Where(x => x != "\r\n" && !string.IsNullOrEmpty(x)).ToArray();
-
-                if (query.ActionType == ActionType.Delete)
+                try
                 {
-                    if (string.IsNullOrEmpty(Source)) throw new ArgumentNullException("Source");
-
-                    if (query.Keys == null) throw new ArgumentNullException("Keys");
-
-                    Modified = lines.Where(x => query.Keys.Contains(Convert.ToInt32(x.Substring(0, x.IndexOf(Field)))) == false).ToArray();
-
-                    return new QueryResult<TEntity>()
+                    lock (_lock)
                     {
-                        IsSuccess = true,
-                    };
-                }
+                        if (query.ActionType == ActionType.Select) throw new InvalidOperationException();
 
-                if(query.ActionType == ActionType.Add)
-                {
-                    if(query.Entities == null) throw new ArgumentNullException("Entities");
+                        ReadStream();
 
-                    int maxId = 0;
-                    if (lines.Length > 0)
-                    { 
-                        var lstLine = lines.Last();
-                        maxId = Convert.ToInt32(lstLine.Substring(0, lstLine.IndexOf(Field)));
-                    }
+                        BackUp();
 
-                   Modified = lines.Concat(_interpreter.InterpreteToString(query.Entities, maxId)).ToArray();
-                   Modified = Modified.Select(x => x + $"{Line}").ToArray();
-                    return new QueryResult<TEntity>()
-                    {
-                        IsSuccess = true,
-                        Result = query.Entities
-                    };
-                }
-                if(query.ActionType == ActionType.Update)
-                {
-                    if (string.IsNullOrEmpty(Source)) throw new ArgumentNullException("Source");
+                        var lines = Source.Split(Line).Where(x => x != "\r\n" && !string.IsNullOrEmpty(x)).ToArray();
 
-                    if (query.Entities == null) throw new ArgumentNullException("Entities");
-
-                    var updates = _interpreter.InterpreteToString(query.Entities);
-
-                    Modified = lines.ToArray();
-
-                    for (int i = 0; i < Modified.Length; i ++)
-                    {
-                        int id = Convert.ToInt32(Modified[i].Substring(0, Modified[i].IndexOf(Field)));
-                     
-                        if(updates.ContainsKey(id))
+                        if (query.ActionType == ActionType.Delete)
                         {
-                            Modified[i] = updates[id];
-                        }
-                    }
-                    Modified = Modified.Select(x => x + $"{Line}").ToArray();
+                            if (string.IsNullOrEmpty(Source)) throw new ArgumentNullException("Source");
 
+                            if (query.Keys == null) throw new ArgumentNullException("Keys");
+
+                            Modified =
+                                lines.Where(
+                                        x =>
+                                            query.Keys.Contains(Convert.ToInt32(x.Substring(0, x.IndexOf(Field)))) ==
+                                            false)
+                                    .ToArray();
+
+                            Modified = Modified.Select(x => x + $"{Line}").ToArray();
+                            return new QueryResult<TEntity>()
+                            {
+                                IsSuccess = true,
+                            };
+                        }
+
+                        if (query.ActionType == ActionType.Add)
+                        {
+                            if (query.Entities == null) throw new ArgumentNullException("Entities");
+
+                            int maxId = 0;
+                            if (lines.Length > 0)
+                            {
+                                var lstLine = lines.Last();
+                                maxId = Convert.ToInt32(lstLine.Substring(0, lstLine.IndexOf(Field)));
+                            }
+
+                            Modified = lines.Concat(_interpreter.InterpreteToString(query.Entities, maxId)).ToArray();
+                            Modified = Modified.Select(x => x + $"{Line}").ToArray();
+                            return new QueryResult<TEntity>()
+                            {
+                                IsSuccess = true,
+                                Result = query.Entities
+                            };
+                        }
+                        if (query.ActionType == ActionType.Update)
+                        {
+                            if (string.IsNullOrEmpty(Source)) throw new ArgumentNullException("Source");
+
+                            if (query.Entities == null) throw new ArgumentNullException("Entities");
+
+                            var updates = _interpreter.InterpreteToString(query.Entities);
+
+                            Modified = lines.ToArray();
+
+                            for (int i = 0; i < Modified.Length; i++)
+                            {
+                                int id = Convert.ToInt32(Modified[i].Substring(0, Modified[i].IndexOf(Field)));
+
+                                if (updates.ContainsKey(id))
+                                {
+                                    Modified[i] = updates[id];
+                                }
+                            }
+                            Modified = Modified.Select(x => x + $"{Line}").ToArray();
+
+                            return new QueryResult<TEntity>()
+                            {
+                                IsSuccess = true,
+                                Result = query.Entities
+                            };
+                        }
+
+                        throw new NullReferenceException();
+                    }
+                }
+                catch (Exception exception)
+                {
                     return new QueryResult<TEntity>()
                     {
-                        IsSuccess = true,
-                        Result = query.Entities
+                        IsSuccess = false,
+                        Exception = exception,
+                        ErrorMessage = exception.Message
                     };
                 }
-
-                throw new NullReferenceException();
-            }
-            catch (Exception exception)
-            {
-                return new QueryResult<TEntity>()
-                {
-                    IsSuccess = false,
-                    Exception = exception,
-                    ErrorMessage = exception.Message
-                };
-            }
         }
 
         public void BackUp()
@@ -209,7 +224,7 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
                 if (Modified == null) return;
 
                 WriteStream();
-               // File.WriteAllLines(FilePath, Modified, Encoding.Unicode);
+              
                 File.Delete(FilePath + ".backup");
             }
             catch(Exception exception)
