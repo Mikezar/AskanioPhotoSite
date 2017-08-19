@@ -43,7 +43,7 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
 
         public void WriteStream()
         {
-            using (var writer = File.Open(_filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
+            using (var writer = File.Open(_filePath, FileMode.Truncate, FileAccess.ReadWrite, FileShare.None))
             {
                 for (int i = 0; i < _updated.Length; i++)
                 {

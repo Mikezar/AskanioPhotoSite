@@ -53,6 +53,8 @@ namespace AskanioPhotoSite.Core.Storage.Transactions
 
             string boolean = value ? "1" : "0";
 
+            if (!File.Exists(path)) File.Create(path).Close();
+
             using (var transaction = new Transaction(path, new string[] {boolean}))
             {
                 transaction.Commit();
