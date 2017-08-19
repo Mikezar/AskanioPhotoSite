@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AskanioPhotoSite.Core.Storage.Queries
 {
@@ -11,5 +13,6 @@ namespace AskanioPhotoSite.Core.Storage.Queries
         ActionType ActionType { get; set; }
 
         ICollection<int> Keys { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace AskanioPhotoSite.Core.Storage.Queries
 {
@@ -11,5 +12,13 @@ namespace AskanioPhotoSite.Core.Storage.Queries
         public ActionType ActionType { get; set; }
 
         public ICollection<int> Keys { get; set; }
+
+       // public override Type Type => typeof(TEntity);
     }
+
+    //public abstract class Query 
+    //{
+
+    //   public abstract Type Type { get; }
+    //}
 }

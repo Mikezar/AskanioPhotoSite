@@ -66,6 +66,8 @@ namespace AskanioPhotoSite.UnitTest
             };
 
             var data = storage.Execute(query);
+            
+            storage.Commit();
 
             Assert.IsTrue(data.IsSuccess);
         }
@@ -94,6 +96,8 @@ namespace AskanioPhotoSite.UnitTest
 
             var data = storage.Execute(query);
 
+            storage.Commit();
+
             Assert.IsTrue(data.IsSuccess);
         }
 
@@ -113,6 +117,8 @@ namespace AskanioPhotoSite.UnitTest
 
             var data = storage.Execute(query);
 
+            storage.Commit();
+
             Assert.IsTrue(data.IsSuccess);
         }
 
@@ -123,6 +129,6 @@ namespace AskanioPhotoSite.UnitTest
             char Field = (char)31;
 
             Assert.IsNotNull(Field);
-        }
+        }  
     }
 }

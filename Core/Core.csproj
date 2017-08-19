@@ -88,13 +88,17 @@
     <Compile Include="Storage\Queries\IQuery.cs" />
     <Compile Include="Storage\Queries\IQueryResult.cs" />
     <Compile Include="Storage\IStorage.cs" />
+    <Compile Include="Storage\Transactions\TransactionServiceInfo.cs" />
+    <Compile Include="Storage\Transactions\IProcessor.cs" />
     <Compile Include="Storage\Transactions\ITransaction.cs" />
     <Compile Include="Storage\Queries\Query.cs" />
     <Compile Include="Storage\Queries\QueryBuilder.cs" />
     <Compile Include="Storage\Queries\QueryResult.cs" />
     <Compile Include="Storage\Queries\QueryType.cs" />
     <Compile Include="Storage\Storage.cs" />
+    <Compile Include="Storage\Transactions\Processor.cs" />
     <Compile Include="Storage\Transactions\Transaction.cs" />
+    <Compile Include="Storage\Transactions\TransactionPool.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

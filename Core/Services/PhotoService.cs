@@ -15,7 +15,7 @@ namespace AskanioPhotoSite.Core.Services
 
         public override IEnumerable<Photo> GetAll()
         {
-            return _storage.GetRepository<Photo>().GetAll();
+            return _storage.GetRepository<Photo>().GetAll().ToList();
         }
 
         public override Photo GetOne(int id)

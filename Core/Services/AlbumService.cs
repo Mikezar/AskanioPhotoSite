@@ -17,12 +17,23 @@ namespace AskanioPhotoSite.Core.Services
 
         public override IEnumerable<Album> GetAll()
         {
-            return _storage.GetRepository<Album>().GetAll();
+            return _storage.GetRepository<Album>().GetAll().ToList();
         }
 
         public override Album GetOne(int id)
         {
-            return GetAll().SingleOrDefault(x => x.Id == id);
+            var album = GetAll().SingleOrDefault(x => x.Id == id);
+
+            if (album == null) return null;
+            return new Album()
+            {
+                Id = album.Id,
+                ParentId = album.ParentId,
+                DescriptionEng = album.DescriptionEng,
+                DescriptionRu = album.DescriptionRu,
+                TitleEng = album.TitleEng,
+                TitleRu = album.TitleRu
+            };
         }
 
         public override Album AddOne(object obj)
@@ -39,7 +50,9 @@ namespace AskanioPhotoSite.Core.Services
                 DescriptionRu = model.DescriptionRu
             };
 
-           return _storage.GetRepository<Album>().AddOne(album);
+           var updated =  _storage.GetRepository<Album>().AddOne(album);
+            _storage.Commit();
+            return updated;
         }
 
         public override Album UpdateOne(object obj)
@@ -54,12 +67,15 @@ namespace AskanioPhotoSite.Core.Services
             album.TitleRu = model.TitleRu;
             album.ParentId = model.ParentAlbum?.Id ?? 0;
 
-            return _storage.GetRepository<Album>().UpdateOne(album);
+            var updated = _storage.GetRepository<Album>().UpdateOne(album);
+            _storage.Commit();
+            return updated;
         }
 
         public override void DeleteOne(int id)
         {
             _storage.GetRepository<Album>().DeleteOne(id);
+            _storage.Commit();
         }
 
         public override IEnumerable<SelectListItem> GetSelectListItem()

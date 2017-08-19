@@ -63,7 +63,6 @@ namespace AskanioPhotoSite.WebUI.Controllers
             return View(model);
         }
 
-
         public ActionResult AddAlbum()
         {
             var model = new EditAlbumModel()
@@ -115,7 +114,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 }
             }
 
-            model.ParentAlbums = _albumService.GetSelectListItem();
+            model.ParentAlbums = _albumService.GetSelectListItem().Where(x => x.Value != model.Id.ToString());
 
             return View(model);
         }

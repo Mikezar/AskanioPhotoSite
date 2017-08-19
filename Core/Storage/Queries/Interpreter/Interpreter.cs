@@ -34,7 +34,7 @@ namespace AskanioPhotoSite.Core.Storage.Queries.Interpreter
                     counter++;
                     var properties = entity.GetType().GetProperties();
                     var values = properties.Select(x => x.GetValue(entity)).ToArray();
-                    var entityString = String.Join($"{Transaction<TEntity>.Field}", values.Select(c => c).ToArray());
+                    var entityString = String.Join($"{Processor<TEntity>.Field}", values.Select(c => c).ToArray());
                     result.Add(entityString);
                 }
 
@@ -49,7 +49,7 @@ namespace AskanioPhotoSite.Core.Storage.Queries.Interpreter
                 {
                     var properties = entity.GetType().GetProperties();
                     var values = properties.Select(x => x.GetValue(entity)).ToArray();
-                    var entityString = String.Join($"{Transaction<TEntity>.Field}", values.Select(c => c).ToArray());
+                    var entityString = String.Join($"{Processor<TEntity>.Field}", values.Select(c => c).ToArray());
                     result.Add((int)entity.GetType().GetProperty("Id").GetValue(entity), entityString);
                 }
 
@@ -60,7 +60,7 @@ namespace AskanioPhotoSite.Core.Storage.Queries.Interpreter
         {
             return lines.Select(x =>
             {
-                var albumFields = x.Split(Transaction<TEntity>.Field);
+                var albumFields = x.Split(Processor<TEntity>.Field);
                 return new Album()
                 {
                     Id = Convert.ToInt32(albumFields[0]),
@@ -77,7 +77,7 @@ namespace AskanioPhotoSite.Core.Storage.Queries.Interpreter
         {
             return lines.Select(x =>
             {
-                var albumFields = x.Split(Transaction<TEntity>.Field);
+                var albumFields = x.Split(Processor<TEntity>.Field);
                 return new Photo()
                 {
                     Id = Convert.ToInt32(albumFields[0]),

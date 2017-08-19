@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using AskanioPhotoSite.Core.Entities;
 using AskanioPhotoSite.Core.Repositories;
@@ -15,9 +16,12 @@ namespace AskanioPhotoSite.Core.Storage
     {
         private readonly IDictionary<object, object> _repositories;
 
+        private object _locker = new object();
+        public TransactionPool TransactionPool;
+
         public ICache Cache { get; set; }
 
-        private DirectoryInfo _directory;
+        private readonly DirectoryInfo _directory;
 
         private const string CacheKey = "AskanioCachedData";
 
@@ -54,13 +58,19 @@ namespace AskanioPhotoSite.Core.Storage
             return Cache.GetEntities<TEntity>();
         }
 
+        public void AddToPool<TEntity>(TransactionServiceInfo info)
+        {
+            if(TransactionPool == null) TransactionPool = new TransactionPool(_directory);
+            TransactionPool.Put<TEntity>(info);
+        }
+
         public IQueryResult<TEntity> Execute<TEntity>(IQuery<TEntity> query)
-        {     
+        {
             if (query.QueryType == QueryType.Read)
             {
-                using (var transaction = new Transaction<TEntity>(new Interpreter<TEntity>(), _directory))
+                using (var processor = new Processor<TEntity>(new Interpreter<TEntity>(), _directory))
                 {
-                    var result = transaction.Read(query);
+                    var result = processor.Read(query);
 
                     if (!result.IsSuccess)
                         throw new Exception(result.ErrorMessage);
@@ -68,23 +78,54 @@ namespace AskanioPhotoSite.Core.Storage
                     return result;
                 }
             }
-            else 
+            else
             {
-                    using (var transaction = new Transaction<TEntity>(new Interpreter<TEntity>(), _directory))
-                    {
-                        var result = transaction.Write(query);
+                using (var processor = new Processor<TEntity>(new Interpreter<TEntity>(), _directory))
+                {
+                    var result = processor.Write(query);
 
-                        if (!result.IsSuccess)
+                    if (!result.IsSuccess)
+                    {
+                        throw new Exception(result.ErrorMessage);
+                    }
+
+                    AddToPool<TEntity>(result.ServiceInfo);
+                    return result;
+                }
+            }
+        }
+
+        public void Commit()
+        {
+            try
+            {
+                var dictionary = TransactionPool.GetDictionary;
+                lock (_locker)
+                {
+                    foreach (var key in dictionary)
+                    {
+                        if (key.Value.Modified == null) return;
+
+                      
+                        using (var transaction = new Transaction(key.Value.FilePath, key.Value.Modified))
                         {
-                            transaction.RollBack();
-                            throw new Exception(result.ErrorMessage);
+                            transaction.WriteStream();
                         }
 
-                        transaction.Commit();
+                        if(File.Exists(key.Value.FilePath + ".backup")) File.Delete(key.Value.FilePath + ".backup");
+                        TransactionPool.SetMarker(false);
                         MarkAsModified();
-                        return result;
                     }
+                    TransactionPool = null;
+                }
             }
+            catch (Exception exception)
+            {
+                TransactionPool = null;
+                TransactionPool?.RollBack();
+                throw new Exception("Transaction failed.");
+            }
+            
         }
 
         public ICache GetCache()
@@ -120,6 +161,8 @@ namespace AskanioPhotoSite.Core.Storage
             if (cache == null) cache = GetCache();
 
             cache.IsActual = false;
+
+            HttpContext.Current.Cache[CacheKey] = cache;
         }
     }
 }
