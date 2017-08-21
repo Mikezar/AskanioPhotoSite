@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Routing;
-using AskanioPhotoSite.Core.Entities;
 using AskanioPhotoSite.Core.Services;
-using AskanioPhotoSite.Core.Storage;
+using AskanioPhotoSite.Data.Entities;
+using AskanioPhotoSite.Data.Storage;
 using Ninject;
 
 namespace AskanioPhotoSite.WebUI.Infrastructure

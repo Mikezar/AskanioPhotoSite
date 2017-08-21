@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using AskanioPhotoSite.Core.Entities;
 
 namespace AskanioPhotoSite.Core.Helpers
 {

@@ -1,8 +1,6 @@
-﻿using AskanioPhotoSite.Data.Entities;
-
-namespace AskanioPhotoSite.Core.Models
+﻿namespace AskanioPhotoSite.Data.Entities
 {
-    public class PhotoModel
+    public class Photo : Entity
     {
         public int Id { get; set; }
 
@@ -18,6 +16,6 @@ namespace AskanioPhotoSite.Core.Models
 
         public string ThumbnailPath { get; set; }
 
-        public Album Album { get; set; }
+        public int AlbumId { get; set; }
     }
 }

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Web;
-using AskanioPhotoSite.Core.Entities;
-using AskanioPhotoSite.Core.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using AskanioPhotoSite.Core.Storage.Queries;
+using AskanioPhotoSite.Data.Entities;
+using AskanioPhotoSite.Data.Storage;
+using AskanioPhotoSite.Data.Storage.Queries;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 

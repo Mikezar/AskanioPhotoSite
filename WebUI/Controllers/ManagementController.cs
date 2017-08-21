@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.ModelBinding;
 using System.Web.Mvc;
 using System.Web.Routing;
-using AskanioPhotoSite.Core.Entities;
 using AskanioPhotoSite.Core.Models;
 using AskanioPhotoSite.Core.Services;
+using AskanioPhotoSite.Data.Entities;
 using AskanioPhotoSite.WebUI.Models;
 using Microsoft.Ajax.Utilities;
 
@@ -134,7 +134,15 @@ namespace AskanioPhotoSite.WebUI.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult Upload()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Upload(IEnumerable<HttpPostedFileBase> files)
         {
             return View();
         }

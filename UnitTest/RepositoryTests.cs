@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AskanioPhotoSite.Core.Entities;
 using AskanioPhotoSite.Core.Services;
-using AskanioPhotoSite.Core.Storage;
+using AskanioPhotoSite.Data.Entities;
+using AskanioPhotoSite.Data.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AskanioPhotoSite.UnitTest

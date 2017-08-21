@@ -63,11 +63,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Album.cs" />
-    <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Entities\Photo.cs" />
-    <Compile Include="Entities\PhotoToTag.cs" />
-    <Compile Include="Entities\Tag.cs" />
     <Compile Include="Helpers\LinqHelper.cs" />
     <Compile Include="Models\AlbumListModel.cs" />
     <Compile Include="Models\EditAlbumModel.cs" />
@@ -75,33 +70,18 @@
     <Compile Include="Models\PhotoListModel.cs" />
     <Compile Include="Models\PhotoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\GenericRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Services\AlbumService.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\PhotoService.cs" />
-    <Compile Include="Storage\Queries\Interpreter\Interpreter.cs" />
-    <Compile Include="Storage\Queries\Interpreter\IInterpreter.cs" />
-    <Compile Include="Storage\Queries\ActionType.cs" />
-    <Compile Include="Storage\Cache.cs" />
-    <Compile Include="Storage\ICache.cs" />
-    <Compile Include="Storage\Queries\IQuery.cs" />
-    <Compile Include="Storage\Queries\IQueryResult.cs" />
-    <Compile Include="Storage\IStorage.cs" />
-    <Compile Include="Storage\Transactions\TransactionServiceInfo.cs" />
-    <Compile Include="Storage\Transactions\IProcessor.cs" />
-    <Compile Include="Storage\Transactions\ITransaction.cs" />
-    <Compile Include="Storage\Queries\Query.cs" />
-    <Compile Include="Storage\Queries\QueryBuilder.cs" />
-    <Compile Include="Storage\Queries\QueryResult.cs" />
-    <Compile Include="Storage\Queries\QueryType.cs" />
-    <Compile Include="Storage\Storage.cs" />
-    <Compile Include="Storage\Transactions\Processor.cs" />
-    <Compile Include="Storage\Transactions\Transaction.cs" />
-    <Compile Include="Storage\Transactions\TransactionPool.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{59d27c7a-90f9-436b-807f-5dbe72c73835}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
