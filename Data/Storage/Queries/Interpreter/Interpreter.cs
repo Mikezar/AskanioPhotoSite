@@ -80,13 +80,15 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
                 return new Photo()
                 {
                     Id = Convert.ToInt32(albumFields[0]),
-                    TitleRu = albumFields[1],
-                    TitleEng = albumFields[2],
-                    DescriptionRu = albumFields[3],
-                    DescriptionEng = albumFields[4],
-                    ThumbnailPath = albumFields[5],
+                    AlbumId = Convert.ToInt32(albumFields[1]),
+                    TitleRu = albumFields[2],
+                    TitleEng = albumFields[3],
+                    DescriptionRu = albumFields[4],
+                    DescriptionEng = albumFields[5],
                     PhotoPath = albumFields[6],
-                    AlbumId = Convert.ToInt32(albumFields[7]),
+                    ThumbnailPath = albumFields[7],
+                    FileName = albumFields[8],
+                    CreationDate =  Convert.ToDateTime(albumFields[9])
                 };
             });
         }

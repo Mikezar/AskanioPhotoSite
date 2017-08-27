@@ -16,7 +16,7 @@ namespace AskanioPhotoSite.Core.Models
         [Display(Name = "Основной альбом")]
         public Album ParentAlbum { get; set; }
 
-        [Display(Name = "Альбомы")]
+        [Display(Name = "Родительский альбом")]
         public IEnumerable<SelectListItem> ParentAlbums { get; set; }
 
         [Display(Name = "Название")]

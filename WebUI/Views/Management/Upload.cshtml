@@ -1,8 +1,113 @@
-﻿
+﻿@model AskanioPhotoSite.Core.Models.PhotoUploadListModel
+
 @{
     ViewBag.Title = "Загрузка фотографий";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>@ViewBag.Title</h2>
+@using (Ajax.BeginForm("Upload", "Management",
+    new AjaxOptions
+    {
+        UpdateTargetId = "uploadContainer"
+    },  new {
+        enctype = "multipart/form-data",
+        id = "photoLoadForm" }))
+    
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.Label("Загрузить", new { @class = "control-label col-sm-3" })
+                <div class="col-sm-5">
+                    <input type="file" id="uploadFile" name="files" data-val="true" data-val-required="Выберите файл" multiple="multiple" />
+                    <span id="validityMessages" style="color: Red;"></span>
+                </div>
+            </div>
+            <div style="clear: both;"></div>
+            <div class="form-group">
+                <div class="col-sm-5 col-sm-offset-3">
+                    <input id="upload" type="button" value="Загрузить" name="Upload" onclick="UploadPhoto()" class="btn btn-primary" />
+                    <span id="uploadLoader" style="display: none;">
+                        <img id="searchLoader" src="@Url.Content("~/Content/Core/loader.gif")" />Идет загрузка
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="container">
+    <div id="uploadContainer" onload="UploadPhoto_Complete();">
+        @Html.Partial("_Upload", Model)
+    </div>
+
+    <div id="editUploadPhoto"></div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('.delete').on('click', function () {
+
+            var item = $(this);
+            var photoId = $(item).prop("id");
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("DeleteUploadPhoto")',
+                data: { id: photoId },
+                success: function (response) {
+                    $(item).closest('tr').fadeIn(500, function () {
+                        $(this).remove();
+                    });
+                }
+            });
+        });
+
+        $('.edit').on('click', function () {
+
+            var photoId = $(this).prop("id");
+
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("EditUploadPhoto")',
+                data: { id: photoId },
+                success: function (response) {
+                    $('#editUploadPhoto').html(response);
+                    $('#editUploadPhotoModal').modal('show');
+                }
+            });
+        })
+    });
+</script>
+
+<script>
+    function UploadPhoto() {
+        if ($("#uploadFile").val()) {
+            var iSize = ($("#uploadFile")[0].files[0].size / 1024);
+            iSize = (Math.round((iSize / 1024) * 100) / 100);
+            if (iSize > 4) {
+                alert("Файл должен быть менее 4MB");
+                $('span#validityMessages').html("Файл должен быть менее 4MB");
+                return;
+            }
+            else {
+                $('#uploadLoader').show();
+                $("#photoLoadForm").submit();
+            }
+        }
+        else {
+            $('span#validityMessages').html("Необходимо выбрать файл размером менее 4MB");
+            return;
+        }
+    }
+
+    function UploadPhoto_Complete() {
+        $('#uploadLoader').hide();
+    }
+</script>
 

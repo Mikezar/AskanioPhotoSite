@@ -55,6 +55,11 @@ namespace AskanioPhotoSite.Core.Services
             return updated;
         }
 
+        public override Album[] AddMany(object[] obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public override Album UpdateOne(object obj)
         {
             var model = (EditAlbumModel)obj;
@@ -88,6 +93,5 @@ namespace AskanioPhotoSite.Core.Services
                 Text = x.TitleRu,
             }).InsertEmptyFirst("None", "0").ToList();
         }
-
     }
 }

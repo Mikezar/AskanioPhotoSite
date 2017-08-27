@@ -36,6 +36,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -63,12 +64,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\ImageProcessor.cs" />
     <Compile Include="Helpers\LinqHelper.cs" />
     <Compile Include="Models\AlbumListModel.cs" />
     <Compile Include="Models\EditAlbumModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PhotoListModel.cs" />
     <Compile Include="Models\PhotoModel.cs" />
+    <Compile Include="Models\PhotoUploadListModel.cs" />
+    <Compile Include="Models\PhotoUploadModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AlbumService.cs" />
     <Compile Include="Services\BaseService.cs" />

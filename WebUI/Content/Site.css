@@ -50,3 +50,10 @@ textarea {
     margin-bottom: 10px;
     margin-top: 10px;
 }
+
+.photo-thumbnail img {
+    max-height:200px; 
+    max-width: 120px; 
+    object-fit:fill;
+    object-position: top;
+}

@@ -25,6 +25,8 @@ namespace AskanioPhotoSite.Core.Services
 
         public abstract TEntity AddOne(object obj);
 
+        public abstract TEntity[] AddMany(object[] obj);
+
         public abstract TEntity UpdateOne(object obj);
 
         public abstract void DeleteOne(int id);
