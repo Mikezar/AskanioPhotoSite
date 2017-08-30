@@ -18,6 +18,10 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
             {
                 return GetPhotoEntities(lines).Cast<TEntity>();
             }
+            else if (entity.GetType() == typeof(Tag))
+            {
+                return GetTagEntities(lines).Cast<TEntity>();
+            }
             else return new List<TEntity>();
         }
 
@@ -76,19 +80,33 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
         {
             return lines.Select(x =>
             {
-                var albumFields = x.Split(Processor<TEntity>.Field);
+                var photoFields = x.Split(Processor<TEntity>.Field);
                 return new Photo()
                 {
-                    Id = Convert.ToInt32(albumFields[0]),
-                    AlbumId = Convert.ToInt32(albumFields[1]),
-                    TitleRu = albumFields[2],
-                    TitleEng = albumFields[3],
-                    DescriptionRu = albumFields[4],
-                    DescriptionEng = albumFields[5],
-                    PhotoPath = albumFields[6],
-                    ThumbnailPath = albumFields[7],
-                    FileName = albumFields[8],
-                    CreationDate =  Convert.ToDateTime(albumFields[9])
+                    Id = Convert.ToInt32(photoFields[0]),
+                    AlbumId = Convert.ToInt32(photoFields[1]),
+                    TitleRu = photoFields[2],
+                    TitleEng = photoFields[3],
+                    DescriptionRu = photoFields[4],
+                    DescriptionEng = photoFields[5],
+                    PhotoPath = photoFields[6],
+                    ThumbnailPath = photoFields[7],
+                    FileName = photoFields[8],
+                    CreationDate =  Convert.ToDateTime(photoFields[9])
+                };
+            });
+        }
+
+        private IEnumerable<Tag> GetTagEntities(string[] lines)
+        {
+            return lines.Select(x =>
+            {
+                var tagFields = x.Split(Processor<TEntity>.Field);
+                return new Tag()
+                {
+                    Id = Convert.ToInt32(tagFields[0]),
+                    TitleRu = tagFields[2],
+                    TitleEng = tagFields[3]
                 };
             });
         }

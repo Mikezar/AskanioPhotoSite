@@ -5,7 +5,7 @@ using System.Web;
 using System.IO;
 using System.Web.ModelBinding;
 using System.Web.Mvc;
-using System.Web.Routing;
+using AskanioPhotoSite.Core.Services.Extensions;
 using AskanioPhotoSite.Core.Models;
 using AskanioPhotoSite.Core.Services;
 using AskanioPhotoSite.Data.Entities;
@@ -21,13 +21,15 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
         private readonly BaseService<Photo> _photoService;
 
-        public ManagementController(BaseService<Album> albumService, BaseService<Photo> photoService)
+        private readonly BaseService<Tag> _tagService;
+
+        public ManagementController(BaseService<Album> albumService, BaseService<Photo> photoService, BaseService<Tag> tagService)
         {
             _albumService = albumService;
             _photoService = photoService;
+            _tagService = tagService;
         }
 
-        // GET: Management
         public ActionResult Index()
         {
             return View();
@@ -63,6 +65,15 @@ namespace AskanioPhotoSite.WebUI.Controllers
             return View(model);
         }
 
+        #region Работа с тэгами
+
+        public ActionResult TagIndex()
+        {
+            return View();
+        }
+
+        #endregion
+
         #region Работа с альбомами
 
 
@@ -72,7 +83,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
             var model = new EditAlbumModel()
             {
                 ParentAlbum = new Album(),
-                ParentAlbums = _albumService.GetSelectListItem()
+                ParentAlbums = _albumService.GetAll().GetSelectListItem()
             };
             return View("EditAlbum", model);
         }
@@ -91,7 +102,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 DescriptionEng = album.DescriptionEng,
                 TitleRu = album.TitleRu,
                 TitleEng = album.TitleEng,
-                ParentAlbums = _albumService.GetSelectListItem().Where(x => x.Value != album.Id.ToString())
+                ParentAlbums = _albumService.GetAll().GetSelectListItem().Where(x => x.Value != album.Id.ToString())
             };
 
             return View(model);
@@ -118,7 +129,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 }
             }
 
-            model.ParentAlbums = _albumService.GetSelectListItem().Where(x => x.Value != model.Id.ToString());
+            model.ParentAlbums = _albumService.GetAll().GetSelectListItem().Where(x => x.Value != model.Id.ToString());
 
             return View(model);
         }
@@ -129,6 +140,55 @@ namespace AskanioPhotoSite.WebUI.Controllers
             try
             {
                 _albumService.DeleteOne(id);
+
+                return Json(MyAjaxHelper.GetSuccessResponse());
+            }
+            catch (Exception exception)
+            {
+                return Json(MyAjaxHelper.GetErrorResponse(exception.Message));
+            }
+        }
+
+        #endregion
+
+        #region Работа с фотографиями
+
+        public ActionResult EditPhoto(int id)
+        {
+            var photo = _photoService.GetOne(id);
+
+            var model = new PhotoUploadModel()
+            {
+                Id = photo.Id,
+                PhotoPath = photo.PhotoPath,
+                ThumbnailPath = photo.ThumbnailPath,
+                CreationDate = photo.CreationDate,
+                FileName = photo.FileName,
+                TitleRu = photo.TitleRu,
+                TitleEng = photo.TitleEng,
+                DescriptionEng = photo.DescriptionEng,
+                DescriptionRu = photo.DescriptionRu,
+                Albums = _albumService.GetAll().GetSelectListItem(),
+                Album = photo.AlbumId == 0 ? new Album() : _albumService.GetOne(id),
+                Action = "EditPhoto"
+            };
+
+            return PartialView("~/Views/Management/_EditUploadPhoto.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult EditPhoto(PhotoUploadModel model)
+        {
+            _photoService.UpdateOne(model);
+            
+            return RedirectToAction("PhotoIndex");
+        }
+
+        public ActionResult DeletePhoto(int id)
+        {
+            try
+            {
+                _photoService.DeleteOne(id);
 
                 return Json(MyAjaxHelper.GetSuccessResponse());
             }
@@ -232,8 +292,9 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
             var photo = model.Uploads.Single(x => x.Id == id);
 
+            photo.Action = "EditUploadPhoto";
             photo.Album = photo.Album ?? new Album();
-            photo.Albums = _albumService.GetSelectListItem();
+            photo.Albums = _albumService.GetAll().GetSelectListItem();
 
             return PartialView("~/Views/Management/_EditUploadPhoto.cshtml", photo);
         }

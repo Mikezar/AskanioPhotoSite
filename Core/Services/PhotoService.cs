@@ -21,7 +21,7 @@ namespace AskanioPhotoSite.Core.Services
 
         public override Photo GetOne(int id)
         {
-            throw new NotImplementedException();
+            return GetAll().FirstOrDefault(x => x.Id == id);
         }
 
         public override Photo AddOne(object obj)
@@ -65,17 +65,32 @@ namespace AskanioPhotoSite.Core.Services
 
         public override Photo UpdateOne(object obj)
         {
-            throw new NotImplementedException();
+            var photo = (PhotoUploadModel)obj;
+
+            var entity = new Photo()
+            {
+                Id = photo.Id,
+                AlbumId = photo.Album.Id,
+                TitleRu = photo.TitleRu,
+                TitleEng = photo.TitleEng,
+                DescriptionRu = photo.DescriptionRu,
+                DescriptionEng = photo.DescriptionEng,
+                PhotoPath = photo.PhotoPath,
+                ThumbnailPath = photo.ThumbnailPath,
+                FileName = photo.FileName,
+                CreationDate = photo.CreationDate
+            };
+
+            var updated = _storage.GetRepository<Photo>().UpdateOne(entity);
+            _storage.Commit();
+
+            return updated;
         }
 
         public override void DeleteOne(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public override IEnumerable<SelectListItem> GetSelectListItem()
-        {
-            throw new NotImplementedException();
+            _storage.GetRepository<Photo>().DeleteOne(id);
+            _storage.Commit();
         }
     }
 }

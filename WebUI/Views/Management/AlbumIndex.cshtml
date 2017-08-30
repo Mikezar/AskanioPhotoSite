@@ -50,24 +50,9 @@
             ConfirmDelete("Вы уверены, что хотите удалить альбом и все связанные с ним фотографии? Это действие будет наобратимо!", function () {
                 ConfirmDelete("Вы точно уверенны? Это последнее китайское предупреждение!",
                     function () {
-
-                        $.ajax({
-                            type: 'POST',
-                            url: '@Url.Action("DeleteAlbum")',
-                                    data: { id: id },
-                                    success: function(result) {
-                                        if (result.success) {
-                                            $(element).closest('tr').fadeIn(500,
-                                                function() {
-                                                    $(this).remove();
-                                                });
-                                        } else {
-                                            bootbox.alert(result.errorMessage);
-                                        }
-                                    }
-                                });
-                            });
-                });
+                        DeleteEntity(id, '@Url.Action("DeleteAlbum")', element)
+                 });
+            });
         });
     });
 </script>

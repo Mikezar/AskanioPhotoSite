@@ -52,20 +52,10 @@
 <script>
     $(document).ready(function () {
         $('.delete').on('click', function () {
-
             var item = $(this);
             var photoId = $(item).prop("id");
 
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("DeleteUploadPhoto")',
-                data: { id: photoId },
-                success: function (response) {
-                    $(item).closest('tr').fadeIn(500, function () {
-                        $(this).remove();
-                    });
-                }
-            });
+            DeleteEntity(id, '@Url.Action("DeleteUploadPhoto")', item);
         });
 
         $('.edit').on('click', function () {

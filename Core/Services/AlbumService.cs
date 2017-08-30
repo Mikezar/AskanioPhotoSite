@@ -82,16 +82,5 @@ namespace AskanioPhotoSite.Core.Services
             _storage.GetRepository<Album>().DeleteOne(id);
             _storage.Commit();
         }
-
-        public override IEnumerable<SelectListItem> GetSelectListItem()
-        {
-            var albums = GetAll().ToList();
-
-            return albums.Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.TitleRu,
-            }).InsertEmptyFirst("None", "0").ToList();
-        }
     }
 }

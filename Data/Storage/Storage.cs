@@ -29,6 +29,7 @@ namespace AskanioPhotoSite.Data.Storage
             _repositories = new Dictionary<object, object>();
             _repositories.Add(typeof(Album), new GenericRepository<Album>(this));
             _repositories.Add(typeof(Photo), new GenericRepository<Photo>(this));
+            _repositories.Add(typeof(Tag), new GenericRepository<Tag>(this));
         }
 
         public Storage(DirectoryInfo directory) : this()

@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
 
-            @using (Ajax.BeginForm("EditUploadPhoto", new AjaxOptions
+            @using (Ajax.BeginForm(Model.Action, new AjaxOptions
             {
             OnSuccess = "OnSuccessSave"
             }))
@@ -66,12 +66,3 @@
         </div>
     </div>
 </div>
-
-
-
-<script>
-    function OnSuccessSave(response)
-    {
-        $('editUploadPhotoModal').modal('hide');
-    }
-</script>

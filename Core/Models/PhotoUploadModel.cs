@@ -39,6 +39,8 @@ namespace AskanioPhotoSite.Core.Models
 
         [Required]
         public DateTime CreationDate { get; set; }
+
+        public string Action { get; set; }
     }
 
 }

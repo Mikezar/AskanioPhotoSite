@@ -22,3 +22,22 @@
     }
     );
 }
+
+function DeleteEntity(id, url, element)
+{
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: { id: id },
+        success: function (result) {
+            if (result.success) {
+                $(element).closest('tr').fadeIn(500,
+                    function () {
+                        $(this).remove();
+                    });
+            } else {
+                bootbox.alert(result.errorMessage);
+            }
+        }
+    });
+}

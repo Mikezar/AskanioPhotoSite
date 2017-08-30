@@ -30,8 +30,6 @@ namespace AskanioPhotoSite.Core.Services
         public abstract TEntity UpdateOne(object obj);
 
         public abstract void DeleteOne(int id);
-
-        public abstract IEnumerable<SelectListItem> GetSelectListItem();
        
     }
 }

@@ -76,7 +76,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AlbumService.cs" />
     <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\Extensions\AlbumServiceExtension.cs" />
     <Compile Include="Services\PhotoService.cs" />
+    <Compile Include="Services\TagService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

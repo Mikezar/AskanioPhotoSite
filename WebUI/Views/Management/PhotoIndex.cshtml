@@ -34,12 +34,44 @@
                     <td>@photo.PhotoPath</td>
                     <td>@photo.Album.TitleRu</td>
                     <td style="text-align: right">
-                        <a href='@Url.Action("EditPhoto", "Management", new {id = photo.Id})' class="edit"><span class="glyphicon glyphicon-pencil"></span>Редактировать</a>
+                        <a href="#" data-id="@photo.Id" class="edit"><span class="glyphicon glyphicon-pencil"></span>Редактировать</a>
                         <a class="remove" data-id="@photo.Id"><span class="glyphicon glyphicon-remove-sign"></span>Удалить</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+
+    <div id="editUploadPhoto"></div>
 </div>
 
+
+<script>
+    $(document).ready(function () {
+
+        $(".remove").on("click", function () {
+
+            var element = $(this);
+            var id = $(this).data("id");
+
+            ConfirmDelete("Вы уверены, что хотите удалить фотографию? Это действие будет наобратимо!", function () {
+                DeleteEntity(id, '@Url.Action("DeletePhoto")', element);
+            });
+        });
+
+        $('.edit').on('click', function () {
+
+            var photoId = $(this).data("id");
+
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("EditPhoto")',
+                data: { id: photoId },
+                success: function (response) {
+                    $('#editUploadPhoto').html(response);
+                    $('#editUploadPhotoModal').modal('show');
+                }
+            });
+        })
+    });
+</script>
