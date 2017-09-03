@@ -39,6 +39,7 @@ namespace AskanioPhotoSite.WebUI.Infrastructure
             _ninjectKernel.Bind<BaseService<Album>>().To<AlbumService>();
             _ninjectKernel.Bind<BaseService<Photo>>().To<PhotoService>();
             _ninjectKernel.Bind<BaseService<Tag>>().To<TagService>();
+            _ninjectKernel.Bind<BaseService<PhotoToTag>>().To<PhotoToTagService>();
             _ninjectKernel.Bind<IStorage>().To<Storage>();
         }
     }

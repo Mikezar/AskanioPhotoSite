@@ -25,8 +25,8 @@
             {
                 <tr>
                     <td>@(++counter)</td>
-                    <td>@album.TitleRu</td>
-                    <td></td>
+                    <td>@album.Title</td>
+                    <td>@album.PhotoCount</td>
                     <td style="text-align: right">
                         <a  href='@Url.Action("EditAlbum", "Management", new {id = album.Id})' class="edit"><span class="glyphicon glyphicon-pencil"></span>Редактировать</a>
                         <a class="remove" data-id="@album.Id"><span class="glyphicon glyphicon-remove-sign"></span>Удалить</a>

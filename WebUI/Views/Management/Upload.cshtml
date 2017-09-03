@@ -55,7 +55,7 @@
             var item = $(this);
             var photoId = $(item).prop("id");
 
-            DeleteEntity(id, '@Url.Action("DeleteUploadPhoto")', item);
+            DeleteEntity(photoId, '@Url.Action("DeleteUploadPhoto")', item);
         });
 
         $('.edit').on('click', function () {

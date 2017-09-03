@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
 using AskanioPhotoSite.Data.Entities;
 using AskanioPhotoSite.Data.Storage;
 using AskanioPhotoSite.Core.Models;
+using AskanioPhotoSite.Core.Services.Extensions;
 
 namespace AskanioPhotoSite.Core.Services
 {
@@ -34,8 +32,11 @@ namespace AskanioPhotoSite.Core.Services
             var model = (PhotoUploadModel[])obj;
 
             var repository = _storage.GetRepository<Photo>();
+            var photoToTagRepository = _storage.GetRepository<PhotoToTag>();
 
             var photos = new List<Photo>();
+            var photoToTags = new List<PhotoToTag>();
+
 
             foreach (var photo in model)
             {
@@ -53,10 +54,22 @@ namespace AskanioPhotoSite.Core.Services
                     CreationDate = photo.CreationDate
                 };
 
+                foreach (var tagId in photo.RelatedTagIds)
+                {
+                    var photoToTag = new PhotoToTag()
+                    {
+                        Id = 0,
+                        PhotoId = photo.Id,
+                        TagId = tagId
+                    };
+                    photoToTags.Add(photoToTag);
+                }
+
                 photos.Add(entity);
             }
 
-            var updatedPhotos =  _storage.GetRepository<Photo>().AddMany(photos.ToArray());
+            var updatedPhotos = repository.AddMany(photos.ToArray());
+            photoToTagRepository.AddMany(photoToTags.ToArray());
 
             _storage.Commit();
 
@@ -66,6 +79,8 @@ namespace AskanioPhotoSite.Core.Services
         public override Photo UpdateOne(object obj)
         {
             var photo = (PhotoUploadModel)obj;
+
+            var photoToTagRepository = _storage.GetRepository<PhotoToTag>();
 
             var entity = new Photo()
             {
@@ -81,6 +96,29 @@ namespace AskanioPhotoSite.Core.Services
                 CreationDate = photo.CreationDate
             };
 
+            var photoToTags = photoToTagRepository.GetAll();
+
+            var relatedTagIds = photoToTags.GetRelatedTags(photo.Id).Select(x => x.Id).ToArray();
+
+            if (relatedTagIds.Length > 0)
+            {
+                photoToTagRepository.DeleteMany(relatedTagIds);
+                _storage.Commit(); //TODO: продумать
+            }
+
+         
+
+            photoToTagRepository.AddMany(photo.RelatedTagIds
+                .Select(x => new PhotoToTag()
+                {
+                    Id = 0,
+                    PhotoId = photo.Id,
+                    TagId = x
+                }).ToArray()
+            );
+
+
+
             var updated = _storage.GetRepository<Photo>().UpdateOne(entity);
             _storage.Commit();
 
@@ -89,8 +127,22 @@ namespace AskanioPhotoSite.Core.Services
 
         public override void DeleteOne(int id)
         {
+            var photoToTagRepository = _storage.GetRepository<PhotoToTag>();
+
+            var photoToTags = photoToTagRepository.GetAll().Where(x => x.PhotoId == id).ToList();
+
+            if (photoToTags.Count() > 0)
+            {
+                photoToTagRepository.DeleteMany(photoToTags.Select(x => x.Id).ToArray());
+            }
+
             _storage.GetRepository<Photo>().DeleteOne(id);
             _storage.Commit();
+        }
+
+        public void GetIt()
+        {
+
         }
     }
 }

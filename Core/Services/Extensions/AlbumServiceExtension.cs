@@ -17,5 +17,15 @@ namespace AskanioPhotoSite.Core.Services.Extensions
                 Text = x.TitleRu,
             }).InsertEmptyFirst("None", "0").ToList();
         }
+
+        public static IEnumerable<Album> GetEndNoteAlbums(this IEnumerable<Album> albums)
+        {
+            return albums.Where(x => albums.isParent(x) == false);
+        }
+
+        public static bool isParent(this IEnumerable<Album> albums, Album album)
+        {
+            return albums.Any(x => x.ParentId == album.Id);
+        }
     }
 }

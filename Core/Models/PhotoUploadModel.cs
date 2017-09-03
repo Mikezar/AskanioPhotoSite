@@ -41,6 +41,12 @@ namespace AskanioPhotoSite.Core.Models
         public DateTime CreationDate { get; set; }
 
         public string Action { get; set; }
+
+        public string ReturnUrl { get; set; }
+
+        public MultiSelectList AllTags { get; set; }
+
+        public int[] RelatedTagIds { get; set; }
     }
 
 }

@@ -79,6 +79,14 @@ namespace AskanioPhotoSite.Core.Services
 
         public override void DeleteOne(int id)
         {
+            var photoRepository = _storage.GetRepository<Photo>();
+            var photos = photoRepository.GetAll().Where(x => x.AlbumId == id);
+
+            if (photos.Count() > 0)
+            {
+                photoRepository.DeleteMany(photos.Select(x => x.Id).ToArray());
+            }
+
             _storage.GetRepository<Album>().DeleteOne(id);
             _storage.Commit();
         }

@@ -9,6 +9,6 @@ namespace AskanioPhotoSite.Core.Models
 {
    public class AlbumListModel
     {
-        public List<Album> Albums { get; set; }
+        public List<AlbumModel> Albums { get; set; }
     }
 }

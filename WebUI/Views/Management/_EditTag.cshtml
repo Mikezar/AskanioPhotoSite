@@ -1,0 +1,54 @@
+﻿@model AskanioPhotoSite.Core.Models.EditTagModel
+
+<div id="editTagModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Редактирование фотографии @Model.TitleRu</h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Ajax.BeginForm("EditTag", null, new AjaxOptions
+                {
+                    OnSuccess = "OnSuccessSave"
+                }, new { id = "editTagForm"}))
+                {
+                    @Html.HiddenFor(x => x.Id)
+
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.TitleEng, new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.TitleEng, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.TitleEng)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.TitleRu, new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.TitleRu, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.TitleRu)
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="submit btn btn-primary">Сохранить</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.submit').on('click', function () {
+            var isValid = $('#editTagForm').valid()
+            if (isValid) {
+                $('#editTagModal').modal('toggle');
+            }
+        });
+    });
+</script>

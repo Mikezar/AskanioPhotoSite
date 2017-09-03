@@ -67,18 +67,26 @@
     <Compile Include="Helpers\ImageProcessor.cs" />
     <Compile Include="Helpers\LinqHelper.cs" />
     <Compile Include="Models\AlbumListModel.cs" />
+    <Compile Include="Models\AlbumModel.cs" />
     <Compile Include="Models\EditAlbumModel.cs" />
+    <Compile Include="Models\EditTagModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PhotoListModel.cs" />
     <Compile Include="Models\PhotoModel.cs" />
     <Compile Include="Models\PhotoUploadListModel.cs" />
     <Compile Include="Models\PhotoUploadModel.cs" />
+    <Compile Include="Models\TagListModel.cs" />
+    <Compile Include="Models\TagModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AlbumService.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Services\Extensions\AlbumServiceExtension.cs" />
+    <Compile Include="Services\Extensions\PhotoServiceExtension.cs" />
+    <Compile Include="Services\Extensions\PhotoToTagServiceExtension.cs" />
     <Compile Include="Services\PhotoService.cs" />
+    <Compile Include="Services\PhotoToTagService.cs" />
     <Compile Include="Services\TagService.cs" />
+    <Compile Include="Services\Extensions\TagServiceExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

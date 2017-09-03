@@ -65,6 +65,7 @@ namespace AskanioPhotoSite.Core.Helpers
                             break;
                         case 8:
                             image.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                            image.RotateFlip(RotateFlipType.Rotate90FlipNone);
                             break;
                     }
                     // This EXIF data is now invalid and should be removed.

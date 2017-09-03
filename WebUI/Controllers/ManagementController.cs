@@ -23,11 +23,15 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
         private readonly BaseService<Tag> _tagService;
 
-        public ManagementController(BaseService<Album> albumService, BaseService<Photo> photoService, BaseService<Tag> tagService)
+        private readonly BaseService<PhotoToTag> _photoToTagService;
+
+        public ManagementController(BaseService<Album> albumService, BaseService<Photo> photoService, 
+            BaseService<Tag> tagService, BaseService<PhotoToTag> photoToTagService)
         {
             _albumService = albumService;
             _photoService = photoService;
             _tagService = tagService;
+            _photoToTagService = photoToTagService;
         }
 
         public ActionResult Index()
@@ -39,7 +43,12 @@ namespace AskanioPhotoSite.WebUI.Controllers
         {
             var model = new AlbumListModel()
             {
-                Albums = _albumService.GetAll().ToList()
+                Albums = _albumService.GetAll().Select(x => new AlbumModel()
+                {
+                    Id = x.Id,
+                    Title = x.TitleRu,
+                    PhotoCount = _photoService.GetAll().GetPhotoCountInAlbum(x.Id)
+                }).ToList()
             };
 
             return View(model);
@@ -49,27 +58,76 @@ namespace AskanioPhotoSite.WebUI.Controllers
         {
             var model = new PhotoListModel()
             {
-                Photos = _photoService.GetAll().Select(x => new PhotoModel()
-                {
-                    Id = x.Id,
-                    DescriptionEng = x.DescriptionEng,
-                    DescriptionRu = x.DescriptionRu,
-                    PhotoPath = x.PhotoPath,
-                    ThumbnailPath = x.ThumbnailPath,
-                    TitleRu = x.TitleRu,
-                    TitleEng = x.TitleEng,
-                    Album = x.AlbumId == 0 ? new Album() : _albumService.GetOne(x.AlbumId)
-                }).Where(x => x.Album.Id == 0).ToList()
+                Photos = _photoService.GetAll().InitPhotoListModel()
             };
 
             return View(model);
         }
 
-        #region Работа с тэгами
-
         public ActionResult TagIndex()
         {
-            return View();
+            var model = new TagListModel()
+            {
+                Tags = _tagService.GetAll().Select(x => new TagModel()
+                {
+                    Id = x.Id,
+                    Title = x.TitleRu,
+                    RelativePhotoCount = _photoToTagService.GetAll().GetRelatedPhotoCount(_photoService.GetAll(), x.Id)
+                }).ToList()
+            };
+
+            return View(model);
+        }
+
+
+        #region Работа с тэгами
+
+        public ActionResult AddTag()
+        {
+            return View("_EditTag", new EditTagModel());
+        }
+
+        public ActionResult EditTag(int id)
+        {
+            var tag = _tagService.GetOne(id);
+
+            var model = new EditTagModel()
+            {
+                Id = tag.Id,
+                TitleEng = tag.TitleEng,
+                TitleRu = tag.TitleRu
+            };
+
+            return PartialView("_EditTag", model);
+        }
+
+        [HttpPost]
+        public ActionResult EditTag(EditTagModel model)
+        {
+            if (!ModelState.IsValid)
+                return PartialView("_EditTag", model);
+
+           if (model.Id == 0)
+                _tagService.AddOne(model);
+           else
+                _tagService.UpdateOne(model);
+                
+            return RedirectToAction("TagIndex");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteTag(int id)
+        {
+            try
+            {
+                _tagService.DeleteOne(id);
+
+                return Json(MyAjaxHelper.GetSuccessResponse());
+            }
+            catch (Exception exception)
+            {
+                return Json(MyAjaxHelper.GetErrorResponse(exception.Message));
+            }
         }
 
         #endregion
@@ -83,7 +141,8 @@ namespace AskanioPhotoSite.WebUI.Controllers
             var model = new EditAlbumModel()
             {
                 ParentAlbum = new Album(),
-                ParentAlbums = _albumService.GetAll().GetSelectListItem()
+                ParentAlbums = _albumService.GetAll().GetSelectListItem(),
+                Photos = new PhotoListModel()
             };
             return View("EditAlbum", model);
         }
@@ -102,7 +161,25 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 DescriptionEng = album.DescriptionEng,
                 TitleRu = album.TitleRu,
                 TitleEng = album.TitleEng,
-                ParentAlbums = _albumService.GetAll().GetSelectListItem().Where(x => x.Value != album.Id.ToString())
+                ParentAlbums = _albumService.GetAll().GetSelectListItem().Where(x => x.Value != album.Id.ToString()),
+                IsParent = _albumService.GetAll().isParent(album)
+            };
+
+            model.Photos = new PhotoListModel()
+            {
+                Photos = _photoService.GetAll().Where(x => x.AlbumId == model.Id).Select(x => new PhotoModel()
+                {
+                    Id = x.Id,
+                    DescriptionEng = x.DescriptionEng,
+                    DescriptionRu = x.DescriptionRu,
+                    PhotoPath = x.PhotoPath,
+                    ThumbnailPath = x.ThumbnailPath,
+                    TitleRu = x.TitleRu,
+                    TitleEng = x.TitleEng,
+                    Album = _albumService.GetOne(model.Id)
+                }).ToList(),
+
+                ReturnUrl = Url.Action("EditAlbum")
             };
 
             return View(model);
@@ -130,6 +207,21 @@ namespace AskanioPhotoSite.WebUI.Controllers
             }
 
             model.ParentAlbums = _albumService.GetAll().GetSelectListItem().Where(x => x.Value != model.Id.ToString());
+            model.Photos = new PhotoListModel()
+            {
+                Photos = _photoService.GetAll().Where(x => x.AlbumId == model.Id).Select(x => new PhotoModel()
+                {
+                    Id = x.Id,
+                    DescriptionEng = x.DescriptionEng,
+                    DescriptionRu = x.DescriptionRu,
+                    PhotoPath = x.PhotoPath,
+                    ThumbnailPath = x.ThumbnailPath,
+                    TitleRu = x.TitleRu,
+                    TitleEng = x.TitleEng,
+                    Album = _albumService.GetOne(model.Id)
+                }).ToList(),
+                ReturnUrl = Url.Action("EditAlbum")
+            };
 
             return View(model);
         }
@@ -153,7 +245,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
         #region Работа с фотографиями
 
-        public ActionResult EditPhoto(int id)
+        public ActionResult EditPhoto(int id, string returnUrl = null)
         {
             var photo = _photoService.GetOne(id);
 
@@ -170,8 +262,11 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 DescriptionRu = photo.DescriptionRu,
                 Albums = _albumService.GetAll().GetSelectListItem(),
                 Album = photo.AlbumId == 0 ? new Album() : _albumService.GetOne(id),
-                Action = "EditPhoto"
+                Action = "EditPhoto",
+                ReturnUrl = returnUrl,
             };
+            model.RelatedTagIds = _photoToTagService.GetAll().GetRelatedTags(photo.Id).Select(x => x.TagId).ToArray();
+            model.AllTags = _tagService.GetAll().GetSelectListItem(model.RelatedTagIds);
 
             return PartialView("~/Views/Management/_EditUploadPhoto.cshtml", model);
         }
@@ -180,7 +275,12 @@ namespace AskanioPhotoSite.WebUI.Controllers
         public ActionResult EditPhoto(PhotoUploadModel model)
         {
             _photoService.UpdateOne(model);
-            
+
+            if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+            {
+                return Redirect(model.ReturnUrl);
+            }
+
             return RedirectToAction("PhotoIndex");
         }
 
@@ -244,7 +344,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 {
                     if (file != null)
                     {
-                        ImageProcessor.CreateThumbnail(310, 210, file, photoUploadModel.ThumbnailPath);
+                        ImageProcessor.CreateThumbnail(310, 210, file, photoUploadModel.ThumbnailPath);             
                         ImageProcessor.ImageRotating(file, photoUploadModel.PhotoPath);
 
                         //if (IsWaterMark)
@@ -294,7 +394,9 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
             photo.Action = "EditUploadPhoto";
             photo.Album = photo.Album ?? new Album();
-            photo.Albums = _albumService.GetAll().GetSelectListItem();
+            photo.Albums = _albumService.GetAll().GetEndNoteAlbums().GetSelectListItem();
+
+            photo.AllTags = _tagService.GetAll().GetSelectListItem(photo.RelatedTagIds);
 
             return PartialView("~/Views/Management/_EditUploadPhoto.cshtml", photo);
         }

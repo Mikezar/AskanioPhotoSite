@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AskanioPhotoSite.Data.Entities;
+using AskanioPhotoSite.Data.Helpers;
 using AskanioPhotoSite.Data.Storage.Transactions;
 
 namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
@@ -21,6 +22,10 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
             else if (entity.GetType() == typeof(Tag))
             {
                 return GetTagEntities(lines).Cast<TEntity>();
+            }
+            else if (entity.GetType() == typeof(PhotoToTag))
+            {
+                return GetPhotoToTagEntities(lines).Cast<TEntity>();
             }
             else return new List<TEntity>();
         }
@@ -66,8 +71,8 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
                 var albumFields = x.Split(Processor<TEntity>.Field);
                 return new Album()
                 {
-                    Id = Convert.ToInt32(albumFields[0]),
-                    ParentId = Convert.ToInt32(albumFields[1]),
+                    Id = albumFields[0].GetValue(),
+                    ParentId = albumFields[1].GetValue(),
                     TitleRu = albumFields[2],
                     TitleEng = albumFields[3],
                     DescriptionRu = albumFields[4],
@@ -83,8 +88,8 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
                 var photoFields = x.Split(Processor<TEntity>.Field);
                 return new Photo()
                 {
-                    Id = Convert.ToInt32(photoFields[0]),
-                    AlbumId = Convert.ToInt32(photoFields[1]),
+                    Id = photoFields[0].GetValue(),
+                    AlbumId = photoFields[1].GetValue(),
                     TitleRu = photoFields[2],
                     TitleEng = photoFields[3],
                     DescriptionRu = photoFields[4],
@@ -104,11 +109,27 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
                 var tagFields = x.Split(Processor<TEntity>.Field);
                 return new Tag()
                 {
-                    Id = Convert.ToInt32(tagFields[0]),
-                    TitleRu = tagFields[2],
-                    TitleEng = tagFields[3]
+                    Id = tagFields[0].GetValue(),
+                    TitleRu = tagFields[1],
+                    TitleEng = tagFields[2]
                 };
             });
         }
+
+
+        private IEnumerable<PhotoToTag> GetPhotoToTagEntities(string[] lines)
+        {
+            return lines.Select(x =>
+            {
+                var tagFields = x.Split(Processor<TEntity>.Field);
+                return new PhotoToTag()
+                {
+                    Id = tagFields[0].GetValue(),
+                    PhotoId = tagFields[1].GetValue(),
+                    TagId = tagFields[2].GetValue()
+                };
+            });
+        }
+
     }
 }

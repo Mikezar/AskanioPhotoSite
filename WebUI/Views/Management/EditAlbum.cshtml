@@ -61,5 +61,14 @@
             </div>
         </div>
     }
+
+    @if (!Model.IsParent)
+    {
+         @Html.Partial("_PhotoList", Model.Photos)
+    }
+    else
+    {
+        <p>Родительский альбом не может иметь фотографий</p>
+    }
 </div>
 
