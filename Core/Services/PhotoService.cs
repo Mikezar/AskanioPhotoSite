@@ -54,7 +54,8 @@ namespace AskanioPhotoSite.Core.Services
                     CreationDate = photo.CreationDate
                 };
 
-                foreach (var tagId in photo.RelatedTagIds)
+
+                foreach (var tagId in photo.RelatedTagIds ?? new int[0])
                 {
                     var photoToTag = new PhotoToTag()
                     {

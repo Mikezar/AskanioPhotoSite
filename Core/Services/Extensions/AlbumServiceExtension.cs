@@ -18,7 +18,7 @@ namespace AskanioPhotoSite.Core.Services.Extensions
             }).InsertEmptyFirst("None", "0").ToList();
         }
 
-        public static IEnumerable<Album> GetEndNoteAlbums(this IEnumerable<Album> albums)
+        public static IEnumerable<Album> GetEndNodeAlbums(this IEnumerable<Album> albums)
         {
             return albums.Where(x => albums.isParent(x) == false);
         }

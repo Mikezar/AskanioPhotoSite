@@ -259,3 +259,10 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/WebUI/Content/Gallery/Photos/photo_AS-S5.jpg
+/WebUI/App_Data/Transaction.txt
+/WebUI/App_Data/PhotoToTag.txt
+/WebUI/App_Data/Photo.txt
+/WebUI/App_Data/Album.txt
+/WebUI/Content/Gallery/Thumbs/photo_AS-S5s.jpg
+/WebUI/App_Data/Tag.txt

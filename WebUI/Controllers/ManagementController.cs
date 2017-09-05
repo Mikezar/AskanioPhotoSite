@@ -164,7 +164,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 ParentAlbums = _albumService.GetAll().GetSelectListItem().Where(x => x.Value != album.Id.ToString()),
                 IsParent = _albumService.GetAll().isParent(album)
             };
-
+  
             model.Photos = new PhotoListModel()
             {
                 Photos = _photoService.GetAll().Where(x => x.AlbumId == model.Id).Select(x => new PhotoModel()
@@ -394,10 +394,11 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
             photo.Action = "EditUploadPhoto";
             photo.Album = photo.Album ?? new Album();
-            photo.Albums = _albumService.GetAll().GetEndNoteAlbums().GetSelectListItem();
+            photo.Albums = _albumService.GetAll().GetEndNodeAlbums().GetSelectListItem();
 
             photo.AllTags = _tagService.GetAll().GetSelectListItem(photo.RelatedTagIds);
-
+            photo.RelatedTagIds = _photoToTagService.GetAll().GetRelatedTags(photo.Id).Select(x => x.TagId).ToArray();
+          
             return PartialView("~/Views/Management/_EditUploadPhoto.cshtml", photo);
         }
 
