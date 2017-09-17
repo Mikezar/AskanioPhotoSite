@@ -9,6 +9,11 @@ namespace AskanioPhotoSite.Core.Services.Extensions
 {
     public static class AlbumServiceExtension
     {
+        public static IEnumerable<SelectListItem> GetAvailableAlbumSelectList(this BaseService<Album> albumService, IEnumerable<Photo> photos)
+        {
+            return albumService.GetAll().GetNoPhotoAlbums(photos).GetSelectListItem();
+        }
+
         public static IEnumerable<SelectListItem> GetSelectListItem(this IEnumerable<Album> albums)
         {
             return albums.Select(x => new SelectListItem()
@@ -26,6 +31,12 @@ namespace AskanioPhotoSite.Core.Services.Extensions
         public static bool isParent(this IEnumerable<Album> albums, Album album)
         {
             return albums.Any(x => x.ParentId == album.Id);
+        }
+
+        public static IEnumerable<Album> GetNoPhotoAlbums(this IEnumerable<Album> albums, IEnumerable<Photo> photos)
+        {
+            var albumIds = photos.Select(t => t.AlbumId).ToList();
+            return albums.Where(x => !albumIds.Contains(x.Id));
         }
     }
 }

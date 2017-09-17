@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Редактирование фотографии @Model.TitleRu</h4>
+                <h4 class="modal-title">Редактирование тэга @Model.TitleRu</h4>
             </div>
             <div class="modal-body">
 
@@ -17,20 +17,24 @@
                     @Html.HiddenFor(x => x.Id)
 
                     <div class="form-horizontal">
-                        <div class="form-group">
-                            @Html.LabelFor(x => x.TitleEng, new { @class = "control-label col-sm-4" })
-                            <div class="col-sm-8">
-                                @Html.TextBoxFor(x => x.TitleEng, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(x => x.TitleEng)
-                            </div>
-                        </div>
+                        <p class="language-title">Русский</p>
+                        <hr />
                         <div class="form-group">
                             @Html.LabelFor(x => x.TitleRu, new { @class = "control-label col-sm-4" })
                             <div class="col-sm-8">
                                 @Html.TextBoxFor(x => x.TitleRu, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(x => x.TitleRu)
                             </div>
-                        </div>  
+                        </div> 
+                        <p class="language-title">Английский</p>
+                        <hr/>
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.TitleEng, new { @class = "control-label col-sm-4" })
+                            <div class="col-sm-8">
+                                @Html.TextBoxFor(x => x.TitleEng, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.TitleEng)
+                            </div>
+                        </div> 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>

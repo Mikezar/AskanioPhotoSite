@@ -31,6 +31,7 @@ namespace AskanioPhotoSite.Data.Storage
             _repositories.Add(typeof(Photo), new GenericRepository<Photo>(this));
             _repositories.Add(typeof(Tag), new GenericRepository<Tag>(this));
             _repositories.Add(typeof(PhotoToTag), new GenericRepository<PhotoToTag>(this));
+            _repositories.Add(typeof(TextAttributes), new GenericRepository<TextAttributes>(this));
         }
 
         public Storage(DirectoryInfo directory) : this()
@@ -151,6 +152,7 @@ namespace AskanioPhotoSite.Data.Storage
             cache.AddEntity(Execute(new Query<Photo>() { QueryType = QueryType.Read, ActionType = ActionType.Select }).Result.ToList());
             cache.AddEntity(Execute(new Query<Tag>() { QueryType = QueryType.Read, ActionType = ActionType.Select }).Result.ToList());
             cache.AddEntity(Execute(new Query<PhotoToTag>() { QueryType = QueryType.Read, ActionType = ActionType.Select }).Result.ToList());
+            cache.AddEntity(Execute(new Query<TextAttributes>() { QueryType = QueryType.Read, ActionType = ActionType.Select }).Result.ToList());
             cache.IsActual = true;
             HttpContext.Current.Cache[CacheKey] = cache;
 

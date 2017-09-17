@@ -57,3 +57,17 @@ textarea {
     object-fit:fill;
     object-position: top;
 }
+
+.space-right {
+    margin-left: 20px;
+}
+
+.language-title{
+    font-size: 16px;
+    color: darkgray;
+}
+
+.default {
+    color: grey; 
+    margin-left: 5px;
+}

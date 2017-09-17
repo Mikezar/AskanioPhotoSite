@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using AskanioPhotoSite.Core.Helpers;
 using AskanioPhotoSite.Core.Models;
 using AskanioPhotoSite.Data.Entities;
 using AskanioPhotoSite.Data.Storage;

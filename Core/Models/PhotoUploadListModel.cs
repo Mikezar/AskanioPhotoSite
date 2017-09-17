@@ -11,8 +11,11 @@ namespace AskanioPhotoSite.Core.Models
         public PhotoUploadListModel()
         {
             Uploads = new List<PhotoUploadModel>();
+            ImageAttributes = new ImageAttrModel();
         }
 
         public List<PhotoUploadModel> Uploads { get; set; }
+
+        public ImageAttrModel ImageAttributes { get; set; }
     }
 }

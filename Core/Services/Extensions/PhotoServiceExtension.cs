@@ -14,9 +14,9 @@ namespace AskanioPhotoSite.Core.Services.Extensions
             return photos.Where(t => t.AlbumId == albumId).Count();
         }
 
-        public static List<PhotoModel> InitPhotoListModel(this IEnumerable<Photo> photos)
+        public static List<PhotoModel> InitPhotoListModel(this BaseService<Photo> photoService)
         {
-            return photos.Where(r => r.AlbumId == 0).Select(x => new PhotoModel()
+            return photoService.GetAll().Where(r => r.AlbumId == 0).Select(x => new PhotoModel()
             {
                 Id = x.Id,
                 DescriptionEng = x.DescriptionEng,

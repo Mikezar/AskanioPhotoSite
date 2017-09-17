@@ -27,6 +27,10 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
             {
                 return GetPhotoToTagEntities(lines).Cast<TEntity>();
             }
+            else if (entity.GetType() == typeof(TextAttributes))
+            {
+                return GetTextAttributes(lines).Cast<TEntity>();
+            }
             else return new List<TEntity>();
         }
 
@@ -116,7 +120,6 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
             });
         }
 
-
         private IEnumerable<PhotoToTag> GetPhotoToTagEntities(string[] lines)
         {
             return lines.Select(x =>
@@ -127,6 +130,27 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
                     Id = tagFields[0].GetValue(),
                     PhotoId = tagFields[1].GetValue(),
                     TagId = tagFields[2].GetValue()
+                };
+            });
+        }
+
+        private IEnumerable<TextAttributes> GetTextAttributes(string[] lines)
+        {
+            return lines.Select(x =>
+            {
+                var textFields = x.Split(Processor<TEntity>.Field);
+                return new TextAttributes()
+                {
+                    Id = textFields[0].GetValue(),
+                    WatermarkFont = textFields[1],
+                    WatermarkFontSize = textFields[2].GetValue(),
+                    WatermarkText = textFields[3],
+                    SignatureFont = textFields[4],
+                    SignatureFontSize = textFields[5].GetValue(),
+                    SignatureText = textFields[6],
+                    StampFont = textFields[7],
+                    StampFontSize = textFields[8].GetValue(),
+                    StampText = textFields[9]
                 };
             });
         }

@@ -43,7 +43,7 @@ namespace AskanioPhotoSite.Core.Services
                 var entity = new Photo()
                 {
                     Id = 0,
-                    AlbumId = photo.Album.Id,
+                    AlbumId = photo.Album?.Id ?? 0,
                     TitleRu = photo.TitleRu,
                     TitleEng = photo.TitleEng,
                     DescriptionRu = photo.DescriptionRu,
