@@ -8,7 +8,7 @@ using AskanioPhotoSite.Core.Services.Extensions;
 using AskanioPhotoSite.Core.Models;
 using AskanioPhotoSite.Core.Services;
 using AskanioPhotoSite.Data.Entities;
-using AskanioPhotoSite.WebUI.Models;
+using AskanioPhotoSite.WebUI.Helpers;
 using AskanioPhotoSite.Core.Helpers;
 namespace AskanioPhotoSite.WebUI.Controllers
 {
@@ -426,7 +426,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
             // Если в БД уже есть фотографии, значит получаем макс. Id фотографии
             if (photos.Count > 0) maxId = photos.Max(x => x.Id);
 
-            // Проверяем, име.тся ли в сессии уже загруженные фотогарфии, если да, то берем за макс Id значение из сессии
+            // Проверяем, имеются ли в сессии уже загруженные фотогарфии, если да, то берем за макс Id значение из сессии
             if (model.Uploads.Any()) maxId = model.Uploads.Max(x => x.Id);
 
             foreach (var file in files)

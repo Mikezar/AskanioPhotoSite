@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Text;
+using AskanioPhotoSite.Core.Models;
+using System.Globalization;
+
+namespace AskanioPhotoSite.WebUI.Helpers
+{
+    public static class CloudHelper
+    {
+        public static MvcHtmlString TagCloud(this HtmlHelper html, IEnumerable<TagCloudModel> tags)
+        {
+            int min = tags.Min(t => t.Count);
+            int max = tags.Max(t => t.Count);
+            int dist = (max - min) / 3;
+
+            var links = new StringBuilder();
+            foreach (var tag in tags)
+            {
+                string tagClass;
+                string title = CultureHelper.IsEnCulture() ? tag.TitleEng : tag.TitleRu;
+                if (tag.Count == max)
+                {
+                    tagClass = "largest";
+                }
+                else if (tag.Count > (min + (dist * 2)))
+                {
+                    tagClass = "large";
+                }
+                else if (tag.Count > (min + dist))
+                {
+                    tagClass = "medium";
+                }
+                else if (tag.Count == min)
+                {
+                    tagClass = "smallest";
+                }
+                else
+                {
+                    tagClass = "small";
+                }
+
+                links.AppendFormat($"<a href=\"{tag.Count}\" title=\"{title}\" class=\"{tagClass}\">{title}</a>{Environment.NewLine}");
+            }
+
+            var div = new TagBuilder("div");
+            div.MergeAttribute("class", "tag-cloud");
+            div.InnerHtml = links.ToString();
+
+            return MvcHtmlString.Create(div.ToString());
+            
+        }
+    }
+}

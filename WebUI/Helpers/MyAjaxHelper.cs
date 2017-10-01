@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace AskanioPhotoSite.WebUI.Models
+﻿
+namespace AskanioPhotoSite.WebUI.Helpers
 {
     public static class MyAjaxHelper
     {

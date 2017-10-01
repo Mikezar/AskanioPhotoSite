@@ -1,0 +1,45 @@
+﻿@using AskanioPhotoSite.WebUI.Localization;
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - Aleksandr Serebryakov</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+</head>
+<body>
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Alexander Serebryakov", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink(MainUI.Home, "Index", "Home")</li>
+                    <li>@Html.ActionLink(MainUI.Gallery, "Index", "Gallery")</li>
+                    <li>@Html.ActionLink(MainUI.Blog, "Blog", "Home")</li>
+                    <li>@Html.ActionLink(MainUI.Contact, "Contact", "Home")</li>
+                    <li>@Html.ActionLink(MainUI.GuestBook, "Guestbook", "Home")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href='@Url.Action("ChangeCulture", "Culture", new { language = "ru-RU"})'>RU</a></li>
+                    <li><a href='@Url.Action("ChangeCulture", "Culture", new { language = "en-US"})'>EN</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+   @Html.Action("GetRandomPhoto")
+
+    <div> 
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -144,14 +144,22 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CultureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagementController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CloudHelper.cs" />
+    <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
-    <Compile Include="Models\AuthAttribute.cs" />
-    <Compile Include="Models\MyAjaxHelper.cs" />
+    <Compile Include="Localization\MainUI.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainUI.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\AuthAttribute.cs" />
+    <Compile Include="Helpers\MyAjaxHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +216,9 @@
     <Content Include="Views\Management\_PhotoList.cshtml" />
     <Content Include="Views\Management\TagIndex.cshtml" />
     <Content Include="Views\Management\_EditTag.cshtml" />
+    <Content Include="Views\Shared\_BaseLayout.cshtml" />
+    <Content Include="Views\Shared\_SideBar.cshtml" />
+    <Content Include="Views\Shared\_Cloud.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Core\" />
@@ -238,6 +249,12 @@
       <Project>{59d27c7a-90f9-436b-807f-5dbe72c73835}</Project>
       <Name>Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localization\MainUI.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MainUI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

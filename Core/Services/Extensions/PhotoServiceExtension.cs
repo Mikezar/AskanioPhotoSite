@@ -28,5 +28,18 @@ namespace AskanioPhotoSite.Core.Services.Extensions
                 Album = new Album()
             }).ToList();
         }
+
+        public static Photo GetRandomPhoto(this BaseService<Photo> photoService)
+        {
+            Random random = new Random();
+
+            var photos = photoService.GetAll().ToList();
+
+            if (photos.Count > 0)
+            {
+                return photos[random.Next(0, photos.Count)];
+            }
+            return null;
+        }
     }
 }

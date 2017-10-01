@@ -1,29 +1,140 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
-using System.Web.UI.WebControls;
+using System.Linq;
+using System.Collections.Generic;
+using AskanioPhotoSite.Data.Entities;
+using AskanioPhotoSite.Core.Services.Extensions;
 using AskanioPhotoSite.Core.Models;
+using AskanioPhotoSite.Core.Services;
+using AskanioPhotoSite.WebUI.Helpers;
+
 
 namespace AskanioPhotoSite.WebUI.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly BaseService<Album> _albumService;
+
+        private readonly BaseService<Photo> _photoService;
+
+        private readonly BaseService<Tag> _tagService;
+
+        private readonly BaseService<PhotoToTag> _photoToTagService;
+
+
+        public HomeController(BaseService<Album> albumService, BaseService<Photo> photoService,
+            BaseService<Tag> tagService, BaseService<PhotoToTag> photoToTagService)
+        {
+            _albumService = albumService;
+            _photoService = photoService;
+            _tagService = tagService;
+            _photoToTagService = photoToTagService;
+        }
+
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult GetRandomPhoto()
         {
-            ViewBag.Message = "Your application description page.";
+            var photo = _photoService.GetRandomPhoto();
 
-            return View();
+            return PartialView("~/Views/Shared/_SideBar.cshtml", photo);
         }
 
-        public ActionResult Contact()
+        public ActionResult GenerateTagCloud()
         {
-            ViewBag.Message = "Your contact page.";
+            var photos = _photoService.GetAll();
 
-            return View();
+            var cloud = _photoToTagService.GetAll().Join(_tagService.GetAll(), i => i.TagId, o => o.Id,(i, o) => new
+            {
+                Id = i.TagId,
+                TitleRu = o.TitleRu,
+                TitleEng = o.TitleEng,
+            }).GroupBy(t => t.Id).Select(x => new TagCloudModel()
+            {
+                Id = x.Key,
+                Count = x.Count(),
+                TitleRu = x.Select(r => r.TitleRu).FirstOrDefault(),
+                TitleEng = x.Select(r => r.TitleEng).FirstOrDefault(),
+            });
+
+
+
+            if (CultureHelper.IsEnCulture())
+            {
+                cloud = cloud.OrderBy(x => x.TitleEng).ToList();
+            }
+            else
+            {
+                cloud = cloud.OrderBy(x => x.TitleRu).ToList();
+            }
+
+            cloud = new List<TagCloudModel>()
+            {
+                new TagCloudModel()
+                {
+                    Id = 1,
+                    TitleEng = "Test1",
+                    TitleRu = "Test1",
+                    Count = 3
+                },
+                 new TagCloudModel()
+                {
+                    Id = 2,
+                    TitleEng = "Test2",
+                    TitleRu = "Test2",
+                    Count = 2
+                },
+                new TagCloudModel()
+                {
+                    Id = 3,
+                    TitleEng = "Test3",
+                    TitleRu = "Test3",
+                    Count = 1
+                },
+                new TagCloudModel()
+                {
+                    Id = 4,
+                    TitleEng = "Test4",
+                    TitleRu = "Test4",
+                    Count = 5
+                },
+                 new TagCloudModel()
+                {
+                    Id = 1,
+                    TitleEng = "Test1",
+                    TitleRu = "Test1",
+                    Count = 3
+                },
+                new TagCloudModel()
+                {
+                    Id = 4,
+                    TitleEng = "Test4",
+                    TitleRu = "Test4",
+                    Count = 5
+                },
+                 new TagCloudModel()
+                {
+                    Id = 2,
+                    TitleEng = "Test2",
+                    TitleRu = "Test2",
+                    Count = 2
+                },
+                new TagCloudModel()
+                {
+                    Id = 3,
+                    TitleEng = "Test3",
+                    TitleRu = "Test3",
+                    Count = 1
+                },
+
+            };
+
+
+
+            return PartialView("~/Views/Shared/_Cloud.cshtml", cloud);
         }
 
         [HttpGet]

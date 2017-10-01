@@ -1,0 +1,39 @@
+﻿@model AskanioPhotoSite.Data.Entities.Photo
+@using AskanioPhotoSite.WebUI.Helpers;
+@using AskanioPhotoSite.WebUI.Localization;
+
+@{
+    Layout = null;
+}
+
+
+<div class="side-bar">
+    <div class="leftColumn">
+        <div class="randomPhoto">
+            @if (Model != null)
+            {
+                <img src='@Url.Content(Model.ThumbnailPath)'/>
+                <div class="form-inline photoTitle">@(CultureHelper.IsEnCulture() ? Model.TitleEng : Model.TitleRu)</div>
+            }
+            else
+            {
+                <img  />
+                <span></span>
+            }
+        </div>
+
+        <div class="cloud">
+            <h4 class="text-center">@MainUI.TagSearch</h4>
+            <hr/>
+            @Html.Action("GenerateTagCloud")
+        </div>
+
+        <div class="hr-footer"></div>
+        <div class="footer">
+            &copy; Alexander Serebryakov @DateTime.Now.Year
+        </div>
+    </div>
+    <div class="rightColumn">
+
+    </div>
+</div>

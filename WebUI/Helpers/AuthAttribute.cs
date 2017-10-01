@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Filters;
 
-namespace AskanioPhotoSite.WebUI.Models
+namespace AskanioPhotoSite.WebUI.Helpers
 {
     public class AuthAttribute : FilterAttribute, IAuthenticationFilter
     {
