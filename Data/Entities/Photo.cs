@@ -23,5 +23,7 @@ namespace AskanioPhotoSite.Data.Entities
         public string FileName { get; set; }
 
         public DateTime CreationDate { get; set; }
+
+        public bool ShowRandom { get; set; }
     }
 }

@@ -40,6 +40,9 @@ namespace AskanioPhotoSite.Core.Models
         [Required]
         public DateTime CreationDate { get; set; }
 
+        [Display(Name = "Случайное фото")]
+        public bool ShowRandom { get; set; }
+
         public string Action { get; set; }
 
         public string ReturnUrl { get; set; }

@@ -14,5 +14,7 @@
         public string DescriptionRu { get; set; }
 
         public string DescriptionEng { get; set; }
+
+        public string CoverPath { get; set; }
     }
 }

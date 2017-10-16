@@ -125,7 +125,8 @@ namespace AskanioPhotoSite.Data.Storage
             {
                 TransactionPool = null;
                 TransactionPool?.RollBack();
-                throw new Exception("Transaction failed.");
+
+                throw new Exception("Transaction failed.", exception);
             }
             
         }

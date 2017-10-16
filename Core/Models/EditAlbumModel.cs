@@ -38,6 +38,7 @@ namespace AskanioPhotoSite.Core.Models
         [Required(ErrorMessage = "Введите описание альбома на англ. языке")]
         [MaxLength(500, ErrorMessage = "Длина описания альбома не может превышать 500 символов")]
         public string DescriptionEng { get; set; }
+        public string CoverPath { get; set; }
 
         public PhotoListModel Photos { get; set; }
 

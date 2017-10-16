@@ -33,7 +33,7 @@ namespace AskanioPhotoSite.Core.Services.Extensions
         {
             Random random = new Random();
 
-            var photos = photoService.GetAll().ToList();
+            var photos = photoService.GetAll().Where(x => x.ShowRandom == true).ToList();
 
             if (photos.Count > 0)
             {

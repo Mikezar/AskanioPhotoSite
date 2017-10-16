@@ -13,11 +13,11 @@ namespace AskanioPhotoSite.Core.Helpers
 
         public static void RegisterError(Exception exception)
         {
-            _logger.Error($"Date: {DateTime.Now}\r\n");
-            _logger.Error($"Inner message: {exception.InnerException}\r\n");
-            _logger.Error($"Source: {exception.Source}\r\n");
-            _logger.Error($"Error message: {exception.Message}\r\n");
-            _logger.Error($"Stack trace: {exception.StackTrace}\r\n");
+            _logger.Error($"Date: {DateTime.Now}");
+            _logger.Error($"Inner message: {exception.InnerException}");
+            _logger.Error($"Source: {exception.Source}");
+            _logger.Error($"Error message: {exception.Message}");
+            _logger.Error($"Stack trace: {exception.StackTrace}");
         }
     }
 }

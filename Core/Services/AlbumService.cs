@@ -58,6 +58,15 @@ namespace AskanioPhotoSite.Core.Services
 
         public override Album UpdateOne(object obj)
         {
+            if(obj.GetType() == typeof(Album))
+            {
+                var entity = (Album)obj;
+
+                var updatedEntity = _storage.GetRepository<Album>().UpdateOne(entity);
+                _storage.Commit();
+                return updatedEntity;
+            }
+
             var model = (EditAlbumModel)obj;
 
             var album = GetOne(model.Id);
@@ -67,6 +76,7 @@ namespace AskanioPhotoSite.Core.Services
             album.TitleEng = model.TitleEng;
             album.TitleRu = model.TitleRu;
             album.ParentId = model.ParentAlbum?.Id ?? 0;
+            album.CoverPath = model.CoverPath;
 
             var updated = _storage.GetRepository<Album>().UpdateOne(album);
             _storage.Commit();

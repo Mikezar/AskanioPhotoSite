@@ -80,7 +80,8 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
                     TitleRu = albumFields[2],
                     TitleEng = albumFields[3],
                     DescriptionRu = albumFields[4],
-                    DescriptionEng = albumFields[5]
+                    DescriptionEng = albumFields[5],
+                    CoverPath = albumFields[6]
                 };
             });
         }
@@ -101,7 +102,8 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
                     PhotoPath = photoFields[6],
                     ThumbnailPath = photoFields[7],
                     FileName = photoFields[8],
-                    CreationDate =  Convert.ToDateTime(photoFields[9])
+                    CreationDate =  Convert.ToDateTime(photoFields[9]),
+                    ShowRandom = Convert.ToBoolean(photoFields[10])
                 };
             });
         }

@@ -272,6 +272,30 @@ namespace AskanioPhotoSite.WebUI.Controllers
         }
 
         [HttpPost]
+        public JsonResult SetAlbumCover(int id, string cover)
+        {
+            try
+            {
+                var album = _albumService.GetOne(id);
+
+                if (album != null)
+                {
+                    album.CoverPath = cover;
+                }
+
+                _albumService.UpdateOne(album);
+
+                return Json(MyAjaxHelper.GetSuccessResponse());
+            }
+            catch (Exception exception)
+            {
+                Log.RegisterError(exception);
+                return Json(MyAjaxHelper.GetErrorResponse(exception.Message));
+            }
+        }
+
+
+        [HttpPost]
         public ActionResult EditAlbum(EditAlbumModel model)
         {
             try
@@ -358,6 +382,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 Album = photo.AlbumId == 0 ? new Album() : _albumService.GetOne(id),
                 Action = "EditPhoto",
                 ReturnUrl = returnUrl,
+                ShowRandom = photo.ShowRandom
             };
             model.RelatedTagIds = _photoToTagService.GetAll().GetRelatedTags(photo.Id).Select(x => x.TagId).ToArray();
             model.AllTags = _tagService.GetAll().GetSelectListItem(model.RelatedTagIds);
@@ -439,7 +464,8 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     FileName = filename,
                     PhotoPath = "~/Content/Gallery/Photos/" + filename + Path.GetExtension(file.FileName).ToLower(),
                     ThumbnailPath = "~/Content/Gallery/Thumbs/" + filename + "s" + Path.GetExtension(file.FileName).ToLower(),
-                    CreationDate = TimeZone.CurrentTimeZone.ToLocalTime(DateTime.Now)
+                    CreationDate = TimeZone.CurrentTimeZone.ToLocalTime(DateTime.Now),
+                    ShowRandom = false
                 };
 
                 if (file.ContentLength < 4048576)

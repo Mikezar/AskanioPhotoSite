@@ -73,12 +73,12 @@ body {
 
         .tag-cloud a {
             display: inline-block;
-	        margin: 0.125rem;
-	        padding: 0.4375rem;
-	     /* background: rgba(0, 0, 255, 0.2);*/
+            margin: 0.125rem;
+            padding: 0.4375rem;
+            /* background: rgba(0, 0, 255, 0.2);
 	        border: 1px solid rgba(0, 0, 255, 0.2);
-            border-radius: 5px;
-	        transition: all 0.1s ease-in-out;
+            border-radius: 5px;*/
+            transition: all 0.1s ease-in-out;
         }
 
         .tag-cloud a:hover,
@@ -99,11 +99,12 @@ body {
         color: #aea294;
     }
 
-    .hr-footer {
-        margin-top: 60px;
-        margin-bottom: 20px;
-        border: 0.5px solid #aea294;
-    }
+.hr-footer {
+    margin-top: 60px;
+    margin-bottom: 20px;
+    margin-left: 25px;
+    border: 0.5px solid #aea294;
+}
 
 .navbar-brand {
     margin-right: 75px;

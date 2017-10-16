@@ -35,11 +35,14 @@
             </div>
         </div>
     </div>
-
-   @Html.Action("GetRandomPhoto")
-
-    <div> 
-        @RenderBody()
+   
+    <div class="side-bar">
+        <div class="leftColumn">
+            @Html.Action("GetRandomPhoto", "Home", null)
+        </div>
+        <div class="rightColumn">
+            @RenderBody()
+        </div>
     </div>
 </body>
 </html>

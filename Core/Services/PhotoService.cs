@@ -51,7 +51,8 @@ namespace AskanioPhotoSite.Core.Services
                     PhotoPath = photo.PhotoPath,
                     ThumbnailPath = photo.ThumbnailPath,
                     FileName = photo.FileName,
-                    CreationDate = photo.CreationDate
+                    CreationDate = photo.CreationDate,
+                    ShowRandom = photo.ShowRandom
                 };
 
 
@@ -94,7 +95,8 @@ namespace AskanioPhotoSite.Core.Services
                 PhotoPath = photo.PhotoPath,
                 ThumbnailPath = photo.ThumbnailPath,
                 FileName = photo.FileName,
-                CreationDate = photo.CreationDate
+                CreationDate = photo.CreationDate,
+                ShowRandom = photo.ShowRandom
             };
 
             var photoToTags = photoToTagRepository.GetAll();
