@@ -109,18 +109,18 @@ namespace AskanioPhotoSite.Core.Services
                 _storage.Commit(); //TODO: продумать
             }
 
-         
 
-            photoToTagRepository.AddMany(photo.RelatedTagIds
-                .Select(x => new PhotoToTag()
-                {
-                    Id = 0,
-                    PhotoId = photo.Id,
-                    TagId = x
-                }).ToArray()
-            );
-
-
+            if (photo.RelatedTagIds != null)
+            {
+                photoToTagRepository.AddMany(photo.RelatedTagIds
+                    .Select(x => new PhotoToTag()
+                    {
+                        Id = 0,
+                        PhotoId = photo.Id,
+                        TagId = x
+                    }).ToArray()
+                );
+            }
 
             var updated = _storage.GetRepository<Photo>().UpdateOne(entity);
             _storage.Commit();

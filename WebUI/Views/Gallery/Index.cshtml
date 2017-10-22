@@ -1,10 +1,26 @@
 ﻿@model AskanioPhotoSite.Core.Models.GalleryViewModel
 @using AskanioPhotoSite.WebUI.Localization;
+@using AskanioPhotoSite.WebUI.Helpers;
 
 @{
     ViewBag.Title = MainUI.Gallery;
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 }
 
+<div class="container">
+    <div class="album-layout">
+        @foreach (var album in Model.Albums)
+        {
+            <div class="album">
+                <a href='@Url.Action("Album", new { id = album.Id})'>
+                    <img src='@Url.Content(album.Cover)' />
+                    <div class="description">
+                        @(CultureHelper.IsEnCulture() ? album.TitleEng : album.TitleRu)
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>
 
 

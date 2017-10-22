@@ -1,0 +1,18 @@
+﻿@model AskanioPhotoSite.Core.Models.GalleryPhotoViewModel
+
+@{ 
+    Layout = null;
+}
+
+<!-- The Modal -->
+<div id="myModal" class="modalr">
+
+    <!-- The Close Button -->
+    <span data-dismiss="true" class="close">&times;</span>
+
+    <!-- Modal Content (The Image) -->
+    <img class="modal-content" src='@Url.Content(Model.Path)' id="img01">
+
+    <!-- Modal Caption (Image Text) -->
+    <div id="caption">@Model.Description</div>
+</div> 

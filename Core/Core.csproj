@@ -76,6 +76,9 @@
     <Compile Include="Models\EditAlbumModel.cs" />
     <Compile Include="Models\EditTagModel.cs" />
     <Compile Include="Models\GalleryAlbumModel.cs" />
+    <Compile Include="Models\GalleryPhotoListModel.cs" />
+    <Compile Include="Models\GalleryPhotoModel.cs" />
+    <Compile Include="Models\GalleryPhotoViewModel.cs" />
     <Compile Include="Models\GalleryViewModel.cs" />
     <Compile Include="Models\ImageAttrModel.cs" />
     <Compile Include="Models\LoginModel.cs" />

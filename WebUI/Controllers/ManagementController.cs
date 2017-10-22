@@ -379,7 +379,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 DescriptionEng = photo.DescriptionEng,
                 DescriptionRu = photo.DescriptionRu,
                 Albums = _albumService.GetAll().GetEndNodeAlbums().GetSelectListItem(),
-                Album = photo.AlbumId == 0 ? new Album() : _albumService.GetOne(id),
+                Album = photo.AlbumId == 0 ? new Album() : _albumService.GetOne(photo.AlbumId),
                 Action = "EditPhoto",
                 ReturnUrl = returnUrl,
                 ShowRandom = photo.ShowRandom
@@ -446,7 +446,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
         {
             var model = Session["Uploads"] != null ? Session["Uploads"] as PhotoUploadListModel : new PhotoUploadListModel();
             int maxId = 0;
-            var photos = _albumService.GetAll().ToList();
+            var photos = _photoService.GetAll().ToList();
 
             // Если в БД уже есть фотографии, значит получаем макс. Id фотографии
             if (photos.Count > 0) maxId = photos.Max(x => x.Id);
@@ -473,7 +473,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     if (file != null)
                     {
                         var textAttributes = _textAttrService.GetAll().FirstOrDefault();
-                        ImageProcessor.CreateThumbnail(310, 210, file, photoUploadModel.ThumbnailPath);
+                        ImageProcessor.CreateThumbnail(350, 350, file, photoUploadModel.ThumbnailPath);
                         ImageProcessor.WatermarkImage(photoUploadModel.PhotoPath, file, listModel.ImageAttributes, textAttributes);        
 
                         model.Uploads.Add(photoUploadModel);
