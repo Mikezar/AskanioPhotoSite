@@ -29,7 +29,7 @@
 
 /*ФОТОГРАФИИ*/
 
-.photos {
+.photos-pattern-1 {
     line-height: 0;
    
     -webkit-column-count: 3;
@@ -39,7 +39,7 @@
     column-count:         3;
     column-gap:           10px;  
 }
-            .photos img {
+            .photos-pattern-1 img {
                 cursor: pointer;
                 width: 100% !important;
                 object-fit: fill;
@@ -48,22 +48,34 @@
                 margin-bottom: 10px;
             }
 
-/*МОДАЛЬНОЕ ОКНО*/
- /* Style the Image Used to Trigger the Modal */
-#myImg {
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
+ .photos-pattern-2 {
+    line-height: 0;
+    position: relative;
+    margin-top: 5px;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px; 
 }
+            .photos-pattern-2 img {
+                display: block;
+                cursor: pointer;
+                margin: auto;
+                height: auto;
+                max-width: 65%;
+            }
 
-#myImg:hover {opacity: 0.7;}
+            .desc {
+                padding: 15px;
+                text-align: center;
+            }
 
-/* The Modal (background) */
-.modalr {
+
+/*МОДАЛЬНОЕ ОКНО*/
+.modalPhoto {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1001; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 50px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -73,15 +85,24 @@
     background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
 }
 
-/* Modal Content (Image) */
 .modal-content {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 900px;
+    max-width: 88%;
+    max-height: 90%;
 }
 
-/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#title {
+    font-size: 19px;
+    position: absolute;
+    margin-top:  25px;
+    margin-left: 25px;
+    display: block;
+    color: #ccc;
+    top: 0;
+    height: 25px;
+}
+
 #caption {
     margin: auto;
     display: block;
@@ -101,6 +122,45 @@
     animation-duration: 0.6s;
 }
 
+.prev, .next {
+position: absolute;
+top: 50%;
+left: 25px;
+width: 40px;
+height: 40px;
+margin-top: -23px;
+font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+font-size: 60px;
+font-weight: 100;
+line-height: 30px;
+color: #fff;
+text-decoration: none;
+text-shadow: 0 0 2px #000;
+text-align: center;
+background: #222;
+background: rgba(0,0,0,.5);
+-webkit-box-sizing: content-box;
+-moz-box-sizing: content-box;
+box-sizing: content-box;
+border: 3px solid #fff;
+-webkit-border-radius: 23px;
+-moz-border-radius: 23px;
+border-radius: 23px;
+opacity: .5;
+cursor: pointer;
+}
+
+.next {
+left: auto;
+right: 25px;
+}
+
+.glyphicon
+{
+    font-size: 25px;
+    padding-top: 3px;
+    padding-right: 1px;
+}
 @-webkit-keyframes zoom {
     from {-webkit-transform:scale(0)}
     to {-webkit-transform:scale(1)}

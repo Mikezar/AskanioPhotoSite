@@ -1,0 +1,28 @@
+﻿@model AskanioPhotoSite.Core.Models.GalleryPhotoListModel
+
+@{
+    ViewBag.Title = Model.AlbumTitle;
+    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+}
+
+
+<div class="photos-pattern-2">
+    @foreach (var photo in Model.Photos)
+    {
+        <a href='#' class="photo" data-id="@photo.Id"><img src='@Url.Content(photo.Photo)'></a>
+        <div class="desc">@photo.Description</div>
+        <div style="margin-top: 15px"></div>
+    }
+</div>
+
+
+<div id="photo"></div>
+
+<script>
+
+    $(document).ready(function () {
+        $('.photo').on('click', function () {
+            OpenPhotoInModal(this, '@Url.Action("ViewPhotoPartial")')
+        });
+    });
+</script>

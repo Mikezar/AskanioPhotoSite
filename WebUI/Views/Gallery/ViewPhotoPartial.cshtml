@@ -4,15 +4,33 @@
     Layout = null;
 }
 
-<!-- The Modal -->
-<div id="myModal" class="modalr">
+<div id="photo-modal" class="modalPhoto">>
+    <span class="close">&times;</span>
 
-    <!-- The Close Button -->
-    <span data-dismiss="true" class="close">&times;</span>
+    <div id="title">@Model.Title</div>
 
-    <!-- Modal Content (The Image) -->
-    <img class="modal-content" src='@Url.Content(Model.Path)' id="img01">
+    
+    <img class="modal-content" src='@Url.Content(Model.Path)'>
 
-    <!-- Modal Caption (Image Text) -->
+    <a class="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+
     <div id="caption">@Model.Description</div>
 </div> 
+
+
+<script>
+    $(document).ready(function () {
+        $(".close").on("click", function () {
+            $("#photo-modal").hide();
+            $('body').css("overflow", "visible");
+        });
+
+        $('.prev').on('click', function () {
+            GetPhoto(@Model.Id, '@Url.Action("ViewPhotoPartial")', false);
+        });
+        $('.next').on('click', function () {
+            GetPhoto(@Model.Id,'@Url.Action("ViewPhotoPartial")',  true);
+        });
+    });
+</script>

@@ -41,3 +41,30 @@ function DeleteEntity(id, url, element)
         }
     });
 }
+
+function OpenPhotoInModal(context, url)
+{
+    var id = $(context).data("id");
+    $.ajax({
+        type: 'GET',
+        url: url,
+        data: { id: id },
+        success: function (result) {
+            $('#photo').html(result);
+            $('#photo-modal').show();
+            $('body').css("overflow", "hidden");
+        }
+    });
+}
+
+function GetPhoto(id, url, isNext) {
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: { id: id, isNext: isNext },
+        success: function (result) {
+            $('#photo').html(result);
+            $('#photo-modal').show();
+        }
+    });
+}

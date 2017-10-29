@@ -60,79 +60,10 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 TitleEng = x.Select(r => r.TitleEng).FirstOrDefault(),
             });
 
-
-
             if (CultureHelper.IsEnCulture())
-            {
                 cloud = cloud.OrderBy(x => x.TitleEng).ToList();
-            }
             else
-            {
                 cloud = cloud.OrderBy(x => x.TitleRu).ToList();
-            }
-
-            cloud = new List<TagCloudModel>()
-            {
-                new TagCloudModel()
-                {
-                    Id = 1,
-                    TitleEng = "Test1",
-                    TitleRu = "Test1",
-                    Count = 3
-                },
-                 new TagCloudModel()
-                {
-                    Id = 2,
-                    TitleEng = "Test2",
-                    TitleRu = "Test2",
-                    Count = 2
-                },
-                new TagCloudModel()
-                {
-                    Id = 3,
-                    TitleEng = "Test3",
-                    TitleRu = "Test3",
-                    Count = 1
-                },
-                new TagCloudModel()
-                {
-                    Id = 4,
-                    TitleEng = "Test4",
-                    TitleRu = "Test4",
-                    Count = 5
-                },
-                 new TagCloudModel()
-                {
-                    Id = 1,
-                    TitleEng = "Test1",
-                    TitleRu = "Test1",
-                    Count = 3
-                },
-                new TagCloudModel()
-                {
-                    Id = 4,
-                    TitleEng = "Test4",
-                    TitleRu = "Test4",
-                    Count = 5
-                },
-                 new TagCloudModel()
-                {
-                    Id = 2,
-                    TitleEng = "Test2",
-                    TitleRu = "Test2",
-                    Count = 2
-                },
-                new TagCloudModel()
-                {
-                    Id = 3,
-                    TitleEng = "Test3",
-                    TitleRu = "Test3",
-                    Count = 1
-                },
-
-            };
-
-
 
             return PartialView("~/Views/Shared/_Cloud.cshtml", cloud);
         }
@@ -165,7 +96,6 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 return View(model);
             }
             FormsAuthentication.SetAuthCookie(model.Login, false);
-
 
             if (!string.IsNullOrEmpty(model.ReturnUrl))
             {

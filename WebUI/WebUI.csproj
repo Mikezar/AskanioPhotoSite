@@ -144,6 +144,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CultureController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -222,13 +223,16 @@
     <Content Include="Views\Shared\_SideBar.cshtml" />
     <Content Include="Views\Shared\_Cloud.cshtml" />
     <Content Include="Views\Gallery\Index.cshtml" />
-    <Content Include="Views\Gallery\Album.cshtml" />
+    <Content Include="Views\Gallery\AlbumRenderPattern1.cshtml" />
     <Content Include="Views\Gallery\ViewPhotoPartial.cshtml" />
+    <Content Include="Views\Gallery\AlbumRenderPattern2.cshtml" />
+    <Content Include="Views\Gallery\TagRenderPattern.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Core\" />
     <Folder Include="Content\Gallery\Photos\" />
     <Folder Include="Content\Gallery\Thumbs\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

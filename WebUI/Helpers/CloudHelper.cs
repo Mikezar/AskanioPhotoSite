@@ -13,11 +13,13 @@ namespace AskanioPhotoSite.WebUI.Helpers
     {
         public static MvcHtmlString TagCloud(this HtmlHelper html, IEnumerable<TagCloudModel> tags)
         {
+            if (tags.Count() == 0) return null;
+
             int min = tags.Min(t => t.Count);
             int max = tags.Max(t => t.Count);
             int dist = (max - min) / 3;
-
             var links = new StringBuilder();
+            var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
             foreach (var tag in tags)
             {
                 string tagClass;
@@ -43,7 +45,7 @@ namespace AskanioPhotoSite.WebUI.Helpers
                     tagClass = "small";
                 }
 
-                links.AppendFormat($"<a href=\"{tag.Count}\" title=\"{title}\" class=\"{tagClass}\">{title}</a>{Environment.NewLine}");
+                links.AppendFormat($"<a href=\"{urlHelper.Action("Tag", "Gallery", new { id = tag.Id})}\" title=\"{title}\" class=\"{tagClass}\">{title}</a>{Environment.NewLine}");
             }
 
             var div = new TagBuilder("div");
