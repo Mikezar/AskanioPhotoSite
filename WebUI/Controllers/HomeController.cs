@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
 using System.Linq;
+using System;
 using System.Collections.Generic;
 using AskanioPhotoSite.Data.Entities;
 using AskanioPhotoSite.Core.Services.Extensions;
@@ -11,7 +12,7 @@ using AskanioPhotoSite.WebUI.Helpers;
 
 namespace AskanioPhotoSite.WebUI.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly BaseService<Album> _albumService;
 

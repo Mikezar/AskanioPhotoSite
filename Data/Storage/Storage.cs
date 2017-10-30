@@ -8,11 +8,13 @@ using AskanioPhotoSite.Data.Repositories;
 using AskanioPhotoSite.Data.Storage.Queries;
 using AskanioPhotoSite.Data.Storage.Queries.Interpreter;
 using AskanioPhotoSite.Data.Storage.Transactions;
+using NLog;
 
 namespace AskanioPhotoSite.Data.Storage
 {
     public sealed class Storage : IStorage
     {
+        private readonly Logger _log = LogManager.GetCurrentClassLogger();
         private readonly IDictionary<object, object> _repositories;
 
         private object _locker = new object();
@@ -48,6 +50,7 @@ namespace AskanioPhotoSite.Data.Storage
             }
             catch(KeyNotFoundException)
             {
+                _log.Error("[STORAGE]:Service locator failed to resolve to a finite instance");
                 throw new ApplicationException("Service locator failed to resolve to a finite instance");
             }
         }
@@ -72,10 +75,15 @@ namespace AskanioPhotoSite.Data.Storage
             {
                 using (var processor = new Processor<TEntity>(new Interpreter<TEntity>(), _directory))
                 {
+                    _log.Trace(string.Format("[EXECUTE READ]: Reading data from {0}", typeof(TEntity).Name));
+
                     var result = processor.Read(query);
 
                     if (!result.IsSuccess)
+                    {
+                        _log.Error($"[EXECUTE READ]:{result.ErrorMessage}");
                         throw new Exception(result.ErrorMessage);
+                    }
 
                     return result;
                 }
@@ -84,12 +92,16 @@ namespace AskanioPhotoSite.Data.Storage
             {
                 using (var processor = new Processor<TEntity>(new Interpreter<TEntity>(), _directory))
                 {
+                    _log.Trace(string.Format("[EXECUTE WRITE]: Pre-writing data to {0}", typeof(TEntity).Name));
+
                     var result = processor.Write(query);
 
                     if (!result.IsSuccess)
                     {
                         throw new Exception(result.ErrorMessage);
                     }
+
+                    _log.Trace(string.Format("[EXECUTE WRITE]: Add service info on {0} to transaction pool", typeof(TEntity).Name));
 
                     AddToPool<TEntity>(result.ServiceInfo);
                     return result;
@@ -104,20 +116,22 @@ namespace AskanioPhotoSite.Data.Storage
                 var dictionary = TransactionPool.GetDictionary;
                 lock (_locker)
                 {
+                    _log.Trace(string.Format("[COMMIT] START WRITING"));
+
                     foreach (var key in dictionary)
                     {
                         if (key.Value.Modified == null) return;
 
-                      
+                        _log.Trace(string.Format("[COMMIT] Data commit {0}", key.Value.FilePath));
                         using (var transaction = new Transaction(key.Value.FilePath, key.Value.Modified))
                         {
                             transaction.WriteStream();
                         }
 
                         if(File.Exists(key.Value.FilePath + ".backup")) File.Delete(key.Value.FilePath + ".backup");
-                        TransactionPool.SetMarker(false);
-                        MarkAsModified();
                     }
+                    MarkAsModified();
+                    TransactionPool.SetMarker(false);
                     TransactionPool = null;
                 }
             }
@@ -126,6 +140,7 @@ namespace AskanioPhotoSite.Data.Storage
                 TransactionPool = null;
                 TransactionPool?.RollBack();
 
+                _log.Error($"[COMMIT]:{exception.Message}");
                 throw new Exception("Transaction failed.", exception);
             }
             

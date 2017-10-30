@@ -10,7 +10,7 @@ using AskanioPhotoSite.WebUI.Helpers;
 
 namespace AskanioPhotoSite.WebUI.Controllers
 {
-    public class GalleryController : Controller
+    public class GalleryController : BaseController
     {
         private readonly BaseService<Album> _albumService;
 

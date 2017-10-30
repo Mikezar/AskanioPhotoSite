@@ -14,7 +14,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
 {
     [Auth]
     [Authorize(Users = "askanio")]
-    public class ManagementController : Controller
+    public class ManagementController : BaseController
     {
         private readonly BaseService<Album> _albumService;
 

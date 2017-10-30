@@ -7,6 +7,7 @@ using System.Threading;
 using System.Globalization;
 using System.Collections.Generic;
 using System;
+using AskanioPhotoSite.Core.Helpers;
 
 namespace AskanioPhotoSite.WebUI
 {
@@ -58,6 +59,17 @@ namespace AskanioPhotoSite.WebUI
                     Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU");
                 }
             }
+        }
+
+        protected void Application_Error()
+        {
+            Exception exception = Server.GetLastError();
+
+            Log.RegisterError(exception);
+
+            Server.ClearError();
+
+            Response.Redirect("~/Views/Shared/Error.cshtml");
         }
 
     }

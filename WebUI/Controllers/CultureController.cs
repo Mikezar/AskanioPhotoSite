@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace AskanioPhotoSite.WebUI.Controllers
 {
-    public class CultureController : Controller
+    public class CultureController : BaseController
     {
         // GET: Language
         public ActionResult ChangeCulture(string language)
