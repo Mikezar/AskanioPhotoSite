@@ -16,5 +16,7 @@
         public string DescriptionEng { get; set; }
 
         public string CoverPath { get; set; }
+
+        public int? ViewPattern { get; set; }
     }
 }

@@ -248,7 +248,10 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 TitleRu = album.TitleRu,
                 TitleEng = album.TitleEng,
                 ParentAlbums = _albumService.GetAvailableAlbumSelectList(_photoService.GetAll()).Where(x => x.Value != album.Id.ToString()),
-                IsParent = _albumService.GetAll().isParent(album)
+                IsParent = _albumService.GetAll().isParent(album),
+                ViewPattern =  album.ViewPattern,
+                CoverPath = album.CoverPath,
+                ViewPatterns = ViewPatternHelper.GetPatterns()
             };
   
             model.Photos = new PhotoListModel()
@@ -319,6 +322,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 }
 
                 model.ParentAlbums = _albumService.GetAvailableAlbumSelectList(_photoService.GetAll()).Where(x => x.Value != model.Id.ToString());
+                model.ViewPatterns = ViewPatternHelper.GetPatterns();
                 model.Photos = new PhotoListModel()
                 {
                     Photos = _photoService.GetAll().Where(x => x.AlbumId == model.Id).Select(x => new PhotoModel()

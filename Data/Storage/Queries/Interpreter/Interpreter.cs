@@ -73,6 +73,7 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
             return lines.Select(x =>
             {
                 var albumFields = x.Split(Processor<TEntity>.Field);
+                int edge = albumFields.Count() - 1;
                 return new Album()
                 {
                     Id = albumFields[0].GetValue(),
@@ -81,7 +82,8 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
                     TitleEng = albumFields[3],
                     DescriptionRu = albumFields[4],
                     DescriptionEng = albumFields[5],
-                    CoverPath = albumFields[6]
+                    CoverPath = albumFields[6],
+                    ViewPattern =  edge == 7 ? albumFields[7]?.GetValueOrNull(): null
                 };
             });
         }

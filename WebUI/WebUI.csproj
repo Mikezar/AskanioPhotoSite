@@ -154,6 +154,7 @@
     </Compile>
     <Compile Include="Helpers\CloudHelper.cs" />
     <Compile Include="Helpers\CultureHelper.cs" />
+    <Compile Include="Helpers\ViewPatternHelper.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
     <Compile Include="Localization\MainUI.Designer.cs">
       <AutoGen>True</AutoGen>

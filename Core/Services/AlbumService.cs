@@ -28,7 +28,9 @@ namespace AskanioPhotoSite.Core.Services
                 DescriptionEng = album.DescriptionEng,
                 DescriptionRu = album.DescriptionRu,
                 TitleEng = album.TitleEng,
-                TitleRu = album.TitleRu
+                TitleRu = album.TitleRu,
+                CoverPath = album.CoverPath,
+                ViewPattern = album.ViewPattern
             };
         }
 
@@ -43,7 +45,8 @@ namespace AskanioPhotoSite.Core.Services
                 TitleRu = model.TitleRu,
                 TitleEng = model.TitleEng,
                 DescriptionEng = model.DescriptionEng,
-                DescriptionRu = model.DescriptionRu
+                DescriptionRu = model.DescriptionRu,
+                ViewPattern = model.ViewPattern
             };
 
            var updated =  _storage.GetRepository<Album>().AddOne(album);
@@ -77,6 +80,7 @@ namespace AskanioPhotoSite.Core.Services
             album.TitleRu = model.TitleRu;
             album.ParentId = model.ParentAlbum?.Id ?? 0;
             album.CoverPath = model.CoverPath;
+            album.ViewPattern = model.ViewPattern;
 
             var updated = _storage.GetRepository<Album>().UpdateOne(album);
             _storage.Commit();

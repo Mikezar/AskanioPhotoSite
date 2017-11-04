@@ -17,6 +17,7 @@
             <div class="alert alert-success">@ViewBag.Success</div>
         }
 
+        @Html.HiddenFor(x => x.CoverPath)
         <div class="form-horizontal">
             <p class="language-title">Русский</p>
             <hr />
@@ -53,7 +54,12 @@
                 </div>
             </div>
             <hr />
-
+            <div class="form-group">
+                @Html.LabelFor(x => x.ViewPattern, new { @class = "control-label col-sm-4" })
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(x => x.ViewPattern, Model.ViewPatterns, new { @class = "form-control" })
+                </div>
+            </div>
             <div class="form-group">
                 @Html.LabelFor(x => x.ParentAlbums, new {@class = "control-label col-sm-4"})
                 <div class="col-sm-8">

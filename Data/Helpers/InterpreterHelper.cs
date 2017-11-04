@@ -14,5 +14,12 @@ namespace AskanioPhotoSite.Data.Helpers
 
             return Convert.ToInt32(str);
         }
+
+        public static int? GetValueOrNull(this string str)
+        {
+            if (string.IsNullOrEmpty(str)) return null;
+
+            return Convert.ToInt32(str);
+        }
     }
 }
