@@ -14,7 +14,7 @@ namespace AskanioPhotoSite.Data.Storage
 {
     public sealed class Storage : IStorage
     {
-        private readonly Logger _log = LogManager.GetCurrentClassLogger();
+        private readonly Logger _log = LogManager.GetLogger("storage");
         private readonly IDictionary<object, object> _repositories;
 
         private object _locker = new object();

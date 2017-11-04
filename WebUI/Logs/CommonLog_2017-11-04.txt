@@ -532,3 +532,17 @@ Parameter name: contentPath
 2017-11-04 21:08:42.1864|INFO|AskanioPhotoSite.Data.Storage.Storage|[EXECUTE READ]: Reading data from Tag
 2017-11-04 21:08:42.1864|INFO|AskanioPhotoSite.Data.Storage.Storage|[EXECUTE READ]: Reading data from PhotoToTag
 2017-11-04 21:08:42.2044|INFO|AskanioPhotoSite.Data.Storage.Storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-04 21:14:13.4234|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-04 21:14:13.4744|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-04 21:14:13.4974|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-04 21:14:13.5874|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-04 21:14:13.5924|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-04 21:14:24.9134|INFO|storage|[EXECUTE WRITE]: Pre-writing data to Album
+2017-11-04 21:14:24.9314|INFO|storage|[EXECUTE WRITE]: Add service info on Album to transaction pool
+2017-11-04 21:14:24.9424|INFO|storage|[COMMIT] START WRITING
+2017-11-04 21:14:24.9484|INFO|storage|[COMMIT] Data commit C:\Users\Mike\Source\Repos\AskanioPhotoSite\WebUI\App_Data\Album.txt
+2017-11-04 21:14:24.9644|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-04 21:14:24.9644|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-04 21:14:24.9644|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-04 21:14:24.9844|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-04 21:14:24.9844|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
