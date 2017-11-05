@@ -144,6 +144,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Code\Files\AttachmentRouteHandler.cs" />
+    <Compile Include="Code\Files\FileHandler.cs" />
+    <Compile Include="Code\Files\PhotoManager.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CultureController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />

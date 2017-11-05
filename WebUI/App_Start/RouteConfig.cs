@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Mvc.Routing.Constraints;
 using System.Web.Routing;
+using AskanioPhotoSite.WebUI.Code.Files;
 
 namespace AskanioPhotoSite.WebUI
 {
@@ -13,6 +14,9 @@ namespace AskanioPhotoSite.WebUI
             routes.IgnoreRoute("Management/{action}");
 
             routes.IgnoreRoute("Management/{action}/{id}");
+
+            // Attachment files
+            AttachmentRouteHandler.RegisterRoute(routes);
 
             routes.MapRoute(
             "Manage",

@@ -423,3 +423,8 @@
 2017-11-05 22:09:43.7244|INFO|storage|[EXECUTE READ]: Reading data from Tag
 2017-11-05 22:09:43.7314|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
 2017-11-05 22:09:43.7314|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-05 23:17:52.0537|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-05 23:17:52.0975|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-05 23:17:52.0975|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-05 23:17:52.0975|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-05 23:17:52.0975|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
