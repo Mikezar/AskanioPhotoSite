@@ -70,7 +70,7 @@ namespace AskanioPhotoSite.Data.Storage.Transactions
                 return new QueryResult<TEntity>()
                 {
                     IsSuccess = true,
-                    Result = _interpreter.InterpreteToEntity(lines, Activator.CreateInstance<TEntity>())
+                    Result = _interpreter.InterpreteToEntity(lines)
                 };
 
             }
