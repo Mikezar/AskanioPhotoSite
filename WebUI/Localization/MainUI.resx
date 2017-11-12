@@ -123,6 +123,9 @@
   <data name="Contact" xml:space="preserve">
     <value>Contact</value>
   </data>
+  <data name="FileNotFoundError" xml:space="preserve">
+    <value>File was not found.</value>
+  </data>
   <data name="Gallery" xml:space="preserve">
     <value>Gallery</value>
   </data>

@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Entities\PhotoToTag.cs" />
     <Compile Include="Entities\TextAttributes.cs" />
+    <Compile Include="Entities\Watermark.cs" />
     <Compile Include="Helpers\InterpreterHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Album.cs" />

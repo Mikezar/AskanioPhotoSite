@@ -1,0 +1,301 @@
+2017-11-11 00:03:36.9038|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:03:36.9818|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:03:37.0442|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:03:37.0442|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:03:37.0598|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 00:08:50.7176|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:08:50.7586|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:08:50.7686|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:08:50.7786|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:08:50.7786|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 00:09:44.8936|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:09:44.9404|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:09:45.1900|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:09:45.1900|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:09:45.1900|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 00:13:21.8988|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:13:21.9378|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:13:21.9378|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:13:21.9528|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:13:21.9528|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 00:15:30.7098|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:15:30.7838|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:15:30.8068|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:15:30.8288|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:15:30.8458|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 00:18:40.0468|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:18:40.0936|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:18:40.1092|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:18:40.1092|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:18:40.1248|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 00:23:45.0646|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:23:45.1314|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:23:45.2718|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:23:45.2718|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:23:45.2874|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 00:25:39.9270|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:25:39.9650|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:25:39.9830|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:25:40.0140|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:25:40.0140|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 00:27:55.5850|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:27:55.6456|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:27:55.6626|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:27:55.6726|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:27:55.6726|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 00:30:06.4035|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:30:06.4455|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:30:06.5035|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:30:06.5435|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:30:06.5435|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 00:32:33.7187|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:32:33.7655|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:32:33.7811|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:32:33.7811|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:32:33.7811|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 00:40:41.9447|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:40:41.9915|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:40:42.0227|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:40:42.0383|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:40:42.0539|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 00:42:08.9369|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:42:08.9993|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:42:09.4049|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:42:09.4049|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:42:09.4205|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 00:54:33.0159|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:54:33.0939|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:54:33.3435|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:54:33.5073|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:54:33.5173|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 00:55:34.2441|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:55:34.3065|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:55:34.3533|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:55:34.4001|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:55:34.4157|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 00:56:45.1249|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 00:56:45.1639|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 00:56:45.1819|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 00:56:45.2969|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 00:56:45.3929|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 10:14:59.1864|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 10:14:59.2374|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 10:14:59.2454|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 10:14:59.2594|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 10:14:59.2594|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 10:51:35.1384|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 10:51:35.1764|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 10:51:35.1764|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 10:51:35.1934|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 10:51:35.1934|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 10:56:28.5614|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 10:56:28.6082|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 10:56:28.6394|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 10:56:28.6394|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 10:56:28.6394|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 11:00:59.1668|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 11:00:59.2038|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:00:59 AM
+2017-11-11 11:00:59.2038|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 11:00:59.3138|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:00:59.3138|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 11:00:59.3308|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 11:00:59.3418|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 11:00:59.3808|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web.Mvc
+2017-11-11 11:00:59.3848|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: The parameters dictionary contains a null entry for parameter 'id' of non-nullable type 'System.Int32' for method 'System.Web.Mvc.ActionResult ViewPhotoPartial(Int32)' in 'AskanioPhotoSite.WebUI.Controllers.GalleryController'. An optional parameter must be a reference type, a nullable type, or be declared as an optional parameter.
+Parameter name: parameters
+2017-11-11 11:00:59.3848|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.Mvc.ActionDescriptor.ExtractParameterFromDictionary(ParameterInfo parameterInfo, IDictionary`2 parameters, MethodInfo methodInfo)
+   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.ActionInvocation.InvokeSynchronousActionMethod()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<BeginInvokeSynchronousActionMethod>b__39(IAsyncResult asyncResult, ActionInvocation innerInvokeState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`2.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass33.<BeginInvokeActionMethodWithFilters>b__32(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()
+   at System.Web.Mvc.Async.AsyncResultWrapper.End[TResult](IAsyncResult asyncResult, Object tag)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   at System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+2017-11-11 11:08:26.2968|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 11:08:26.3348|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 11:08:26.3438|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 11:08:26.3438|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 11:08:26.3588|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 11:18:37.3102|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 11:18:37.3542|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 11:18:37.3542|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 11:18:37.3732|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 11:18:37.3882|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 11:19:17.8792|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 11:19:17.9352|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 11:19:17.9492|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 11:19:17.9492|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 11:19:17.9622|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 11:20:42.5532|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 11:20:42.5972|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 11:20:42.6072|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 11:20:42.6072|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 11:20:42.6222|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes
+2017-11-11 11:21:15.1036|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.1192|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.1660|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web.Mvc
+2017-11-11 11:21:15.1660|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: The controller for path '/Image/photo_AS-S2' was not found or does not implement IController.
+2017-11-11 11:21:15.1816|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at AskanioPhotoSite.WebUI.Infrastructure.NinjectControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType) in C:\Users\Mike\Source\Repos\AskanioPhotoSite\WebUI\Infrastructure\NinjectControllerFactory.cs:line 26
+   at System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, Object state)
+   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.2284|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.2284|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.2440|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.2440|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.2440|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.2596|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.2752|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.2752|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.2752|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.2752|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.3220|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.3376|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.3376|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.3376|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.3376|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.3844|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.3844|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.3844|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.3844|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.4000|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.4156|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.4156|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.4156|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.4312|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.4312|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.4468|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.4468|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.4624|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.4624|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.4624|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.4936|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.4936|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.4936|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.4936|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.4936|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.5248|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.5248|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.5248|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.5248|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.5248|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.5716|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.5716|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.5872|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.5872|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.5872|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.6184|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.6184|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.6184|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.6340|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.6340|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.6496|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.6496|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.6496|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.6496|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.6652|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.6964|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.7120|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.7120|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.7276|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.7276|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.7900|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.7900|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.8056|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.8056|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.8056|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.8212|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.8212|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.8212|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.8368|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.8368|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.8524|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.8680|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.8680|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.8680|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.8836|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.8992|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.9148|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.9148|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.9148|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.9148|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.9304|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.9304|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.9304|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.9460|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.9460|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:15.9772|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:15 AM
+2017-11-11 11:21:15.9772|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:15.9772|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:15.9772|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:15.9928|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:16.0084|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:16 AM
+2017-11-11 11:21:16.0084|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:16.0084|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:16.0240|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:16.0240|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:21:16.0552|ERROR|AskanioPhotoSite.Core.Helpers.Log|Date: 11/11/2017 11:21:16 AM
+2017-11-11 11:21:16.0552|ERROR|AskanioPhotoSite.Core.Helpers.Log|Inner message: 
+2017-11-11 11:21:16.0552|ERROR|AskanioPhotoSite.Core.Helpers.Log|Source: System.Web
+2017-11-11 11:21:16.0864|ERROR|AskanioPhotoSite.Core.Helpers.Log|Error message: Path '/Views/Shared/Error.cshtml' was not found.
+2017-11-11 11:21:16.1176|ERROR|AskanioPhotoSite.Core.Helpers.Log|Stack trace:    at System.Web.HttpNotFoundHandler.ProcessRequest(HttpContext context)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+2017-11-11 11:25:15.9146|INFO|storage|[EXECUTE READ]: Reading data from Album
+2017-11-11 11:25:15.9614|INFO|storage|[EXECUTE READ]: Reading data from Photo
+2017-11-11 11:25:16.0706|INFO|storage|[EXECUTE READ]: Reading data from Tag
+2017-11-11 11:25:16.0706|INFO|storage|[EXECUTE READ]: Reading data from PhotoToTag
+2017-11-11 11:25:16.0862|INFO|storage|[EXECUTE READ]: Reading data from TextAttributes

@@ -131,13 +131,18 @@ namespace AskanioPhotoSite.Core.Services
         public override void DeleteOne(int id)
         {
             var photoToTagRepository = _storage.GetRepository<PhotoToTag>();
+            var watermarkRepository = _storage.GetRepository<Watermark>();
 
             var photoToTags = photoToTagRepository.GetAll().Where(x => x.PhotoId == id).ToList();
+
+            var watermark = watermarkRepository.GetAll().FirstOrDefault(x => x.PhotoId == id);
 
             if (photoToTags.Count() > 0)
             {
                 photoToTagRepository.DeleteMany(photoToTags.Select(x => x.Id).ToArray());
             }
+            if (watermark != null)
+                watermarkRepository.DeleteOne(watermark.Id);
 
             _storage.GetRepository<Photo>().DeleteOne(id);
             _storage.Commit();

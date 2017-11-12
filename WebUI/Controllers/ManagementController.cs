@@ -26,14 +26,19 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
         private readonly BaseService<TextAttributes> _textAttrService;
 
+        private readonly BaseService<Watermark> _watermarkService;
+
+
         public ManagementController(BaseService<Album> albumService, BaseService<Photo> photoService, 
-            BaseService<Tag> tagService, BaseService<PhotoToTag> photoToTagService, BaseService<TextAttributes> textAttrService)
+            BaseService<Tag> tagService, BaseService<PhotoToTag> photoToTagService, 
+            BaseService<TextAttributes> textAttrService, BaseService<Watermark> watermarkService)
         {
             _albumService = albumService;
             _photoService = photoService;
             _tagService = tagService;
             _photoToTagService = photoToTagService;
             _textAttrService = textAttrService;
+            _watermarkService = watermarkService;
         }
 
         public ActionResult Index()
@@ -476,9 +481,12 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 {
                     if (file != null)
                     {
-                        var textAttributes = _textAttrService.GetAll().FirstOrDefault();
+                      //  var textAttributes = _textAttrService.GetAll().FirstOrDefault();
                         ImageProcessor.CreateThumbnail(350, 350, file, photoUploadModel.ThumbnailPath);
-                        ImageProcessor.WatermarkImage(photoUploadModel.PhotoPath, file, listModel.ImageAttributes, textAttributes);        
+                        listModel.ImageAttributes.PhotoId = photoUploadModel.Id;
+                        _watermarkService.AddOne(listModel.ImageAttributes);
+                        file.SaveAs(Server.MapPath(photoUploadModel.PhotoPath));
+                     //  ImageProcessor.WatermarkImage(photoUploadModel.PhotoPath, file, listModel.ImageAttributes, textAttributes);        
 
                         model.Uploads.Add(photoUploadModel);
 

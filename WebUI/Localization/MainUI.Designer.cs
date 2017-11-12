@@ -79,6 +79,15 @@ namespace AskanioPhotoSite.WebUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File was not found..
+        /// </summary>
+        public static string FileNotFoundError {
+            get {
+                return ResourceManager.GetString("FileNotFoundError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gallery.
         /// </summary>
         public static string Gallery {

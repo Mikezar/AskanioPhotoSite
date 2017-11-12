@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AskanioPhotoSite.Core.Models
+﻿namespace AskanioPhotoSite.Data.Entities
 {
-    public class ImageAttrModel
+    public class Watermark : Entity
     {
+        public int Id { get; set; }
+
         public int PhotoId { get; set; }
 
         public bool IsWatermarkApplied { get; set; }

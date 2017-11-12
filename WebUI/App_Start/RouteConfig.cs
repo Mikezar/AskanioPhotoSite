@@ -15,9 +15,13 @@ namespace AskanioPhotoSite.WebUI
 
             routes.IgnoreRoute("Management/{action}/{id}");
 
-            // Attachment files
-            AttachmentRouteHandler.RegisterRoute(routes);
-
+            //Обработка изображений
+            routes.Add(new Route(
+                "image", 
+                null, 
+                new RouteValueDictionary(new { MvcContraint = new ImageRouteHandlerConstaint() }), 
+                new ImageRouteHandler()));
+            
             routes.MapRoute(
             "Manage",
             "Secured/Management/{action}/{id}",

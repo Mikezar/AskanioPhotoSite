@@ -10,7 +10,7 @@
     <div id="title">@Model.Title</div>
 
     
-    <img class="modal-content" src='@Url.Content(Model.Path)'>
+    <img class="modal-content" src='/image?id=@Model.Id&path=@Model.Path'>
 
     <a class="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
     <a class="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -21,6 +21,17 @@
 
 <script>
     $(document).ready(function () {
+        @*$.ajax({
+            url: '/image',
+            type: 'GET',
+            data: {path: '@Model.Path', id: @Model.Id},
+            success: function(data)
+            {
+                $('img').attr('src', "data:image/jpg;base64," + data);
+                console.log(data);
+            }
+        });*@
+
         $(".close").on("click", function () {
             $("#photo-modal").hide();
             $('body').css("overflow", "visible");
@@ -33,4 +44,14 @@
             GetPhoto(@Model.Id,'@Url.Action("ViewPhotoPartial")',  true);
         });
     });
+
+    function _arrayBufferToBase64( buffer ) {
+        var binary = '';
+        var bytes = new Uint8Array( buffer );
+        var len = bytes.byteLength;
+        for (var i = 0; i < len; i++) {
+            binary += String.fromCharCode( bytes[ i ] );
+        }
+        return window.btoa( binary );
+    }
 </script>

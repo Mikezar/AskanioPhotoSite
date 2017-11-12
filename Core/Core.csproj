@@ -102,6 +102,7 @@
     <Compile Include="Services\TagService.cs" />
     <Compile Include="Services\Extensions\TagServiceExtension.cs" />
     <Compile Include="Services\TextAttributeService.cs" />
+    <Compile Include="Services\WatermarkService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NLog.config">

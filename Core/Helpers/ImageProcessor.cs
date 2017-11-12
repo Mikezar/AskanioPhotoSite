@@ -11,7 +11,6 @@ namespace AskanioPhotoSite.Core.Helpers
 {
     public class ImageProcessor
     {
-
         public static void CreateThumbnail(int maxWidth, int maxHeight, HttpPostedFileBase file, string path)
         {
 
@@ -36,9 +35,10 @@ namespace AskanioPhotoSite.Core.Helpers
         }
 
 
-        public static void WatermarkImage(string path, HttpPostedFileBase file, 
+        public static byte[] WatermarkImage(string path, 
             ImageAttrModel attributes, TextAttributes textAttributes)
         {
+
             if (textAttributes == null)
             {
                 textAttributes = new TextAttributes()
@@ -69,7 +69,7 @@ namespace AskanioPhotoSite.Core.Helpers
                 LineAlignment = StringAlignment.Near
             };
 
-            using (Image image = Image.FromStream(file.InputStream))
+            using (Image image = Image.FromFile(HttpContext.Current.Server.MapPath(path)))
             {
                 using (Graphics imageGraphics = Graphics.FromImage(image))
                 {
@@ -79,7 +79,7 @@ namespace AskanioPhotoSite.Core.Helpers
                     {
                         using (Font signatureFont = new Font(textAttributes.SignatureFont, textAttributes.SignatureFontSize, FontStyle.Regular, GraphicsUnit.Pixel))
                         {
-                            //Font adaptedWatermarlFont = CalculateFont(imageGraphics, signature, new Size(image.Width / 4, image.Height / 4), signatureFont);
+                            //Font adaptedWatermarkFont = CalculateFont(imageGraphics, signature, new Size(image.Width / 4, image.Height / 4), signatureFont);
                             SizeF actualSize = imageGraphics.MeasureString(textAttributes.SignatureText, signatureFont);
                             imageGraphics.DrawString(textAttributes.SignatureText, signatureFont,  
                                 attributes.IsSignatureBlack ? Brushes.Black : Brushes.White,
@@ -91,7 +91,7 @@ namespace AskanioPhotoSite.Core.Helpers
                     {
                         using (Font stampFont = new Font(textAttributes.StampFont, textAttributes.StampFontSize, FontStyle.Regular, GraphicsUnit.Pixel))
                         {
-                            // Font adaptedWatermarlFont = CalculateFont(imageGraphics, stamp, new Size(120, 20), stampFont);
+                            // Font adaptedWatermarkFont = CalculateFont(imageGraphics, stamp, new Size(120, 20), stampFont);
                             SizeF actualSize = imageGraphics.MeasureString(textAttributes.StampText, stampFont);
                             imageGraphics.DrawString(textAttributes.StampText, stampFont, 
                                 attributes.IsWebSiteTitleBlack ? Brushes.Black : Brushes.White,
@@ -147,9 +147,19 @@ namespace AskanioPhotoSite.Core.Helpers
                         // This EXIF data is now invalid and should be removed.
                         image.RemovePropertyItem(274);
                     }
+                    return ImageToByteArray(image);
 
-                    image.Save(HttpContext.Current.Server.MapPath(path), image.RawFormat);
+                  //  image.Save(HttpContext.Current.Server.MapPath(path), image.RawFormat);
                 }
+            }
+        }
+
+        public static byte[] ImageToByteArray(Image image)
+        {
+            using (var ms = new MemoryStream())
+            {
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+                return ms.ToArray();
             }
         }
 
