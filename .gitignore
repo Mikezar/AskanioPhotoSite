@@ -266,3 +266,5 @@ __pycache__/
 /WebUI/App_Data/Album.txt
 /WebUI/Content/Gallery/Thumbs/photo_AS-S5s.jpg
 /WebUI/App_Data/Tag.txt
+/WebUI/Logs/CommonLog_2017-11-14.txt
+/WebUI/Logs/StorageLog_2017-11-14.txt

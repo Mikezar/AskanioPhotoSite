@@ -32,28 +32,20 @@ namespace AskanioPhotoSite.WebUI.Code.Files
                 context.Response.Cache.SetCacheability(HttpCacheability.Public);
                 context.Response.BufferOutput = false;
                 var nvc = HttpUtility.ParseQueryString(HttpUtility.HtmlDecode(context.Server.UrlDecode(context.Request.QueryString.ToString())));
-
-                string photoPath = nvc.Get("path");
-                if (photoPath == null)
-                {
-                    context.Response.StatusCode = 404;
-                    context.Response.Write(MainUI.FileNotFoundError);
-                    return;
-                }
-
-                string photoSize = nvc.Get("size");
-           
+          
                 byte[] image = null;
+                string photoPath = null;
                 if (!string.IsNullOrEmpty(context.Request.QueryString["Id"]))
                 {
                     var id = Convert.ToInt32(context.Request.QueryString["Id"]);
+                    photoPath = $"~/Content/Gallery/Photos/photo_AS-S{id}.jpg";
                     image = PhotoManager.GetPhoto(id, photoPath);
                 }
 
                 if (image != null)
                     context.Response.BinaryWrite(image);
 
-                context.Response.Cache.SetETag($"{photoPath.GetHashCode()}-{photoSize}");
+                context.Response.Cache.SetETag($"{photoPath.GetHashCode()}");
                 context.Response.Cache.SetCacheability(HttpCacheability.Public);
                 context.Response.Cache.SetSlidingExpiration(true);
                 context.Response.Cache.SetValidUntilExpires(true);
