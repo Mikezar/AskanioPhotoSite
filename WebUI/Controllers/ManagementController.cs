@@ -471,8 +471,8 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 {
                     Id = maxId,
                     FileName = filename,
-                    PhotoPath = "~/Content/Gallery/Photos/" + filename + Path.GetExtension(file.FileName).ToLower(),
-                    ThumbnailPath = "~/Content/Gallery/Thumbs/" + filename + "s" + Path.GetExtension(file.FileName).ToLower(),
+                    PhotoPath = "~/PhotoGallery/Photos/" + filename + Path.GetExtension(file.FileName).ToLower(),
+                    ThumbnailPath = "~/PhotoGallery/Thumbs/" + filename + "s" + Path.GetExtension(file.FileName).ToLower(),
                     CreationDate = TimeZone.CurrentTimeZone.ToLocalTime(DateTime.Now),
                     ShowRandom = false
                 };

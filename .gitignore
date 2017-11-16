@@ -268,3 +268,6 @@ __pycache__/
 /WebUI/App_Data/Tag.txt
 /WebUI/Logs/CommonLog_2017-11-14.txt
 /WebUI/Logs/StorageLog_2017-11-14.txt
+/WebUI/Logs/StorageLog_2017-11-16.txt
+/WebUI/Logs/CommonLog_2017-11-16.txt
+*.jpg
