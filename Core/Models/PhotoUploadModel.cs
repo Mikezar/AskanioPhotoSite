@@ -50,6 +50,8 @@ namespace AskanioPhotoSite.Core.Models
         public MultiSelectList AllTags { get; set; }
 
         public int[] RelatedTagIds { get; set; }
+
+        public ImageAttrModel ImageAttributes { get; set; }
     }
 
 }

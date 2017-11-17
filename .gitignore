@@ -271,3 +271,4 @@ __pycache__/
 /WebUI/Logs/StorageLog_2017-11-16.txt
 /WebUI/Logs/CommonLog_2017-11-16.txt
 *.jpg
+*.txt

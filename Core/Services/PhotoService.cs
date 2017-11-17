@@ -33,6 +33,7 @@ namespace AskanioPhotoSite.Core.Services
 
             var repository = _storage.GetRepository<Photo>();
             var photoToTagRepository = _storage.GetRepository<PhotoToTag>();
+            var attributeRepository = _storage.GetRepository<Watermark>();
 
             var photos = new List<Photo>();
             var photoToTags = new List<PhotoToTag>();
@@ -55,7 +56,21 @@ namespace AskanioPhotoSite.Core.Services
                     ShowRandom = photo.ShowRandom
                 };
 
-
+                if (photo.ImageAttributes != null)
+                {
+                    attributeRepository.AddOne(new Watermark()
+                    {
+                        Id = 0,
+                        PhotoId = photo.Id,
+                        IsWatermarkApplied = photo.ImageAttributes.IsWatermarkApplied,
+                        IsWatermarkBlack = photo.ImageAttributes.IsWatermarkBlack,
+                        IsSignatureApplied = photo.ImageAttributes.IsSignatureApplied,
+                        IsSignatureBlack = photo.ImageAttributes.IsSignatureBlack,
+                        IsWebSiteTitleApplied = photo.ImageAttributes.IsWebSiteTitleApplied,
+                        IsWebSiteTitleBlack = photo.ImageAttributes.IsWebSiteTitleBlack,
+                        IsRightSide = photo.ImageAttributes.IsRightSide
+                    });
+                }
                 foreach (var tagId in photo.RelatedTagIds ?? new int[0])
                 {
                     var photoToTag = new PhotoToTag()

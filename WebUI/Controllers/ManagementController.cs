@@ -233,7 +233,8 @@ namespace AskanioPhotoSite.WebUI.Controllers
             {
                 ParentAlbum = new Album(),
                 ParentAlbums = _albumService.GetAvailableAlbumSelectList(_photoService.GetAll()),
-                Photos = new PhotoListModel()
+                Photos = new PhotoListModel(),
+                ViewPatterns = ViewPatternHelper.GetPatterns()
             };
             return View("EditAlbum", model);
         }
@@ -474,7 +475,8 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     PhotoPath = "~/PhotoGallery/Photos/" + filename + Path.GetExtension(file.FileName).ToLower(),
                     ThumbnailPath = "~/PhotoGallery/Thumbs/" + filename + "s" + Path.GetExtension(file.FileName).ToLower(),
                     CreationDate = TimeZone.CurrentTimeZone.ToLocalTime(DateTime.Now),
-                    ShowRandom = false
+                    ShowRandom = false,
+                    ImageAttributes = listModel.ImageAttributes
                 };
 
                 if (file.ContentLength < 4048576)
@@ -484,7 +486,6 @@ namespace AskanioPhotoSite.WebUI.Controllers
                       //  var textAttributes = _textAttrService.GetAll().FirstOrDefault();
                         ImageProcessor.CreateThumbnail(350, 350, file, photoUploadModel.ThumbnailPath);
                         listModel.ImageAttributes.PhotoId = photoUploadModel.Id;
-                        _watermarkService.AddOne(listModel.ImageAttributes);
                         file.SaveAs(Server.MapPath(photoUploadModel.PhotoPath));
                      //  ImageProcessor.WatermarkImage(photoUploadModel.PhotoPath, file, listModel.ImageAttributes, textAttributes);        
 

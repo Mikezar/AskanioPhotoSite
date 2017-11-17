@@ -30,7 +30,7 @@ namespace AskanioPhotoSite.Core.Helpers
             thumbGraph.DrawImage(image, 0, 0, newWidth, newHeight);
             image.Dispose();
 
-            string fileRelativePath = "~/Content/Gallery/Thumbs/" + Path.GetFileName(path);
+            string fileRelativePath = "~/PhotoGallery/Thumbs/" + Path.GetFileName(path);
             newImage.Save(HttpContext.Current.Server.MapPath(fileRelativePath), newImage.RawFormat);
         }
 
