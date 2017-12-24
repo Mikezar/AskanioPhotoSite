@@ -1,0 +1,14 @@
+﻿@using AskanioPhotoSite.WebUI.Localization
+
+@{
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+    ViewBag.Title = "404";
+}
+
+<hgroup class="text-center">
+        <h1>404</h1>
+
+        <h3>@MainUI.NotFoundPage</h3>
+
+        <h4><a href='@Url.Action("Index", "Home")'>@MainUI.ReturnToHomeLink</a></h4>
+</hgroup>

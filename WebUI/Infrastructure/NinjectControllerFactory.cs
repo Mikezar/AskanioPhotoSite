@@ -5,6 +5,7 @@ using AskanioPhotoSite.Core.Services;
 using AskanioPhotoSite.Data.Entities;
 using AskanioPhotoSite.Data.Storage;
 using Ninject;
+using System.Web;
 
 namespace AskanioPhotoSite.WebUI.Infrastructure
 {
@@ -23,7 +24,7 @@ namespace AskanioPhotoSite.WebUI.Infrastructure
             var controllerInstance = controllerType == null ? null : (IController)_ninjectKernel.Get(controllerType);
 
             if (controllerInstance == null)
-                return base.GetControllerInstance(requestContext, controllerType);
+                throw new HttpException(404, "Bad request");
 
             return controllerInstance;
         }

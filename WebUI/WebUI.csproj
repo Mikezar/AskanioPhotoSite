@@ -149,6 +149,7 @@
     <Compile Include="Code\Files\PhotoManager.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CultureController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagementController.cs" />
@@ -181,6 +182,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Core\loader.gif" />
     <Content Include="Content\Gallery.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -242,11 +244,13 @@
     <Content Include="Views\Gallery\ViewPhotoPartial.cshtml" />
     <Content Include="Views\Gallery\AlbumRenderPattern2.cshtml" />
     <Content Include="Views\Gallery\TagRenderPattern.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\Shared\_DefaultLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\Core\" />
     <Folder Include="PhotoGallery\Thumbs\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

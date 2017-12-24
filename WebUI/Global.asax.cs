@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using System;
 using AskanioPhotoSite.Core.Helpers;
+using AskanioPhotoSite.WebUI.Controllers;
 
 namespace AskanioPhotoSite.WebUI
 {
@@ -67,10 +68,29 @@ namespace AskanioPhotoSite.WebUI
 
             Log.RegisterError(exception);
 
-            Server.ClearError();
+            HttpException httpException = exception as HttpException;
 
-            Response.Redirect("~/Views/Shared/Error.cshtml");
+            if (httpException == null)
+                httpException = new HttpException(500, "Internal Server Error", exception);
+            Response.Clear();
+
+            RouteData routeData = new RouteData();
+            routeData.Values.Add("controller", "Error");
+            routeData.Values.Add("fromAppErrorEvent", true);
+
+            switch (httpException.GetHttpCode())
+            {
+	        case 404:
+	            routeData.Values.Add("action", "NotFound");
+	            break;
+	        default:
+	            routeData.Values.Add("action", "Index");
+	            break;
+	    }
+	    Server.ClearError();
+
+	    IController controller = new ErrorController();
+	    controller.Execute(new RequestContext(new HttpContextWrapper(Context), routeData));
         }
-
     }
 }

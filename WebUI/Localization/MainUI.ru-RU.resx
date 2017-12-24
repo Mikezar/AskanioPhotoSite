@@ -123,6 +123,12 @@
   <data name="Contact" xml:space="preserve">
     <value>Контакты</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>Произошла ошибка во время выполнения запроса.</value>
+  </data>
   <data name="FileNotFoundError" xml:space="preserve">
     <value>Файл не найден</value>
   </data>
@@ -135,8 +141,14 @@
   <data name="Home" xml:space="preserve">
     <value>Главная</value>
   </data>
+  <data name="NotFoundPage" xml:space="preserve">
+    <value>К сожалению,страница не найдена!</value>
+  </data>
   <data name="PhotographySite" xml:space="preserve">
     <value>Сайт по фотографиям</value>
+  </data>
+  <data name="ReturnToHomeLink" xml:space="preserve">
+    <value>Вернуться на главную страницу.</value>
   </data>
   <data name="TagSearch" xml:space="preserve">
     <value>Поиск по тэгам</value>

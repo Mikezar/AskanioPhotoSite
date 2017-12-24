@@ -79,6 +79,24 @@ namespace AskanioPhotoSite.WebUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while processing your request..
+        /// </summary>
+        public static string ErrorMessage {
+            get {
+                return ResourceManager.GetString("ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File was not found..
         /// </summary>
         public static string FileNotFoundError {
@@ -115,11 +133,29 @@ namespace AskanioPhotoSite.WebUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unfortunately, page was not found!.
+        /// </summary>
+        public static string NotFoundPage {
+            get {
+                return ResourceManager.GetString("NotFoundPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Photography site.
         /// </summary>
         public static string PhotographySite {
             get {
                 return ResourceManager.GetString("PhotographySite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return to  home page.
+        /// </summary>
+        public static string ReturnToHomeLink {
+            get {
+                return ResourceManager.GetString("ReturnToHomeLink", resourceCulture);
             }
         }
         
