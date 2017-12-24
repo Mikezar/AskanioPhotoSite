@@ -33,13 +33,13 @@ namespace AskanioPhotoSite.Core.Services
             {
                 Id = 0,
                 WatermarkFont = model.WatermarkFont,
-                WatermarkFontSize = model.WatermarkFontSize,
+                WatermarkFontSize = model.WatermarkFontSize.Value,
                 WatermarkText = model.WatermarkText,
                 SignatureFont = model.SignatureFont,
-                SignatureFontSize = model.SignatureFontSize,
+                SignatureFontSize = model.SignatureFontSize.Value,
                 SignatureText = model.SignatureText,
                 StampFont = model.StampFont,
-                StampFontSize = model.StampFontSize,
+                StampFontSize = model.StampFontSize.Value,
                 StampText = model.StampText
             };
 
@@ -60,13 +60,13 @@ namespace AskanioPhotoSite.Core.Services
             var text = GetOne(model.Id);
 
             text.WatermarkFont = model.WatermarkFont;
-            text.WatermarkFontSize = model.WatermarkFontSize;
+            text.WatermarkFontSize = model.WatermarkFontSize.Value;
             text.WatermarkText = model.WatermarkText;
             text.SignatureFont = model.SignatureFont;
-            text.SignatureFontSize = model.SignatureFontSize;
+            text.SignatureFontSize = model.SignatureFontSize.Value;
             text.SignatureText = model.SignatureText;
             text.StampFont = model.StampFont;
-            text.StampFontSize = model.StampFontSize;
+            text.StampFontSize = model.StampFontSize.Value;
             text.StampText = model.StampText;
 
             var updated = _storage.GetRepository<TextAttributes>().UpdateOne(text);

@@ -21,7 +21,7 @@ namespace AskanioPhotoSite.Core.Models
 
         [Required]
         [Display(Name = "Кегль водяного знака")]
-        public int WatermarkFontSize { get; set; }
+        public int? WatermarkFontSize { get; set; }
 
 
         [Required]
@@ -34,7 +34,7 @@ namespace AskanioPhotoSite.Core.Models
 
         [Required]
         [Display(Name = "Кегль подписи")]
-        public int SignatureFontSize { get; set; }
+        public int? SignatureFontSize { get; set; }
 
 
         [Required]
@@ -47,6 +47,6 @@ namespace AskanioPhotoSite.Core.Models
 
         [Required]
         [Display(Name = "Кегль печати сайта")]
-        public int StampFontSize { get; set; }
+        public int? StampFontSize { get; set; }
     }
 }
