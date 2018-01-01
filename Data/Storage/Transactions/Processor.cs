@@ -31,7 +31,7 @@ namespace AskanioPhotoSite.Data.Storage.Transactions
 
         private void CreateIfNotExists(string type)
         {
-            DirectoryInfo directory = OptDirectory ?? new DirectoryInfo(HttpContext.Current.Server.MapPath("~\\App_Data"));
+            DirectoryInfo directory = OptDirectory ?? new DirectoryInfo(HttpContext.Current.Server.MapPath("~\\SysData\\Vault"));
 
             string path = $"{directory}\\{type}.txt";
             if (!Directory.Exists(directory.ToString())) Directory.CreateDirectory(directory.ToString());

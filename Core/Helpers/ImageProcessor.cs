@@ -11,27 +11,34 @@ namespace AskanioPhotoSite.Core.Helpers
 {
     public class ImageProcessor
     {
+        private static string _thumbPath = "~/SysData/PhotoGallery/Thumbs/";
+
         public static void CreateThumbnail(int maxWidth, int maxHeight, HttpPostedFileBase file, string path)
         {
+            using (var image = Image.FromStream(file.InputStream))
+            {
+                var ratioX = (double)maxWidth / image.Width;
+                var ratioY = (double)maxHeight / image.Height;
+                var ratio = Math.Min(ratioX, ratioY);
+                var newWidth = (int)(image.Width * ratio);
+                var newHeight = (int)(image.Height * ratio);
+                using (var newImage = new Bitmap(newWidth, newHeight))
+                {
+                    Graphics thumbGraph = Graphics.FromImage(newImage);
 
-            var image = Image.FromStream(file.InputStream);
-            var ratioX = (double)maxWidth / image.Width;
-            var ratioY = (double)maxHeight / image.Height;
-            var ratio = Math.Min(ratioX, ratioY);
-            var newWidth = (int)(image.Width * ratio);
-            var newHeight = (int)(image.Height * ratio);
-            var newImage = new Bitmap(newWidth, newHeight);
-            Graphics thumbGraph = Graphics.FromImage(newImage);
+                    thumbGraph.CompositingQuality = CompositingQuality.HighQuality;
+                    thumbGraph.SmoothingMode = SmoothingMode.HighQuality;
+                    thumbGraph.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    thumbGraph.DrawImage(image, 0, 0, newWidth, newHeight);
 
+                    string fileRelativePath = _thumbPath + Path.GetFileName(path);
 
-            thumbGraph.CompositingQuality = CompositingQuality.HighQuality;
-            thumbGraph.SmoothingMode = SmoothingMode.HighQuality;
-            thumbGraph.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            thumbGraph.DrawImage(image, 0, 0, newWidth, newHeight);
-            image.Dispose();
+                    if (!Directory.Exists(HttpContext.Current.Server.MapPath(_thumbPath)))
+                        Directory.CreateDirectory(HttpContext.Current.Server.MapPath(_thumbPath));
 
-            string fileRelativePath = "~/PhotoGallery/Thumbs/" + Path.GetFileName(path);
-            newImage.Save(HttpContext.Current.Server.MapPath(fileRelativePath), newImage.RawFormat);
+                    newImage.Save(HttpContext.Current.Server.MapPath(fileRelativePath), newImage.RawFormat);
+                }
+            }
         }
 
 

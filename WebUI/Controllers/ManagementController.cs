@@ -472,8 +472,8 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 {
                     Id = maxId,
                     FileName = filename,
-                    PhotoPath = "~/PhotoGallery/Photos/" + filename + Path.GetExtension(file.FileName).ToLower(),
-                    ThumbnailPath = "~/PhotoGallery/Thumbs/" + filename + "s" + Path.GetExtension(file.FileName).ToLower(),
+                    PhotoPath = "~/SysData/PhotoGallery/Photos/" + filename + Path.GetExtension(file.FileName).ToLower(),
+                    ThumbnailPath = "~/SysData/PhotoGallery/Thumbs/" + filename + "s" + Path.GetExtension(file.FileName).ToLower(),
                     CreationDate = TimeZone.CurrentTimeZone.ToLocalTime(DateTime.Now),
                     ShowRandom = false,
                     ImageAttributes = listModel.ImageAttributes
@@ -483,9 +483,10 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 {
                     if (file != null)
                     {
-                      //  var textAttributes = _textAttrService.GetAll().FirstOrDefault();
+                        //  var textAttributes = _textAttrService.GetAll().FirstOrDefault();
                         ImageProcessor.CreateThumbnail(350, 350, file, photoUploadModel.ThumbnailPath);
                         listModel.ImageAttributes.PhotoId = photoUploadModel.Id;
+
                         file.SaveAs(Server.MapPath(photoUploadModel.PhotoPath));
                      //  ImageProcessor.WatermarkImage(photoUploadModel.PhotoPath, file, listModel.ImageAttributes, textAttributes);        
 

@@ -38,7 +38,7 @@ namespace AskanioPhotoSite.WebUI.Code.Files
                 if (!string.IsNullOrEmpty(context.Request.QueryString["Id"]))
                 {
                     var id = Convert.ToInt32(context.Request.QueryString["Id"]);
-                    photoPath = $"~/PhotoGallery/Photos/photo_AS-S{id}.jpg";
+                    photoPath = $"~/SysData/PhotoGallery/Photos/photo_AS-S{id}.jpg";
                     image = PhotoManager.GetPhoto(id, photoPath);
                 }
 

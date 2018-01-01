@@ -9,7 +9,7 @@ namespace AskanioPhotoSite.Core.Helpers
 {
     public class Log
     {
-        private static Logger _logger = LogManager.GetCurrentClassLogger();
+        private static Logger _logger = LogManager.GetLogger("common");
 
         public static void RegisterError(Exception exception)
         {
@@ -18,6 +18,11 @@ namespace AskanioPhotoSite.Core.Helpers
             _logger.Error($"Source: {exception.Source}");
             _logger.Error($"Error message: {exception.Message}");
             _logger.Error($"Stack trace: {exception.StackTrace}");
+        }
+
+        public static void Trace(string message)
+        {
+            _logger.Trace(message);
         }
     }
 }
