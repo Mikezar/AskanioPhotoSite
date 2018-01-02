@@ -145,7 +145,7 @@ namespace AskanioPhotoSite.Core.Infrastructure.ImageHandler
         {
             using (var ms = new MemoryStream())
             {
-                image.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                 return ms.ToArray();
             }
         }
