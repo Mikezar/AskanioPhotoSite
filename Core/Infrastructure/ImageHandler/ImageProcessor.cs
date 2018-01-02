@@ -91,7 +91,7 @@ namespace AskanioPhotoSite.Core.Infrastructure.ImageHandler
                 LineAlignment = StringAlignment.Near
             };
 
-            using (Image image = Image.FromFile(HttpContext.Current.Server.MapPath(_photoPath)))
+            using (Image image = Image.FromFile(HttpContext.Current.Server.MapPath(_photoPath), true))
             {
                 using (Graphics imageGraphics = Graphics.FromImage(image))
                 {
