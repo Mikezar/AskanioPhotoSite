@@ -452,7 +452,14 @@ namespace AskanioPhotoSite.WebUI.Controllers
         {
             var model = Session["Uploads"] as PhotoUploadListModel;
 
-            return View(model ?? new PhotoUploadListModel());
+            return View(model ?? new PhotoUploadListModel()
+            {
+                Albums = _albumService.GetAll().Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.TitleRu
+                }).InsertEmptyFirst("None", "0")
+            });
         }
 
 
@@ -482,7 +489,8 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     ThumbnailPath = Settings.Default.ThumbPath + filename + "s" + Path.GetExtension(file.FileName).ToLower(),
                     CreationDate = TimeZone.CurrentTimeZone.ToLocalTime(DateTime.Now),
                     ShowRandom = false,
-                    ImageAttributes = listModel.ImageAttributes
+                    ImageAttributes = listModel.ImageAttributes,
+                    Album = _albumService.GetOne(listModel.AlbumId)
                 };
 
                 if (file.ContentLength < 4048576)
@@ -497,7 +505,12 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     }
                 }
             }
-       
+            model.Albums = _albumService.GetAll().Select(x => new SelectListItem()
+            {
+                Value = x.Id.ToString(),
+                Text = x.TitleRu
+            });
+
             return PartialView(model);
         }
 

@@ -21,12 +21,12 @@ body {
     {
         float: left;
         width: 290px;
-        padding: 15px;
+        padding-top: 15px;
     }
 
         .randomPhoto
         {
-            text-align: center;
+            margin: auto;
             width: 260px;
             height: 210px;
             border: 0px none;
