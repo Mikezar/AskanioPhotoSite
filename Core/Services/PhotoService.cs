@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using AskanioPhotoSite.Data.Entities;
 using AskanioPhotoSite.Data.Storage;
 using AskanioPhotoSite.Core.Models;
@@ -148,7 +149,7 @@ namespace AskanioPhotoSite.Core.Services
         {
             var photoToTagRepository = _storage.GetRepository<PhotoToTag>();
             var watermarkRepository = _storage.GetRepository<Watermark>();
-
+            var photo = GetOne(id);
             var photoToTags = photoToTagRepository.GetAll().Where(x => x.PhotoId == id).ToList();
 
             var watermark = watermarkRepository.GetAll().FirstOrDefault(x => x.PhotoId == id);
@@ -162,6 +163,9 @@ namespace AskanioPhotoSite.Core.Services
 
             _storage.GetRepository<Photo>().DeleteOne(id);
             _storage.Commit();
+
+            System.IO.File.Delete(HttpContext.Current.Server.MapPath(photo.PhotoPath));
+            System.IO.File.Delete(HttpContext.Current.Server.MapPath(photo.ThumbnailPath));
         }
 
         public void GetIt()
