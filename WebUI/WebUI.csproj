@@ -229,12 +229,6 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="SysData\Vault\Album.txt" />
-    <Content Include="SysData\Vault\Photo.txt" />
-    <Content Include="SysData\Vault\PhotoToTag.txt" />
-    <Content Include="SysData\Vault\Tag.txt" />
-    <Content Include="SysData\Vault\TextAttributes.txt" />
-    <Content Include="SysData\Vault\Watermark.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -276,6 +270,7 @@
   <ItemGroup>
     <Folder Include="SysData\Logs\" />
     <Folder Include="SysData\PhotoGallery\Thumbs\" />
+    <Folder Include="SysData\Vault\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>
