@@ -37,7 +37,7 @@ namespace AskanioPhotoSite.Core.Services
 
             var photos = new List<Photo>();
             var photoToTags = new List<PhotoToTag>();
-
+            var attributes = new List<Watermark>();
 
             foreach (var photo in model)
             {
@@ -58,7 +58,7 @@ namespace AskanioPhotoSite.Core.Services
 
                 if (photo.ImageAttributes != null)
                 {
-                    attributeRepository.AddOne(new Watermark()
+                    attributes.Add(new Watermark()
                     {
                         Id = 0,
                         PhotoId = photo.Id,
@@ -87,8 +87,9 @@ namespace AskanioPhotoSite.Core.Services
 
             var updatedPhotos = repository.AddMany(photos.ToArray());
             photoToTagRepository.AddMany(photoToTags.ToArray());
+            attributeRepository.AddMany(attributes.ToArray());
 
-            _storage.Commit();
+           _storage.Commit();
 
             return updatedPhotos;
         }
