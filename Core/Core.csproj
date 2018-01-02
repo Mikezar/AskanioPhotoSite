@@ -68,7 +68,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\ImageProcessor.cs" />
+    <Compile Include="Infrastructure\ImageHandler\IImageProcessor.cs" />
+    <Compile Include="Infrastructure\ImageHandler\ImageProcessor.cs" />
     <Compile Include="Helpers\LinqHelper.cs" />
     <Compile Include="Helpers\Log.cs" />
     <Compile Include="Models\AlbumListModel.cs" />
@@ -105,12 +106,6 @@
     <Compile Include="Services\WatermarkService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

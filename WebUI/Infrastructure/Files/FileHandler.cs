@@ -1,15 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using AskanioPhotoSite.Core.Helpers;
-using System.Collections.Specialized;
-using System.Linq;
 using System.Web;
 using System.Web.Routing;
+using AskanioPhotoSite.Data.Storage;
+using AskanioPhotoSite.Core.Services;
+using AskanioPhotoSite.WebUI.Properties;
 using AskanioPhotoSite.WebUI.Localization;
-namespace AskanioPhotoSite.WebUI.Code.Files
+
+namespace AskanioPhotoSite.WebUI.Infrastructure.Files
 {
     public class FileHandler : IHttpHandler
     {
+        private readonly PhotoManager _photoManager;
+
         public bool IsReusable => true;
 
         protected RequestContext RequestContext { get; set; }
@@ -20,8 +23,10 @@ namespace AskanioPhotoSite.WebUI.Code.Files
         public FileHandler(RequestContext  requestContext)
         {
             RequestContext = requestContext;
-        }
 
+            var storage = new Storage();
+            _photoManager = new PhotoManager(new TextAttributeService(storage), new WatermarkService(storage));
+        }
 
         public void ProcessRequest(HttpContext context)
         {
@@ -38,8 +43,8 @@ namespace AskanioPhotoSite.WebUI.Code.Files
                 if (!string.IsNullOrEmpty(context.Request.QueryString["Id"]))
                 {
                     var id = Convert.ToInt32(context.Request.QueryString["Id"]);
-                    photoPath = $"~/PhotoGallery/Photos/photo_AS-S{id}.jpg";
-                    image = PhotoManager.GetPhoto(id, photoPath);
+                    photoPath = $"{Settings.Default.PhotoPath}photo_AS-S{id}.jpg";
+                    image = _photoManager.GetPhoto(id, photoPath);
                 }
 
                 if (image != null)

@@ -272,3 +272,4 @@ __pycache__/
 /WebUI/Logs/CommonLog_2017-11-16.txt
 *.jpg
 *.txt
+/WebUI/Properties/PublishProfiles/Askanio.pubxml

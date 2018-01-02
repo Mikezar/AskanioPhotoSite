@@ -28,6 +28,7 @@ namespace AskanioPhotoSite.Data.Storage
 
         public Storage()
         {
+            _directory = new DirectoryInfo(HttpContext.Current.Server.MapPath(@"~\SysData\Vault"));
             _repositories = new Dictionary<object, object>();
             _repositories.Add(typeof(Album), new GenericRepository<Album>(this));
             _repositories.Add(typeof(Photo), new GenericRepository<Photo>(this));
@@ -76,7 +77,7 @@ namespace AskanioPhotoSite.Data.Storage
             {
                 using (var processor = new Processor<TEntity>(new Interpreter<TEntity>(), _directory))
                 {
-                    _log.Info(string.Format("[EXECUTE READ]: Reading data from {0}", typeof(TEntity).Name));
+                    _log.Trace(string.Format("[EXECUTE READ]: Reading data from {0}", typeof(TEntity).Name));
 
                     var result = processor.Read(query);
 
@@ -93,7 +94,7 @@ namespace AskanioPhotoSite.Data.Storage
             {
                 using (var processor = new Processor<TEntity>(new Interpreter<TEntity>(), _directory))
                 {
-                    _log.Info(string.Format("[EXECUTE WRITE]: Pre-writing data to {0}", typeof(TEntity).Name));
+                    _log.Trace(string.Format("[EXECUTE WRITE]: Pre-writing data to {0}", typeof(TEntity).Name));
 
                     var result = processor.Write(query);
 
@@ -102,7 +103,7 @@ namespace AskanioPhotoSite.Data.Storage
                         throw new Exception(result.ErrorMessage);
                     }
 
-                    _log.Info(string.Format("[EXECUTE WRITE]: Add service info on {0} to transaction pool", typeof(TEntity).Name));
+                    _log.Trace(string.Format("[EXECUTE WRITE]: Add service info on {0} to transaction pool", typeof(TEntity).Name));
 
                     AddToPool<TEntity>(result.ServiceInfo);
                     return result;
@@ -117,13 +118,13 @@ namespace AskanioPhotoSite.Data.Storage
                 var dictionary = TransactionPool.GetDictionary;
                 lock (_locker)
                 {
-                    _log.Info(string.Format("[COMMIT] START WRITING"));
+                    _log.Trace(string.Format("[COMMIT] START WRITING"));
 
                     foreach (var key in dictionary)
                     {
                         if (key.Value.Modified == null) return;
 
-                        _log.Info(string.Format("[COMMIT] Data commit {0}", key.Value.FilePath));
+                        _log.Trace(string.Format("[COMMIT] Data commit {0}", key.Value.FilePath));
                         using (var transaction = new Transaction(key.Value.FilePath, key.Value.Modified))
                         {
                             transaction.WriteStream();

@@ -50,6 +50,8 @@ namespace AskanioPhotoSite.WebUI
                         if (_supportedCultures.Contains(languages[i]))
                         {
                             Thread.CurrentThread.CurrentCulture = new CultureInfo(languages[i]);
+                            Thread.CurrentThread.CurrentUICulture = new CultureInfo(languages[i]);
+                            HttpContext.Current.Response.Cookies.Add(new HttpCookie("CurrentUICulture") { Value = languages[i] });
                             break;
                         }
                     }
@@ -58,6 +60,7 @@ namespace AskanioPhotoSite.WebUI
                 {
                     Thread.CurrentThread.CurrentCulture = new CultureInfo("ru-RU");
                     Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU");
+                    HttpContext.Current.Response.Cookies.Add(new HttpCookie("CurrentUICulture") { Value = "ru-RU"});
                 }
             }
         }

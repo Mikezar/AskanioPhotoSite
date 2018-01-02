@@ -10,6 +10,8 @@ using AskanioPhotoSite.Core.Services;
 using AskanioPhotoSite.Data.Entities;
 using AskanioPhotoSite.WebUI.Helpers;
 using AskanioPhotoSite.Core.Helpers;
+using AskanioPhotoSite.WebUI.Properties;
+using AskanioPhotoSite.Core.Infrastructure.ImageHandler;
 namespace AskanioPhotoSite.WebUI.Controllers
 {
     [Auth]
@@ -28,10 +30,13 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
         private readonly BaseService<Watermark> _watermarkService;
 
+        private readonly IImageProcessor _imageProcessor;
+
 
         public ManagementController(BaseService<Album> albumService, BaseService<Photo> photoService, 
             BaseService<Tag> tagService, BaseService<PhotoToTag> photoToTagService, 
-            BaseService<TextAttributes> textAttrService, BaseService<Watermark> watermarkService)
+            BaseService<TextAttributes> textAttrService, BaseService<Watermark> watermarkService,
+            IImageProcessor imageProcessor)
         {
             _albumService = albumService;
             _photoService = photoService;
@@ -39,6 +44,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
             _photoToTagService = photoToTagService;
             _textAttrService = textAttrService;
             _watermarkService = watermarkService;
+            _imageProcessor = imageProcessor;
         }
 
         public ActionResult Index()
@@ -472,8 +478,8 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 {
                     Id = maxId,
                     FileName = filename,
-                    PhotoPath = "~/PhotoGallery/Photos/" + filename + Path.GetExtension(file.FileName).ToLower(),
-                    ThumbnailPath = "~/PhotoGallery/Thumbs/" + filename + "s" + Path.GetExtension(file.FileName).ToLower(),
+                    PhotoPath = Settings.Default.PhotoPath + filename + Path.GetExtension(file.FileName).ToLower(),
+                    ThumbnailPath = Settings.Default.ThumbPath + filename + "s" + Path.GetExtension(file.FileName).ToLower(),
                     CreationDate = TimeZone.CurrentTimeZone.ToLocalTime(DateTime.Now),
                     ShowRandom = false,
                     ImageAttributes = listModel.ImageAttributes
@@ -483,14 +489,10 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 {
                     if (file != null)
                     {
-                      //  var textAttributes = _textAttrService.GetAll().FirstOrDefault();
-                        ImageProcessor.CreateThumbnail(350, 350, file, photoUploadModel.ThumbnailPath);
+                        _imageProcessor.CreateThumbnail(file, 350, 350, filename);
                         listModel.ImageAttributes.PhotoId = photoUploadModel.Id;
-                        file.SaveAs(Server.MapPath(photoUploadModel.PhotoPath));
-                     //  ImageProcessor.WatermarkImage(photoUploadModel.PhotoPath, file, listModel.ImageAttributes, textAttributes);        
-
+                        file.SaveAs(Server.MapPath(photoUploadModel.PhotoPath));                
                         model.Uploads.Add(photoUploadModel);
-
                         Session["Uploads"] = model;
                     }
                 }
