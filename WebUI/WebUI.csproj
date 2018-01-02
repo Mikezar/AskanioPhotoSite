@@ -148,9 +148,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Code\Files\ImageRouteHandler.cs" />
-    <Compile Include="Code\Files\FileHandler.cs" />
-    <Compile Include="Code\Files\PhotoManager.cs" />
+    <Compile Include="Infrastructure\Files\ImageRouteHandler.cs" />
+    <Compile Include="Infrastructure\Files\FileHandler.cs" />
+    <Compile Include="Infrastructure\Files\PhotoManager.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CultureController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -182,6 +182,11 @@
     <Compile Include="Helpers\AuthAttribute.cs" />
     <Compile Include="Helpers\MyAjaxHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -206,6 +211,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\Askanio.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

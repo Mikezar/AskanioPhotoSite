@@ -1,31 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using AskanioPhotoSite.WebUI.Properties;
 using AskanioPhotoSite.Core.Helpers;
 using AskanioPhotoSite.Core.Services;
 using AskanioPhotoSite.Data.Entities;
-using AskanioPhotoSite.Data.Storage;
 using AskanioPhotoSite.Core.Models;
+using AskanioPhotoSite.Core.Infrastructure.ImageHandler;
 
-namespace AskanioPhotoSite.WebUI.Code.Files
+namespace AskanioPhotoSite.WebUI.Infrastructure.Files
 {
     public class PhotoManager
     {
+        private readonly BaseService<TextAttributes> _textAttrService;
+        private readonly BaseService<Watermark> _watermarkService;
+
+        public PhotoManager(BaseService<TextAttributes> textAttrService, BaseService<Watermark>  watermarkService)
+        {
+            _textAttrService = textAttrService;
+            _watermarkService = watermarkService;
+        }
+
         /// <summary>
         /// Получение фотографии
         /// </summary>
         /// <param name="photoId">Идентификатор фотографии</param>
         /// <returns></returns>
-        public static byte[] GetPhoto(int photoId, string photoPath)
+        public  byte[] GetPhoto(int photoId, string photoPath)
         {
             try
             {
-               var storage = new Storage();
-               BaseService<TextAttributes> textAttrService = new TextAttributeService(storage);
-               BaseService<Watermark> watermarkService = new WatermarkService(storage);
-               var textAttributes = textAttrService.GetAll().FirstOrDefault();
-               var watermark = watermarkService.GetAll().FirstOrDefault(x => x.PhotoId == photoId);
+               var textAttributes = _textAttrService.GetAll().FirstOrDefault();
+               var watermark = _watermarkService.GetAll().FirstOrDefault(x => x.PhotoId == photoId);
 
                 var imageAttributes = new ImageAttrModel();
                 if (watermark != null)
@@ -40,7 +45,7 @@ namespace AskanioPhotoSite.WebUI.Code.Files
                     imageAttributes.IsRightSide = watermark.IsRightSide;
                 }
 
-               return ImageProcessor.WatermarkImage(photoPath, imageAttributes, textAttributes);
+               return new ImageProcessor(photoPath, Settings.Default.ThumbPath, textAttributes).Watermark(imageAttributes);
             }
             catch (Exception ex)
             {

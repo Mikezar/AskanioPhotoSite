@@ -2,6 +2,8 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 using AskanioPhotoSite.Core.Services;
+using AskanioPhotoSite.WebUI.Properties;
+using AskanioPhotoSite.Core.Infrastructure.ImageHandler;
 using AskanioPhotoSite.Data.Entities;
 using AskanioPhotoSite.Data.Storage;
 using Ninject;
@@ -44,6 +46,9 @@ namespace AskanioPhotoSite.WebUI.Infrastructure
             _ninjectKernel.Bind<BaseService<TextAttributes>>().To<TextAttributeService>();
             _ninjectKernel.Bind<BaseService<Watermark>>().To<WatermarkService>();
             _ninjectKernel.Bind<IStorage>().To<Storage>();
+            _ninjectKernel.Bind<IImageProcessor>().To<ImageProcessor>()
+                .WithConstructorArgument("path", Settings.Default.PhotoPath)
+                .WithConstructorArgument("thumbFolder", Settings.Default.ThumbPath);
         }
     }
 }

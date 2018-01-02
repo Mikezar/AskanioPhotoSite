@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
-using System.Web.Mvc.Routing.Constraints;
 using System.Web.Routing;
-using AskanioPhotoSite.WebUI.Code.Files;
+using AskanioPhotoSite.WebUI.Infrastructure.Files;
 
 namespace AskanioPhotoSite.WebUI
 {

@@ -68,7 +68,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\ImageProcessor.cs" />
+    <Compile Include="Infrastructure\ImageHandler\IImageProcessor.cs" />
+    <Compile Include="Infrastructure\ImageHandler\ImageProcessor.cs" />
     <Compile Include="Helpers\LinqHelper.cs" />
     <Compile Include="Helpers\Log.cs" />
     <Compile Include="Models\AlbumListModel.cs" />

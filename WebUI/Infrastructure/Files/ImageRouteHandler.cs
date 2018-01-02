@@ -1,8 +1,7 @@
-﻿using System.Configuration;
-using System.Web;
+﻿using System.Web;
 using System.Web.Routing;
 
-namespace AskanioPhotoSite.WebUI.Code.Files
+namespace AskanioPhotoSite.WebUI.Infrastructure.Files
 {
     public class ImageRouteHandler : IRouteHandler
     {
