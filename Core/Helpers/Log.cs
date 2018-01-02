@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NLog;
 
 namespace AskanioPhotoSite.Core.Helpers
@@ -14,10 +10,15 @@ namespace AskanioPhotoSite.Core.Helpers
         public static void RegisterError(Exception exception)
         {
             _logger.Error($"Date: {DateTime.Now}");
-            _logger.Error($"Inner message: {exception.InnerException}");
             _logger.Error($"Source: {exception.Source}");
             _logger.Error($"Error message: {exception.Message}");
             _logger.Error($"Stack trace: {exception.StackTrace}");
+            _logger.Error($"Target site: {exception.TargetSite}");
+            if (exception.InnerException != null)
+            {
+                _logger.Error($"Inner exception: ");
+                RegisterError(exception.InnerException);
+            }
         }
 
         public static void Trace(string message)

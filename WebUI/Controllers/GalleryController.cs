@@ -88,7 +88,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     return View($"~/Views/Gallery/AlbumRenderPattern{album.ViewPattern ?? 1}.cshtml", model);
                 }
                 else
-                    return View(new GalleryPhotoListModel());
+                    return View($"~/Views/Gallery/AlbumRenderPattern1.cshtml", new GalleryPhotoListModel());
             }
         }
 
