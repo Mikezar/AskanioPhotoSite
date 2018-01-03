@@ -26,10 +26,10 @@ body {
 
         .randomPhoto
         {
-            margin: auto;
-            width: 260px;
+           text-align:center
+            /*width: 260px;
             height: 210px;
-            border: 0px none;
+            border: 0px none;*/
         }
 
             .randomPhoto img {
@@ -177,4 +177,11 @@ textarea {
 
 .field-validation-error {
     color: red;
+}
+
+.custom-header {
+    text-align: center;
+    padding: 3px;
+    background: #000;
+    color: #fff;
 }

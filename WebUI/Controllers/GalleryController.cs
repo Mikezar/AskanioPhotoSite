@@ -33,7 +33,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
         {
             var model = new GalleryViewModel()
             {
-                Albums = _albumService.GetAll().Select(x => new GalleryAlbumModel()
+                Albums = _albumService.GetAll().Where(t => t.ParentId == 0).Select(x => new GalleryAlbumModel()
                 {
                     Id = x.Id,
                     TitleRu = x.TitleRu,

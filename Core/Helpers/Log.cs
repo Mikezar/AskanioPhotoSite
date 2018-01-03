@@ -16,7 +16,7 @@ namespace AskanioPhotoSite.Core.Helpers
             _logger.Error($"Target site: {exception.TargetSite}");
             if (exception.InnerException != null)
             {
-                _logger.Error($"Inner exception: ");
+                _logger.Error($"Inner exception:");
                 RegisterError(exception.InnerException);
             }
         }
