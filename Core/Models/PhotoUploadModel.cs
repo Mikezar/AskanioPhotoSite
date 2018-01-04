@@ -32,6 +32,8 @@ namespace AskanioPhotoSite.Core.Models
         [MaxLength(500, ErrorMessage = "Длина описания фотографии не может превышать 500 символов")]
         public string DescriptionEng { get; set; }
 
+        public int Order { get; set; }
+
         [Display(Name = "Альбом")]
         public Album Album{ get; set; }
 

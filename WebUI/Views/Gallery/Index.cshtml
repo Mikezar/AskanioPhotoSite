@@ -15,7 +15,7 @@
                 <a href='@Url.Action("Album", new { id = album.Id})'>
                     @if (!string.IsNullOrEmpty(album.Cover))
                     {
-                        <img src='@Url.Content(album.Cover)' />
+                        <img src='@Url.Content(album.Cover)?@Guid.NewGuid()' />
                     }
                     <div class="description">
                         @(CultureHelper.IsEnCulture() ? album.TitleEng : album.TitleRu)

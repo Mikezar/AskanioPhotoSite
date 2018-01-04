@@ -22,8 +22,13 @@
         @foreach (var photo in Model.Photos)
         {
             <tr>
+                @Html.HiddenFor(x => photo.Order)
+                <td>
+                    <a data-photo="@photo.Id" class="up"></a>
+                    <a data-photo="@photo.Id" class="down"></a>
+                </td>
                 <td>@(++counter)</td>
-                <td class="photo-thumbnail"><img src='@Url.Content(photo.ThumbnailPath)' /></td>
+                <td class="photo-thumbnail"><img src='@Url.Content(photo.ThumbnailPath)?@Guid.NewGuid()' /></td>
                 <td>@photo.TitleRu</td>
                 <td>@photo.PhotoPath</td>
                 <td>@photo.Album.TitleRu</td>
@@ -45,6 +50,7 @@ else
 
 <script>
     $(document).ready(function () {
+        SortHandler('@Url.Action("ChangeOrder")');
 
         $(".remove").on("click", function () {
 

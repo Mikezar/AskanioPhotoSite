@@ -277,10 +277,12 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 CoverPath = album.CoverPath,
                 ViewPatterns = ViewPatternHelper.GetPatterns()
             };
-  
+
+            var photos = _photoService.GetAll().Where(x => x.AlbumId == model.Id);
+
             model.Photos = new PhotoListModel()
             {
-                Photos = _photoService.GetAll().Where(x => x.AlbumId == model.Id).Select(x => new PhotoModel()
+                Photos = photos.Select(x => new PhotoModel()
                 {
                     Id = x.Id,
                     DescriptionEng = x.DescriptionEng,
@@ -289,8 +291,9 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     ThumbnailPath = x.ThumbnailPath,
                     TitleRu = x.TitleRu,
                     TitleEng = x.TitleEng,
-                    Album = _albumService.GetOne(model.Id)
-                }).ToList(),
+                    Album = _albumService.GetOne(model.Id),
+                    Order = x.Order == default(int) ? x.Id : x.Order
+                }).OrderBy(x => x.Order).ToList(),
 
                 ReturnUrl = Url.Action("EditAlbum")
             };
@@ -358,8 +361,9 @@ namespace AskanioPhotoSite.WebUI.Controllers
                         ThumbnailPath = x.ThumbnailPath,
                         TitleRu = x.TitleRu,
                         TitleEng = x.TitleEng,
-                        Album = _albumService.GetOne(model.Id)
-                    }).ToList(),
+                        Album = _albumService.GetOne(model.Id),
+                        Order = x.Order
+                    }).OrderBy(x => x.Order).ToList(),
                     ReturnUrl = Url.Action("EditAlbum")
                 };
             }
@@ -410,22 +414,12 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 Album = photo.AlbumId == 0 ? new Album() : _albumService.GetOne(photo.AlbumId),
                 Action = "EditPhoto",
                 ReturnUrl = returnUrl,
-                ShowRandom = photo.ShowRandom
+                ShowRandom = photo.ShowRandom,
+                Order = photo.Order
             };
 
             var watermark = _watermarkService.GetAll().FirstOrDefault(x => x.PhotoId == photo.Id);
-            model.ImageAttributes = new ImageAttrModel()
-            {
-                IsRightSide = watermark.IsRightSide,
-                IsSignatureApplied = watermark.IsSignatureApplied,
-                IsSignatureBlack = watermark.IsSignatureBlack,
-                IsWatermarkApplied = watermark.IsWatermarkApplied,
-                IsWatermarkBlack = watermark.IsWatermarkBlack,
-                IsWebSiteTitleApplied = watermark.IsWebSiteTitleApplied,
-                IsWebSiteTitleBlack = watermark.IsWebSiteTitleBlack,
-                PhotoId = watermark.PhotoId,
-                Id = watermark.Id
-            };
+            model.ImageAttributes = new ImageAttrModel(watermark);
             model.RelatedTagIds = _photoToTagService.GetAll().GetRelatedTags(photo.Id).Select(x => x.TagId).ToArray();
             model.AllTags = _tagService.GetAll().GetSelectListItem(model.RelatedTagIds);
 
@@ -467,6 +461,35 @@ namespace AskanioPhotoSite.WebUI.Controllers
             }
         }
 
+
+        [HttpPost]
+        public JsonResult ChangeOrder(PhotoSortModel model)
+        {
+            try
+            {
+                var photos = _photoService.GetAll();
+                var currentPhoto = photos.FirstOrDefault(x => x.Id == model.CurrentId);
+                var swappedPhoto = photos.FirstOrDefault(x => x.Id == model.SwappedId);
+
+                currentPhoto.Order = currentPhoto.Order == default(int) ? model.CurrentId : currentPhoto.Order;
+                swappedPhoto.Order = swappedPhoto.Order == default(int) ? model.SwappedId : swappedPhoto.Order;
+
+                int temp = currentPhoto.Order;
+                currentPhoto.Order = swappedPhoto.Order;
+                swappedPhoto.Order = temp;
+
+                 _photoService.UpdateOne(currentPhoto);
+                 _photoService.UpdateOne(swappedPhoto);
+
+                return Json(MyAjaxHelper.GetSuccessResponse());
+            }
+            catch (Exception exception)
+            {
+                Log.RegisterError(exception);
+                return Json(MyAjaxHelper.GetErrorResponse(exception.Message));
+            }
+        }
+
         #endregion
 
         #region Загрузка и обработка фотографий
@@ -480,11 +503,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
             return View(model ?? new PhotoUploadListModel()
             {
-                Albums = _albumService.GetAll().Select(x => new SelectListItem()
-                {
-                    Value = x.Id.ToString(),
-                    Text = x.TitleRu
-                }).InsertEmptyFirst("None", "0")
+                Albums = _albumService.GetAll().GetEndNodeAlbums().GetSelectListItem()
             });
         }
 
@@ -495,13 +514,22 @@ namespace AskanioPhotoSite.WebUI.Controllers
         {
             var model = Session["Uploads"] != null ? Session["Uploads"] as PhotoUploadListModel : new PhotoUploadListModel();
             int maxId = 0;
+            int order = 0;
             var photos = _photoService.GetAll().ToList();
 
             // Если в БД уже есть фотографии, значит получаем макс. Id фотографии
-            if (photos.Count > 0) maxId = photos.Max(x => x.Id);
+            if (photos.Count > 0)
+            {
+                maxId = photos.Max(x => x.Id);
+                order = photos.Max(x => x.Order);
+            }
 
             // Проверяем, имеются ли в сессии уже загруженные фотогарфии, если да, то берем за макс Id значение из сессии
-            if (model.Uploads.Any()) maxId = model.Uploads.Max(x => x.Id);
+            if (model.Uploads.Any())
+            {
+                maxId = model.Uploads.Max(x => x.Id);
+                order = model.Uploads.Max(x => x.Order);
+            }
 
             foreach (var file in files)
             {
@@ -516,7 +544,8 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     CreationDate = TimeZone.CurrentTimeZone.ToLocalTime(DateTime.Now),
                     ShowRandom = false,
                     ImageAttributes = listModel.ImageAttributes,
-                    Album = _albumService.GetOne(listModel.AlbumId)
+                    Album = _albumService.GetOne(listModel.AlbumId),
+                    Order = ++order
                 };
 
                 if (file.ContentLength < 4048576)

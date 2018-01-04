@@ -54,7 +54,8 @@ namespace AskanioPhotoSite.Core.Services
                     ThumbnailPath = photo.ThumbnailPath,
                     FileName = photo.FileName,
                     CreationDate = photo.CreationDate,
-                    ShowRandom = photo.ShowRandom
+                    ShowRandom = photo.ShowRandom,
+                    Order = photo.Order
                 };
 
                 if (photo.ImageAttributes != null)
@@ -97,6 +98,13 @@ namespace AskanioPhotoSite.Core.Services
 
         public override Photo UpdateOne(object obj)
         {
+            if(typeof(Photo) == obj.GetType())
+            {
+                _storage.GetRepository<Photo>().UpdateOne((Photo)obj);
+                _storage.Commit();
+                return (Photo)obj;
+            }
+
             var photo = (PhotoUploadModel)obj;
 
             var photoToTagRepository = _storage.GetRepository<PhotoToTag>();
@@ -113,7 +121,8 @@ namespace AskanioPhotoSite.Core.Services
                 ThumbnailPath = photo.ThumbnailPath,
                 FileName = photo.FileName,
                 CreationDate = photo.CreationDate,
-                ShowRandom = photo.ShowRandom
+                ShowRandom = photo.ShowRandom,
+                Order = photo.Order
             };
 
             var watermark = new Watermark()

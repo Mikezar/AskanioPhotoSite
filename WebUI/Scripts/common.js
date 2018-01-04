@@ -97,3 +97,55 @@ function WatermarkChangeHandler() {
         else $('.IsWebSiteTitleBlack').attr('disabled', 'true');
     });
 }
+
+function SortHandler(url)
+{
+    $('tr').on('click', function () {
+        $('tr').removeClass('active-row');
+        $(this).addClass('active-row');
+    });
+
+    $('.down').on('click', function () {
+        var id = $(this).data('photo');
+        var sid = $(this).closest('tr').next().find('.down').data('photo');
+        var row = $(this).closest('tr');
+        row.insertAfter(row.next());
+
+        var data = {
+            CurrentId: id,
+            SwappedId: sid
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data
+        })
+    });
+
+    $('.up').on('click', function () {
+        var id = $(this).data('photo');
+        var row = $(this).closest('tr');
+        var sid = row.prev().find('.up').data('photo');
+        row.prev().insertAfter(row);
+
+        var data = {
+            CurrentId: id,
+            SwappedId: sid
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data
+        })
+    });
+}
+
+function ChangeOrder(data) {
+    $.ajax({
+        type: 'POST',
+        url: '/Management/ChangeOrder',
+        data: data
+    })
+}

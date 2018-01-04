@@ -32,18 +32,7 @@ namespace AskanioPhotoSite.WebUI.Infrastructure.Files
                var textAttributes = _textAttrService.GetAll().FirstOrDefault();
                var watermark = _watermarkService.GetAll().FirstOrDefault(x => x.PhotoId == photoId);
 
-                var imageAttributes = new ImageAttrModel();
-                if (watermark != null)
-                {
-                    imageAttributes.PhotoId = photoId;
-                    imageAttributes.IsWatermarkApplied = watermark.IsWatermarkApplied;
-                    imageAttributes.IsWatermarkBlack = watermark.IsWatermarkBlack;
-                    imageAttributes.IsSignatureApplied = watermark.IsSignatureApplied;
-                    imageAttributes.IsSignatureBlack = watermark.IsSignatureBlack;
-                    imageAttributes.IsWebSiteTitleApplied = watermark.IsWebSiteTitleApplied;
-                    imageAttributes.IsWebSiteTitleBlack = watermark.IsWebSiteTitleBlack;
-                    imageAttributes.IsRightSide = watermark.IsRightSide;
-                }
+               var imageAttributes = new ImageAttrModel(watermark);
 
                return new ImageProcessor(photoPath, Settings.Default.ThumbPath, textAttributes).Watermark(imageAttributes);
             }

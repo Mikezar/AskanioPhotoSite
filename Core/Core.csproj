@@ -86,6 +86,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PhotoListModel.cs" />
     <Compile Include="Models\PhotoModel.cs" />
+    <Compile Include="Models\PhotoSortModel.cs" />
     <Compile Include="Models\PhotoUploadListModel.cs" />
     <Compile Include="Models\PhotoUploadModel.cs" />
     <Compile Include="Models\TagCloudModel.cs" />

@@ -19,5 +19,7 @@ namespace AskanioPhotoSite.Core.Models
         public string ThumbnailPath { get; set; }
 
         public Album Album { get; set; }
+
+        public int Order { get; set; }
     }
 }

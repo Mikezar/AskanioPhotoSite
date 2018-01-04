@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AskanioPhotoSite.Data.Entities;
 
 namespace AskanioPhotoSite.Core.Models
 {
@@ -25,5 +26,22 @@ namespace AskanioPhotoSite.Core.Models
         public bool IsWebSiteTitleBlack { get; set; }
 
         public bool IsRightSide { get; set; }
+
+        public ImageAttrModel() { }
+
+        public ImageAttrModel(Watermark watermark)
+        {
+            if (watermark != null)
+            {
+                PhotoId = watermark.PhotoId;
+                IsWatermarkApplied = watermark.IsWatermarkApplied;
+                IsWatermarkBlack = watermark.IsWatermarkBlack;
+                IsSignatureApplied = watermark.IsSignatureApplied;
+                IsSignatureBlack = watermark.IsSignatureBlack;
+                IsWebSiteTitleApplied = watermark.IsWebSiteTitleApplied;
+                IsWebSiteTitleBlack = watermark.IsWebSiteTitleBlack;
+                IsRightSide = watermark.IsRightSide;
+            }
+        }
     }
 }

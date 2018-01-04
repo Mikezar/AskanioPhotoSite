@@ -185,3 +185,35 @@ textarea {
     background: #000;
     color: #fff;
 }
+
+.up {
+  display: inline-block;
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black;
+}
+
+.up:hover {
+    cursor: pointer;
+      border-bottom: 5px solid grey;
+}
+.down {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+}
+
+.down:hover {
+    cursor: pointer;
+       border-top: 5px solid grey;
+}
+
+.active-row {
+    background-color: #f2dbc6 ;
+}
+
