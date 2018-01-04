@@ -148,6 +148,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Infrastructure\Files\ImageRouteHandler.cs" />
     <Compile Include="Infrastructure\Files\FileHandler.cs" />
     <Compile Include="Infrastructure\Files\PhotoManager.cs" />
@@ -246,7 +247,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Auth\Login.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Management\Index.cshtml" />
     <Content Include="Views\Management\AlbumIndex.cshtml" />
@@ -269,13 +270,12 @@
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Shared\_DefaultLayout.cshtml" />
     <Content Include="SysData\PhotoGallery\Photos\Web.config" />
+    <Content Include="Views\Shared\EditorTemplates\ImageAttrModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SysData\Logs\" />
     <Folder Include="SysData\PhotoGallery\Thumbs\" />
     <Folder Include="SysData\Vault\" />
-    <Folder Include="Views\Base\" />
-    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

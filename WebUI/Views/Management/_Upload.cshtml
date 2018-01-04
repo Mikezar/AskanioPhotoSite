@@ -33,7 +33,7 @@
                         @Html.HiddenFor(m => m.Uploads[i].FileName)
                         <tr>
                             <td class="photo-thumbnail">
-                                <img src="@Url.Content(Model.Uploads[i].ThumbnailPath)"/>
+                                <img src="@Url.Content(Model.Uploads[i].ThumbnailPath)?@Guid.NewGuid()"/>
                             </td>
                             <td>@Model.Uploads[i].ThumbnailPath</td>   
                             <td>@Model.Uploads[i].PhotoPath</td>

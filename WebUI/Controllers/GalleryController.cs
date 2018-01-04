@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
 using System.Linq;
+using System;
 using System.Collections.Generic;
 using AskanioPhotoSite.Data.Entities;
 using AskanioPhotoSite.Core.Services.Extensions;
@@ -31,16 +32,23 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
         public ActionResult Index()
         {
+            var albums = _albumService.GetAll();
+
             var model = new GalleryViewModel()
             {
-                Albums = _albumService.GetAll().Where(t => t.ParentId == 0).Select(x => new GalleryAlbumModel()
+                Albums = albums.Where(t => t.ParentId == 0).Select(x => new GalleryAlbumModel()
                 {
                     Id = x.Id,
                     TitleRu = x.TitleRu,
                     TitleEng = x.TitleEng,
-                    Cover = x.CoverPath
+                    Cover = albums.Where(f => f.ParentId == x.Id).Single(r =>
+                    {
+                        var childs = albums.Where(f => f.ParentId == x.Id);
+                        return childs.ElementAt(new Random().Next(0, childs.Count())).CoverPath != null;
+                    }).CoverPath
                 })
             };
+
 
             return View(model);
         }

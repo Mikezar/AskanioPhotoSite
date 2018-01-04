@@ -26,23 +26,7 @@ namespace AskanioPhotoSite.Core.Infrastructure.ImageHandler
 
         public ImageProcessor(string path, string thumbPath, TextAttributes attributes) : this(path, thumbPath)
         {
-            if (attributes == null)
-            {
-                TextAttributes = new TextAttributes()
-                {
-                    WatermarkFont = "Bell MT",
-                    WatermarkFontSize = 60,
-                    WatermarkText = "AlexSilver.Photo@gmail.com",
-                    SignatureFont = "Edwardian Script ITC",
-                    SignatureFontSize = 43,
-                    SignatureText = "© Alexander Serebryakov",
-                    StampFont = "Bell MT",
-                    StampFontSize = 45,
-                    StampText = "www.askanio.ru"
-                };
-            }
-            else
-                TextAttributes = attributes;
+            TextAttributes = attributes;
         }
 
 

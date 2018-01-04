@@ -49,6 +49,7 @@ function OpenPhotoInModal(context, url)
         type: 'GET',
         url: url,
         data: { id: id },
+        cache: false,
         success: function (result) {
             $('#photo').html(result);
             $('#photo-modal').show();
@@ -61,10 +62,38 @@ function GetPhoto(id, url, isNext) {
     $.ajax({
         type: 'POST',
         url: url,
+        cache: false,
         data: { id: id, isNext: isNext },
         success: function (result) {
             $('#photo').html(result);
             $('#photo-modal').show();
         }
+    });
+}
+
+function WatermarkInit()
+{
+    $('.IsWatermarkBlack').attr("disabled", "true");
+    $('.IsSignatureBlack').attr("disabled", "true");
+    $('.IsWebSiteTitleBlack').attr("disabled", "true");
+    $('input[type="checkbox"]').attr('checked', false);
+}
+
+function WatermarkChangeHandler() {
+    $('#isWaterMarked').change(function () {
+        if ($(this).is(':checked'))
+            $('.IsWatermarkBlack').removeAttr('disabled');
+        else $('.IsWatermarkBlack').attr('disabled', 'true');
+    });
+
+    $('#IsSignatureApplied').change(function () {
+        if ($(this).is(':checked'))
+            $('.IsSignatureBlack').removeAttr('disabled');
+        else $('.IsSignatureBlack').attr('disabled', 'true');
+    });
+    $('#IsWebSiteTitleApplied').change(function () {
+        if ($(this).is(':checked'))
+            $('.IsWebSiteTitleBlack').removeAttr('disabled');
+        else $('.IsWebSiteTitleBlack').attr('disabled', 'true');
     });
 }

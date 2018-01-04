@@ -116,6 +116,18 @@ namespace AskanioPhotoSite.Core.Services
                 ShowRandom = photo.ShowRandom
             };
 
+            var watermark = new Watermark()
+            {
+                IsRightSide = photo.ImageAttributes.IsRightSide,
+                IsSignatureApplied = photo.ImageAttributes.IsSignatureApplied,
+                IsSignatureBlack = photo.ImageAttributes.IsSignatureBlack,
+                IsWatermarkApplied = photo.ImageAttributes.IsWatermarkApplied,
+                IsWatermarkBlack = photo.ImageAttributes.IsWatermarkBlack,
+                IsWebSiteTitleApplied = photo.ImageAttributes.IsWebSiteTitleApplied,
+                IsWebSiteTitleBlack = photo.ImageAttributes.IsWebSiteTitleBlack,
+                PhotoId = photo.ImageAttributes.PhotoId,
+                Id = photo.ImageAttributes.Id
+            };
             var photoToTags = photoToTagRepository.GetAll();
 
             var relatedTagIds = photoToTags.GetRelatedTags(photo.Id).Select(x => x.Id).ToArray();
@@ -138,7 +150,7 @@ namespace AskanioPhotoSite.Core.Services
                     }).ToArray()
                 );
             }
-
+            _storage.GetRepository<Watermark>().UpdateOne(watermark);
             var updated = _storage.GetRepository<Photo>().UpdateOne(entity);
             _storage.Commit();
 

@@ -28,15 +28,14 @@
                     <li>@Html.ActionLink("Фотографии", "PhotoIndex", "Management")</li>
                     <li>@Html.ActionLink("Тэги", "TagIndex", "Management")</li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href='@Url.Action("LogOut", "Auth")'><span class="glyphicon glyphicon-log-out"></span></a></li>
+                </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 </body>
 </html>

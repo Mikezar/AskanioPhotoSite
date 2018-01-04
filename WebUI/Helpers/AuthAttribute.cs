@@ -16,7 +16,7 @@ namespace AskanioPhotoSite.WebUI.Helpers
             if (user == null || !user.Identity.IsAuthenticated)
             {
                 var urlHelper = new UrlHelper(filterContext.RequestContext);
-                filterContext.Result = new RedirectResult(urlHelper.Action("Login", "Home", new {returnUrl = filterContext.HttpContext.Request.RawUrl}));
+                filterContext.Result = new RedirectResult(urlHelper.Action("Login", "Auth", new {returnUrl = filterContext.HttpContext.Request.RawUrl}));
             }
         }
 

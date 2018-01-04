@@ -8,8 +8,8 @@
 
 <div class="randomPhoto">
     @if (Model != null)
-        {
-             <img src='@Url.Content(Model.ThumbnailPath)'/>
+    {
+             <a href='@Url.Action("Album", "Gallery", new { id = Model.AlbumId})'><img id="random" src='@Url.Content(Model.ThumbnailPath)' /></a>
              <div class="form-inline photoTitle">@(CultureHelper.IsEnCulture() ? Model.TitleEng : Model.TitleRu)</div>
         }
     else
@@ -28,5 +28,3 @@
     <div class="footer">
         &copy; Alexander Serebryakov @DateTime.Now.Year
     </div>
-
-

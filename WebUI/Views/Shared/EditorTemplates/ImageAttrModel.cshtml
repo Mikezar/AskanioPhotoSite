@@ -1,0 +1,52 @@
+﻿@model AskanioPhotoSite.Core.Models.ImageAttrModel
+
+@Html.HiddenFor(x => x.Id)
+@Html.HiddenFor(x => x.PhotoId)
+
+<div class="form-group">
+    @Html.Label("Водяной знак", new { @class = "control-label col-sm-3" })
+    <div class="col-sm-8">
+        @Html.CheckBoxFor(x => x.IsWatermarkApplied, new { @class = "checkbox-inline", @id = "isWaterMarked" })
+        <div class="radio-inline space-right">
+            <label>@Html.RadioButtonFor(x => x.IsWatermarkBlack, "true", new { @class = "IsWatermarkBlack" }) Черный цвет</label>
+        </div>
+        <div class="radio-inline">
+            <label>@Html.RadioButtonFor(x => x.IsWatermarkBlack, "false", new { @class = "IsWatermarkBlack" }) Белый цвет</label>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    @Html.Label("Подпись", new { @class = "control-label col-sm-3" })
+    <div class="col-sm-8">
+        @Html.CheckBoxFor(x => x.IsSignatureApplied, new { @class = "checkbox-inline", @id = "IsSignatureApplied" })
+        <div class="radio-inline space-right">
+            <label>@Html.RadioButtonFor(x => x.IsSignatureBlack, "true", new { @class = "IsSignatureBlack" }) Черный цвет</label>
+        </div>
+        <div class="radio-inline">
+            <label>@Html.RadioButtonFor(x => x.IsSignatureBlack, "false", new { @class = "IsSignatureBlack" }) Белый цвет</label>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    @Html.Label("Печать сайта", new { @class = "control-label col-sm-3" })
+    <div class="col-sm-8">
+        @Html.CheckBoxFor(x => x.IsWebSiteTitleApplied, new { @class = "checkbox-inline", @id = "IsWebSiteTitleApplied" })
+        <div class="radio-inline space-right">
+            <label>@Html.RadioButtonFor(x => x.IsWebSiteTitleBlack, "true", new { @class = "IsWebSiteTitleBlack" }) Черный цвет</label>
+        </div>
+        <div class="radio-inline">
+            <label>@Html.RadioButtonFor(x => x.IsWebSiteTitleBlack, "false", new { @class = "IsWebSiteTitleBlack" }) Белый цвет</label>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    @Html.Label("Размещение", new { @class = "control-label col-sm-3" })
+    <div class="col-sm-8">
+        <div class="radio-inline">
+            <label>@Html.RadioButtonFor(x => x.IsRightSide, "false", new { @class = "IsRightSide" }) Слева</label>
+        </div>
+        <div class="radio-inline space-right">
+            <label>@Html.RadioButtonFor(x => x.IsRightSide, "true", new { @class = "IsRightSide" }) Справа</label>
+        </div>
+    </div>
+</div>

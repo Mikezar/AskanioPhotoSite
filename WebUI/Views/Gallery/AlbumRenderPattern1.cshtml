@@ -9,7 +9,7 @@
 <div class="photos-pattern-1">
     @foreach (var photo in Model.Photos)
     {
-     <a href='#' class="photo" data-id="@photo.Id"><img src='@Url.Content(photo.Thumbnail)'></a>
+     <a href='#' class="photo" data-id="@photo.Id"><img src='@Url.Content(photo.Thumbnail)?@Guid.NewGuid()'></a>
     }
 </div>
 

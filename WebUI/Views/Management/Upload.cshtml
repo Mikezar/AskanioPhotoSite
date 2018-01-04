@@ -36,53 +36,7 @@
                     </span>
                 </div>
             </div>
-            <div class="form-group">
-                @Html.Label("Водяной знак", new { @class = "control-label col-sm-3" })
-                <div class="col-sm-5">
-                    @Html.CheckBoxFor(x => x.ImageAttributes.IsWatermarkApplied, new { @class = "checkbox-inline", @id = "isWaterMarked"})
-                    <div class="radio-inline space-right">
-                        <label>@Html.RadioButtonFor(x => x.ImageAttributes.IsWatermarkBlack, "true", new { @class = "IsWatermarkBlack" }) Черный цвет</label>
-                    </div>
-                    <div class="radio-inline">
-                        <label>@Html.RadioButtonFor(x => x.ImageAttributes.IsWatermarkBlack, "false", new { @class = "IsWatermarkBlack" }) Белый цвет</label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.Label("Подпись", new { @class = "control-label col-sm-3" })
-                <div class="col-sm-5">
-                    @Html.CheckBoxFor(x => x.ImageAttributes.IsSignatureApplied, new { @class = "checkbox-inline", @id = "IsSignatureApplied" })
-                    <div class="radio-inline space-right">
-                        <label>@Html.RadioButtonFor(x => x.ImageAttributes.IsSignatureBlack, "true", new { @class = "IsSignatureBlack" }) Черный цвет</label>
-                    </div>
-                    <div class="radio-inline">
-                        <label>@Html.RadioButtonFor(x => x.ImageAttributes.IsSignatureBlack, "false", new { @class = "IsSignatureBlack" }) Белый цвет</label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.Label("Печать сайта", new { @class = "control-label col-sm-3" })
-                <div class="col-sm-5">
-                    @Html.CheckBoxFor(x => x.ImageAttributes.IsWebSiteTitleApplied, new { @class = "checkbox-inline", @id = "IsWebSiteTitleApplied" })
-                    <div class="radio-inline space-right">
-                        <label>@Html.RadioButtonFor(x => x.ImageAttributes.IsWebSiteTitleBlack, "true", new { @class = "IsWebSiteTitleBlack" }) Черный цвет</label>
-                    </div>
-                    <div class="radio-inline">
-                        <label>@Html.RadioButtonFor(x => x.ImageAttributes.IsWebSiteTitleBlack, "false", new { @class = "IsWebSiteTitleBlack" }) Белый цвет</label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.Label("Размещение", new { @class = "control-label col-sm-3" })
-                <div class="col-sm-5">
-                    <div class="radio-inline">
-                        <label>@Html.RadioButtonFor(x => x.ImageAttributes.IsRightSide, "false", new { @class = "IsRightSide" }) Слева</label>
-                    </div>                
-                    <div class="radio-inline space-right">
-                        <label>@Html.RadioButtonFor(x => x.ImageAttributes.IsRightSide, "true", new { @class = "IsRightSide" }) Справа</label>
-                    </div>
-                </div>
-            </div>
+            @Html.EditorFor(x => x.ImageAttributes)
             <div class="form-group">
                 @Html.Label("Альбомы", new { @class = "control-label col-sm-3" })
                 <div class="col-sm-5">
@@ -104,11 +58,8 @@
 
 <script>
     $(document).ready(function () {
-        $('.IsWatermarkBlack').attr("disabled", "true");
-        $('.IsSignatureBlack').attr("disabled", "true");
-        $('.IsWebSiteTitleBlack').attr("disabled", "true");
-        $('input[type="checkbox"]').attr('checked', false);
-
+        WatermarkInit();
+        WatermarkChangeHandler();
         $('.delete').on('click', function () {
             var item = $(this);
             var photoId = $(item).prop("id");
@@ -123,6 +74,7 @@
             $.ajax({
                 type: 'GET',
                 url: '@Url.Action("EditUploadPhoto")',
+                cache: false,
                 data: { id: photoId },
                 success: function (response) {
                     $('#editUploadPhoto').html(response);
@@ -130,23 +82,6 @@
                 }
             });
         })
-
-        $('#isWaterMarked').change(function () {
-            if ($(this).is(':checked'))
-                $('.IsWatermarkBlack').removeAttr('disabled');
-            else $('.IsWatermarkBlack').attr('disabled', 'true');
-        });
-
-        $('#IsSignatureApplied').change(function () {
-            if ($(this).is(':checked'))
-                $('.IsSignatureBlack').removeAttr('disabled');
-            else $('.IsSignatureBlack').attr('disabled', 'true');
-        });
-        $('#IsWebSiteTitleApplied').change(function () {
-            if ($(this).is(':checked'))
-                $('.IsWebSiteTitleBlack').removeAttr('disabled');
-            else $('.IsWebSiteTitleBlack').attr('disabled', 'true');
-        });
     });
 </script>
 

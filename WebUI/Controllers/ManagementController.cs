@@ -69,7 +69,19 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
                 return View(model);
             }
-            else return View(new TextAttributeModel());
+            else
+                return View(new TextAttributeModel()
+                {
+                    WatermarkFont = "Bell MT",
+                    WatermarkFontSize = 60,
+                    WatermarkText = "AlexSilver.Photo@gmail.com",
+                    SignatureFont = "Edwardian Script ITC",
+                    SignatureFontSize = 43,
+                    SignatureText = "© Alexander Serebryakov",
+                    StampFont = "Bell MT",
+                    StampFontSize = 45,
+                    StampText = "www.askanio.ru"
+                });
         }
 
 
@@ -400,6 +412,20 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 ReturnUrl = returnUrl,
                 ShowRandom = photo.ShowRandom
             };
+
+            var watermark = _watermarkService.GetAll().FirstOrDefault(x => x.PhotoId == photo.Id);
+            model.ImageAttributes = new ImageAttrModel()
+            {
+                IsRightSide = watermark.IsRightSide,
+                IsSignatureApplied = watermark.IsSignatureApplied,
+                IsSignatureBlack = watermark.IsSignatureBlack,
+                IsWatermarkApplied = watermark.IsWatermarkApplied,
+                IsWatermarkBlack = watermark.IsWatermarkBlack,
+                IsWebSiteTitleApplied = watermark.IsWebSiteTitleApplied,
+                IsWebSiteTitleBlack = watermark.IsWebSiteTitleBlack,
+                PhotoId = watermark.PhotoId,
+                Id = watermark.Id
+            };
             model.RelatedTagIds = _photoToTagService.GetAll().GetRelatedTags(photo.Id).Select(x => x.TagId).ToArray();
             model.AllTags = _tagService.GetAll().GetSelectListItem(model.RelatedTagIds);
 
@@ -586,7 +612,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     System.IO.File.Delete(Server.MapPath(photo.ThumbnailPath));
                 }
 
-                Session["Uploads"] = list;
+                Session["Uploads"] = null;
             }
             catch(Exception exception)
             {

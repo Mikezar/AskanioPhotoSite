@@ -7,9 +7,10 @@
 }
 
 <div class="container loginHeader">
-    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+    @using (Html.BeginForm("Login", "Auth", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.ReturnUrl)
         <div class="form-horizontal">
             <div class="form-group">
                 @Html.LabelFor(x => x.Login, new {@class = "col-sm-4 control-label"})
