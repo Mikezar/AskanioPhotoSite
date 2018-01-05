@@ -34,6 +34,12 @@ namespace AskanioPhotoSite.WebUI.Controllers
             return View();
         }
 
+        public ActionResult Main()
+        {
+            return View();
+        }
+
+
         public ActionResult GetRandomPhoto()
         {
             var photo = _photoService.GetRandomPhoto();

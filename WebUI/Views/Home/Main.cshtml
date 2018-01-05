@@ -1,0 +1,88 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+</head>
+<body>
+    <div class="askanio-background-slideshow" data-slides='[
+		"../Content/Core/test.jpg",
+        "../Content/Core/test2.jpg",
+        "../Content/Core/test3.jpg",
+        "../Content/Core/test5.jpg",
+        "../Content/Core/test6.jpg"
+	]'>
+   </div>
+
+    <div id="askanio-sidebar">
+        <div class="askanio-sidebar-language"><a href="#">EN</a></div>
+        <div class="askanio-sidebar-header">
+            <div class="askanio-sidebar-header-title">
+                <a href="#">
+                    <div class="title">ALEXANDER SEREBRYAKOV</div>
+                    <div class="description">Photographer</div>
+                </a>
+            </div>
+        </div>
+        <div class="askanio-sidebar-menu">
+            <ul>
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">Галлерея</a></li>
+                <li><a href="#">Блог</a></li>
+                <li><a href="#">Контакты</a></li>
+                <li><a href="#">Гостевая книга</a></li>
+            </ul>
+        </div>
+        <div class="askanio-sidebar-section">
+            <div class="askanio-sidebar-section-title">Случайная фотография</div>
+            <a href="#"><img src="~/Content/Core/test6.jpg" /></a>
+            <div class="form-inline askanio-sidebar-section-photoTitle">Заголовок</div>
+        </div>
+        <div class="askanio-sidebar-section">
+            <div class="askanio-sidebar-section-title">Поиск по тэгам</div>       
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    (function ($) {
+
+        'use strict';
+
+        var counter = -1;
+        var $slides = $('[data-slides]');
+        var images = $slides.data('slides');
+        var count = images.length;
+        var slideshow = function () {
+            if (counter < count - 1)
+                ++counter;
+            else
+                counter = 0;
+
+            $slides
+                .css('background-image', 'url("' + images[counter] + '")')
+                .fadeIn()
+                .show(0, function () {
+                    setTimeout(change, 7000);
+                });
+        };
+
+        var change = function () {
+            $('.askanio-background-slideshow').fadeOut(1000, slideshow);
+        };
+
+        slideshow();
+
+    }(jQuery));
+</script>
