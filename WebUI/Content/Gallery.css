@@ -88,6 +88,10 @@
     background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
 }
 
+.loading {
+  background: transparent url('Core/loading.gif') center no-repeat;
+}
+
 .modal-content {
     margin: auto;
     display: block;
