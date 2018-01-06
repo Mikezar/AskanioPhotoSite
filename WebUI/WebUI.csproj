@@ -195,11 +195,6 @@
     <Content Include="Content\Core\loader.gif" />
     <Content Include="Content\Core\loading.gif" />
     <Content Include="Content\Core\switch.png" />
-    <Content Include="Content\Core\test.jpg" />
-    <Content Include="Content\Core\test2.jpg" />
-    <Content Include="Content\Core\test3.jpg" />
-    <Content Include="Content\Core\test5.jpg" />
-    <Content Include="Content\Core\test6.jpg" />
     <Content Include="Content\Gallery.css" />
     <Content Include="Content\multi-select.css" />
     <Content Include="favicon.ico" />
