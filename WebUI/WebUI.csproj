@@ -236,6 +236,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main-carousel.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -277,7 +278,6 @@
     <Content Include="Views\Shared\_DefaultLayout.cshtml" />
     <Content Include="SysData\PhotoGallery\Photos\Web.config" />
     <Content Include="Views\Shared\EditorTemplates\ImageAttrModel.cshtml" />
-    <Content Include="Views\Home\Main.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SysData\Logs\" />

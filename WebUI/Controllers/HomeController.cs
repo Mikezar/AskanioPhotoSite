@@ -31,12 +31,11 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult Main()
-        {
-            return View();
+            return View(new HomePageModel()
+            {
+                RandomPhoto = _photoService.GetRandomPhoto(),
+                BackgroundCovers = _photoService.GetBackgroundPhotos().ToArray()
+            });
         }
 
 

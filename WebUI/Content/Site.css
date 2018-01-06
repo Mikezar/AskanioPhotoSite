@@ -69,15 +69,16 @@ body {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
+        margin: 5px;
     }
 
         .tag-cloud a {
             display: inline-block;
             margin: 0.125rem;
-            padding: 0.4375rem;
-            /* background: rgba(0, 0, 255, 0.2);
-	        border: 1px solid rgba(0, 0, 255, 0.2);
-            border-radius: 5px;*/
+            padding: 0.6375rem;
+            color: black;
+            background-color: #F5F5DC;
+            border-radius: 5px;
             transition: all 0.1s ease-in-out;
         }
 
@@ -228,9 +229,15 @@ textarea {
     .askanio-sidebar-language a
     {
         font-family: 'Tw Cen MT', 'Oswald', serif;
-        color: #888888;
+        color: #ffffff;
         font-size: 16px;
         font-weight: 400;
+        border-bottom: 1px solid #ffffff;
+        cursor: pointer;
+    }
+
+    .askanio-sidebar-language a:hover {
+        text-decoration: none;
     }
 
 .askanio-background-slideshow,
@@ -243,12 +250,17 @@ textarea {
     z-index: 0; 
 }
 
-[data-slides] {
-	background-image: url(../Content/Core/test.jpg); /* Default image. */
-	background-repeat: no-repeat;
-	background-position: left top;
-	background-size: cover;
-}
+
+    .askanio-background-slideshow img {
+	    height: 100%;
+        width: 100%;
+        position:absolute;
+        left:0;
+        -webkit-transition: opacity 1s ease-in-out;
+        -moz-transition: opacity 1s ease-in-out;
+        -o-transition: opacity 1s ease-in-out;
+        transition: opacity 1s ease-in-out;
+    }
 
 #askanio-sidebar {
     background: rgba(0,0,0,0.8);
@@ -343,10 +355,12 @@ textarea {
                 text-decoration: none;
             }
 
-            .askanio-sidebar-menu a:hover {
-                font-family: 'Tw Cen MT', 'Oswald', serif;
-                color: #ffffff;
-                text-decoration: underline;
+           .askanio-sidebar-menu ul li:hover{
+                background-color: #F5F5DC;
+            }
+
+            .askanio-sidebar-menu ul li:hover > a {
+                color: black;
             }
 
         .askanio-sidebar-section {
@@ -379,3 +393,78 @@ textarea {
                 font-size: 14px;
                 font-family: 'Helvetica Neue';
             }
+
+/*ОБЛАКО ТЭГОВ*/
+
+    .askanio-sidebar-section .tag-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 5px;
+    }
+
+      .askanio-sidebar-section .tag-cloud ul {
+	    margin: 0;
+	    padding: 0;
+	    list-style: none;
+    }
+         .askanio-sidebar-section .tag-cloud ul li {
+	        display: inline-block;
+	        margin: 0 0 .3em 1em;
+	        padding: 0;
+        }
+         .askanio-sidebar-section .tag-cloud ul li a {
+	        position: relative;
+	        display: inline-block;
+	        height: 30px;
+	        line-height: 30px;
+	        padding: 0 1em 0 .75em;
+	        background-color: #3498db;
+	        border-radius: 0 3px 3px 0;
+	        color: #fff;
+	        font-size: 13px;
+	        text-decoration: none;
+	        -webkit-transition: .2s;
+	        transition: .2s;
+        }
+         .askanio-sidebar-section .tag-cloud ul li a::before {
+	        position: absolute;
+	        top: 0;
+	        left: -15px;
+	        z-index: -1;
+	        content: '';
+	        width: 30px;
+	        height: 30px;
+	        background-color: #3498db;
+	        border-radius: 50%;
+	        -webkit-transition: .2s;
+	        transition: .2s;
+        }
+         .askanio-sidebar-section .tag-cloud ul li a::after {
+	        position: absolute;
+	        top: 50%;
+	        left: -6px;
+	        z-index: 2;
+	        display: block;
+	        content: '';
+	        width: 6px;
+	        height: 6px;
+	        margin-top: -3px;
+	        background-color: rgba(0,0,0,0.8);
+            opacity:0.8;
+	        border-radius: 100%;
+        }
+         .askanio-sidebar-section .tag-cloud ul li span {
+	        display: block;
+	        max-width: 100px;
+	        white-space: nowrap;
+	        text-overflow: ellipsis;
+	        overflow: hidden;
+        }
+         .askanio-sidebar-section .tag-cloud ul li a:hover {
+	        background-color: #555;
+	        color: #fff;
+        }
+         .askanio-sidebar-section .tag-cloud ul li a:hover::before {
+	        background-color: #555;
+        }

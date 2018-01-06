@@ -27,5 +27,7 @@ namespace AskanioPhotoSite.Data.Entities
         public bool ShowRandom { get; set; }
 
         public int Order { get; set; }
+
+        public bool IsForBackground { get; set; }
     }
 }

@@ -68,6 +68,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\PhotoFilter.cs" />
+    <Compile Include="Models\PhotoFilterManagement.cs" />
     <Compile Include="Infrastructure\ImageHandler\IImageProcessor.cs" />
     <Compile Include="Infrastructure\ImageHandler\ImageProcessor.cs" />
     <Compile Include="Helpers\LinqHelper.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Models\GalleryPhotoTagModel.cs" />
     <Compile Include="Models\GalleryPhotoViewModel.cs" />
     <Compile Include="Models\GalleryViewModel.cs" />
+    <Compile Include="Models\HomePageModel.cs" />
     <Compile Include="Models\ImageAttrModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\PhotoListModel.cs" />

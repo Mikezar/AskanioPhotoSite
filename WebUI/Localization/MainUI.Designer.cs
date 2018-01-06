@@ -151,6 +151,15 @@ namespace AskanioPhotoSite.WebUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Random photo.
+        /// </summary>
+        public static string RandomPhotoTitle {
+            get {
+                return ResourceManager.GetString("RandomPhotoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Return to  home page.
         /// </summary>
         public static string ReturnToHomeLink {

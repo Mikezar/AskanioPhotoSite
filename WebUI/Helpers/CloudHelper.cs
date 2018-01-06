@@ -45,12 +45,12 @@ namespace AskanioPhotoSite.WebUI.Helpers
                     tagClass = "small";
                 }
 
-                links.AppendFormat($"<a href=\"{urlHelper.Action("Tag", "Gallery", new { id = tag.Id})}\" title=\"{title}\" class=\"{tagClass}\">{title}</a>{Environment.NewLine}");
+                links.AppendFormat($"<li><a href=\"{urlHelper.Action("Tag", "Gallery", new { id = tag.Id})}\" title=\"{title}\" class=\"{tagClass}\"><span>{title}</span></a></li>{Environment.NewLine}");
             }
 
             var div = new TagBuilder("div");
             div.MergeAttribute("class", "tag-cloud");
-            div.InnerHtml = links.ToString();
+            div.InnerHtml = $"<ul>{links.ToString()}</ul>";
 
             return MvcHtmlString.Create(div.ToString());
             

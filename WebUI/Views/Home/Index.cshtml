@@ -1,5 +1,100 @@
-﻿@using AskanioPhotoSite.WebUI.Localization;
+﻿@model AskanioPhotoSite.Core.Models.HomePageModel
+@using AskanioPhotoSite.WebUI.Localization;
+@using AskanioPhotoSite.WebUI.Helpers;
 @{
+    Layout = null;
     ViewBag.Title = MainUI.Home;
 }
 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+</head>
+<body>
+    <div class="askanio-background-slideshow">
+        @*<img class="slideshow" src="" />*@
+    </div>
+
+    <div id="askanio-sidebar">
+        @if (CultureHelper.IsEnCulture())
+        {
+            <div class="askanio-sidebar-language"><a href='@Url.Action("ChangeCulture", "Culture", new { language = "ru-RU"})'>RU</a></div>
+        }
+        else
+        {
+            <div class="askanio-sidebar-language"><a href='@Url.Action("ChangeCulture", "Culture", new { language = "en-US"})'>EN</a></div>
+        }
+
+        <div class="askanio-sidebar-header">
+            <div class="askanio-sidebar-header-title">
+                <a href='@Url.Action("Index")'>
+                    <div class="title">ALEXANDER SEREBRYAKOV</div>
+                    <div class="description">Photographer</div>
+                </a>
+            </div>
+        </div>
+        <div class="askanio-sidebar-menu">
+            <ul>
+                <li><a href='@Url.Action("Index", "Home")'>@MainUI.Home</a></li>
+                <li><a href='@Url.Action("Index", "Gallery")'>@MainUI.Gallery</a></li>
+            </ul>
+        </div>
+        <div class="askanio-sidebar-section">
+            <div class="askanio-sidebar-section-title">@MainUI.RandomPhotoTitle</div>
+            @if (Model.RandomPhoto != null)
+            {
+                <a href='@Url.Action("Album", "Gallery", new { id = Model.RandomPhoto.AlbumId })'><img src='@Url.Content(Model.RandomPhoto.ThumbnailPath)?@Guid.NewGuid()' /></a>
+                <div class="form-inline askanio-sidebar-section-photoTitle">@(CultureHelper.IsEnCulture() ? Model.RandomPhoto.TitleEng : Model.RandomPhoto.TitleRu)</div>
+            }
+        </div>
+        <div class="askanio-sidebar-section">
+            <div class="askanio-sidebar-section-title">@MainUI.TagSearch</div>
+            @Html.Action("GenerateTagCloud")
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+   $(document).ready(function ()
+    {
+        var images = @Json.Encode(Model.BackgroundCovers.Select(x => x.Id));
+        var count = images.length;
+        var counter = count;
+        if (count > 0) {
+            for(var i = 0; i < count; i++)
+            {
+                $('.askanio-background-slideshow').append('<img class="slideshow as-' + i + '" src="/image?id=' + images[i]+ '" />');
+            }
+        };
+
+        var slideshow = function () {
+            if (counter - 1 > 0)
+            {
+                --counter;
+                $('.as-' + counter)
+                    .css('opacity', '0')
+                    .show(0, function () {
+                        setTimeout(slideshow, 15000);
+                    });
+            }
+            else
+            {
+                counter = count;
+                $('.as-0')
+                    .show(0, function () {
+                        setTimeout(slideshow, 15000);
+                        $('.slideshow').css('opacity', '1');
+                    });
+            }        
+        }
+        
+        setTimeout(slideshow, 15000);
+    });
+ </script>

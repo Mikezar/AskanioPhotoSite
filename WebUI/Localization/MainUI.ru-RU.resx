@@ -147,6 +147,9 @@
   <data name="PhotographySite" xml:space="preserve">
     <value>Сайт по фотографиям</value>
   </data>
+  <data name="RandomPhotoTitle" xml:space="preserve">
+    <value>Случайная фотография</value>
+  </data>
   <data name="ReturnToHomeLink" xml:space="preserve">
     <value>Вернуться на главную страницу.</value>
   </data>

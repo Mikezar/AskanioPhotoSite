@@ -1,4 +1,4 @@
-﻿@model AskanioPhotoSite.Core.Models.PhotoListModel
+﻿@model AskanioPhotoSite.Core.Models.PhotoFilterManagement
 
 @{
     ViewBag.Title = "Фотографии";
@@ -10,10 +10,48 @@
     
     @Html.ActionLink("Загрузить новые фотографии", "Upload", null, new {@class = "btn btn-primary"})
     
-    <h3>Фотографии без альбомов</h3>
+    <h3>Фотографии</h3>
 
-    @Html.Partial("_PhotoList", Model)
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(x => x.Filter, new { @class = "col-sm-2 label-control" })
+            <div class="col-sm-2">
+                @Html.DropDownListFor(x => x.Filter, Model.Filters, new { @class = "form-control", @id = "filter" })
+            </div>
+            <div class="col-sm-3">
+                <button class="btn btn-primary">Отфильтровать</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="photo-list">
+        @Html.Partial("_PhotoList", Model.ListModel)
+    </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        FilterPhoto();
+        $('button').on('click', function () {
+            var filter = $('#filter').val();
+            FilterPhoto(filter);
+        });
+    });
+
+    function FilterPhoto(filter)
+    {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("FilterPhoto")',
+            data: { filter: filter },
+            success: function (result) {
+                console.log(result);
+                $('#photo-list').html(result);
+            }
+        })
+    }
+</script>
 
 
 

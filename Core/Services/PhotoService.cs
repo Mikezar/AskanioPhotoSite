@@ -55,6 +55,7 @@ namespace AskanioPhotoSite.Core.Services
                     FileName = photo.FileName,
                     CreationDate = photo.CreationDate,
                     ShowRandom = photo.ShowRandom,
+                    IsForBackground = photo.IsForBackground,
                     Order = photo.Order
                 };
 
@@ -122,6 +123,7 @@ namespace AskanioPhotoSite.Core.Services
                 FileName = photo.FileName,
                 CreationDate = photo.CreationDate,
                 ShowRandom = photo.ShowRandom,
+                IsForBackground = photo.IsForBackground,
                 Order = photo.Order
             };
 

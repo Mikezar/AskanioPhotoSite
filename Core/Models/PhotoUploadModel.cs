@@ -45,6 +45,9 @@ namespace AskanioPhotoSite.Core.Models
         [Display(Name = "Случайное фото")]
         public bool ShowRandom { get; set; }
 
+        [Display(Name = "Фоновое")]
+        public bool IsForBackground { get; set; }
+
         public string Action { get; set; }
 
         public string ReturnUrl { get; set; }

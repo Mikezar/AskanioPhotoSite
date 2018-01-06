@@ -9,6 +9,7 @@ using AskanioPhotoSite.Core.Models;
 using AskanioPhotoSite.Core.Services;
 using AskanioPhotoSite.Data.Entities;
 using AskanioPhotoSite.WebUI.Helpers;
+using AskanioPhotoSite.Core.Enums;
 using AskanioPhotoSite.Core.Helpers;
 using AskanioPhotoSite.WebUI.Properties;
 using AskanioPhotoSite.Core.Infrastructure.ImageHandler;
@@ -157,12 +158,36 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
         public ActionResult PhotoIndex()
         {
-            var model = new PhotoListModel()
-            {
-                Photos = _photoService.InitPhotoListModel()
-            };
+            return View(new PhotoFilterManagement());
+        }
 
-            return View(model);
+        public ActionResult FilterPhoto(PhotoFilter filter = PhotoFilter.None)
+        {
+            var model = new PhotoListModel();
+
+            try
+            {
+                switch (filter)
+                {
+                    case PhotoFilter.Random:
+                        model.Photos = _photoService.GetRandomPhotos().InitPhotoListModel();
+                        break;
+                    case PhotoFilter.NoAlbum:
+                        model.Photos = _photoService.GetOrphans().InitPhotoListModel();
+                        break;
+                    case PhotoFilter.Background:
+                        model.Photos = _photoService.GetBackgroundPhotos().InitPhotoListModel();
+                        break;
+                    default:
+                        model.Photos = _photoService.GetRandomPhotos().Union(_photoService.GetOrphans()).Union(_photoService.GetBackgroundPhotos()).InitPhotoListModel();
+                        break;
+                }
+            }
+            catch (Exception exception)
+            {
+                Log.RegisterError(exception);
+            }
+            return PartialView("~/Views/Management/_PhotoList.cshtml", model);
         }
 
         public ActionResult TagIndex()
@@ -415,6 +440,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 Action = "EditPhoto",
                 ReturnUrl = returnUrl,
                 ShowRandom = photo.ShowRandom,
+                IsForBackground = photo.IsForBackground,
                 Order = photo.Order
             };
 
@@ -543,6 +569,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     ThumbnailPath = Settings.Default.ThumbPath + filename + "s" + Path.GetExtension(file.FileName).ToLower(),
                     CreationDate = TimeZone.CurrentTimeZone.ToLocalTime(DateTime.Now),
                     ShowRandom = false,
+                    IsForBackground = false,
                     ImageAttributes = listModel.ImageAttributes,
                     Album = _albumService.GetOne(listModel.AlbumId),
                     Order = ++order

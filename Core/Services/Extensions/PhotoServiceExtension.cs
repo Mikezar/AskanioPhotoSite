@@ -14,9 +14,20 @@ namespace AskanioPhotoSite.Core.Services.Extensions
             return photos.Where(t => t.AlbumId == albumId).Count();
         }
 
-        public static List<PhotoModel> InitPhotoListModel(this BaseService<Photo> photoService)
+
+        public static IEnumerable<Photo> GetOrphans(this BaseService<Photo> photoService)
         {
-            return photoService.GetAll().Where(r => r.AlbumId == 0).Select(x => new PhotoModel()
+            return photoService.GetAll().Where(r => r.AlbumId == 0);
+        }
+
+        public static IEnumerable<Photo> GetRandomPhotos(this BaseService<Photo> photoService)
+        {
+            return photoService.GetAll().Where(x => x.ShowRandom == true);
+        }
+
+        public static List<PhotoModel> InitPhotoListModel(this IEnumerable<Photo> photos)
+        {
+            return photos.Select(x => new PhotoModel()
             {
                 Id = x.Id,
                 DescriptionEng = x.DescriptionEng,
@@ -40,6 +51,11 @@ namespace AskanioPhotoSite.Core.Services.Extensions
                 return photos[random.Next(0, photos.Count)];
             }
             return null;
+        }
+
+        public static IEnumerable<Photo> GetBackgroundPhotos(this BaseService<Photo> photoService)
+        {
+            return photoService.GetAll().Where(x => x.IsForBackground == true);
         }
     }
 }
