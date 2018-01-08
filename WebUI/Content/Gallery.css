@@ -89,6 +89,10 @@
 }
 
 .loading {
+  display: block;
+  margin: auto;
+  width: 88%;
+  height: 90%;
   background: transparent url('Core/loading.gif') center no-repeat;
 }
 

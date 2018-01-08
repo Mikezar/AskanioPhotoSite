@@ -118,7 +118,8 @@ namespace AskanioPhotoSite.WebUI.Controllers
         [HttpPost]
         public ActionResult ViewPhotoPartial(int id, bool isNext)
         {
-            var photos = _photoService.GetAll().ToArray();
+            var currentPhoto = _photoService.GetOne(id);
+            var photos = _photoService.GetAll().Where(x => x.AlbumId == currentPhoto.AlbumId).ToArray();
 
             Photo photo = new Photo();
             for (int i = 0; i < photos.Length; i++)

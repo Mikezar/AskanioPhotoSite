@@ -9,8 +9,8 @@
 
     <div id="title">@Model.Title</div>
 
-    
-    <img class="modal-content loading" src='/image?id=@Model.Id&?@Guid.NewGuid()'>
+    <img id="actual" class="modal-content" src="/image?id=@Model.Id&?@Guid.NewGuid()">
+    <div class="loading"></div>
 
     <a class="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
     <a class="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
@@ -21,21 +21,12 @@
 
 <script>
     $(document).ready(function () {
-        @*$.ajax({
-            url: '/image',
-            type: 'GET',
-            data: {path: '@Model.Path', id: @Model.Id},
-            success: function(data)
-            {
-                $('img').attr('src', "data:image/jpg;base64," + data);
-                console.log(data);
-            }
-        });*@
-
         $(".close").on("click", function () {
             $("#photo-modal").hide();
             $('body').css("overflow", "visible");
         });
+
+        PreloadImage(ShowImage);
 
         $('.prev').on('click', function () {
             GetPhoto(@Model.Id, '@Url.Action("ViewPhotoPartial")', false);
@@ -44,6 +35,27 @@
             GetPhoto(@Model.Id,'@Url.Action("ViewPhotoPartial")',  true);
         });
     });
+
+    function ShowImage()
+    {
+        $('img .loading').fadeOut(500);
+    }
+
+    function PreloadImage(callback){
+        var objImagePreloader = new Image();
+
+        objImagePreloader.src = $('#actual').attr("src");
+        if(objImagePreloader.complete){
+            callback();
+            objImagePreloader.onload=function(){};
+        }
+        else{
+            objImagePreloader.onload = function() {
+                callback();
+                objImagePreloader.onload=function(){};
+            }
+        }
+    }
 
     function _arrayBufferToBase64( buffer ) {
         var binary = '';
