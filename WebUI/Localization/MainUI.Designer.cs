@@ -142,6 +142,15 @@ namespace AskanioPhotoSite.WebUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Photographer.
+        /// </summary>
+        public static string Photographer {
+            get {
+                return ResourceManager.GetString("Photographer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Photography site.
         /// </summary>
         public static string PhotographySite {
@@ -165,6 +174,15 @@ namespace AskanioPhotoSite.WebUI.Localization {
         public static string ReturnToHomeLink {
             get {
                 return ResourceManager.GetString("ReturnToHomeLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ALEXANDER SEREBRYAKOV.
+        /// </summary>
+        public static string SiteTitle {
+            get {
+                return ResourceManager.GetString("SiteTitle", resourceCulture);
             }
         }
         

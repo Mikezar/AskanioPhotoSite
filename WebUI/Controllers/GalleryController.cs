@@ -41,11 +41,11 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     Id = x.Id,
                     TitleRu = x.TitleRu,
                     TitleEng = x.TitleEng,
-                    Cover = albums.Where(f => f.ParentId == x.Id).Single(r =>
+                    Cover = albums.Where(f => f.ParentId == x.Id).SingleOrDefault(r =>
                     {
                         var childs = albums.Where(f => f.ParentId == x.Id);
                         return childs.ElementAt(new Random().Next(0, childs.Count())).CoverPath != null;
-                    }).CoverPath
+                    })?.CoverPath
                 })
             };
 

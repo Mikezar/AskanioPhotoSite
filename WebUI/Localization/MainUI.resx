@@ -144,6 +144,9 @@
   <data name="NotFoundPage" xml:space="preserve">
     <value>Unfortunately, page was not found!</value>
   </data>
+  <data name="Photographer" xml:space="preserve">
+    <value>Photographer</value>
+  </data>
   <data name="PhotographySite" xml:space="preserve">
     <value>Photography site</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="ReturnToHomeLink" xml:space="preserve">
     <value>Return to  home page</value>
+  </data>
+  <data name="SiteTitle" xml:space="preserve">
+    <value>ALEXANDER SEREBRYAKOV</value>
   </data>
   <data name="TagSearch" xml:space="preserve">
     <value>Tag search</value>

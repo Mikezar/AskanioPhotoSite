@@ -144,6 +144,9 @@
   <data name="NotFoundPage" xml:space="preserve">
     <value>К сожалению,страница не найдена!</value>
   </data>
+  <data name="Photographer" xml:space="preserve">
+    <value>Фотограф</value>
+  </data>
   <data name="PhotographySite" xml:space="preserve">
     <value>Сайт по фотографиям</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="ReturnToHomeLink" xml:space="preserve">
     <value>Вернуться на главную страницу.</value>
+  </data>
+  <data name="SiteTitle" xml:space="preserve">
+    <value>АЛЕКСАНДР СЕРЕБРЯКОВ</value>
   </data>
   <data name="TagSearch" xml:space="preserve">
     <value>Поиск по тэгам</value>
