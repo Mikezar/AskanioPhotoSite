@@ -29,10 +29,10 @@
         PreloadImage(ShowImage);
 
         $('.prev').on('click', function () {
-            GetPhoto(@Model.Id, '@Url.Action("ViewPhotoPartial")', false);
+            GetPhoto(@Model.Id, '@Url.Action("ViewPhotoPartial")', false, '@Model.IncludeTag');
         });
         $('.next').on('click', function () {
-            GetPhoto(@Model.Id,'@Url.Action("ViewPhotoPartial")',  true);
+            GetPhoto(@Model.Id,'@Url.Action("ViewPhotoPartial")',  true, '@Model.IncludeTag');
         });
     });
 

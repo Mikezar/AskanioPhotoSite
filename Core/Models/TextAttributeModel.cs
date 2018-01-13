@@ -48,5 +48,9 @@ namespace AskanioPhotoSite.Core.Models
         [Required]
         [Display(Name = "Кегль печати сайта")]
         public int? StampFontSize { get; set; }
+
+        [Required]
+        [Display(Name = "Прозрачность(0-255. 0 - невидимый)")]
+        public int Alpha { get; set; }
     }
 }

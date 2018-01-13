@@ -171,6 +171,9 @@ textarea {
     color: darkgray;
 }
 
+body .modal-open {
+   overflow: visible;
+}
 .default {
     color: grey; 
     margin-left: 5px;

@@ -23,5 +23,7 @@ namespace AskanioPhotoSite.Data.Entities
         public string StampFont { get; set; }
         public int StampFontSize { get; set; }
         public string StampText { get; set; }
+
+        public int Alpha { get; set; }
     }
 }

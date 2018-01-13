@@ -22,7 +22,6 @@
             <div class="col-sm-8 form-inline">
                 @Html.TextBoxFor(x => x.WatermarkFont, new { @class = "form-control", placeholder = "Bell MT" })
                 @Html.ValidationMessageFor(x => x.WatermarkFont)
-                @*<div class="default">По-умолчанию: Bell MT</div>*@
             </div>
         </div>
         <div class="form-group">
@@ -30,7 +29,6 @@
             <div class="col-sm-8 form-inline">
                 @Html.TextBoxFor(x => x.WatermarkFontSize, new { @class = "form-control", placeholder = "60" })
                 @Html.ValidationMessageFor(x => x.WatermarkFontSize)
-                @*<div class="default">По-умолчанию: 60</div>*@
             </div>
         </div>
         <div class="form-group">
@@ -38,7 +36,6 @@
             <div class="col-sm-8 form-inline">
                 @Html.TextBoxFor(x => x.WatermarkText, new { @class = "form-control", placeholder = "AlexSilver.Photo@gmail.com" })
                 @Html.ValidationMessageFor(x => x.WatermarkText)
-                @*<div class="default bottom">По-умолчанию:  AlexSilver.Photo@gmail.com</div>*@
             </div>
         </div>
         <hr />
@@ -47,7 +44,6 @@
             <div class="col-sm-8 form-inline">
                 @Html.TextBoxFor(x => x.SignatureFont, new { @class = "form-control", placeholder = "Edwardian Script ITC" })
                 @Html.ValidationMessageFor(x => x.SignatureFont)
-                @*<div class="default">По-умолчанию: Edwardian Script ITC</div>*@
             </div>
         </div>
         <div class="form-group">
@@ -55,7 +51,6 @@
             <div class="col-sm-8 form-inline">
                 @Html.TextBoxFor(x => x.SignatureFontSize, new { @class = "form-control", placeholder = "45" })
                 @Html.ValidationMessageFor(x => x.SignatureFontSize)
-                @*<div class="default">По-умолчанию: 45 </div>*@
             </div>
         </div>
         <div class="form-group form-inline">
@@ -63,7 +58,6 @@
             <div class="col-sm-8">
                 @Html.TextBoxFor(x => x.SignatureText, new { @class = "form-control", placeholder = "© Alexander Serebryakov" })
                 @Html.ValidationMessageFor(x => x.SignatureText)
-                @*<div class="default">По-умолчанию: © Alexander Serebryakov</div>*@
             </div>
         </div>
         <hr />
@@ -72,7 +66,6 @@
             <div class="col-sm-8">
                 @Html.TextBoxFor(x => x.StampFont, new { @class = "form-control", placeholder = "Bell MT" })
                 @Html.ValidationMessageFor(x => x.StampFont)
-                @*<div class="default">По-умолчанию: Bell MT</div>*@
             </div>
         </div>
         <div class="form-group form-inline">
@@ -80,7 +73,6 @@
             <div class="col-sm-8">
                 @Html.TextBoxFor(x => x.StampFontSize, new { @class = "form-control", placeholder = "33" })
                 @Html.ValidationMessageFor(x => x.StampFontSize)
-                @*<div class="default">По-умолчанию: 33</div>*@
             </div>
         </div>
         <div class="form-group form-inline">
@@ -88,7 +80,13 @@
             <div class="col-sm-8">
                 @Html.TextBoxFor(x => x.StampText, new { @class = "form-control", placeholder = "www.askanio.ru" })
                 @Html.ValidationMessageFor(x => x.StampText)
-                @*<div class="default">По-умолчанию: www.askanio.ru</div>*@
+            </div>
+        </div>
+        <div class="form-group form-inline">
+            @Html.LabelFor(x => x.Alpha, new { @class = "control-label col-sm-4" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(x => x.Alpha, new { @class = "form-control", placeholder = "80" })
+                @Html.ValidationMessageFor(x => x.Alpha)
             </div>
         </div>
 

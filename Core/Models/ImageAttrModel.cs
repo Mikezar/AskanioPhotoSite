@@ -33,6 +33,7 @@ namespace AskanioPhotoSite.Core.Models
         {
             if (watermark != null)
             {
+                Id = watermark.Id;
                 PhotoId = watermark.PhotoId;
                 IsWatermarkApplied = watermark.IsWatermarkApplied;
                 IsWatermarkBlack = watermark.IsWatermarkBlack;

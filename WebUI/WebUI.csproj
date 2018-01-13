@@ -194,7 +194,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Core\loader.gif" />
     <Content Include="Content\Core\loading.gif" />
-    <Content Include="Content\Core\loading2.gif" />
     <Content Include="Content\Core\switch.png" />
     <Content Include="Content\Gallery.css" />
     <Content Include="Content\multi-select.css" />
@@ -212,6 +211,7 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="fonts\Aurora_script.ttf" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

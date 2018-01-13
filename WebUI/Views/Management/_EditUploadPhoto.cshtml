@@ -14,7 +14,7 @@
             </div>
             @using (Ajax.BeginForm(Model.Action, new AjaxOptions
             {
-                OnSuccess = "OnSuccessSave"
+                OnComplete = "OnSuccessSave"
             }))
             {
                 <div class="modal-body">
@@ -99,7 +99,7 @@
                             <button id="albumCover" data-id="@Model.Album.Id" data-cover="@Model.ThumbnailPath" type="button" class="btn btn-success">Сделать обложкой альбома</button>
                         }
 
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="OnSuccessSave()">Закрыть</button>
                         <button type="submit" class="btn btn-primary">Сохранить</button>
                     </div>
                  </div>
@@ -108,7 +108,7 @@
      </div>
 </div>
 
-
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <script>
     $(document).ready(function () {
         WatermarkChangeHandler();
@@ -135,4 +135,9 @@
                 });
         });
     });
+
+    function OnSuccessSave()
+    {
+        $('#editUploadPhotoModal').modal("toggle");
+    }
 </script>

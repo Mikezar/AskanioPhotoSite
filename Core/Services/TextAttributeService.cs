@@ -40,7 +40,8 @@ namespace AskanioPhotoSite.Core.Services
                 SignatureText = model.SignatureText,
                 StampFont = model.StampFont,
                 StampFontSize = model.StampFontSize.Value,
-                StampText = model.StampText
+                StampText = model.StampText,
+                Alpha = model.Alpha > 255 ? 255 : 0             
             };
 
             var updated = _storage.GetRepository<TextAttributes>().AddOne(text);
@@ -68,6 +69,7 @@ namespace AskanioPhotoSite.Core.Services
             text.StampFont = model.StampFont;
             text.StampFontSize = model.StampFontSize.Value;
             text.StampText = model.StampText;
+            text.Alpha = model.Alpha > 255 ? 255 : 0;
 
             var updated = _storage.GetRepository<TextAttributes>().UpdateOne(text);
             _storage.Commit();

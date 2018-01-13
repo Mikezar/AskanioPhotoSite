@@ -63,7 +63,8 @@ else
             });
         });
 
-        $('.edit').on('click', function () {
+        $('.edit').on('click', function (e) {
+            e.preventDefault();
 
             var photoId = $(this).data("id");
 
@@ -77,5 +78,11 @@ else
                 }
             });
         })
+
+        $('#editUploadPhotoModal').on("show", function () {
+            $('body').addClass("modal-open");
+        }).on("hidden", function () {
+            $('body').removeClass("modal-open");
+        });
     });
 </script>

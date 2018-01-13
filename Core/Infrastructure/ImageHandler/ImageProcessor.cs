@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Drawing.Drawing2D;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using AskanioPhotoSite.Core.Models;
 using AskanioPhotoSite.Data.Entities;
@@ -14,6 +15,7 @@ namespace AskanioPhotoSite.Core.Infrastructure.ImageHandler
         private readonly string _thumbFolder;
         private readonly string _photoPath;
         private readonly TextAttributes TextAttributes;
+        private static IDictionary<string, FontFamily> _fonts  = new Dictionary<string, FontFamily>();
 
         public ImageProcessor(string path, string thumbFolder)
         {
@@ -29,6 +31,24 @@ namespace AskanioPhotoSite.Core.Infrastructure.ImageHandler
             TextAttributes = attributes;
         }
 
+        private FontFamily GetFontFamily(string fileName)
+        {
+            if (_fonts.ContainsKey(fileName))
+                return _fonts[fileName];
+
+            string path = HttpContext.Current.Server.MapPath($"~/fonts/{fileName}.ttf");
+            if (File.Exists(path))
+            {
+                var customFonts = new PrivateFontCollection();
+                customFonts.AddFontFile(HttpContext.Current.Server.MapPath($"~/fonts/{TextAttributes.SignatureFont}.ttf"));
+
+                _fonts.Add(fileName, customFonts.Families[0]);
+
+                return customFonts.Families[0];
+            }
+
+            return new FontFamily(fileName);
+        }
 
         public void CreateThumbnail(HttpPostedFileBase file, int maxWidth, int maxHeight, string fileName)
         {
@@ -62,7 +82,7 @@ namespace AskanioPhotoSite.Core.Infrastructure.ImageHandler
         public byte[] Watermark(ImageAttrModel attributes)
         {
             Random random = new Random();
-
+  
             var watermarkFormat = new StringFormat()
             {
                 Alignment = StringAlignment.Center,
@@ -83,9 +103,9 @@ namespace AskanioPhotoSite.Core.Infrastructure.ImageHandler
 
                     if (attributes.IsSignatureApplied)
                     {
-                        using (Font signatureFont = new Font(TextAttributes.SignatureFont, TextAttributes.SignatureFontSize, FontStyle.Regular, GraphicsUnit.Pixel))
+                        using (Font signatureFont = new Font(GetFontFamily(TextAttributes.SignatureFont),TextAttributes.SignatureFontSize, FontStyle.Regular, GraphicsUnit.Pixel))
                         {
-                            SizeF actualSize = imageGraphics.MeasureString(TextAttributes.SignatureText, signatureFont);
+                            SizeF actualSize = imageGraphics.MeasureString(TextAttributes.SignatureText,signatureFont);
                             imageGraphics.DrawString(TextAttributes.SignatureText, signatureFont,  
                                 attributes.IsSignatureBlack ? Brushes.Black : Brushes.White,
                                 attributes.IsRightSide ? new PointF(image.Width - actualSize.Width, image.Height - actualSize.Height) : new PointF(10f, image.Height - actualSize.Height), 
@@ -94,7 +114,7 @@ namespace AskanioPhotoSite.Core.Infrastructure.ImageHandler
                     }
                     if (attributes.IsWebSiteTitleApplied)
                     {
-                        using (Font stampFont = new Font(TextAttributes.StampFont, TextAttributes.StampFontSize, FontStyle.Regular, GraphicsUnit.Pixel))
+                        using (Font stampFont = new Font(GetFontFamily(TextAttributes.StampFont), TextAttributes.StampFontSize, FontStyle.Regular, GraphicsUnit.Pixel))
                         {
                             SizeF actualSize = imageGraphics.MeasureString(TextAttributes.StampText, stampFont);
                             imageGraphics.DrawString(TextAttributes.StampText, stampFont, 
@@ -105,11 +125,11 @@ namespace AskanioPhotoSite.Core.Infrastructure.ImageHandler
                     }
                     if (attributes.IsWatermarkApplied)
                     {
-                        using (Font watermarkFont = new Font(TextAttributes.WatermarkFont, TextAttributes.WatermarkFontSize, FontStyle.Regular, GraphicsUnit.Pixel))
+                        using (Font watermarkFont = new Font(GetFontFamily(TextAttributes.WatermarkFont), TextAttributes.WatermarkFontSize, FontStyle.Regular, GraphicsUnit.Pixel))
                         {
                             SizeF actualSize = imageGraphics.MeasureString(TextAttributes.WatermarkText, watermarkFont);
                             imageGraphics.DrawString(TextAttributes.WatermarkText, watermarkFont, 
-                                new SolidBrush(Color.FromArgb(80, attributes.IsWatermarkBlack? Color.Black : Color.White)),
+                                new SolidBrush(Color.FromArgb(TextAttributes.Alpha, attributes.IsWatermarkBlack? Color.Black : Color.White)),
                                 (image.Width / 2) + random.Next(40), (image.Height / 2) + random.Next(40),
                                 watermarkFormat);
                         }

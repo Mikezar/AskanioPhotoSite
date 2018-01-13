@@ -24,7 +24,7 @@ namespace AskanioPhotoSite.Data.Storage.Transactions
 
         public string ReadStream()
         {
-            using (var reader = File.Open(_filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None))
+            using (var reader = File.Open(_filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read))
             {
                 var buffer = new byte[reader.Length];
                 reader.Read(buffer, 0, buffer.Length);

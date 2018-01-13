@@ -93,7 +93,7 @@
   margin: auto;
   width: 88%;
   height: 90%;
-  background: transparent url('Core/loading.gif') center no-repeat;
+  background: url('Core/loading.gif') center no-repeat;
 }
 
 .modal-content {
@@ -126,12 +126,12 @@
 }
 
 /* Add Animation - Zoom in the Modal */
-.modal-content, #caption {
+/*.modal-content, #caption {
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 0.6s;
     animation-name: zoom;
     animation-duration: 0.6s;
-}
+}*/
 
 .prev, .next {
 position: absolute;
@@ -172,7 +172,7 @@ right: 25px;
     padding-top: 3px;
     padding-right: 1px;
 }
-@-webkit-keyframes zoom {
+/*@-webkit-keyframes zoom {
     from {-webkit-transform:scale(0)}
     to {-webkit-transform:scale(1)}
 }
@@ -180,7 +180,7 @@ right: 25px;
 @keyframes zoom {
     from {transform:scale(0)}
     to {transform:scale(1)}
-}
+}*/
 
 /* The Close Button */
 .close {

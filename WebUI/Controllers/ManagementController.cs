@@ -65,7 +65,8 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     SignatureText = text.SignatureText,
                     StampFont = text.StampFont,
                     StampFontSize = text.StampFontSize,
-                    StampText = text.StampText
+                    StampText = text.StampText,
+                    Alpha = text.Alpha == default(int) ? 80 : text.Alpha
                 };
 
                 return View(model);
@@ -81,7 +82,9 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     SignatureText = "© Alexander Serebryakov",
                     StampFont = "Bell MT",
                     StampFontSize = 45,
-                    StampText = "www.askanio.ru"
+                    StampText = "www.askanio.ru",
+                    Alpha = 80
+                    
                 });
         }
 
@@ -453,23 +456,24 @@ namespace AskanioPhotoSite.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditPhoto(PhotoUploadModel model)
+        public JsonResult EditPhoto(PhotoUploadModel model)
         {
             try
             {
                 _photoService.UpdateOne(model);
 
-                if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                {
-                    return Redirect(model.ReturnUrl);
-                }
-
+                //if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
+                //{
+                //    return Redirect(model.ReturnUrl);
+                //}
+                return Json(MyAjaxHelper.GetSuccessResponse());
             }
             catch(Exception exception)
             {
                 Log.RegisterError(exception);
+                return Json(MyAjaxHelper.GetErrorResponse(exception.Message));
             }
-            return RedirectToAction("PhotoIndex");
+            //return RedirectToAction("PhotoIndex");
         }
 
         public ActionResult DeletePhoto(int id)

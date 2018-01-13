@@ -100,7 +100,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
             }
         }
 
-        public ActionResult ViewPhotoPartial(int id)
+        public ActionResult ViewPhotoPartial(int id, bool includeTag = false)
         {
             var photo = _photoService.GetOne(id);
 
@@ -110,16 +110,29 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 Title = CultureHelper.IsEnCulture() ? photo.TitleEng : photo.TitleRu,
                 Path = photo.PhotoPath,
                 Description = CultureHelper.IsEnCulture() ? photo.DescriptionEng : photo.DescriptionRu,
+                IncludeTag = includeTag
             };
 
             return PartialView(model);
         }
 
         [HttpPost]
-        public ActionResult ViewPhotoPartial(int id, bool isNext)
+        public ActionResult ViewPhotoPartial(int id, bool isNext, bool includeTag = false)
         {
             var currentPhoto = _photoService.GetOne(id);
-            var photos = _photoService.GetAll().Where(x => x.AlbumId == currentPhoto.AlbumId).ToArray();
+
+            Photo[] photos;
+
+            if (includeTag)
+            {
+                var tags = _photoToTagService.GetAll();
+                var photoIds = tags.Where(x => 
+                    tags.GetRelatedTags(currentPhoto.Id).Select(g => g.TagId).Contains(x.TagId)
+                ).Select(x => x.PhotoId);
+                photos = _photoService.GetAll().Where(x => photoIds.Contains(x.Id)).ToArray();
+            }
+            else
+                photos = _photoService.GetAll().Where(x => x.AlbumId == currentPhoto.AlbumId).ToArray();
 
             Photo photo = new Photo();
             for (int i = 0; i < photos.Length; i++)
@@ -128,7 +141,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 {
                     if (isNext)
                     {
-                        if (i + 1 >= photos.Length - 1)
+                        if (i + 1 >= photos.Length)
                         {
                             photo = photos[0];
                             break;
@@ -154,6 +167,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 Title = CultureHelper.IsEnCulture() ? photo.TitleEng : photo.TitleRu,
                 Path = photo.PhotoPath,
                 Description = CultureHelper.IsEnCulture() ? photo.DescriptionEng : photo.DescriptionRu,
+                IncludeTag = includeTag
             };
 
             return PartialView(model);

@@ -42,13 +42,14 @@ function DeleteEntity(id, url, element)
     });
 }
 
-function OpenPhotoInModal(context, url)
+function OpenPhotoInModal(context, url, includeTag)
 {
     var id = $(context).data("id");
+
     $.ajax({
         type: 'GET',
         url: url,
-        data: { id: id },
+        data: { id: id, includeTag: includeTag },
         cache: false,
         success: function (result) {
             $('#photo').html(result);
@@ -58,12 +59,12 @@ function OpenPhotoInModal(context, url)
     });
 }
 
-function GetPhoto(id, url, isNext) {
+function GetPhoto(id, url, isNext, includeTag) {
     $.ajax({
         type: 'POST',
         url: url,
         cache: false,
-        data: { id: id, isNext: isNext },
+        data: { id: id, isNext: isNext, includeTag: includeTag },
         success: function (result) {
             $('#photo').html(result);
             $('#photo-modal').show();
