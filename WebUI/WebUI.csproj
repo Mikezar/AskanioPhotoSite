@@ -162,7 +162,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CloudHelper.cs" />
-    <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Helpers\ViewPatternHelper.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
     <Compile Include="Localization\MainUI.en-US.Designer.cs">

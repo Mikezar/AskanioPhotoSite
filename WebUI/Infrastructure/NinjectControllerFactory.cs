@@ -8,6 +8,11 @@ using AskanioPhotoSite.Data.Entities;
 using AskanioPhotoSite.Data.Storage;
 using Ninject;
 using System.Web;
+using AskanioPhotoSite.Core.Services.Providers;
+using AskanioPhotoSite.Core.Convertors.Abstract;
+using AskanioPhotoSite.Core.Convertors.Concrete;
+using AskanioPhotoSite.Core.Services.Abstract;
+using AskanioPhotoSite.Core.Services.Concrete;
 
 namespace AskanioPhotoSite.WebUI.Infrastructure
 {
@@ -39,13 +44,19 @@ namespace AskanioPhotoSite.WebUI.Infrastructure
 
         private void AddBindings()
         {
-            _ninjectKernel.Bind<BaseService<Album>>().To<AlbumService>();
-            _ninjectKernel.Bind<BaseService<Photo>>().To<PhotoService>();
-            _ninjectKernel.Bind<BaseService<Tag>>().To<TagService>();
-            _ninjectKernel.Bind<BaseService<PhotoToTag>>().To<PhotoToTagService>();
-            _ninjectKernel.Bind<BaseService<TextAttributes>>().To<TextAttributeService>();
-            _ninjectKernel.Bind<BaseService<Watermark>>().To<WatermarkService>();
-            _ninjectKernel.Bind<IStorage>().To<Storage>();
+            _ninjectKernel.Bind<IConverterFactory>().To<ConverterFactory>();
+            _ninjectKernel.Bind<BaseProvider<Album>>().To<AlbumProvider>();
+            _ninjectKernel.Bind<IAlbumService>().To<AlbumService>();
+            _ninjectKernel.Bind<BaseProvider<Photo>>().To<PhotoProvider>();
+            _ninjectKernel.Bind<IPhotoService>().To<PhotoService>();
+            _ninjectKernel.Bind<BaseProvider<Tag>>().To<TagProvider>();
+            _ninjectKernel.Bind<ITagService>().To<TagService>();
+            _ninjectKernel.Bind<BaseProvider<PhotoToTag>>().To<PhotoToTagProvider>();
+            _ninjectKernel.Bind<BaseProvider<TextAttributes>>().To<TextAttributeProvider>();
+            _ninjectKernel.Bind<ITextAttributeService>().To<TextAttributeService>();
+            _ninjectKernel.Bind<BaseProvider<Watermark>>().To<WatermarkProvider>();
+            _ninjectKernel.Bind<IWatermarkService>().To<WatermarkService>();
+            _ninjectKernel.Bind<IStorage>().To<Storage>().InSingletonScope();
             _ninjectKernel.Bind<IImageProcessor>().To<ImageProcessor>()
                 .WithConstructorArgument("path", Settings.Default.PhotoPath)
                 .WithConstructorArgument("thumbFolder", Settings.Default.ThumbPath);

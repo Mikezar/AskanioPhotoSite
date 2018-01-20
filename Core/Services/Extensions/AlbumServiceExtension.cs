@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AskanioPhotoSite.Data.Entities;
@@ -9,11 +8,6 @@ namespace AskanioPhotoSite.Core.Services.Extensions
 {
     public static class AlbumServiceExtension
     {
-        public static IEnumerable<SelectListItem> GetAvailableAlbumSelectList(this BaseService<Album> albumService, IEnumerable<Photo> photos)
-        {
-            return albumService.GetAll().GetNoPhotoAlbums(photos).GetSelectListItem();
-        }
-
         public static IEnumerable<SelectListItem> GetSelectListItem(this IEnumerable<Album> albums)
         {
             return albums.Select(x => new SelectListItem()

@@ -24,10 +24,13 @@
         {
             <tr>
                 @Html.HiddenFor(x => photo.Order)
-                <td>
-                    <a data-photo="@photo.Id" class="up"></a>
-                    <a data-photo="@photo.Id" class="down"></a>
-                </td>
+                @if (Model.ShowOrderArrows)
+                {
+                    <td>
+                        <a data-photo="@photo.Id" class="up"></a>
+                        <a data-photo="@photo.Id" class="down"></a>
+                    </td>
+                }
                 <td>@(++counter)</td>
                 <td class="photo-thumbnail"><img src='@Url.Content(photo.ThumbnailPath)?@Guid.NewGuid()' /></td>
                 <td>@photo.TitleRu</td>

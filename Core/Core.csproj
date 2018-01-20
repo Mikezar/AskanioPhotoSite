@@ -68,7 +68,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Convertors\Abstract\IAlbumConverter.cs" />
+    <Compile Include="Convertors\Abstract\IConverter.cs" />
+    <Compile Include="Convertors\Abstract\IConverterFactory.cs" />
+    <Compile Include="Convertors\Abstract\IEnumerableConverter.cs" />
+    <Compile Include="Convertors\Abstract\IPhotoConverter.cs" />
+    <Compile Include="Convertors\Abstract\ITagConverter.cs" />
+    <Compile Include="Convertors\Abstract\ITextAttributeConverter.cs" />
+    <Compile Include="Convertors\Abstract\IWatermarkConverter.cs" />
+    <Compile Include="Convertors\Concrete\AlbumConverter.cs" />
+    <Compile Include="Convertors\Concrete\ConverterFactory.cs" />
+    <Compile Include="Convertors\Concrete\PhotoConverter.cs" />
+    <Compile Include="Convertors\Concrete\TagConverter.cs" />
+    <Compile Include="Convertors\Concrete\TextAttributeConverter.cs" />
+    <Compile Include="Convertors\Concrete\WatermarkConverter.cs" />
     <Compile Include="Enums\PhotoFilter.cs" />
+    <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Models\PhotoFilterManagement.cs" />
     <Compile Include="Infrastructure\ImageHandler\IImageProcessor.cs" />
     <Compile Include="Infrastructure\ImageHandler\ImageProcessor.cs" />
@@ -97,17 +112,27 @@
     <Compile Include="Models\TagModel.cs" />
     <Compile Include="Models\TextAttributeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\AlbumService.cs" />
-    <Compile Include="Services\BaseService.cs" />
+    <Compile Include="Services\Abstract\IAlbumService.cs" />
+    <Compile Include="Services\Abstract\IPhotoService.cs" />
+    <Compile Include="Services\Abstract\ITagService.cs" />
+    <Compile Include="Services\Abstract\ITextAttributeService.cs" />
+    <Compile Include="Services\Abstract\IWatermarkService.cs" />
+    <Compile Include="Services\Concrete\AlbumService.cs" />
+    <Compile Include="Services\Providers\AlbumProvider.cs" />
+    <Compile Include="Services\Providers\BaseProvider.cs" />
     <Compile Include="Services\Extensions\AlbumServiceExtension.cs" />
     <Compile Include="Services\Extensions\PhotoServiceExtension.cs" />
     <Compile Include="Services\Extensions\PhotoToTagServiceExtension.cs" />
-    <Compile Include="Services\PhotoService.cs" />
-    <Compile Include="Services\PhotoToTagService.cs" />
-    <Compile Include="Services\TagService.cs" />
+    <Compile Include="Services\Concrete\PhotoService.cs" />
+    <Compile Include="Services\Providers\PhotoProvider.cs" />
+    <Compile Include="Services\Providers\PhotoToTagProvider.cs" />
+    <Compile Include="Services\Providers\TagProvider.cs" />
+    <Compile Include="Services\Providers\TextAttributeProvider.cs" />
+    <Compile Include="Services\Providers\WatermarkProvider.cs" />
+    <Compile Include="Services\Concrete\TagService.cs" />
     <Compile Include="Services\Extensions\TagServiceExtension.cs" />
-    <Compile Include="Services\TextAttributeService.cs" />
-    <Compile Include="Services\WatermarkService.cs" />
+    <Compile Include="Services\Concrete\TextAttributeService.cs" />
+    <Compile Include="Services\Concrete\WatermarkService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

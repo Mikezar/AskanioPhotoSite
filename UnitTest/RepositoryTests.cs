@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AskanioPhotoSite.Core.Services;
 using AskanioPhotoSite.Data.Entities;
 using AskanioPhotoSite.Data.Storage;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using AskanioPhotoSite.Core.Services.Providers;
 
 namespace AskanioPhotoSite.UnitTest
 {
@@ -15,7 +15,7 @@ namespace AskanioPhotoSite.UnitTest
         {
 
             Storage storage = new Storage();
-            BaseService<Album> service = new AlbumService(storage);
+            BaseProvider<Album> service = new AlbumProvider(storage);
 
             storage.Cache = new Cache();
             storage.Cache.IsActual = true;

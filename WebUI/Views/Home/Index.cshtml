@@ -1,6 +1,6 @@
 ﻿@model AskanioPhotoSite.Core.Models.HomePageModel
 @using AskanioPhotoSite.WebUI.Localization;
-@using AskanioPhotoSite.WebUI.Helpers;
+@using AskanioPhotoSite.Core.Helpers;
 @{
     Layout = null;
     ViewBag.Title = MainUI.Home;
@@ -17,9 +17,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 </head>
 <body>
-    <div class="askanio-background-slideshow">
-        @*<img class="slideshow" src="" />*@
-    </div>
+    <div class="askanio-background-slideshow"></div>
 
     <div id="askanio-sidebar">
         @if (CultureHelper.IsEnCulture())
@@ -65,36 +63,22 @@
    $(document).ready(function ()
     {
         var images = @Json.Encode(Model.BackgroundCovers.Select(x => x.Id));
-        var count = images.length;
-        var counter = count;
-        if (count > 0) {
-            for(var i = 0; i < count; i++)
-            {
-                $('.askanio-background-slideshow').append('<img class="slideshow as-' + i + '" src="/image?id=' + images[i]+ '" />');
-            }
-        };
+        for(var i = 0; i < images.length; i++)
+            $('.askanio-background-slideshow').append('<img class="slideshow as-' + i + '" src="/image?id=' + images[i]+ '" style="opacity: 0;"/>');
 
-        var slideshow = function () {
-            if (counter - 1 > 0)
-            {
-                --counter;
-                $('.as-' + counter)
-                    .css('opacity', '0')
-                    .show(0, function () {
-                        setTimeout(slideshow, 15000);
-                    });
-            }
-            else
-            {
-                counter = count;
-                $('.as-0')
-                    .show(0, function () {
-                        setTimeout(slideshow, 15000);
-                        $('.slideshow').css('opacity', '1');
-                    });
-            }        
-        }
-        
-        setTimeout(slideshow, 15000);
+        var slideIndex = 0;
+        var slides = $('.slideshow');
+        showSlides();
+
+        function showSlides() {
+            for (var i = 0; i < slides.length; i++) 
+                slides[i].style.opacity = "0";
+
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex-1].style.opacity = "1";
+            setTimeout(showSlides, 15000); 
+        } 
     });
+
  </script>

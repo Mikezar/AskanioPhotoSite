@@ -2,19 +2,18 @@
 using System.Linq;
 using AskanioPhotoSite.WebUI.Properties;
 using AskanioPhotoSite.Core.Helpers;
-using AskanioPhotoSite.Core.Services;
-using AskanioPhotoSite.Data.Entities;
 using AskanioPhotoSite.Core.Models;
 using AskanioPhotoSite.Core.Infrastructure.ImageHandler;
+using AskanioPhotoSite.Core.Services.Abstract;
 
 namespace AskanioPhotoSite.WebUI.Infrastructure.Files
 {
     public class PhotoManager
     {
-        private readonly BaseService<TextAttributes> _textAttrService;
-        private readonly BaseService<Watermark> _watermarkService;
+        private readonly ITextAttributeService _textAttrService;
+        private readonly IWatermarkService _watermarkService;
 
-        public PhotoManager(BaseService<TextAttributes> textAttrService, BaseService<Watermark>  watermarkService)
+        public PhotoManager(ITextAttributeService textAttrService, IWatermarkService watermarkService)
         {
             _textAttrService = textAttrService;
             _watermarkService = watermarkService;
@@ -31,6 +30,21 @@ namespace AskanioPhotoSite.WebUI.Infrastructure.Files
             {
                var textAttributes = _textAttrService.GetAll().FirstOrDefault();
                var watermark = _watermarkService.GetAll().FirstOrDefault(x => x.PhotoId == photoId);
+
+                if (textAttributes == null)
+                    textAttributes = new Data.Entities.TextAttributes()
+                    {
+                        WatermarkFont = "Bell MT",
+                        WatermarkFontSize = 60,
+                        WatermarkText = "AlexSilver.Photo@gmail.com",
+                        SignatureFont = "Edwardian Script ITC",
+                        SignatureFontSize = 43,
+                        SignatureText = "© Alexander Serebryakov",
+                        StampFont = "Bell MT",
+                        StampFontSize = 45,
+                        StampText = "www.askanio.ru",
+                        Alpha = 80
+                    };
 
                var imageAttributes = new ImageAttrModel(watermark);
 

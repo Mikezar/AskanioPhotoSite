@@ -4,6 +4,7 @@
     ViewBag.Title = Model.Id == 0 ? "Добавление нового альбома" : $"Редактирование альбома {Model.TitleRu}";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 
 <div class="container">
     <h3>@ViewBag.Title</h3>

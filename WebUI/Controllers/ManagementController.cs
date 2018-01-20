@@ -2,77 +2,51 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.IO;
 using System.Web.Mvc;
 using AskanioPhotoSite.Core.Services.Extensions;
 using AskanioPhotoSite.Core.Models;
-using AskanioPhotoSite.Core.Services;
 using AskanioPhotoSite.Data.Entities;
 using AskanioPhotoSite.WebUI.Helpers;
 using AskanioPhotoSite.Core.Enums;
 using AskanioPhotoSite.Core.Helpers;
-using AskanioPhotoSite.WebUI.Properties;
 using AskanioPhotoSite.Core.Infrastructure.ImageHandler;
+using AskanioPhotoSite.Core.Services.Abstract;
+using AskanioPhotoSite.Core.Convertors.Abstract;
+
 namespace AskanioPhotoSite.WebUI.Controllers
 {
     [Auth]
     [Authorize(Users = "askanio")]
     public class ManagementController : BaseController
     {
-        private readonly BaseService<Album> _albumService;
-
-        private readonly BaseService<Photo> _photoService;
-
-        private readonly BaseService<Tag> _tagService;
-
-        private readonly BaseService<PhotoToTag> _photoToTagService;
-
-        private readonly BaseService<TextAttributes> _textAttrService;
-
-        private readonly BaseService<Watermark> _watermarkService;
-
         private readonly IImageProcessor _imageProcessor;
+        private readonly ITextAttributeService _attrService;
+        private readonly IAlbumService _albumService;
+        private readonly IPhotoService _photoService;
+        private readonly ITagService _tagService;
+        private readonly IConverterFactory _factory;
+        private readonly ITextAttributeConverter _converterAttr;
+        private readonly IWatermarkService _watermarkService;
 
-
-        public ManagementController(BaseService<Album> albumService, BaseService<Photo> photoService, 
-            BaseService<Tag> tagService, BaseService<PhotoToTag> photoToTagService, 
-            BaseService<TextAttributes> textAttrService, BaseService<Watermark> watermarkService,
-            IImageProcessor imageProcessor)
+        public ManagementController(ITextAttributeService attrService, IImageProcessor imageProcessor,
+            IConverterFactory factory, IAlbumService albumService, IPhotoService photoService, 
+            ITagService tagService, IWatermarkService watermarkService)
         {
-            _albumService = albumService;
-            _photoService = photoService;
-            _tagService = tagService;
-            _photoToTagService = photoToTagService;
-            _textAttrService = textAttrService;
-            _watermarkService = watermarkService;
             _imageProcessor = imageProcessor;
+            _factory = factory;
+            _converterAttr = _factory.GetConverter<ITextAttributeConverter>();
+            _attrService = attrService;
+            _albumService = albumService;
+            _tagService = tagService;
+            _photoService = photoService;
+            _watermarkService = watermarkService;
         }
 
         public ActionResult Index()
         {
-            var text = _textAttrService.GetAll().FirstOrDefault();
-
-            if (text != null)
-            {
-                var model = new TextAttributeModel()
-                {
-                    Id = text.Id,
-                    WatermarkFont = text.WatermarkFont,
-                    WatermarkFontSize = text.WatermarkFontSize,
-                    WatermarkText = text.WatermarkText,
-                    SignatureFont = text.SignatureFont,
-                    SignatureFontSize = text.SignatureFontSize,
-                    SignatureText = text.SignatureText,
-                    StampFont = text.StampFont,
-                    StampFontSize = text.StampFontSize,
-                    StampText = text.StampText,
-                    Alpha = text.Alpha == default(int) ? 80 : text.Alpha
-                };
-
-                return View(model);
-            }
-            else
-                return View(new TextAttributeModel()
+            var attr = _attrService.GetAll().FirstOrDefault();
+            var model = _converterAttr.ConvertTo(attr) ??
+                new TextAttributeModel()
                 {
                     WatermarkFont = "Bell MT",
                     WatermarkFontSize = 60,
@@ -85,7 +59,8 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     StampText = "www.askanio.ru",
                     Alpha = 80
                     
-                });
+                };
+            return View(model);
         }
 
 
@@ -98,14 +73,14 @@ namespace AskanioPhotoSite.WebUI.Controllers
             {
                 if (model.Id == 0)
                 {
-                    var updated = _textAttrService.AddOne(model);
+                    var updated = _attrService.AddOne(model);
                     model.Id = updated.Id;
                     ViewBag.Success = $"Настройки текста и шрифтов были успешно добавлены";
                     return View("Index", model);
                 }
                 else
                 {
-                    _textAttrService.UpdateOne(model);
+                    _attrService.UpdateOne(model);
                     ViewBag.Success = $"Настройки текста и шрифтов были успешно обновлены";
                     return View("Index", model);
                 }
@@ -121,16 +96,16 @@ namespace AskanioPhotoSite.WebUI.Controllers
         {
             try
             {
-                var textSets = _textAttrService.GetAll().ToList();
+                var textSets = _attrService.GetAll().ToList();
 
                 if (textSets.Count() > 0)
                 {
-
                     foreach (var text in textSets)
                     {
-                        _textAttrService.DeleteOne(text.Id);
-                    }
+                        _attrService.DeleteOne(text.Id);
+                    } 
                 }
+
                 ViewBag.Success = $"Настройки текста и шрифтов были сброшены";
             }
             catch(Exception exception)
@@ -201,7 +176,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 {
                     Id = x.Id,
                     Title = x.TitleRu,
-                    RelativePhotoCount = _photoToTagService.GetAll().GetRelatedPhotoCount(_photoService.GetAll(), x.Id)
+                    RelativePhotoCount = _tagService.GetRelatedPhotoCount(x.Id)
                 }).ToList()
             };
 
@@ -271,8 +246,6 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
         #region Работа с альбомами
 
-
-
         public ActionResult AddAlbum()
         {
             var model = new EditAlbumModel()
@@ -323,7 +296,8 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     Order = x.Order == default(int) ? x.Id : x.Order
                 }).OrderBy(x => x.Order).ToList(),
 
-                ReturnUrl = Url.Action("EditAlbum")
+                ReturnUrl = Url.Action("EditAlbum"),
+                ShowOrderArrows = true
             };
 
             return View(model);
@@ -337,9 +311,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 var album = _albumService.GetOne(id);
 
                 if (album != null)
-                {
                     album.CoverPath = cover;
-                }
 
                 _albumService.UpdateOne(album);
 
@@ -449,7 +421,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
             var watermark = _watermarkService.GetAll().FirstOrDefault(x => x.PhotoId == photo.Id);
             model.ImageAttributes = new ImageAttrModel(watermark);
-            model.RelatedTagIds = _photoToTagService.GetAll().GetRelatedTags(photo.Id).Select(x => x.TagId).ToArray();
+            model.RelatedTagIds = _tagService.GetRelatedTags(photo.Id);
             model.AllTags = _tagService.GetAll().GetSelectListItem(model.RelatedTagIds);
 
             return PartialView("~/Views/Management/_EditUploadPhoto.cshtml", model);
@@ -461,11 +433,6 @@ namespace AskanioPhotoSite.WebUI.Controllers
             try
             {
                 _photoService.UpdateOne(model);
-
-                //if (!string.IsNullOrEmpty(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
-                //{
-                //    return Redirect(model.ReturnUrl);
-                //}
                 return Json(MyAjaxHelper.GetSuccessResponse());
             }
             catch(Exception exception)
@@ -473,7 +440,6 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 Log.RegisterError(exception);
                 return Json(MyAjaxHelper.GetErrorResponse(exception.Message));
             }
-            //return RedirectToAction("PhotoIndex");
         }
 
         public ActionResult DeletePhoto(int id)
@@ -497,19 +463,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
         {
             try
             {
-                var photos = _photoService.GetAll();
-                var currentPhoto = photos.FirstOrDefault(x => x.Id == model.CurrentId);
-                var swappedPhoto = photos.FirstOrDefault(x => x.Id == model.SwappedId);
-
-                currentPhoto.Order = currentPhoto.Order == default(int) ? model.CurrentId : currentPhoto.Order;
-                swappedPhoto.Order = swappedPhoto.Order == default(int) ? model.SwappedId : swappedPhoto.Order;
-
-                int temp = currentPhoto.Order;
-                currentPhoto.Order = swappedPhoto.Order;
-                swappedPhoto.Order = temp;
-
-                 _photoService.UpdateOne(currentPhoto);
-                 _photoService.UpdateOne(swappedPhoto);
+                _photoService.ChangeOrder(model);
 
                 return Json(MyAjaxHelper.GetSuccessResponse());
             }
@@ -542,61 +496,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
         [HttpPost]
         public ActionResult Upload(IEnumerable<HttpPostedFileBase> files, PhotoUploadListModel listModel)
         {
-            var model = Session["Uploads"] != null ? Session["Uploads"] as PhotoUploadListModel : new PhotoUploadListModel();
-            int maxId = 0;
-            int order = 0;
-            var photos = _photoService.GetAll().ToList();
-
-            // Если в БД уже есть фотографии, значит получаем макс. Id фотографии
-            if (photos.Count > 0)
-            {
-                maxId = photos.Max(x => x.Id);
-                order = photos.Max(x => x.Order);
-            }
-
-            // Проверяем, имеются ли в сессии уже загруженные фотогарфии, если да, то берем за макс Id значение из сессии
-            if (model.Uploads.Any())
-            {
-                maxId = model.Uploads.Max(x => x.Id);
-                order = model.Uploads.Max(x => x.Order);
-            }
-
-            foreach (var file in files)
-            {
-                var filename = $"photo_AS-S{++maxId}";
-
-                var photoUploadModel = new PhotoUploadModel()
-                {
-                    Id = maxId,
-                    FileName = filename,
-                    PhotoPath = Settings.Default.PhotoPath + filename + Path.GetExtension(file.FileName).ToLower(),
-                    ThumbnailPath = Settings.Default.ThumbPath + filename + "s" + Path.GetExtension(file.FileName).ToLower(),
-                    CreationDate = TimeZone.CurrentTimeZone.ToLocalTime(DateTime.Now),
-                    ShowRandom = false,
-                    IsForBackground = false,
-                    ImageAttributes = listModel.ImageAttributes,
-                    Album = _albumService.GetOne(listModel.AlbumId),
-                    Order = ++order
-                };
-
-                if (file.ContentLength < 4048576)
-                {
-                    if (file != null)
-                    {
-                        _imageProcessor.CreateThumbnail(file, 350, 350, filename);
-                        listModel.ImageAttributes.PhotoId = photoUploadModel.Id;
-                        file.SaveAs(Server.MapPath(photoUploadModel.PhotoPath));                
-                        model.Uploads.Add(photoUploadModel);
-                        Session["Uploads"] = model;
-                    }
-                }
-            }
-            model.Albums = _albumService.GetAll().Select(x => new SelectListItem()
-            {
-                Value = x.Id.ToString(),
-                Text = x.TitleRu
-            });
-
+            var model = _photoService.Upload(files, listModel, _imageProcessor);
             return PartialView(model);
         }
 
@@ -607,7 +507,6 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
             try
             {
-
                 _photoService.AddMany(model.Uploads.ToArray());
 
                 Session["Uploads"] = null;
@@ -630,9 +529,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
             photo.Action = "EditUploadPhoto";
             photo.Album = photo.Album ?? new Album();
             photo.Albums = _albumService.GetAll().GetEndNodeAlbums().GetSelectListItem();
-
             photo.AllTags = _tagService.GetAll().GetSelectListItem(photo.RelatedTagIds);
-            photo.RelatedTagIds = _photoToTagService.GetAll().GetRelatedTags(photo.Id).Select(x => x.TagId).ToArray();
           
             return PartialView("~/Views/Management/_EditUploadPhoto.cshtml", photo);
         }
@@ -644,12 +541,8 @@ namespace AskanioPhotoSite.WebUI.Controllers
             {
                 var list = Session["Uploads"] as PhotoUploadListModel;
 
-
                 for (int i = 0; i < list.Uploads.Count; i++)
-                {
                     if (list.Uploads[i].Id == model.Id) list.Uploads[i] = model;
-                }
-
                 Session["Uploads"] = list;
             }
             catch(Exception exception)

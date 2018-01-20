@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace AskanioPhotoSite.WebUI.Helpers
+namespace AskanioPhotoSite.Core.Helpers
 {
     public class CultureHelper
     {

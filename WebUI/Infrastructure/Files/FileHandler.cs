@@ -3,9 +3,11 @@ using AskanioPhotoSite.Core.Helpers;
 using System.Web;
 using System.Web.Routing;
 using AskanioPhotoSite.Data.Storage;
-using AskanioPhotoSite.Core.Services;
 using AskanioPhotoSite.WebUI.Properties;
 using AskanioPhotoSite.WebUI.Localization;
+using AskanioPhotoSite.Core.Services.Concrete;
+using AskanioPhotoSite.Core.Convertors.Concrete;
+using AskanioPhotoSite.Core.Services.Providers;
 
 namespace AskanioPhotoSite.WebUI.Infrastructure.Files
 {
@@ -25,7 +27,9 @@ namespace AskanioPhotoSite.WebUI.Infrastructure.Files
             RequestContext = requestContext;
 
             var storage = new Storage();
-            _photoManager = new PhotoManager(new TextAttributeService(storage), new WatermarkService(storage));
+            var factory = new ConverterFactory();
+            _photoManager = new PhotoManager(new TextAttributeService(factory, new TextAttributeProvider(storage)),
+                new WatermarkService(factory, new WatermarkProvider(storage)));
         }
 
         public void ProcessRequest(HttpContext context)
