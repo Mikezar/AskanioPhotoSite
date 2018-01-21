@@ -21,7 +21,7 @@ namespace AskanioPhotoSite.Core.Convertors.Concrete
                 StampFont = model.StampFont,
                 StampFontSize = model.StampFontSize.Value,
                 StampText = model.StampText,
-                Alpha = model.Alpha > 255 ? 255 : 0
+                Alpha = model.Alpha > 255 ? 255 : model.Alpha
             };
         }
 
