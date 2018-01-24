@@ -1,28 +1,4 @@
-﻿
-
-/*MAIN UI*/
-body {
-
-}
-
-.navbar {
-   color: #525558;
-   font-weight: bold;
-   font-size: 1.1em;
-   font-family: Arial, Helvetica, sans-serif;
-}
-
-.side-bar {
-    display: block;
-    margin-top: 25px;
-}
-
-    .side-bar .leftColumn
-    {
-        float: left;
-        width: 290px;
-        padding-top: 15px;
-    }
+﻿/*MAIN UI*/
 
         .randomPhoto
         {
@@ -45,15 +21,6 @@ body {
                 font-size: 14px;
                 font-family: 'Helvetica Neue';
             }
-
-    .side-bar .rightColumn
-    {
-        margin-left: 310px;
-        border-left: 1px solid #e7e7e7;
-        padding: 15px;
-        min-height: 350px;
-        overflow: hidden
-    }
 
     hr
     {
@@ -223,14 +190,20 @@ body .modal-open {
 
 
 
-/*НОВЫЙ МАКЕТ*/
-.askanio-sidebar-language
+/*ГЛАВНАЯ*/
+
+@media only screen and (min-width: 1200px) {
+
+.askanio-sidebar-language, 
+.askanio-gallery-language
 {
     padding: 7px;
 }
 
-    .askanio-sidebar-language a
+    .askanio-sidebar-language a, 
+    .askanio-gallery-language a
     {
+        outline: 0;
         font-family: 'Tw Cen MT', 'Oswald', serif;
         color: #ffffff;
         font-size: 16px;
@@ -239,7 +212,8 @@ body .modal-open {
         cursor: pointer;
     }
 
-    .askanio-sidebar-language a:hover {
+    .askanio-sidebar-language a:hover,
+    .askanio-gallery-language a:hover {
         text-decoration: none;
     }
 
@@ -269,8 +243,8 @@ body .modal-open {
     background: rgba(0,0,0,0.8);
     height: 100%;
     width: 250px;
-    position: fixed;
     left: 60px;
+    position: fixed;
     top: 0px;
     top: 0;
     bottom: 0;
@@ -279,6 +253,7 @@ body .modal-open {
     -webkit-box-shadow: 0px 2px 5px rgb(0, 0, 0);
     box-shadow: 0px 2px 5px rgb(0, 0, 0);
 }
+
     .askanio-sidebar-header {
         display: block;
         width: 100%;
@@ -293,6 +268,7 @@ body .modal-open {
         }
             .askanio-sidebar-header-title a {
                 text-decoration: none;
+                outline: 0;
              }
 
             .askanio-sidebar-header-title .title {
@@ -356,6 +332,7 @@ body .modal-open {
                 text-transform: uppercase;
                 font-weight: 600;
                 text-decoration: none;
+                outline: 0;
             }
 
            .askanio-sidebar-menu ul li:hover{
@@ -417,6 +394,7 @@ body .modal-open {
 	        padding: 0;
         }
          .askanio-sidebar-section .tag-cloud ul li a {
+            outline: 0;
 	        position: relative;
 	        display: inline-block;
 	        height: 30px;
@@ -471,3 +449,4 @@ body .modal-open {
          .askanio-sidebar-section .tag-cloud ul li a:hover::before {
 	        background-color: #555;
         }
+ }

@@ -195,6 +195,7 @@
     <Content Include="Content\Core\loading.gif" />
     <Content Include="Content\Core\switch.png" />
     <Content Include="Content\Gallery.css" />
+    <Content Include="Content\MobileSite.css" />
     <Content Include="Content\multi-select.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

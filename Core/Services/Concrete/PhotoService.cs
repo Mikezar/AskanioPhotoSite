@@ -226,7 +226,9 @@ namespace AskanioPhotoSite.Core.Services.Concrete
             swappedPhoto.Order = temp;
 
             _providerPhoto.UpdateOne(currentPhoto);
+            _providerPhoto.Commit();
             _providerPhoto.UpdateOne(swappedPhoto);
+            _providerPhoto.Commit();
         }
 
         public PhotoUploadListModel Upload(IEnumerable<HttpPostedFileBase> files, PhotoUploadListModel listModel, IImageProcessor processor)

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Text;
 using System.Drawing.Drawing2D;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using AskanioPhotoSite.Core.Models;
@@ -40,14 +41,18 @@ namespace AskanioPhotoSite.Core.Infrastructure.ImageHandler
             if (File.Exists(path))
             {
                 var customFonts = new PrivateFontCollection();
-                customFonts.AddFontFile(HttpContext.Current.Server.MapPath($"~/fonts/{TextAttributes.SignatureFont}.ttf"));
+                customFonts.AddFontFile(HttpContext.Current.Server.MapPath($"~/fonts/{fileName}.ttf"));
 
                 _fonts.Add(fileName, customFonts.Families[0]);
 
                 return customFonts.Families[0];
             }
+            var defaultFont = FontFamily.Families.SingleOrDefault(x => x.Name == fileName);
 
-            return new FontFamily(fileName);
+            if (defaultFont != null)
+                return defaultFont;
+            else
+                return FontFamily.Families.First();
         }
 
         public void CreateThumbnail(HttpPostedFileBase file, int maxWidth, int maxHeight, string fileName)

@@ -1,4 +1,5 @@
 ﻿@using AskanioPhotoSite.WebUI.Localization;
+@using AskanioPhotoSite.Core.Helpers;
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -10,33 +11,33 @@
     @Scripts.Render("~/bundles/jqueryval")
 </head>
 <body>
-    <div class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
+    <div class="askanio-bar navbar navbar-default">
+        <div class="container-fluid">
+            <div class="askanio-bar navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Alexander Serebryakov", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink(MainUI.Home, "Index", "Home")</li>
                     <li>@Html.ActionLink(MainUI.Gallery, "Index", "Gallery")</li>
-                    <li>@Html.ActionLink(MainUI.Blog, "Blog", "Home")</li>
-                    <li>@Html.ActionLink(MainUI.Contact, "Contact", "Home")</li>
-                    <li>@Html.ActionLink(MainUI.GuestBook, "Guestbook", "Home")</li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href='@Url.Action("ChangeCulture", "Culture", new { language = "ru-RU"})'>RU</a></li>
-                    <li><a href='@Url.Action("ChangeCulture", "Culture", new { language = "en-US"})'>EN</a></li>
                 </ul>
             </div>
+            @if (CultureHelper.IsEnCulture())
+            {
+                <div class="askanio-gallery-language "><a href='@Url.Action("ChangeCulture", "Culture", new { language = "ru-RU" })'>RU</a></div>
+            }
+            else
+            {
+                <div class="askanio-gallery-language "><a href='@Url.Action("ChangeCulture", "Culture", new { language = "en-US" })'>EN</a></div>
+            }
         </div>
     </div>
    
-    <div class="side-bar">
+    <div class="askanio-gallery">
         <div class="leftColumn">
             @Html.Action("GetRandomPhoto", "Home", null)
         </div>
