@@ -294,7 +294,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     TitleEng = x.TitleEng,
                     Album = _albumService.GetOne(model.Id),
                     Order = x.Order == default(int) ? x.Id : x.Order
-                }).OrderBy(x => x.Order).ToList(),
+                }).OrderByDescending(x => x.Order).ToList(),
 
                 ReturnUrl = Url.Action("EditAlbum"),
                 ShowOrderArrows = true

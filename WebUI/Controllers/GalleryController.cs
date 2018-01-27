@@ -54,7 +54,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     var model = new GalleryPhotoListModel()
                     {
                         AlbumTitle = CultureHelper.IsEnCulture() ? album.TitleEng : album.TitleRu,
-                        Photos = photos.OrderBy(x => x.Order).Select(x => new GalleryPhotoModel()
+                        Photos = photos.OrderByDescending(x => x.Order).Select(x => new GalleryPhotoModel()
                         {
                             Id = x.Id,
                             Thumbnail = x.ThumbnailPath,

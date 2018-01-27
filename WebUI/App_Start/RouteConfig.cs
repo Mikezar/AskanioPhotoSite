@@ -10,6 +10,8 @@ namespace AskanioPhotoSite.WebUI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("RobotsTxtRoute", "robots.txt", new { controller = "Robot", action = "Index" });
+
             routes.IgnoreRoute("Management/{action}");
 
             routes.IgnoreRoute("Management/{action}/{id}");

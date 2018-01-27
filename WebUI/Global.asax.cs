@@ -7,13 +7,12 @@ using System.Threading;
 using System.Globalization;
 using System.Collections.Generic;
 using System;
-using System.Linq;
 using AskanioPhotoSite.Core.Helpers;
 using AskanioPhotoSite.WebUI.Controllers;
 
 namespace AskanioPhotoSite.WebUI
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         private readonly IList<string> _supportedCultures = new List<string>()
         {
@@ -36,8 +35,6 @@ namespace AskanioPhotoSite.WebUI
             Log.Trace($"Query register. Url - {httpApp.Request?.Url}, Agent - {httpApp.Request?.UserAgent}");
             HttpCookie cookie = HttpContext.Current.Request.Cookies["CurrentUICulture"];
 
-            Log.Trace("Getting cookies...");
-
             if ((cookie != null) && (cookie?.Value != null))
             {
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(cookie.Value);
@@ -46,11 +43,10 @@ namespace AskanioPhotoSite.WebUI
 
             else
             {
-                Log.Trace("No cookies.");
                 var languages = HttpContext.Current?.Request?.UserLanguages;
 
                 if (languages == null) return;
-                Log.Trace($"Supported languages: {languages.Select(x => x).Concat(languages)}");
+
                 if (languages.Length > 0)
                 {
                     for (int i = 0; i < languages.Length; i++)
@@ -66,7 +62,7 @@ namespace AskanioPhotoSite.WebUI
                 }
                 else
                 {
-                    Log.Trace("Нет поддерживаемых языков. По умочланию устанавливается ru-RU");
+                    Log.Trace("No supported languages. Default locale ru-RU is set");
                     Thread.CurrentThread.CurrentCulture = new CultureInfo("ru-RU");
                     Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU");
                     HttpContext.Current.Response.Cookies.Add(new HttpCookie("CurrentUICulture") { Value = "ru-RU"});

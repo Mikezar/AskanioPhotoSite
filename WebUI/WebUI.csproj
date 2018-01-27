@@ -149,6 +149,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\RobotController.cs" />
+    <Compile Include="Helpers\ContentLoader.cs" />
     <Compile Include="Infrastructure\Files\ImageRouteHandler.cs" />
     <Compile Include="Infrastructure\Files\FileHandler.cs" />
     <Compile Include="Infrastructure\Files\PhotoManager.cs" />
@@ -201,6 +203,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="robots.txt" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -279,6 +282,7 @@
     <Folder Include="SysData\Logs\" />
     <Folder Include="SysData\PhotoGallery\Thumbs\" />
     <Folder Include="SysData\Vault\" />
+    <Folder Include="Views\Robot\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

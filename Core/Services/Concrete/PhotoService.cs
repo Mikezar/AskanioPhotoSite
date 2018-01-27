@@ -117,11 +117,11 @@ namespace AskanioPhotoSite.Core.Services.Concrete
             if (watermark != null)
                 _providerWatermark.DeleteOne(watermark.Id);
 
+            System.IO.File.Delete(HttpContext.Current?.Server?.MapPath(photo?.PhotoPath));
+            System.IO.File.Delete(HttpContext.Current?.Server?.MapPath(photo?.ThumbnailPath));
+
             _providerPhoto.DeleteOne(id);
             _providerPhoto.Commit();
-
-            System.IO.File.Delete(HttpContext.Current.Server.MapPath(photo.PhotoPath));
-            System.IO.File.Delete(HttpContext.Current.Server.MapPath(photo.ThumbnailPath));
         }
 
         public void DeleteMany(int[] ids)
