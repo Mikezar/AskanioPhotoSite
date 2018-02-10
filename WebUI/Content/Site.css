@@ -1,83 +1,6 @@
-﻿/*MAIN UI*/
-
-        .randomPhoto
-        {
-           text-align:center
-            /*width: 260px;
-            height: 210px;
-            border: 0px none;*/
-        }
-
-            .randomPhoto img {
-                max-width: 260px;
-                max-height: 210px;
-                border-radius: 5px;
-            }
-
-            .randomPhoto .photoTitle
-            {
-                padding: 8px;
-                color: rgb(85, 85, 85);
-                font-size: 14px;
-                font-family: 'Helvetica Neue';
-            }
-
-    hr
-    {
-        border: 1px solid #777777;
-    }
-    .cloud
-    {
-        margin-top: 60px;
-        margin-left: 25px;
-        align-content: center;
-    }
-    .tag-cloud {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        margin: 5px;
-    }
-
-        .tag-cloud a {
-            display: inline-block;
-            margin: 0.125rem;
-            padding: 0.6375rem;
-            color: black;
-            background-color: #F5F5DC;
-            border-radius: 5px;
-            transition: all 0.1s ease-in-out;
-        }
-
-        .tag-cloud a:hover,
-        .tagcloud a:focus { 
-            color: #0c2933;
-            transform: scale(1.1);
-        }
-
-    .tag-cloud .smallest { font-size: 75%;}
-    .tag-cloud .small { font-size: 100%; }
-    .tag-cloud .medium { font-size: 125%;}
-    .tag-cloud .large { font-size: 150%; }
-    .tag-cloud .largest { font-size: 200%; }
-
-
-    .footer {
-        text-align: center;
-        color: #aea294;
-    }
-
-.hr-footer {
-    margin-top: 60px;
-    margin-bottom: 20px;
-    margin-left: 25px;
-    border: 0.5px solid #aea294;
-}
-
-.navbar-brand {
+﻿.navbar-brand {
     margin-right: 75px;
 }
-
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -139,7 +62,7 @@ textarea {
 }
 
 body .modal-open {
-   overflow: visible;
+   overflow: hidden;
 }
 .default {
     color: grey; 
@@ -187,8 +110,6 @@ body .modal-open {
 .active-row {
     background-color: #f2dbc6 ;
 }
-
-
 
 /*ГЛАВНАЯ*/
 
@@ -376,24 +297,28 @@ body .modal-open {
 
 /*ОБЛАКО ТЭГОВ*/
 
-    .askanio-sidebar-section .tag-cloud {
+    .askanio-sidebar-section .tag-cloud,
+    .askanio-gallery-cloud .tag-cloud {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         margin: 5px;
     }
 
-      .askanio-sidebar-section .tag-cloud ul {
+      .askanio-sidebar-section .tag-cloud ul,
+      .askanio-gallery-cloud .tag-cloud ul {
 	    margin: 0;
 	    padding: 0;
 	    list-style: none;
     }
-         .askanio-sidebar-section .tag-cloud ul li {
+         .askanio-sidebar-section .tag-cloud ul li,
+         .askanio-gallery-cloud .tag-cloud ul li {
 	        display: inline-block;
 	        margin: 0 0 .3em 1em;
 	        padding: 0;
         }
-         .askanio-sidebar-section .tag-cloud ul li a {
+         .askanio-sidebar-section .tag-cloud ul li a,
+         .askanio-gallery-cloud .tag-cloud ul li a {
             outline: 0;
 	        position: relative;
 	        display: inline-block;
@@ -408,7 +333,8 @@ body .modal-open {
 	        -webkit-transition: .2s;
 	        transition: .2s;
         }
-         .askanio-sidebar-section .tag-cloud ul li a::before {
+         .askanio-sidebar-section .tag-cloud ul li a::before,
+         .askanio-gallery-cloud .tag-cloud ul li a::before {
 	        position: absolute;
 	        top: 0;
 	        left: -15px;
@@ -421,7 +347,8 @@ body .modal-open {
 	        -webkit-transition: .2s;
 	        transition: .2s;
         }
-         .askanio-sidebar-section .tag-cloud ul li a::after {
+         .askanio-sidebar-section .tag-cloud ul li a::after,
+         .askanio-gallery-cloud .tag-cloud ul li a::after{
 	        position: absolute;
 	        top: 50%;
 	        left: -6px;
@@ -435,18 +362,21 @@ body .modal-open {
             opacity:0.8;
 	        border-radius: 100%;
         }
-         .askanio-sidebar-section .tag-cloud ul li span {
+         .askanio-sidebar-section .tag-cloud ul li span,
+         .askanio-gallery-cloud .tag-cloud ul li span{
 	        display: block;
 	        max-width: 100px;
 	        white-space: nowrap;
 	        text-overflow: ellipsis;
 	        overflow: hidden;
         }
-         .askanio-sidebar-section .tag-cloud ul li a:hover {
+         .askanio-sidebar-section .tag-cloud ul li a:hover,
+         .askanio-gallery-cloud .tag-cloud ul li a:hover{
 	        background-color: #555;
 	        color: #fff;
         }
-         .askanio-sidebar-section .tag-cloud ul li a:hover::before {
+         .askanio-sidebar-section .tag-cloud ul li a:hover::before,
+         .askanio-gallery-cloud  .tag-cloud ul li a:hover::before{
 	        background-color: #555;
         }
  }

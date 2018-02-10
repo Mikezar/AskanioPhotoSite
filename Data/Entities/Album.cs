@@ -17,6 +17,6 @@
 
         public string CoverPath { get; set; }
 
-        public int? ViewPattern { get; set; }
+        public int ViewPattern { get; set; }
     }
 }

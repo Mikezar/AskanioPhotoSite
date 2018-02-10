@@ -54,7 +54,6 @@ function OpenPhotoInModal(context, url, includeTag)
         success: function (result) {
             $('#photo').html(result);
             $('#photo-modal').show();
-            $('body').css("overflow", "hidden");
         }
     });
 }
@@ -150,3 +149,45 @@ function ChangeOrder(data) {
         data: data
     })
 }
+
+function RegisterListener(event, func) {
+    if (window.addEventListener) {
+        window.addEventListener(event, func)
+    } else {
+        window.attachEvent('on' + event, func)
+    }
+}
+
+function IsInViewport(element) {
+    var rect = element.getBoundingClientRect();
+
+    return (
+        rect.bottom >= 0 &&
+        rect.right >= 0 &&
+
+        rect.top <= (
+        window.innerHeight ||
+        document.documentElement.clientHeight) &&
+
+        rect.left <= (
+        window.innerWidth ||
+        document.documentElement.clientWidth)
+     );
+}
+
+function LazyLoad(grid) {
+    var lazy = $('.lazy');
+    for (var i = 0; i < lazy.length; i++) {
+        if (IsInViewport(lazy[i])) {
+            lazy[i].src = lazy[i].getAttribute('data-src');
+            lazy[i].onload = function (el) {
+                $(this).fadeTo("slow", 1);
+                $(this).parent().children('.loader').hide();
+                if (grid) {
+                    $('.grid').masonry('layout');
+                }
+            };
+        }
+    }
+}
+

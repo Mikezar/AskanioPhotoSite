@@ -45,7 +45,7 @@ namespace AskanioPhotoSite.WebUI.Helpers
                     tagClass = "small";
                 }
 
-                links.AppendFormat($"<li><a href=\"{urlHelper.Action("Tag", "Gallery", new { id = tag.Id})}\" title=\"{title}\" class=\"{tagClass}\"><span>{title}</span></a></li>{Environment.NewLine}");
+                links.AppendFormat($"<li><a href=\"{urlHelper.Action("Tag", "Gallery", new { ids = tag.Id })}\" title=\"{title}\" class=\"{tagClass}\" alt=\"{title}\"><span>{title}</span></a></li>{Environment.NewLine}");
             }
 
             var div = new TagBuilder("div");

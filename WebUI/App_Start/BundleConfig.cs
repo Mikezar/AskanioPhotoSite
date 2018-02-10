@@ -14,6 +14,10 @@ namespace AskanioPhotoSite.WebUI
                         "~/Scripts/jquery.validate*",
                         "~/Scripts/jquery.validate-unobtrusive.js",
                         "~/Scripts/jquery.multi-select.js",
+                        "~/Scripts/masonry.min.js",
+                        "~/Scripts/imagesLoaded.min.js",
+                        "~/Scripts/select2.js",
+                        "~/Scripts/select2.full.js",
                         "~/Scripts/main-carousel.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -32,6 +36,7 @@ namespace AskanioPhotoSite.WebUI
                       "~/Content/Site.css",
                       "~/Content/MobileSite.css",
                       "~/Content/Gallery.css",
+                      "~/Content/select2.css",
                       "~/Content/multi-select.css"
                       ));
         }

@@ -29,7 +29,13 @@ namespace AskanioPhotoSite.WebUI.Controllers
         {
             var photo = _photoService.GetRandomPhoto();
 
-            return PartialView("~/Views/Shared/_SideBar.cshtml", photo);
+            var model = new SideBarModel()
+            {
+                Photo = photo,
+                Tags = _tagService.GetAll()
+            };
+
+            return PartialView("~/Views/Shared/_SideBar.cshtml", model);
         }
 
         public ActionResult GenerateTagCloud()

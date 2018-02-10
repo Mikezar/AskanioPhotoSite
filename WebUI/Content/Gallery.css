@@ -1,19 +1,26 @@
 ﻿/*ГАЛЕРЕЯ*/
+body {
+    background-color: #fff;
+}
 
+/*МЕНЮ*/
 .askanio-gallery-language {
    position:absolute;
    margin-left: 7px;
-   top: 0;
+   top: 5px;
 }
 .askanio-gallery-language a {
-   color: #252525;
+   color: #fff;
    border-bottom-color: #252525;
    outline: 0;
 }
 
+.navbar-fixed-top
+{
+    z-index: 1000;
+}
 .askanio-bar .navbar {
-   color: #252525;
-   font-size: 1.1em;
+   font-size: 1.3em;
    font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -28,84 +35,266 @@
 
 .askanio-bar .navbar-nav > li a {
     outline: 0;
+    color: #fff;
 }
-.askanio-bar .navbar-nav > li a:hover {
+.askanio-bar .navbar-nav > li a:hover,
+.askanio-gallery-language a:hover {
     text-decoration:underline;
-    text-decoration-color:black;
+    text-decoration-color: #AAA;
+    color: #AAA;
 }
 
+/*ТЕЛО*/
 .askanio-gallery {
     display: block;
-    margin-top: 25px;
+    margin-top: 50px;
 }
 
-    .askanio-gallery .leftColumn
+    .askanio-gallery .panel-left
     {
         float: left;
+        height: inherit;
         width: 290px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        margin-right: 1%;
+        position: fixed;
+        overflow: auto;
+        padding: 0 0 0 25px;
         padding-top: 15px;
+        padding-right: 0px;
+        left: 0;
+        padding-top: 2%;
+        padding-right: 2%;
     }
-    .askanio-gallery .rightColumn
+
+    .wrapper {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+
+    /*СЛУЧАЙНОЕ ФОТО*/
+    .askanio-gallery-random {
+        text-align: center;
+        width: 100%;
+    }
+
+       .askanio-gallery-random img {
+           max-width: 90%;
+           height: auto;
+           border-radius: 5px;
+       }
+
+        .askanio-gallery-random .photoTitle
+         {
+            padding: 8px;
+            color: rgb(85, 85, 85);
+            font-size: 14px;
+            font-family: 'Helvetica Neue';
+        }
+
+    /*ОБЛАКО ТЕГОВ*/
+
+    .askanio-gallery-cloud
+    {
+        margin-top: 25px;
+    }
+
+     .askanio-gallery-title {
+        font-family: "Freight Sans Light", "Freight Sans Light", sans-serif;
+        font-size: 17px;
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 13px;
+    }
+    
+    /*ПОИСК*/
+    .askanio-gallery-search {
+      overflow: hidden;
+      width: 100%;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+     .askanio-gallery-search #search{
+          width: 100%;
+          height: 40px;
+          background: #f1f1f1;
+          border: 1px solid #65737e;
+          font-size: 10pt;
+          float: left;
+          color: #65737e;
+          padding-left: 15px;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          border-radius: 5px;
+     }
+
+    .askanio-gallery-search #search::-webkit-input-placeholder,
+    .askanio-gallery-search #search::-moz-placeholder,
+    .askanio-gallery-search #search:-ms-input-placeholder{
+        color: #65737e;
+    }
+ 
+     /*.icon{
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+ 
+      margin-top: -32px;
+      display: block;
+      left: 17.9%;
+      position: fixed;
+      border: 1px solid #65737e;
+      background: #65737e;
+      height: 32px;
+      color: #fff;
+      outline: none;
+    }*/
+
+     .askanio-gallery .btn-primary {
+         background:#65737e;
+         margin-top: 8px;
+         margin-bottom: 8px;
+         border-color:#65737e;
+         margin-left: 70%;
+     }
+
+    .askanio-gallery .btn-primary:hover {
+        background-color: #fff;
+        color: #65737e;
+    }
+
+    .askanio-gallery-search button.icon .glyphicon
+    {
+        font-size: 18px;
+        padding-bottom: 3px;
+    }
+
+  .icon:hover{
+    background: white;
+    border: 1px solid #65737e;
+    color: #65737e;
+  }
+
+   /*ПОДВАЛ*/
+   .askanio-gallery-footer
+   {
+       position: relative;
+       margin: 10px 0 0 0;
+       line-height: 1.2;
+       color: #AAA;
+       font-family: "Freight Sans Condensed Book", "Freight Sans Condensed Book", sans-serif;
+       font-size: 11px;
+       padding: 0 0.5em;
+   }
+
+  .askanio-gallery .rightColumn
     {
         margin-left: 310px;
-        border-left: 1px solid #e7e7e7;
         padding: 15px;
         min-height: 350px;
         overflow: hidden
     }
 
-
 /*АЛЬБОМЫ*/
+    .album-layout {
+        margin-bottom: 25px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
 
-.album-layout {
-    margin-bottom: 25px;
-    display: grid;
-    position: relative;
-    grid-template-columns: 270px 270px 270px;
-    grid-gap: 10px;
-    width: 900px;
-}
+    .askanio-gallery-album a:hover {
+        text-decoration: none;
+    }
 
-    .album a img  {
+     .askanio-gallery-album h3:hover
+     {
+        background-color: #e6e6e6;
+     }
+
+   .askanio-gallery-album a img  {
         cursor: pointer;
-        display: inline-block;
+        display: block;
         max-width: 270px;
         max-height: 270px;
         margin: 0;
         padding: 0;
     }
 
-    .album a .description{
-        font-family: Poiret One;
-        font-size: 17px;
-        text-align: center;
-        vertical-align: middle;
-        padding: 5px;
-        color: #777777;
+   .askanio-gallery-album {
+        max-width: 290px;
+   }
+    .askanio-gallery-column h3 {
+    font-size: 17px;
+    font-family: sans-serif;
+    word-break: break-all;
+    color: #65737e;
+    text-align: center;
+}
+    .askanio-gallery-column {
+        float: left;
+        padding: 8px;
     }
 
-/*ФОТОГРАФИИ*/
-
-.photos-pattern-1 {
-    display: grid;
-    grid-template-columns: 270px  270px  270px;
-    /*grid-template-columns:repeat(auto-fit, minmax(270px, 1fr));*/
-    /*grid-auto-rows: 270px;*/
-    /*grid-auto-flow: row dense;*/
-    grid-gap: 10px;
-    justify-items: center;
+     .askanio-gallery-content a {
+         outline: none;
+     }
+ @media only screen and (max-width: 600px) {
+     .askanio-gallery-column {
+        flex: 100%;
+        max-width:100%;
+    }
 }
-    .photos-pattern-1 img {
-        cursor: pointer;
-        display: flex;
-        flex: 270px;
-        max-width: 270px;
-        position: relative; 
-        justify-content: flex-end;
-        background-size: cover;
-        background-position: center;
-        box-sizing: border-box;
-        padding: 0;
+
+  @media(max-width: 800px) {
+     .askanio-gallery-column {
+        flex: 50%;
+        max-width:100%;
+    }
+}
+
+
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+     .askanio-gallery-column {
+        flex: 33%;
+        max-width:100%;
+    }
+}
+
+@media only screen and (min-width: 1281px) {
+     .askanio-gallery-column {
+        flex: 25%;
+       max-width:100%;
+    }
+}
+
+
+
+/*ФОТОГРАФИИ*/
+    .photos-pattern-1 .grid-item { 
+        float:left;
+        margin: 5px;
+    }
+
+     .photos-pattern-1 .grid-item img {
+      display: block;
+      max-width: 270px;
+      width: 100%;
+      cursor: pointer;
+    }
+     .photos-pattern-1 .grid {
+        width: 100%;
+    }
+
+ /* default width at small size */
+    @media (max-width: 768px) {
+      .grid-item { width: 100%; }
     }
 
  .photos-pattern-2 {
@@ -138,9 +327,10 @@
     padding-top: 50px; /* Location of the box */
     left: 0;
     top: 0;
+    right: 0;
+    bottom: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: hidden; 
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
 }
@@ -182,14 +372,6 @@
     height: 150px;
 }
 
-/* Add Animation - Zoom in the Modal */
-/*.modal-content, #caption {
-    -webkit-animation-name: zoom;
-    -webkit-animation-duration: 0.6s;
-    animation-name: zoom;
-    animation-duration: 0.6s;
-}*/
-
 .prev, .next {
 position: absolute;
 top: 50%;
@@ -229,15 +411,6 @@ right: 25px;
     padding-top: 3px;
     padding-right: 1px;
 }
-/*@-webkit-keyframes zoom {
-    from {-webkit-transform:scale(0)}
-    to {-webkit-transform:scale(1)}
-}
-
-@keyframes zoom {
-    from {transform:scale(0)}
-    to {transform:scale(1)}
-}*/
 
 /* The Close Button */
 .close {
@@ -263,3 +436,120 @@ right: 25px;
         width: 100%;
     }
 } 
+
+/*BREAD CRUMBS*/
+.breadcrumb {
+	list-style: none;
+	display: inline-block;
+}
+
+.breadcrumb .glyphicon {
+	font-size: 16px;
+}
+
+.breadcrumb li {
+	float: left;
+}
+
+.breadcrumb li a {
+	color: #FFF;
+	display: block;
+	/*background: #3498db;*/
+    outline: 0;
+    background: #626D71;
+	text-decoration: none;
+	position: relative;
+	height: 26px;
+	line-height: 26px;
+	padding: 0 10px 0 5px;
+	text-align: center;
+	margin-right: 23px;
+}
+
+.breadcrumb li:nth-child(even) a {
+	/*background-color: #2980b9;*/
+    background-color: #626D71;
+}
+
+.breadcrumb li:nth-child(even) a:before {
+	/*border-color: #2980b9;*/
+    border-color: #626D71;
+	border-left-color: transparent;
+}
+
+.breadcrumb li:nth-child(even) a:after {
+	/*border-left-color: #2980b9;*/
+    border-left-color: #626D71;
+}
+
+.breadcrumb li:first-child a {
+	padding-left: 15px;
+	border-radius: 4px 0 0 4px;
+}
+
+.breadcrumb li:first-child a:before {
+	border: none;
+}
+
+.breadcrumb li:last-child a {
+	padding-right: 15px;
+	border-radius: 0 4px 4px 0;
+}
+
+.breadcrumb li:last-child a:after {
+	border: none;
+}
+
+.breadcrumb li a:before, .breadcrumb li a:after {
+	content: "";
+	position: absolute;
+	top: 0;
+	/*border: 0 solid #3498db;*/
+    border: 0 solid #626D71;
+	border-width: 13px 10px;
+	width: 0;
+	height: 0;
+}
+
+.breadcrumb li a:before {
+	left: -20px;
+	border-left-color: transparent;
+}
+
+.breadcrumb li a:after {
+	left: 100%;
+	border-color: transparent;
+	/*border-left-color: #3498db;*/
+    border-left-color: #626D71;
+}
+
+.breadcrumb > li + li::before {
+    padding: 0;
+    color: none;
+    content: "";
+}
+.breadcrumb li a:hover {
+	background-color: #1abc9c;
+}
+
+.breadcrumb li a:hover:before {
+	border-color: #1abc9c;
+	border-left-color: transparent;
+}
+
+.breadcrumb li a:hover:after {
+	border-left-color: #1abc9c;
+}
+
+.breadcrumb li a:active {
+	background-color: #16a085;
+}
+
+.breadcrumb li a:active:before {
+	border-color: #16a085;
+	border-left-color: transparent;
+}
+
+.breadcrumb li a:active:after {
+	border-left-color: #16a085;
+}

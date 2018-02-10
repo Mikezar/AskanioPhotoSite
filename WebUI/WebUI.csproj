@@ -150,6 +150,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\RobotController.cs" />
+    <Compile Include="Helpers\BreadCrumbHelper.cs" />
     <Compile Include="Helpers\ContentLoader.cs" />
     <Compile Include="Infrastructure\Files\ImageRouteHandler.cs" />
     <Compile Include="Infrastructure\Files\FileHandler.cs" />
@@ -195,11 +196,14 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Core\loader.gif" />
     <Content Include="Content\Core\loading.gif" />
+    <Content Include="Content\Core\photo-dummy.svg" />
     <Content Include="Content\Core\switch.png" />
     <Content Include="Content\Gallery.css" />
     <Content Include="Content\MobileSite.css" />
     <Content Include="Content\multi-select.css" />
-    <Content Include="favicon.ico" />
+    <Content Include="Content\select2.css" />
+    <Content Include="Content\select2.min.css" />
+    <Content Include="Content\Core\favicon.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -225,6 +229,7 @@
     </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\imagesLoaded.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -236,9 +241,14 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main-carousel.js" />
+    <Content Include="Scripts\masonry.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\select2.full.js" />
+    <Content Include="Scripts\select2.full.min.js" />
+    <Content Include="Scripts\select2.js" />
+    <Content Include="Scripts\select2.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

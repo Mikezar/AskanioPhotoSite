@@ -1,4 +1,4 @@
-﻿@model AskanioPhotoSite.Data.Entities.Photo
+﻿@model AskanioPhotoSite.Core.Models.SideBarModel
 @using AskanioPhotoSite.Core.Helpers;
 @using AskanioPhotoSite.WebUI.Localization;
 
@@ -6,13 +6,12 @@
     Layout = null;
 }
 
-
-
-<div class="randomPhoto">
-    @if (Model != null)
+<div class="askanio-gallery-random">
+    <p class="askanio-gallery-title">@MainUI.RandomPhotoTitle</p>
+    @if (Model.Photo != null)
     {
-             <a href='@Url.Action("Album", "Gallery", new { id = Model.AlbumId})'><img id="random" src='@Url.Content(Model.ThumbnailPath)' /></a>
-             <div class="form-inline photoTitle">@(CultureHelper.IsEnCulture() ? Model.TitleEng : Model.TitleRu)</div>
+             <a href='@Url.Action("Album", "Gallery", new { id = Model.Photo.AlbumId})'><img id="random" src='@Url.Content(Model.Photo.ThumbnailPath)' /></a>
+             <div class="form-inline photoTitle">@(CultureHelper.IsEnCulture() ? Model.Photo.TitleEng : Model.Photo.TitleRu)</div>
         }
     else
         {
@@ -21,12 +20,56 @@
         }
 </div>
 
- <div class="cloud">
-     <h4 class="text-center">@MainUI.TagSearch</h4>
-      <hr/>
-      @Html.Action("GenerateTagCloud")
- </div>
-<div class="hr-footer"></div>
-    <div class="footer">
-        &copy; Alexander Serebryakov @DateTime.Now.Year
-    </div>
+ <div class="askanio-gallery-cloud">
+     <p class="askanio-gallery-title">@MainUI.TagSearch</p>
+     <div class="askanio-gallery-search">
+         <select id="search" class="tags" name="states[]" multiple="multiple">
+
+             @foreach (var tag in Model.Tags)
+             {
+                <option value="@tag.Id">@(CultureHelper.IsEnCulture() ? tag.TitleEng : tag.TitleRu)</option>
+             }
+         </select>
+     </div>
+     <button id="search-btn"class="askanio-gallery btn btn-primary">@MainUI.Search</button>
+     <br/>
+     <p class="askanio-gallery-title">@MainUI.TopTags</p>
+     @Html.Action("GenerateTagCloud")
+  </div>
+
+@using (Html.BeginForm("Tag", "Gallery", FormMethod.Post, new { id = "tag-search"}))
+{
+
+}
+
+<div class="askanio-gallery-footer">
+    &copy; Alexander Serebryakov @DateTime.Now.Year
+    <br/>
+    @MainUI.Footer
+    <br />
+    App icon by <a href="https://icons8.com/" target="_blank">icons8</a>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.tags').select2(
+        {
+            placeholder: '@MainUI.Search...',
+            allowClear: true
+        });
+
+        $('#search-btn').on('click', function () {
+            var ids = $.map($('option:selected'), function(element){
+                return element.value;
+            });
+
+            if (ids.length == 0)
+                return;
+
+            for (var i = 0; i < ids.length; i++)
+                $('#tag-search').append('<input name="ids[' + [i] + ']" value="' + ids[i] + '" hidden/>')
+
+           $('#tag-search').submit();
+        });
+    });
+</script>

@@ -6,6 +6,7 @@ namespace AskanioPhotoSite.Data.Storage.Transactions
 {
     public class Transaction : ITransaction
     {
+        private static object _lock = new object();
         private string _filePath;
 
         private bool _disposed;
@@ -24,11 +25,14 @@ namespace AskanioPhotoSite.Data.Storage.Transactions
 
         public string ReadStream()
         {
-            using (var reader = File.Open(_filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read))
+            lock (_lock)
             {
-                var buffer = new byte[reader.Length];
-                reader.Read(buffer, 0, buffer.Length);
-                return Encoding.Unicode.GetString(buffer);
+                using (var reader = File.Open(_filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.Read))
+                {
+                    var buffer = new byte[reader.Length];
+                    reader.Read(buffer, 0, buffer.Length);
+                    return Encoding.Unicode.GetString(buffer);
+                }
             }
         }
 

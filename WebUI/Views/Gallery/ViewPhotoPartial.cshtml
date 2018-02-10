@@ -4,12 +4,12 @@
     Layout = null;
 }
 
-<div id="photo-modal" class="modalPhoto">>
+<div id="photo-modal" class="modal modalPhoto">>
     <span class="close">&times;</span>
 
     <div id="title">@Model.Title</div>
 
-    <img id="actual" class="modal-content" src="/image?id=@Model.Id&?@Guid.NewGuid()">
+    <img id="actual" class="modal-content" src="/image?id=@Model.Id&?@Guid.NewGuid()" alt="@Model.Title">
     <div class="loading"></div>
 
     <a class="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
@@ -21,6 +21,9 @@
 
 <script>
     $(document).ready(function () {
+        $('.modal-content').fadeOut(0); 
+        $('body').css("overflow", "hidden");
+
         $(".close").on("click", function () {
             $("#photo-modal").hide();
             $('body').css("overflow", "visible");
@@ -33,28 +36,22 @@
         });
         $('.next').on('click', function () {
             GetPhoto(@Model.Id,'@Url.Action("ViewPhotoPartial")',  true, '@Model.IncludeTag');
-        });
+        });  
     });
 
     function ShowImage()
     {
-        $('img .loading').fadeOut(500);
+        $('img .loading').hide();
+        $('.modal-content').fadeTo("slow", 1);
     }
 
     function PreloadImage(callback){
-        var objImagePreloader = new Image();
-
-        objImagePreloader.src = $('#actual').attr("src");
-        if(objImagePreloader.complete){
+        var img = new Image();
+        img.src = $('#actual').attr("src");
+        
+        img.onload = function(){
             callback();
-            objImagePreloader.onload=function(){};
-        }
-        else{
-            objImagePreloader.onload = function() {
-                callback();
-                objImagePreloader.onload=function(){};
-            }
-        }
+        };
     }
 
     function _arrayBufferToBase64( buffer ) {

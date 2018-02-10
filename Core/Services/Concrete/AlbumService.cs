@@ -7,6 +7,7 @@ using AskanioPhotoSite.Core.Convertors.Abstract;
 using AskanioPhotoSite.Core.Services.Abstract;
 using System.Web.Mvc;
 using AskanioPhotoSite.Core.Services.Extensions;
+using AskanioPhotoSite.Core.Helpers;
 using System;
 
 namespace AskanioPhotoSite.Core.Services.Concrete
@@ -94,9 +95,9 @@ namespace AskanioPhotoSite.Core.Services.Concrete
                 Albums = albums.Where(t => t.ParentId == 0).Select(x => new GalleryAlbumModel()
                 {
                     Id = x.Id,
-                    TitleRu = x.TitleRu,
-                    TitleEng = x.TitleEng,
-                    Cover = albums.Where(f => f.ParentId == x.Id).SingleOrDefault(r =>
+                    Title = CultureHelper.IsEnCulture() ? x.TitleEng : x.TitleRu,
+                    Description = CultureHelper.IsEnCulture() ? x.DescriptionEng : x.DescriptionRu,
+                    Cover = x.CoverPath ?? albums.Where(f => f.ParentId == x.Id).SingleOrDefault(r =>
                     {
                         var childs = albums.Where(f => f.ParentId == x.Id);
                         return childs.ElementAt(new Random().Next(0, childs.Count())).CoverPath != null;

@@ -64,6 +64,9 @@ namespace AskanioPhotoSite.WebUI.Infrastructure.Files
             }
             catch (Exception e)
             {
+                if(e.Message.Contains("The remote host closed the connection."))
+                    return;
+
                 Log.RegisterError(e);
                 context.Response.StatusCode = 404;
                 context.Response.Write(MainUI.FileNotFoundError);

@@ -1,15 +1,18 @@
-﻿@model AskanioPhotoSite.Core.Models.GalleryPhotoTagModel
+﻿@using AskanioPhotoSite.WebUI.Localization
+@model AskanioPhotoSite.Core.Models.GalleryPhotoTagModel
 
 @{
-    ViewBag.Title = Model.TagName;
+    ViewBag.Title = MainUI.Tags;
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 }
 
-
-<div class="photos-pattern-1">
+<div class="photos-pattern-1 grid">
     @foreach (var photo in Model.Photos)
     {
-        <a href='#' class="photo" data-id="@photo.Id"><img src='@Url.Content(photo.Thumbnail)'></a>
+        <div class="grid-item" data-id="@photo.Id">
+            <img class="lazy" data-src='@Url.Content(photo.Thumbnail)?@Guid.NewGuid()'>
+            <div class="loader" style="width: 270px;"><img style="width: 32px; margin: 0 auto;" src="~/Content/Core/loader.gif" alt="@photo.Title"/></div>
+        </div>
     }
 </div>
 
@@ -19,8 +22,21 @@
 <script>
 
     $(document).ready(function () {
-        $('.photo').on('click', function () {
+        $('.lazy').fadeOut(0);
+        $('.grid-item').on('click', function () {
             OpenPhotoInModal(this, '@Url.Action("ViewPhotoPartial")', true)
         });
+
+        $('.grid').masonry({
+            itemSelector: '.grid-item',
+            percentPosition: true,
+            columnWidth: 3,
+            isAnimated: true,
+            easing: 'linear'
+        });
+
+        RegisterListener('scroll', LazyLoad);
+        RegisterListener('load', LazyLoad);
+        LazyLoad(true);
     });
 </script>

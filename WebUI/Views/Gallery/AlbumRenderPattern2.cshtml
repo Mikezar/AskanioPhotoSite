@@ -1,15 +1,20 @@
-﻿@model AskanioPhotoSite.Core.Models.GalleryPhotoListModel
+﻿@using AskanioPhotoSite.WebUI.Helpers;
+@model AskanioPhotoSite.Core.Models.GalleryPhotoListModel
 
 @{
     ViewBag.Title = Model.AlbumTitle;
     Layout = "~/Views/Shared/_BaseLayout.cshtml";
 }
 
+@Html.Build(Model.Albums)
 
 <div class="photos-pattern-2">
     @foreach (var photo in Model.Photos)
     {
-        <a href='#' class="photo" data-id="@photo.Id"><img src='@Url.Content(photo.Photo)?@Guid.NewGuid()'></a>
+        <div>
+            <img class="lazy photo" src="/image?id=@photo.Id&?@Guid.NewGuid()"/>
+            <div class="loader" style="width: 100%;"><img style="width: 32px; margin: 0 auto;" src="~/Content/Core/loader.gif" alt="@photo.Title" /></div>
+        </div>
         <div class="desc">@photo.Description</div>
         <div style="margin-top: 15px"></div>
     }
@@ -21,8 +26,28 @@
 <script>
 
     $(document).ready(function () {
+        $('.lazy').fadeOut(0);
         $('.photo').on('click', function () {
             OpenPhotoInModal(this, '@Url.Action("ViewPhotoPartial")')
         });
+
+        PreloadImage(ShowImage);
+       
     });
+
+    function ShowImage() {
+        $('.loader').hide();
+        $('.lazy').fadeTo("slow", 1);
+    }
+
+    function PreloadImage(callback) {
+        var lazy = $('.lazy');
+        for (var i = 0; i < lazy.length; i++) {
+            var img = new Image();
+            img.src = $(lazy[i]).attr("src");
+            img.onload = function () {
+                callback();
+            };
+        }
+    }
 </script>

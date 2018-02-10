@@ -16,7 +16,7 @@ namespace AskanioPhotoSite.Core.Convertors.Concrete
                 TitleEng = model.TitleEng,
                 DescriptionEng = model.DescriptionEng,
                 DescriptionRu = model.DescriptionRu,
-                ViewPattern = model.ViewPattern,
+                ViewPattern = model.ViewPattern ?? 0,
                 CoverPath = model.CoverPath
             };
         }

@@ -132,6 +132,9 @@
   <data name="FileNotFoundError" xml:space="preserve">
     <value>Файл не найден</value>
   </data>
+  <data name="Footer" xml:space="preserve">
+    <value>Сайт разработал Михаил Сердюк</value>
+  </data>
   <data name="Gallery" xml:space="preserve">
     <value>Галерея</value>
   </data>
@@ -156,10 +159,19 @@
   <data name="ReturnToHomeLink" xml:space="preserve">
     <value>Вернуться на главную страницу.</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
   <data name="SiteTitle" xml:space="preserve">
     <value>АЛЕКСАНДР СЕРЕБРЯКОВ</value>
   </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Тэги</value>
+  </data>
   <data name="TagSearch" xml:space="preserve">
     <value>Поиск по тэгам</value>
+  </data>
+  <data name="TopTags" xml:space="preserve">
+    <value>Топ 15 тэгов</value>
   </data>
 </root>

@@ -107,6 +107,7 @@
     <Compile Include="Models\PhotoSortModel.cs" />
     <Compile Include="Models\PhotoUploadListModel.cs" />
     <Compile Include="Models\PhotoUploadModel.cs" />
+    <Compile Include="Models\SideBarModel.cs" />
     <Compile Include="Models\TagCloudModel.cs" />
     <Compile Include="Models\TagListModel.cs" />
     <Compile Include="Models\TagModel.cs" />

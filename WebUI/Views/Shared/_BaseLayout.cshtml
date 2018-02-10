@@ -3,6 +3,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="~/Content/Core/favicon.png" />
     <title>@ViewBag.Title - Aleksandr Serebryakov</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -11,7 +12,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 </head>
 <body>
-    <div class="askanio-bar navbar navbar-default">
+    <div class="askanio-bar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="askanio-bar navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -38,8 +39,10 @@
     </div>
    
     <div class="askanio-gallery">
-        <div class="leftColumn">
-            @Html.Action("GetRandomPhoto", "Home", null)
+        <div class="panel-left">
+            <div class="wrapper">
+                @Html.Action("GetRandomPhoto", "Home", null)
+            </div>
         </div>
         <div class="rightColumn">
             @RenderBody()

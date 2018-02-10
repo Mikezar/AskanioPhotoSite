@@ -106,6 +106,15 @@ namespace AskanioPhotoSite.WebUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The website was developped by Mikhail Serdyuk.
+        /// </summary>
+        public static string Footer {
+            get {
+                return ResourceManager.GetString("Footer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gallery.
         /// </summary>
         public static string Gallery {
@@ -178,6 +187,15 @@ namespace AskanioPhotoSite.WebUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ALEXANDER SEREBRYAKOV.
         /// </summary>
         public static string SiteTitle {
@@ -187,11 +205,29 @@ namespace AskanioPhotoSite.WebUI.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tags.
+        /// </summary>
+        public static string Tags {
+            get {
+                return ResourceManager.GetString("Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tag search.
         /// </summary>
         public static string TagSearch {
             get {
                 return ResourceManager.GetString("TagSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Top 15 tags.
+        /// </summary>
+        public static string TopTags {
+            get {
+                return ResourceManager.GetString("TopTags", resourceCulture);
             }
         }
     }

@@ -22,7 +22,13 @@ namespace AskanioPhotoSite.WebUI
                 null, 
                 new RouteValueDictionary(new { MvcContraint = new ImageRouteHandlerConstaint() }), 
                 new ImageRouteHandler()));
-            
+
+            routes.MapRoute(
+            "Tags",
+            "Gallery/Tag/",
+            new { controller = "Gallery", action = "Tag", ids = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
             "Manage",
             "Secured/Management/{action}/{id}",

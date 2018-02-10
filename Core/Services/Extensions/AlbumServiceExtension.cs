@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using AskanioPhotoSite.Data.Entities;
 using AskanioPhotoSite.Core.Helpers;
+using System;
 
 namespace AskanioPhotoSite.Core.Services.Extensions
 {
@@ -31,6 +32,28 @@ namespace AskanioPhotoSite.Core.Services.Extensions
         {
             var albumIds = photos.Select(t => t.AlbumId).ToList();
             return albums.Where(x => !albumIds.Contains(x.Id));
+        }
+
+        public static IEnumerable<Tuple<int, string>> BuildGraph(this IEnumerable<Album> albums, Album currentAlbum)
+        {
+            var graph = GetParents(new List<Album>(), albums, currentAlbum.ParentId);
+
+            return graph.Select(x => new Tuple<int, string>(x.Id, CultureHelper.IsEnCulture() ? x.TitleEng : x.TitleRu))
+                        .Union(new List<Tuple<int, string>>(){
+                            new Tuple<int, string>(currentAlbum.Id, CultureHelper.IsEnCulture() ? currentAlbum.TitleEng : currentAlbum.TitleRu)});
+        }
+
+        public static IEnumerable<Album> GetParents(List<Album> collection, IEnumerable<Album> albums, int parentId)
+        {
+            var parent = albums.SingleOrDefault(x => x.Id == parentId);
+
+            if (parent != null)
+            {
+                collection.Insert(0,parent);
+                return GetParents(collection, albums, parent.ParentId);
+            }
+            else
+                return collection;
         }
     }
 }

@@ -3,6 +3,9 @@ using System.Linq;
 using AskanioPhotoSite.Core.Models;
 using AskanioPhotoSite.Core.Services.Abstract;
 using AskanioPhotoSite.Core.Helpers;
+using AskanioPhotoSite.Core.Services.Extensions;
+using System.Collections.Generic;
+using System;
 
 namespace AskanioPhotoSite.WebUI.Controllers
 {
@@ -37,10 +40,11 @@ namespace AskanioPhotoSite.WebUI.Controllers
                     Albums = childs.Select(x => new GalleryAlbumModel()
                     {
                         Id = x.Id,
-                        TitleRu = x.TitleRu,
-                        TitleEng = x.TitleEng,
+                        Title = CultureHelper.IsEnCulture() ? x.TitleEng : x.TitleRu,
+                        Description = CultureHelper.IsEnCulture() ? x.DescriptionEng : x.DescriptionRu,
                         Cover = x.CoverPath
-                    })
+                    }),
+                    ParentAlbums = _albumService.GetAll().BuildGraph(album)
                 };
 
                 return View("~/Views/Gallery/Index.cshtml", model);
@@ -57,14 +61,16 @@ namespace AskanioPhotoSite.WebUI.Controllers
                         Photos = photos.OrderByDescending(x => x.Order).Select(x => new GalleryPhotoModel()
                         {
                             Id = x.Id,
+                            Title = CultureHelper.IsEnCulture() ? x.TitleEng : x.TitleRu,
                             Thumbnail = x.ThumbnailPath,
                             Photo = x.PhotoPath,
                             Description = CultureHelper.IsEnCulture() ? x.DescriptionEng : x.DescriptionRu,
 
-                        })
+                        }),
+                        Albums = _albumService.GetAll().BuildGraph(album)
                     };
 
-                    return View($"~/Views/Gallery/AlbumRenderPattern{album.ViewPattern ?? 1}.cshtml", model);
+                    return View($"~/Views/Gallery/AlbumRenderPattern{(album.ViewPattern == default(int) ? 1 : album.ViewPattern)}.cshtml", model);
                 }
                 else
                     return View($"~/Views/Gallery/AlbumRenderPattern1.cshtml", new GalleryPhotoListModel());
@@ -94,9 +100,9 @@ namespace AskanioPhotoSite.WebUI.Controllers
             return PartialView(model);
         }
 
-        public ActionResult Tag(int id)
+        public ActionResult Tag(IList<int> ids)
         {
-            var model = _tagService.ShowPhotoByTag(id);
+            var model = _tagService.ShowPhotoByTag(ids);
             return View("~/Views/Gallery/TagRenderPattern.cshtml", model);
         }
     }

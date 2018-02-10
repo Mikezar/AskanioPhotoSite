@@ -12,7 +12,7 @@ namespace AskanioPhotoSite.Core.Services.Abstract
         Tag UpdateOne(EditTagModel model);
         void DeleteOne(int id);
         IEnumerable<TagCloudModel> GenerateTagCloud();
-        GalleryPhotoTagModel ShowPhotoByTag(int id);
+        GalleryPhotoTagModel ShowPhotoByTag(IList<int> id);
         int GetRelatedPhotoCount(int id);
         int[] GetRelatedTags(int photoId);
     }

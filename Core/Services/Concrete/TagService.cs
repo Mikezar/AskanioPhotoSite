@@ -78,27 +78,23 @@ namespace AskanioPhotoSite.Core.Services.Concrete
                 Count = x.Count(),
                 TitleRu = x.Select(r => r.TitleRu).FirstOrDefault(),
                 TitleEng = x.Select(r => r.TitleEng).FirstOrDefault(),
-            });
-
-            if (CultureHelper.IsEnCulture())
-                cloud = cloud.OrderBy(x => x.TitleEng).ToList();
-            else
-                cloud = cloud.OrderBy(x => x.TitleRu).ToList();
+            }).OrderByDescending(t => t.Count).Take(15);
 
             return cloud;
         }
 
-        public GalleryPhotoTagModel ShowPhotoByTag(int id)
+        public GalleryPhotoTagModel ShowPhotoByTag(IList<int> ids)
         {
-            var tag = GetOne(id);
+            var tags = GetAll().Where(x => ids.Contains(x.Id)).ToList().Select(x => x.Id);
+
             var photos = _providerPhoto.GetAll().Where(x =>
-               _providerPhotoToTag.GetAll().Where(t => t.TagId == id).Select(r => r.PhotoId).Contains(x.Id));
+               _providerPhotoToTag.GetAll().Where(t => tags.Contains(t.TagId)).Select(r => r.PhotoId).Contains(x.Id));
 
             if (photos.Count() > 0)
             {
                 var model = new GalleryPhotoTagModel()
                 {
-                    TagName = CultureHelper.IsEnCulture() ? tag.TitleEng : tag.TitleRu,
+                    //TagName = CultureHelper.IsEnCulture() ? tag.TitleEng : tag.TitleRu,
                     Photos = photos.Select(x => new GalleryPhotoModel()
                     {
                         Id = x.Id,

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AskanioPhotoSite.Core.Models
 {
@@ -11,10 +8,13 @@ namespace AskanioPhotoSite.Core.Models
         public GalleryPhotoListModel()
         {
             Photos = new List<GalleryPhotoModel>();
+            Albums = new List<Tuple<int, string>>();
         }
 
         public IEnumerable<GalleryPhotoModel> Photos { get; set; }
 
         public string AlbumTitle { get; set; }
+
+        public IEnumerable<Tuple<int, string>> Albums { get; set; }
     }
 }

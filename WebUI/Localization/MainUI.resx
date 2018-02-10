@@ -132,6 +132,9 @@
   <data name="FileNotFoundError" xml:space="preserve">
     <value>File was not found.</value>
   </data>
+  <data name="Footer" xml:space="preserve">
+    <value>The website was developped by Mikhail Serdyuk</value>
+  </data>
   <data name="Gallery" xml:space="preserve">
     <value>Gallery</value>
   </data>
@@ -156,10 +159,19 @@
   <data name="ReturnToHomeLink" xml:space="preserve">
     <value>Return to  home page</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
   <data name="SiteTitle" xml:space="preserve">
     <value>ALEXANDER SEREBRYAKOV</value>
   </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
   <data name="TagSearch" xml:space="preserve">
     <value>Tag search</value>
+  </data>
+  <data name="TopTags" xml:space="preserve">
+    <value>Top 15 tags</value>
   </data>
 </root>
