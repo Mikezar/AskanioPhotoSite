@@ -1,0 +1,85 @@
+﻿@model AskanioPhotoSite.Core.Models.HomePageModel
+@using AskanioPhotoSite.WebUI.Localization;
+@using AskanioPhotoSite.Core.Helpers;
+@{
+    Layout = null;
+    ViewBag.Title = MainUI.Home;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="~/Content/Core/favicon.png" />
+    <title>@ViewBag.Title - Aleksandr Serebryakov</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render("~/Content/MobileSite.css")
+</head>
+<body>
+    <div class="askanio-background-slideshow"></div>
+
+    <div id="askanio-sidebar">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @if (CultureHelper.IsEnCulture())
+                    {
+                        <div class="askanio-sidebar-language"><a href='@Url.Action("ChangeCulture", "Culture", new { language = "ru-RU"})'>RU</a></div>
+                    }
+                    else
+                    {
+                        <div class="askanio-sidebar-language"><a href='@Url.Action("ChangeCulture", "Culture", new { language = "en-US"})'>EN</a></div>
+                    }
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href='@Url.Action("Index", "Home")'>@MainUI.Home</a></li>
+                        <li><a href='@Url.Action("Index", "Gallery")'>@MainUI.Gallery</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="askanio-sidebar-header">
+            <div class="askanio-sidebar-header-title">
+                <a href='@Url.Action("Index")'>
+                    <div class="title">@MainUI.SiteTitle</div>
+                    <div class="description">@MainUI.Photographer</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+   $(document).ready(function ()
+    {
+        var images = @Json.Encode(Model.BackgroundCovers.Select(x => x.Id));
+        for(var i = 0; i < images.length; i++)
+            $('.askanio-background-slideshow').append('<img class="slideshow as-' + i + '" src="/image?id=' + images[i]+ '" style="opacity: 0;"/>');
+
+        var slideIndex = 0;
+        var slides = $('.slideshow');
+        showSlides();
+
+        function showSlides() {
+            for (var i = 0; i < slides.length; i++)
+                slides[i].style.opacity = "0";
+
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex-1].style.opacity = "1";
+            setTimeout(showSlides, 15000);
+        }
+    });
+
+</script>

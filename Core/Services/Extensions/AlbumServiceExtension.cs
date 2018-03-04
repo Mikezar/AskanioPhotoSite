@@ -36,6 +36,8 @@ namespace AskanioPhotoSite.Core.Services.Extensions
 
         public static IEnumerable<Tuple<int, string>> BuildGraph(this IEnumerable<Album> albums, Album currentAlbum)
         {
+            if (currentAlbum == null) return new List<Tuple<int, string>>();
+
             var graph = GetParents(new List<Album>(), albums, currentAlbum.ParentId);
 
             return graph.Select(x => new Tuple<int, string>(x.Id, CultureHelper.IsEnCulture() ? x.TitleEng : x.TitleRu))

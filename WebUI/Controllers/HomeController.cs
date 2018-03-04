@@ -18,11 +18,18 @@ namespace AskanioPhotoSite.WebUI.Controllers
 
         public ActionResult Index()
         {
-            return View(new HomePageModel()
+            var model = new HomePageModel()
             {
                 RandomPhoto = _photoService.GetRandomPhoto(),
                 BackgroundCovers = _photoService.GetBackgroundPhotos().ToArray()
-            });
+            };
+
+            if(Request.Browser.IsMobileDevice)
+            {
+                return View("Index_m", model);
+            }
+
+            return View(model);
         }
 
         public ActionResult GetRandomPhoto()
@@ -34,6 +41,11 @@ namespace AskanioPhotoSite.WebUI.Controllers
                 Photo = photo,
                 Tags = _tagService.GetAll()
             };
+
+            if (Request.Browser.IsMobileDevice)
+            {
+                return PartialView("~/Views/Gallery/_Mobile.cshtml", model);
+            }
 
             return PartialView("~/Views/Shared/_SideBar.cshtml", model);
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web;
 
 
 namespace AskanioPhotoSite.WebUI.Helpers
@@ -27,6 +28,12 @@ namespace AskanioPhotoSite.WebUI.Helpers
                 Value = x.Key.ToString(),
                 Text = x.Value
             });
+        }
+
+        public static string GetLayout(HttpRequestBase request)
+        {
+            return request.Browser.IsMobileDevice ?
+                "~/Views/Shared/_BaseLayoutMobile.cshtml" : "~/Views/Shared/_BaseLayout.cshtml";
         }
 
     }

@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = Model.AlbumTitle;
-    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    Layout = ViewPatternHelper.GetLayout(Request);
 }
 
 @Html.Build(Model.Albums)

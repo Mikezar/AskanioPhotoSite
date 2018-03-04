@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -287,6 +288,9 @@
     <Content Include="Views\Shared\_DefaultLayout.cshtml" />
     <Content Include="SysData\PhotoGallery\Photos\Web.config" />
     <Content Include="Views\Shared\EditorTemplates\ImageAttrModel.cshtml" />
+    <Content Include="Views\Home\Index_m.cshtml" />
+    <Content Include="Views\Shared\_BaseLayoutMobile.cshtml" />
+    <Content Include="Views\Gallery\_Mobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SysData\Logs\" />

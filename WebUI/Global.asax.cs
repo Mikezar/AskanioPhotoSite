@@ -30,9 +30,7 @@ namespace AskanioPhotoSite.WebUI
         }
 
         protected void Application_BeginRequest(object sender, EventArgs _args)
-        {
-            var httpApp = (HttpApplication)sender;
-            Log.Trace($"Query register. Url - {httpApp.Request?.Url}, Agent - {httpApp.Request?.UserAgent}");
+        {      
             HttpCookie cookie = HttpContext.Current.Request.Cookies["CurrentUICulture"];
 
             if ((cookie != null) && (cookie?.Value != null))
@@ -62,7 +60,6 @@ namespace AskanioPhotoSite.WebUI
                 }
                 else
                 {
-                    Log.Trace("No supported languages. Default locale ru-RU is set");
                     Thread.CurrentThread.CurrentCulture = new CultureInfo("ru-RU");
                     Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU");
                     HttpContext.Current.Response.Cookies.Add(new HttpCookie("CurrentUICulture") { Value = "ru-RU"});
@@ -74,12 +71,13 @@ namespace AskanioPhotoSite.WebUI
         {
             Exception exception = Server.GetLastError();
 
-            Log.RegisterError(exception);
-
             HttpException httpException = exception as HttpException;
 
             if (httpException == null)
+            {
                 httpException = new HttpException(500, "Internal Server Error", exception);
+                Log.RegisterError(exception);
+            }
             Response.Clear();
 
             RouteData routeData = new RouteData();

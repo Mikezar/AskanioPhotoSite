@@ -115,65 +115,63 @@ body .modal-open {
 
 @media only screen and (min-width: 1200px) {
 
-.askanio-sidebar-language, 
-.askanio-gallery-language
-{
-    padding: 7px;
-}
-
-    .askanio-sidebar-language a, 
-    .askanio-gallery-language a
-    {
-        outline: 0;
-        font-family: 'Tw Cen MT', 'Oswald', serif;
-        color: #ffffff;
-        font-size: 16px;
-        font-weight: 400;
-        border-bottom: 1px solid #ffffff;
-        cursor: pointer;
+    .askanio-sidebar-language,
+    .askanio-gallery-language {
+        padding: 7px;
     }
 
-    .askanio-sidebar-language a:hover,
-    .askanio-gallery-language a:hover {
-        text-decoration: none;
-    }
+        .askanio-sidebar-language a,
+        .askanio-gallery-language a {
+            outline: 0;
+            font-family: 'Tw Cen MT', 'Oswald', serif;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 400;
+            border-bottom: 1px solid #ffffff;
+            cursor: pointer;
+        }
 
-.askanio-background-slideshow,
-.askanio-background-slideshow:after { 
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    z-index: 0; 
-}
+            .askanio-sidebar-language a:hover,
+            .askanio-gallery-language a:hover {
+                text-decoration: none;
+            }
 
-
-    .askanio-background-slideshow img {
-	    height: 100%;
+    .askanio-background-slideshow,
+    .askanio-background-slideshow:after {
+        position: fixed;
         width: 100%;
-        position:absolute;
-        left:0;
-        -webkit-transition: opacity 1s ease-in-out;
-        -moz-transition: opacity 1s ease-in-out;
-        -o-transition: opacity 1s ease-in-out;
-        transition: opacity 1s ease-in-out;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        z-index: 0;
     }
 
-#askanio-sidebar {
-    background: rgba(0,0,0,0.8);
-    height: 100%;
-    width: 250px;
-    left: 60px;
-    position: fixed;
-    top: 0px;
-    top: 0;
-    bottom: 0;
-    z-index: 10;
-    -moz-box-shadow: 0px 2px 5px rgb(0, 0, 0);
-    -webkit-box-shadow: 0px 2px 5px rgb(0, 0, 0);
-    box-shadow: 0px 2px 5px rgb(0, 0, 0);
-}
+
+        .askanio-background-slideshow img {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            -webkit-transition: opacity 1s ease-in-out;
+            -moz-transition: opacity 1s ease-in-out;
+            -o-transition: opacity 1s ease-in-out;
+            transition: opacity 1s ease-in-out;
+        }
+
+    #askanio-sidebar {
+        background: rgba(0,0,0,0.8);
+        height: 100%;
+        width: 250px;
+        left: 60px;
+        position: fixed;
+        top: 0px;
+        top: 0;
+        bottom: 0;
+        z-index: 10;
+        -moz-box-shadow: 0px 2px 5px rgb(0, 0, 0);
+        -webkit-box-shadow: 0px 2px 5px rgb(0, 0, 0);
+        box-shadow: 0px 2px 5px rgb(0, 0, 0);
+    }
 
     .askanio-sidebar-header {
         display: block;
@@ -181,120 +179,126 @@ body .modal-open {
         text-align: center;
         margin: 60px 0 40px 0;
     }
-        .askanio-sidebar-header-title {
-            display: block;
-            width: 100%;
-            text-align: center;
-            margin: 60px 0 40px 0;
-        }
-            .askanio-sidebar-header-title a {
-                text-decoration: none;
-                outline: 0;
-             }
 
-            .askanio-sidebar-header-title .title {
-                font-size: 32px;
-                font-family: Papyrus 'Oswald', serif;
-                color: #DEB887;
-                line-height: 38px;
-                border: 0;
-                margin-top: 15px;
-                margin-bottom: 5px;
-                padding: 0;
-                text-align: center;
-                text-transform: uppercase;
-                text-decoration: none;
-            }
-
-            .askanio-sidebar-header-title .description {
-                font-size: 15px;
-                font-family: 'Tw Cen MT', 'Oswald', serif;
-                color: #F5F5DC;
-                text-transform: uppercase;
-                text-decoration: none;
-            }
-
-  .askanio-sidebar-menu {
-      text-align: center;
-      width: auto;
-      margin: 0.55em 0 0 0;
-      clear: both;
-      text-align: center;
-      overflow: visible;
-      z-index: 4;
-      background: transparent;
-  }
-    .askanio-sidebar-menu ul {
-        list-style: none;
-        width: auto;
-        margin: 0;
-        padding: 0;
-        position: relative;
-        border: 0;
-        line-height: 1;
-        box-sizing: content-box;
+    .askanio-sidebar-header-title {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 60px 0 40px 0;
     }
-        .askanio-sidebar-menu ul li {
-            display: block;
-            vertical-align: top;
+
+        .askanio-sidebar-header-title a {
+            text-decoration: none;
+            outline: 0;
+        }
+
+        .askanio-sidebar-header-title .title {
+            font-size: 32px;
+            font-family: Papyrus 'Oswald', serif;
+            color: #DEB887;
+            line-height: 38px;
+            border: 0;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            padding: 0;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .askanio-sidebar-header-title .description {
+            font-size: 15px;
+            font-family: 'Tw Cen MT', 'Oswald', serif;
+            color: #F5F5DC;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+    .askanio-sidebar-menu {
+        text-align: center;
+        width: auto;
+        margin: 0.55em 0 0 0;
+        clear: both;
+        text-align: center;
+        overflow: visible;
+        z-index: 4;
+        background: transparent;
+    }
+
+        .askanio-sidebar-menu ul {
+            list-style: none;
+            width: auto;
             margin: 0;
             padding: 0;
             position: relative;
             border: 0;
             line-height: 1;
             box-sizing: content-box;
-            padding-top: 5px;
-            padding-bottom: 5px;
         }
-            .askanio-sidebar-menu a {
-                font-family: 'Tw Cen MT', 'Oswald', serif;
-                color: #888888;
-                font-size: 16px;
-                text-transform: uppercase;
-                font-weight: 600;
-                text-decoration: none;
-                outline: 0;
+
+            .askanio-sidebar-menu ul li {
+                display: block;
+                vertical-align: top;
+                margin: 0;
+                padding: 0;
+                position: relative;
+                border: 0;
+                line-height: 1;
+                box-sizing: content-box;
+                padding-top: 5px;
+                padding-bottom: 5px;
             }
 
-           .askanio-sidebar-menu ul li:hover{
-                background-color: #F5F5DC;
-            }
+        .askanio-sidebar-menu a {
+            font-family: 'Tw Cen MT', 'Oswald', serif;
+            color: #888888;
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: 600;
+            text-decoration: none;
+            outline: 0;
+        }
+
+        .askanio-sidebar-menu ul li:hover {
+            background-color: #F5F5DC;
+        }
 
             .askanio-sidebar-menu ul li:hover > a {
                 color: black;
             }
 
-        .askanio-sidebar-section {
-            text-align: center;
-            margin-top: 35px;
-            border-top: 1px solid #1e282b;
-        }
-              .askanio-sidebar-section-title {
-                font-size: 15px;
-                font-family: 'Tw Cen MT', 'Oswald', serif;
-                color: #F5F5DC;
-                line-height: 16px;
-                margin-top: 15px;
-                margin-bottom: 5px;
-                padding: 0;
-                text-align: center;
-                text-transform: uppercase;
-                text-decoration: none;
-            }
+    .askanio-sidebar-section {
+        text-align: center;
+        margin-top: 35px;
+        border-top: 1px solid #1e282b;
+    }
 
-            .askanio-sidebar-section img {
-                margin-top: 15px;
-                max-width: 200px;
-                max-height: auto;
-            }
+    .askanio-sidebar-section-title {
+        font-size: 15px;
+        font-family: 'Tw Cen MT', 'Oswald', serif;
+        color: #F5F5DC;
+        line-height: 16px;
+        margin-top: 15px;
+        margin-bottom: 5px;
+        padding: 0;
+        text-align: center;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
 
-            .askanio-sidebar-section-photoTitle {
-                padding: 8px;
-                color: #F5F5DC;
-                font-size: 14px;
-                font-family: 'Helvetica Neue';
-            }
+    .askanio-sidebar-section img {
+        margin-top: 15px;
+        max-width: 200px;
+        max-height: auto;
+    }
 
+    .askanio-sidebar-section-photoTitle {
+        padding: 8px;
+        color: #F5F5DC;
+        font-size: 14px;
+        font-family: 'Helvetica Neue';
+    }
+}
 /*ОБЛАКО ТЭГОВ*/
 
     .askanio-sidebar-section .tag-cloud,
@@ -379,4 +383,4 @@ body .modal-open {
          .askanio-gallery-cloud  .tag-cloud ul li a:hover::before{
 	        background-color: #555;
         }
- }
+ 

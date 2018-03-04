@@ -34,7 +34,6 @@ namespace AskanioPhotoSite.WebUI
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/Site.css",
-                      "~/Content/MobileSite.css",
                       "~/Content/Gallery.css",
                       "~/Content/select2.css",
                       "~/Content/multi-select.css"

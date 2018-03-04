@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using AskanioPhotoSite.Data.Storage.Transactions;
 
@@ -20,7 +21,12 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
                 for (int i = 0; i < apex; i++)
                 {
                     Type type = properties[i].PropertyType;
-                    if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    if (type == typeof(DateTime))
+                    {
+                        var value = DateTime.Parse(fields[i], CultureInfo.InvariantCulture);
+                        properties[i].SetValue(entity, value);
+                    }
+                    else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
                         properties[i].SetValue(entity, null);
                     else
                         properties[i].SetValue(entity, Convert.ChangeType(fields[i], properties[i].PropertyType), null);

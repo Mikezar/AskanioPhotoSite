@@ -1,0 +1,56 @@
+﻿@using AskanioPhotoSite.WebUI.Localization;
+@using AskanioPhotoSite.Core.Helpers;
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="~/Content/Core/favicon.png" />
+    <title>@ViewBag.Title - Aleksandr Serebryakov</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Styles.Render("~/Content/MobileSite.css")
+</head>
+<body>
+    <div class="askanio-bar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="askanio-bar navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink(MainUI.Home, "Index", "Home")</li>
+                    <li>@Html.ActionLink(MainUI.Gallery, "Index", "Gallery")</li>
+                </ul>
+            </div>
+            @if (CultureHelper.IsEnCulture())
+            {
+                <div class="askanio-gallery-language "><a href='@Url.Action("ChangeCulture", "Culture", new { language = "ru-RU" })'>RU</a></div>
+            }
+            else
+            {
+                <div class="askanio-gallery-language "><a href='@Url.Action("ChangeCulture", "Culture", new { language = "en-US" })'>EN</a></div>
+            }
+        </div>
+    </div>
+
+
+    @Html.Action("GetRandomPhoto", "Home", null)
+
+    @RenderBody()
+
+    <div class="askanio-gallery-footer">
+        &copy; Alexander Serebryakov @DateTime.Now.Year
+        <br />
+        @MainUI.Footer
+        <br />
+        App icon by <a href="https://icons8.com/" target="_blank">icons8</a>
+    </div>
+
+</body>
+</html>

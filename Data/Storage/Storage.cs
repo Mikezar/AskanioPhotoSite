@@ -83,7 +83,7 @@ namespace AskanioPhotoSite.Data.Storage
 
                     if (!result.IsSuccess)
                     {
-                        _log.Error($"[EXECUTE READ]:{result.ErrorMessage}");
+                        _log.Error($"[EXECUTE READ]-{typeof(TEntity)}:{result.ErrorMessage}");
                         throw new Exception(result.ErrorMessage);
                     }
 

@@ -1,9 +1,10 @@
 ﻿@using AskanioPhotoSite.WebUI.Localization
+@using AskanioPhotoSite.WebUI.Helpers
 @model AskanioPhotoSite.Core.Models.GalleryPhotoTagModel
 
 @{
     ViewBag.Title = MainUI.Tags;
-    Layout = "~/Views/Shared/_BaseLayout.cshtml";
+    Layout = ViewPatternHelper.GetLayout(Request);
 }
 
 <div class="photos-pattern-1 grid">
