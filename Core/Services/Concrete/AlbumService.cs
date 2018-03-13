@@ -97,11 +97,12 @@ namespace AskanioPhotoSite.Core.Services.Concrete
                     Id = x.Id,
                     Title = CultureHelper.IsEnCulture() ? x.TitleEng : x.TitleRu,
                     Description = CultureHelper.IsEnCulture() ? x.DescriptionEng : x.DescriptionRu,
-                    Cover = x.CoverPath ?? albums.Where(f => f.ParentId == x.Id).SingleOrDefault(r =>
-                    {
-                        var childs = albums.Where(f => f.ParentId == x.Id);
-                        return childs.ElementAt(new Random().Next(0, childs.Count())).CoverPath != null;
-                    })?.CoverPath
+                    Cover = GetAll().GetAlbumCover(x)
+                    //Cover = !string.IsNullOrEmpty(x.CoverPath) ? x.CoverPath : albums.Where(f => f.ParentId == x.Id).SingleOrDefault(r =>
+                    //{
+                    //    var childs = albums.Where(f => f.ParentId == x.Id);
+                    //    return childs.ElementAt(new Random().Next(0, childs.Count())).CoverPath != null;
+                    //})?.CoverPath
                 })
             };
 

@@ -57,5 +57,28 @@ namespace AskanioPhotoSite.Core.Services.Extensions
             else
                 return collection;
         }
+
+        public static string GetAlbumCover(this IEnumerable<Album> albums, Album currentAlbum)
+        {
+            return !string.IsNullOrEmpty(currentAlbum.CoverPath) ? currentAlbum.CoverPath : 
+                albums.GetChilds(null, currentAlbum.Id)?.FirstOrDefault(r => !string.IsNullOrEmpty(r.CoverPath))?.CoverPath;
+        }
+
+        public static IEnumerable<Album> GetChilds(this IEnumerable<Album> albums, List<Album> collection, int albumId)
+        {
+            if (collection == null) collection = new List<Album>();
+
+            var child = albums.SingleOrDefault(x => x.ParentId == albumId);
+
+            if(child != null)
+            {
+                collection.Add(child);
+                return GetChilds(albums, collection, child.Id);
+            }
+            else
+            {
+                return collection;
+            }
+        }
     }
 }

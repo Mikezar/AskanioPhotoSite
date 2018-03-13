@@ -42,7 +42,7 @@ namespace AskanioPhotoSite.WebUI.Controllers
                         Id = x.Id,
                         Title = CultureHelper.IsEnCulture() ? x.TitleEng : x.TitleRu,
                         Description = CultureHelper.IsEnCulture() ? x.DescriptionEng : x.DescriptionRu,
-                        Cover = x.CoverPath
+                        Cover = _albumService.GetAll().GetAlbumCover(x)
                     }),
                     ParentAlbums = _albumService.GetAll().BuildGraph(album)
                 };
