@@ -179,7 +179,7 @@ namespace AskanioPhotoSite.Core.Services.Concrete
             {
                 if (photos[i].Id == id)
                 {
-                    if (isNext)
+                    if (!isNext)
                     {
                         if (i + 1 >= photos.Length)
                         {
