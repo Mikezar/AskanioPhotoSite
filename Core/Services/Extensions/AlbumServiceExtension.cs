@@ -68,7 +68,7 @@ namespace AskanioPhotoSite.Core.Services.Extensions
         {
             if (collection == null) collection = new List<Album>();
 
-            var child = albums.SingleOrDefault(x => x.ParentId == albumId);
+            var child = albums.FirstOrDefault(x => x.ParentId == albumId);
 
             if(child != null)
             {
