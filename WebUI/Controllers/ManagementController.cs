@@ -432,7 +432,14 @@ namespace AskanioPhotoSite.WebUI.Controllers
         {
             try
             {
-                _photoService.UpdateOne(model);
+                HttpPostedFileBase file = null;
+
+                if(Request?.Files.Count > 0)
+                {
+                    file = Request.Files[0];
+                }
+
+                _photoService.UpdateOne(model, file, _imageProcessor);
                 return Json(MyAjaxHelper.GetSuccessResponse());
             }
             catch(Exception exception)

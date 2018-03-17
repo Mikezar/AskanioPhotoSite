@@ -30,15 +30,23 @@ textarea {
 .remove {
     color: red;
     cursor: pointer;
+    outline: 0;
 }
     .remove:hover {
         color: red;
         text-decoration: underline;
+        outline: 0;
     }
 
 .edit {
     cursor: pointer;
+    outline: 0;
 }
+
+    .edit:hover {
+        text-decoration: underline;
+        outline: 0;
+    }
 
 .space {
     margin-bottom: 10px;

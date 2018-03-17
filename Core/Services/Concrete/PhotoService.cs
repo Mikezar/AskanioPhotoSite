@@ -74,7 +74,7 @@ namespace AskanioPhotoSite.Core.Services.Concrete
             return photo;
         }
 
-        public Photo UpdateOne(PhotoUploadModel model)
+        public Photo UpdateOne(PhotoUploadModel model, HttpPostedFileBase file, IImageProcessor processor)
         {
             var photoToTags = _providerPhotoToTag.GetAll();
             var relatedTagIds = photoToTags.GetRelatedTags(model.Id).Select(x => x.Id).ToArray();
@@ -83,6 +83,15 @@ namespace AskanioPhotoSite.Core.Services.Concrete
             {
                 _providerPhotoToTag.DeleteMany(relatedTagIds);
                 _providerPhoto.Commit(); //TODO: продумать
+            }
+
+            if(file != null)
+            {
+                if (file.ContentLength != 0 && file.ContentLength < 4048576)
+                {
+                    processor.CreateThumbnail(file, 350, 350, model.FileName);
+                    file.SaveAs(HttpContext.Current.Server.MapPath(model.PhotoPath));
+                }
             }
 
             var photos = _providerPhoto.UpdateOne(_converter.ConvertTo(model));

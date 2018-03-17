@@ -4,7 +4,17 @@
     .modal-dialog {
         width: 1150px;
     }
+    .nav {
+        margin-bottom: 5px;
+    }
+
+    .modal-footer{
+        border: none;
+    }
 </style>
+
+
+
 <div id="editUploadPhotoModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -12,100 +22,123 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Редактирование фотографии @Model.FileName</h4>
             </div>
-            @using (Ajax.BeginForm(Model.Action, new AjaxOptions
+            @using (Ajax.BeginForm(Model.Action, "Management", new AjaxOptions
             {
                 OnComplete = "OnSuccessSave"
-            }))
+            }, new { enctype = "multipart/form-data", id = "photoEditForm" }))
             {
                 <div class="modal-body">
-                    @Html.HiddenFor(x => x.Id)
-                    @Html.HiddenFor(x => x.ThumbnailPath)
-                    @Html.HiddenFor(x => x.PhotoPath)
-                    @Html.HiddenFor(x => x.CreationDate)
-                    @Html.HiddenFor(x => x.FileName)
-                    @Html.HiddenFor(x => x.ReturnUrl)
-                    @Html.HiddenFor(x => x.Order)
+                    <ul class="nav nav-pills">
+                        <li class="active"><a data-toggle="pill" href="#home">Основное</a></li>
+                        <li><a data-toggle="pill" href="#photoSettings">Настройки фотографии</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="home" class="tab-pane fade in active">
+                            @Html.HiddenFor(x => x.Id)
+                            @Html.HiddenFor(x => x.ThumbnailPath)
+                            @Html.HiddenFor(x => x.PhotoPath)
+                            @Html.HiddenFor(x => x.CreationDate)
+                            @Html.HiddenFor(x => x.FileName)
+                            @Html.HiddenFor(x => x.ReturnUrl)
+                            @Html.HiddenFor(x => x.Order)
 
-                    <div class="form-horizontal">
-                        <div class="col-sm-6">
-                            <p class="language-title">Русский</p>
-                            <hr />
-                            <div class="form-group">
-                                @Html.LabelFor(x => x.TitleRu, new { @class = "control-label col-sm-4" })
-                                <div class="col-sm-8">
-                                    @Html.TextBoxFor(x => x.TitleRu, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(x => x.TitleRu)
+                            <div class="form-horizontal">
+                                <div class="col-sm-6">
+                                    <p class="language-title">Русский</p>
+                                    <hr />
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.TitleRu, new { @class = "control-label col-sm-4" })
+                                        <div class="col-sm-8">
+                                            @Html.TextBoxFor(x => x.TitleRu, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.TitleRu)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.DescriptionRu, new { @class = "control-label col-sm-4" })
+                                        <div class="col-sm-8">
+                                            @Html.TextAreaFor(x => x.DescriptionRu, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.DescriptionRu)
+                                        </div>
+                                    </div>
+                                    <p class="language-title">Английский</p>
+                                    <hr />
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.TitleEng, new { @class = "control-label col-sm-4" })
+                                        <div class="col-sm-8">
+                                            @Html.TextBoxFor(x => x.TitleEng, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.TitleEng)
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.DescriptionEng, new { @class = "control-label col-sm-4" })
+                                        <div class="col-sm-8">
+                                            @Html.TextAreaFor(x => x.DescriptionEng, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.DescriptionEng)
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.ShowRandom, new { @class = "control-label col-sm-4" })
+                                        <div class="col-sm-8">
+                                            @Html.CheckBoxFor(x => x.ShowRandom, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.IsForBackground, new { @class = "control-label col-sm-4" })
+                                        <div class="col-sm-8">
+                                            @Html.CheckBoxFor(x => x.IsForBackground, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.Album, new { @class = "control-label col-sm-4" })
+                                        <div class="col-sm-8">
+                                            @Html.DropDownListFor(x => x.Album.Id, Model.Albums, new { @class = "form-control" })
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(x => x.DescriptionRu, new { @class = "control-label col-sm-4" })
-                                <div class="col-sm-8">
-                                    @Html.TextAreaFor(x => x.DescriptionRu, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(x => x.DescriptionRu)
-                                </div>
-                            </div>
-                            <p class="language-title">Английский</p>
-                            <hr />
-                            <div class="form-group">
-                                @Html.LabelFor(x => x.TitleEng, new { @class = "control-label col-sm-4" })
-                                <div class="col-sm-8">
-                                    @Html.TextBoxFor(x => x.TitleEng, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(x => x.TitleEng)
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(x => x.DescriptionEng, new { @class = "control-label col-sm-4" })
-                                <div class="col-sm-8">
-                                    @Html.TextAreaFor(x => x.DescriptionEng, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(x => x.DescriptionEng)
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="form-group">
-                                @Html.LabelFor(x => x.ShowRandom, new { @class = "control-label col-sm-4" })
-                                <div class="col-sm-8">
-                                    @Html.CheckBoxFor(x => x.ShowRandom, new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(x => x.IsForBackground, new { @class = "control-label col-sm-4" })
-                                <div class="col-sm-8">
-                                    @Html.CheckBoxFor(x => x.IsForBackground, new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(x => x.Album, new { @class = "control-label col-sm-4" })
-                                <div class="col-sm-8">
-                                    @Html.DropDownListFor(x => x.Album.Id, Model.Albums, new { @class = "form-control" })
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        @Html.Label("Тэги", new { @class = "control-label col-sm-2" })
+                                        <div class="col-sm-10">
+                                            @Html.ListBoxFor(x => x.RelatedTagIds, Model.AllTags, new { @class = "form-control", @id = "tag-select" })
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                @Html.Label("Тэги", new { @class = "control-label col-sm-2" })
-                                <div class="col-sm-10">
-                                    @Html.ListBoxFor(x => x.RelatedTagIds, Model.AllTags, new { @class = "form-control", @id = "tag-select" })
+
+                        <div id="photoSettings" class="tab-pane fade">
+                            <div class="col-sm-8">
+                                <p class="language-title">Настройки водяного знака</p>
+                                <hr />
+                                @Html.EditorFor(x => x.ImageAttributes)
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <p class="language-title">Замена фотографии</p>
+                                    <hr />
+
+                                    <input type="file" name="upload" id="uploadFile" /><br />
                                 </div>
                             </div>
-                            @Html.EditorFor(x => x.ImageAttributes)
+                         </div>
+                    </div>
                         </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="clearfix"></div>
-                    <div class="col-sm-12">
-                        @if (Model.Album?.Id != 0)
-                        {
-                            <button id="albumCover" data-id="@Model.Album.Id" data-cover="@Model.ThumbnailPath" type="button" class="btn btn-success">Сделать обложкой альбома</button>
-                        }
+                        <div class="modal-footer">
+                            <div class="clearfix"></div>
+                            <div class="col-sm-12">
+                                @if (Model.Album?.Id != 0)
+                                {
+                                    <button id="albumCover" data-id="@Model.Album.Id" data-cover="@Model.ThumbnailPath" type="button" class="btn btn-success">Сделать обложкой альбома</button>
+                                }
 
-                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="OnSuccessSave()">Закрыть</button>
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                    </div>
-                 </div>
-               }
-        </div>
-     </div>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" onclick="OnSuccessSave()">Закрыть</button>
+                                <button id="submitBtn" type="button" class="btn btn-primary">Сохранить</button>
+                            </div>
+                        </div>
+            }
+            </div>
+      </div>
 </div>
 
 <script>
@@ -132,6 +165,33 @@
                         }
                     }
                 });
+        });
+
+        $("#submitBtn").on('click', function (e) {
+            var id = '@Model.Id';
+            var files = document.getElementById('uploadFile').files;
+
+            var data = new FormData($('#photoEditForm')[0]);
+
+            if (files.length > 0)
+            {
+                for (var x = 0; x < files.length; x++) {
+                    data.append("file" + x, files[x]);
+                }
+             }
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("EditPhoto", "Management")',
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (result) {
+                    OnSuccessSave();
+                },
+                error: function (xhr, status, p3) {
+                    alert(xhr.responseText);
+                }
+            });     
         });
     });
 

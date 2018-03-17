@@ -276,6 +276,11 @@ body {
 
 
     /*ФОТОГРАФИИ*/
+
+    .grid{
+        left: 5%
+    }
+
     .photos-pattern-1 .grid-item {
         float: left;
         margin: 5px;

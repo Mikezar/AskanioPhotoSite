@@ -12,7 +12,7 @@ namespace AskanioPhotoSite.Core.Services.Abstract
         Photo GetOne(int id);
         Photo[] AddMany(PhotoUploadModel[] models);
         Photo UpdateOne(Photo entity);
-        Photo UpdateOne(PhotoUploadModel model);
+        Photo UpdateOne(PhotoUploadModel model, HttpPostedFileBase file, IImageProcessor processor);
         void DeleteOne(int id);
         void DeleteMany(int[] id);
         IEnumerable<Photo> GetOrphans();

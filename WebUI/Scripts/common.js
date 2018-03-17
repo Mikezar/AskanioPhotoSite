@@ -158,39 +158,35 @@ function RegisterListener(event, func) {
     }
 }
 
-function IsInViewport(element) {
-    var rect = element.getBoundingClientRect();
-
+function IsInViewport(el) {
+    var rect = el.getBoundingClientRect();
+    var html = document.documentElement;
     return (
-        rect.bottom >= 0 &&
-        rect.right >= 0 &&
-
-        rect.top <= (
-        window.innerHeight ||
-        document.documentElement.clientHeight) &&
-
-        rect.left <= (
-        window.innerWidth ||
-        document.documentElement.clientWidth)
-     );
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.outerHeight + 200 || html.clientHeight) &&
+        rect.right <= (window.outerWidth + 200|| html.clientWidth)
+    );
 }
 
-function LazyLoad(grid) {
-    var lazy = $('.lazy');
-    for (var i = 0; i < lazy.length; i++) {
-        if (IsInViewport(lazy[i])) {
-            lazy[i].src = lazy[i].getAttribute('data-src');
-            lazy[i].onload = function (el) {
-                $(this).fadeTo("slow", 1);
-                $(this).parent().children('.loader').hide();
-                //if (grid) {
-                //    $('.grid').masonry('layout');
-                //}
-            };
+    var counter = 0;
+
+    function LazyLoad(grid) {
+        var lazy = $('.loader');
+        var photos = $('.lazy');
+        for (var i = counter; i < photos.length; i++) {
+            if (IsInViewport(lazy[i])) {
+                console.log(i);
+                photos[i].src = photos[i].getAttribute('data-src');
+                photos[i].onload = function (el) {
+                    $(this).fadeTo("slow", 1);
+                    $(this).parent().children('.loader').hide();
+                };
+                counter++;
+            }
+        }
+        if (grid) {
+               $('.grid').masonry('layout');
         }
     }
-    if (grid) {
-           $('.grid').masonry('layout');
-    }
-}
 
