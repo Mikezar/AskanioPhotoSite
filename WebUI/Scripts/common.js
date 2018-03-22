@@ -164,29 +164,38 @@ function IsInViewport(el) {
     return (
         rect.top >= 0 &&
         rect.left >= 0 &&
-        rect.bottom <= (window.outerHeight + 200 || html.clientHeight) &&
-        rect.right <= (window.outerWidth + 200|| html.clientWidth)
+        rect.bottom <= (window.outerHeight + 270 || html.clientHeight) &&
+        rect.right <= (window.outerWidth + 270|| html.clientWidth)
     );
 }
 
     var counter = 0;
+    var loadCounter = 0;
 
     function LazyLoad(grid) {
         var lazy = $('.loader');
         var photos = $('.lazy');
+
         for (var i = counter; i < photos.length; i++) {
             if (IsInViewport(lazy[i])) {
-                console.log(i);
                 photos[i].src = photos[i].getAttribute('data-src');
-                photos[i].onload = function (el) {
+                loadCounter++;
+                photos[i].onload = function () {
                     $(this).fadeTo("slow", 1);
                     $(this).parent().children('.loader').hide();
+                    loadCounter--;
+
+                    if (grid && loadCounter == 0) {
+                        setTimeout(BeautifyLayout, 100);
+                    }
                 };
                 counter++;
             }
         }
-        if (grid) {
-               $('.grid').masonry('layout');
-        }
     }
+
+    function BeautifyLayout() {
+        $('.grid').masonry('layout');
+    }
+
 

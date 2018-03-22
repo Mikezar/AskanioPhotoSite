@@ -35,9 +35,12 @@
             isAnimated: true,
             easing: 'linear'
         });
+    });
 
+    window.onload = function () {
         RegisterListener('scroll', LazyLoad);
         RegisterListener('load', LazyLoad);
         LazyLoad(true);
-    });
+    };
+
 </script>
