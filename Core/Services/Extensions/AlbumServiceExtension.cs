@@ -60,25 +60,46 @@ namespace AskanioPhotoSite.Core.Services.Extensions
 
         public static string GetAlbumCover(this IEnumerable<Album> albums, Album currentAlbum)
         {
-            return !string.IsNullOrEmpty(currentAlbum.CoverPath) ? currentAlbum.CoverPath : 
-                albums.GetChilds(null, currentAlbum.Id)?.FirstOrDefault(r => !string.IsNullOrEmpty(r.CoverPath))?.CoverPath;
+            string cover = null;
+
+            if(!string.IsNullOrEmpty(currentAlbum.CoverPath))
+            {
+                cover = currentAlbum.CoverPath;
+            }
+            else
+            {
+                var childs = albums.GetChilds(null, currentAlbum.Id);
+
+                if (childs.Any())
+                {
+                    var withCovers = childs.Where(r => !string.IsNullOrEmpty(r.CoverPath)).ToList();
+
+                    if(withCovers.Any())
+                    {
+                        int seed = new Random().Next(withCovers.Count() - 1);
+                        cover = withCovers.ElementAt(seed)?.CoverPath;
+                    }
+                }
+            }
+
+            return cover;
         }
 
         public static IEnumerable<Album> GetChilds(this IEnumerable<Album> albums, List<Album> collection, int albumId)
         {
             if (collection == null) collection = new List<Album>();
 
-            var child = albums.FirstOrDefault(x => x.ParentId == albumId);
+            var childs = albums.Where(x => x.ParentId == albumId).ToList();
+            
+            foreach(var child in childs)
+            {
+                if (child == null) continue;
 
-            if(child != null)
-            {
                 collection.Add(child);
-                return GetChilds(albums, collection, child.Id);
+                GetChilds(albums, collection, child.Id);
             }
-            else
-            {
-                return collection;
-            }
+
+            return collection;
         }
     }
 }

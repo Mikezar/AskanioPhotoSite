@@ -206,6 +206,14 @@ body {
         width: 100%;
     }
 
+    @media (max-width: 1023px)
+    {
+        .album-layout {
+            justify-content: center;
+        }
+    }
+
+
     .askanio-gallery-album a:hover {
         text-decoration: none;
     }
@@ -313,11 +321,6 @@ body {
             height: auto;
             max-width: 65%;
         }
-
-    .desc {
-        padding: 15px;
-        text-align: center;
-    }
 
 
     /*МОДАЛЬНОЕ ОКНО*/

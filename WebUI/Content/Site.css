@@ -121,7 +121,7 @@ body .modal-open {
 
 /*ГЛАВНАЯ*/
 
-@media only screen and (min-width: 1200px) {
+/*@media only screen and (min-width: 1200px) {*/
 
     .askanio-sidebar-language,
     .askanio-gallery-language {
@@ -306,7 +306,7 @@ body .modal-open {
         font-size: 14px;
         font-family: 'Helvetica Neue';
     }
-}
+/*}*/
 /*ОБЛАКО ТЭГОВ*/
 
     .askanio-sidebar-section .tag-cloud,
@@ -315,6 +315,7 @@ body .modal-open {
         flex-wrap: wrap;
         align-items: center;
         margin: 5px;
+        justify-content: center;
     }
 
       .askanio-sidebar-section .tag-cloud ul,
