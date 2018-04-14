@@ -76,7 +76,7 @@ namespace AskanioPhotoSite.Core.Services.Extensions
 
                     if(withCovers.Any())
                     {
-                        int seed = new Random().Next(withCovers.Count() - 1);
+                        int seed = new Random().Next(withCovers.Count());
                         cover = withCovers.ElementAt(seed)?.CoverPath;
                     }
                 }
