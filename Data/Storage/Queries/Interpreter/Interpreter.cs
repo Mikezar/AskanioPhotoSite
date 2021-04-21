@@ -23,7 +23,7 @@ namespace AskanioPhotoSite.Data.Storage.Queries.Interpreter
                     Type type = properties[i].PropertyType;
                     if (type == typeof(DateTime))
                     {
-                        var value = DateTime.Parse(fields[i], CultureInfo.InvariantCulture);
+                        var value = DateTime.Parse(fields[i]);
                         properties[i].SetValue(entity, value);
                     }
                     else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
